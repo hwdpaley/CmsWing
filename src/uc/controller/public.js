@@ -1,3 +1,10 @@
+// +----------------------------------------------------------------------
+// | Bieber [ 美道网站内容管理框架 ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: Tony <912697590@qq.com>
+// +----------------------------------------------------------------------
 'use strict';
 
 import Base from './base.js';
@@ -79,7 +86,7 @@ export default class extends Base {
   async loginAction() {
 
     if (this.isAjax("post")) {
-//验证码
+      //验证码
       if(1==this.setup.GEETEST_IS_LOGIN){
         let Geetest = think.service("geetest"); //加载 commoon 模块下的 geetset service
         let geetest = new Geetest();
@@ -91,7 +98,7 @@ export default class extends Base {
           return this.fail(-3,"验证码不正确!");
         }
       }
-//用户账号密码验证
+      //用户账号密码验证
       let username = this.post('username');
       let password = this.post('password');
       password = encryptPassword(password);

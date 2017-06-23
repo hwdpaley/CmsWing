@@ -58,7 +58,7 @@ export default class extends Base {
         model_count:model_count,
         ext_count:ext_count,
         type_count:type_count
-    })
+    });
     //console.log(111)
     return this.display();
   }

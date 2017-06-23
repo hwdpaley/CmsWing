@@ -140,14 +140,14 @@ export default class extends think.controller.base {
             seccode: data.geetest_seccode
 
         }, function (err, result) {
-            console.log(result);
+            
             var data = {status: "success"};
 
-            if (err || !result) {
-                console.log(err);
-                data.status = "fail";
-            }
-
+            // if (err || !result) {
+            //     console.log(err);
+            //     data.status = "fail";
+            // }
+            console.log(result);
             deferred.resolve(data);
         });
         return deferred.promise;

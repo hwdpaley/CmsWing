@@ -328,9 +328,10 @@ table tr td{
                                                                 });
 
                                                                 // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-                                                                uploader_sortid_{{val.option.identifier}}.on( 'uploadSuccess', function( file,res ) {
+                                                                uploader_sortid_{{val.option.identifier}}.on( 'uploadSuccess', function( file,res,path ) {
                                                                     $( '#'+file.id ).addClass('upload-state-done');
                                                                     $("#sortid_{{val.option.identifier}}").val(res);
+                                                                    console.log(path);
                                                                 });
 
                                                                 // 文件上传失败，现实上传出错。
@@ -2242,8 +2243,10 @@ table tr td{
 
                 uploader_{{field.name}}.on( 'uploadSuccess', function( file,res ) {
                     var name = "{{field.name}}";
+                    console.log(JSON.stringify(res));
                     $("input[name="+name+"]").val(res.id);
                     $( '#'+file.id ).find('p.state').text('已上传,文件大小:'+res.size);
+                    $( "input[name=videourl]").val(res.path);
                 });
 
                 uploader_{{field.name}}.on( 'uploadError', function( file ) {

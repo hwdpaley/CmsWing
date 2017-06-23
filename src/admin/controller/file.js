@@ -69,9 +69,11 @@ export default class extends think.controller.base {
                   size:file.size,
                   location:1,
                   sha1:uppic.hash,
-                  md5:think.md5(basename)
+                  md5:think.md5(basename),
+                  path:''
               }
           }
+
           //return false;
       }else {
           let uploadPath = think.RESOURCE_PATH + '/upload/download/'+dateformat("Y-m-d",new Date().getTime());
@@ -86,14 +88,16 @@ export default class extends think.controller.base {
                   savename:basename,
                   mime:file.headers["content-type"],
                   size:file.size,
-                  md5:think.md5(basename)
-              }
+                  md5:think.md5(basename),
+                  path:'/upload/download/'+dateformat("Y-m-d",new Date().getTime())+ '/'+basename
+              };
+
       }
 
     }
       console.log(data);
       var res = await this.model("file").data(data).add();
-    this.json({id:res,size:file.size});
+    this.json({id:res,size:file.size,path:data.path});
   }
 
   //上传图片

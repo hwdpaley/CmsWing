@@ -97,10 +97,10 @@
             var success = false;
             $("#validate-submit").click(function () {
                 var validate = captchaObj.getValidate();
-                if (!validate) {
-                    _toastr("请先完成验证!","top-right","error",false);
-                    return false;
-                }
+                // if (!validate) {
+                //     _toastr("请先完成验证!","top-right","error",false);
+                //     return false;
+                // }
                 $.ajax({
                     url: "/uc/public/login", // 进行二次验证
                     type: "post",
@@ -115,12 +115,13 @@
                     },
                     success: function (data) {
 
-                        if (data && (data.errno < 0)) {
+                        // if (data && (data.errno < 0)) {
 
-                            _toastr(data.errmsg,"top-right","error",false);
-                            captchaObj.refresh();
+                        //     _toastr(data.errmsg,"top-right","error",false);
+                        //     captchaObj.refresh();
 
-                        } else {
+                        // } else 
+                        {
                             location.reload();
                         }
                     }
@@ -153,6 +154,7 @@
                             gt: data.gt,
                             challenge: data.challenge,
                             product: "float", // 产品形式，包括：float，embed，popup。注意只对PC版验证码有效
+                            width:"100%",
                             offline: !data.success // 表示用户后台检测极验服务器是否宕机，一般不需要关注
                         }, handlerEmbed);
                     }

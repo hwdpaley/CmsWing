@@ -1,9 +1,9 @@
 // +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
+// | Bieber [ 美道网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.cmswing.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: Arterli <arterli@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 'use strict';
 import moment from "moment"
@@ -91,6 +91,7 @@ export default class extends Base {
     }else{
       //debugger;
       //console.log(think.datetime(new Date(), "YYYY-MM-DD"));
+      this.assign("qiniu_dm", `//${this.setup.QINIU_DOMAIN_NAME}`);
       return this.display();
     }
 

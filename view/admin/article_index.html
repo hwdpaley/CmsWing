@@ -1,4 +1,5 @@
-{% extends "./inc/base.html" %} {% block style %}
+{% extends "./inc/base.html" %} 
+{% block style %}
 <!--<link rel="stylesheet" href="/static/admin/js/zTree/metroStyle/metroStyle.css" type="text/css">-->
 <link rel="stylesheet" href="/static/admin/js/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
 <style>
@@ -6,7 +7,9 @@
         vertical-align:middle;
     }
 </style>
- {% endblock%} {% block content %}
+ {% endblock%}
+
+ {% block content %}
 <section class="vbox">
     <section id="bjax-target">
         <section class="hbox stretch">
@@ -241,19 +244,19 @@
                             </div>
                             <footer class="panel-footer">
                                 <div class="row">
-                                 <div class="col-md-3">
-                                      <div class="btn-group">
-                                            <a class="btn btn-sm btn-default todo" target-form="ids" href="#">
-                                                微信图文
-                                            </a>
-                                            <a class="btn btn-sm btn-default todo" target-form="ids" href="#">
-                                                高级图文
-                                            </a>
-                                            <a class="btn btn-sm btn-default todo" target-form="ids" href="#">
-                                                推送
-                                            </a>
-                                        </div>
-                                 </div>
+                                     <div class="col-md-3">
+                                          <div class="btn-group">
+                                                <a class="btn btn-sm btn-default todo" target-form="ids" href="#">
+                                                    微信图文
+                                                </a>
+                                                <a class="btn btn-sm btn-default todo" target-form="ids" href="#">
+                                                    高级图文
+                                                </a>
+                                                <a class="btn btn-sm btn-default todo" target-form="ids" href="#">
+                                                    推送
+                                                </a>
+                                            </div>
+                                     </div>
                                   
                                     <div class="col-md-9 text-right text-center-xs">
                                         {{pagerData | safe}}
@@ -270,7 +273,9 @@
 </section>
 
 
-{% endblock %} {% block script %}
+{% endblock %} 
+
+{% block script %}
 <script src="/static/admin/js/zTree/jquery.ztree.core-3.5.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     <!--
