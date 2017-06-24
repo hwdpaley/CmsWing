@@ -61,7 +61,7 @@ export default class extends Base {
       this.assign('order',order);
       let data = await this.model('document').where(map).page(this.param('page'),10).order(o).countSelect();
       this.assign("list",data);
-      //console.log(data);
+      console.log("sy list"+data);
       if(this.isAjax("get")){
         for(let v of data.data){
           if(!think.isEmpty(v.pics)){
