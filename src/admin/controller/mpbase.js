@@ -1,9 +1,9 @@
 // +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.cmswing.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: arterli <arterli@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 'use strict';
 
@@ -380,6 +380,7 @@ export default class extends Base {
             return deferred.promise;
         }
         let res = await users(api);
+        console.log("users----------"+JSON.stringify(res));
         let useropenid = res['data']['openid'];
         let count = res['count'];
         //self.end(useropenid);
@@ -1540,6 +1541,22 @@ export default class extends Base {
             return self.success({name: '微信菜单生成成功'});
         } else {
             return self.fail('微信菜单生成失败');
+        }
+    }
+    /**
+
+    */
+
+    async yj2dAction(){
+        let api = new API(this.setup.wx_AppID, this.setup.wx_AppSecret);
+        let res =createLimitQRCode(api,100);
+        console.log(JSON.stringify(res));
+        // let id = this.get("ids");
+        // let res = await this.model('member_public').where({'id':id}).delete();
+        if(res){
+            return this.success({name: "二维码生成成功"});
+        }else{
+            return this.fail("二维码生成失败");
         }
     }
 }

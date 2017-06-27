@@ -6,7 +6,7 @@
 <section class="alternate parallax-2">
 	<div class="overlay dark-0"><!-- dark overlay [1 to 9 opacity] --></div>
 	<div class="container " style="position: relative;z-index: 10">
-		
+
 		{% include "../inc/banner.html" %}
 		<div class="row" >
 			<div class="col-md-12">
@@ -45,7 +45,7 @@
 							{% topic data = "slider",limit= "10",position='2',issub="1"%}
 							{%for val in slider%}
 							{%if val.model_id==4%} {% set pic = val.pics|strToArray%}{%else%}{%set pic = val.cover_id%}{%endif%}
-							
+
 							<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
 								<img src="/static/assets/images/1x1.png" data-lazyload="{{pic|get_pic('m=2,w=848,h=400')}}" alt="" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
 
@@ -134,7 +134,7 @@
 					</div>
 
 					<div class="box-footer">
-						
+
 						<div class="inline-search clearfix">
 							<form action="#" method="get" class="widget_search nomargin">
 								<input type="search" placeholder="Search Post..." name="s" class="serch-input">
@@ -144,7 +144,7 @@
 								<div class="clear"></div>
 							</form>
 						</div>
-						
+
 
 					</div>
 
@@ -168,8 +168,8 @@
 		<div class="row">
 
 			<!-- RIGHT -->
-			<div class="col-sm-9">
-				<ul class="nav nav-tabs nav-justified">
+			<div class="col-sm-12">
+				<!-- <ul class="nav nav-tabs nav-justified">
 					<li class="active"><a href="#new" data-toggle="tab">最新</a></li>
 					<li ><a href="#hot" data-toggle="tab">最热</a></li>
 					<li><a href="#wenda" data-toggle="tab">问答</a></li>
@@ -182,11 +182,11 @@
 						</ul>
 					</li>
 					#}
-				</ul>
+				</ul> -->
 
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="new">
-						{% topic data = "newlist",limit="10"%}
+						{% topic data = "newlist",limit="10",uid=userid %}
 						{% for val in newlist %}
 						{% set categoryname = val.category_id|get_cate %}
 						{%if val.model_id==4%}
@@ -197,7 +197,9 @@
 							<!-- IMAGE -->
 							{% if pic[0]>0 %}
 							<figure class="blog-item-small-image margin-bottom-0">
+								<a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">
 								<img class="img-responsive" src="{{pic[0]|get_pic('m=1,w=200,h=120')}}" alt="">
+								</a>
 							</figure>
 							{% endif %}
 							<div class="blog-item-small-content">
@@ -302,7 +304,9 @@
 							<!-- IMAGE -->
 							{% if val.cover_id>0 %}
 							<figure class="blog-item-small-image margin-bottom-0">
+								<a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">
 								<img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
+								</a>
 							</figure>
 							{% endif %}
 							<div class="blog-item-small-content">
@@ -345,7 +349,7 @@
 						{%endfor%}
 					</div>
 					<div class="tab-pane fade" id="hot">
-						{% topic data = "hotlist",limit="10",type="hot"%}
+						{% topic data = "hotlist",limit="10",type="hot",uid=userid%}
 						{% for val in hotlist %}
 						{% set categoryname = val.category_id|get_cate %}
 						{%if val.model_id==4%}
@@ -582,10 +586,10 @@
 
 						<!-- PAGINATION -->
 
-						<a class="btn btn-featured btn-default btn-inverse" href="/question.html" >
+						<!-- <a class="btn btn-featured btn-default btn-inverse" href="/question.html" >
 							<span>今天，你遇到了什么问题呢？进入社区寻求答案！</span>
 							<i class="et-happy"></i>
-						</a>
+						</a> -->
 						<!-- /PAGINATION -->
 					</div>
 
@@ -593,15 +597,15 @@
 				</div>
 			</div>
 			<!-- LEFT -->
-			<div class="col-md-3 col-sm-3">
+			<!-- <div class="col-md-3 col-sm-3">
 
 				{% if controller.is_login %}
-				<div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
+				<div class="alert alert-info margin-bottom-20 box-shadow-4">
 					今天，你遇到了什么问题呢？
 					<a href="/mod/question/sys/add/cid/123" class="btn btn-primary btn-3d btn-block margin-top-10">提问</a>
 				</div>
 				{%else%}
-				<div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
+				<div class="alert alert-info margin-bottom-20 box-shadow-4">
 					你好! 你还没有登录，请先登录.
 					<a class="btn btn-block btn-social btn-dropbox margin-top-10  " href="/uc/public/login" data-toggle="ajaxModal">
 						<i class="fa fa-sign-in"></i> 登录{{controller.setup.WEB_SITE_TITLE}}
@@ -617,7 +621,7 @@
 					<div class="" >
 						{% keywords data ="topic",type="hot",limit="5" %}
 						{%for k in topic%}
-						<div class="clearfix margin-bottom-10"><!-- discussion item -->
+						<div class="clearfix margin-bottom-10">
 							{%if k.pic==0%}
 							<i class="ico-light ico-60 ico-hover et-chat pull-left margin-bottom-0 margin-top-0" ></i>
 							{%else%}
@@ -631,7 +635,7 @@
 							<span class="size-13 text-muted">
                                 {{k.videonum}} 个主题, {{k.focus_count}} 人关注
 												</span>
-						</div><!-- /discussion item -->
+						</div>
 						{%endfor%}
 
 
@@ -648,11 +652,11 @@
 					</h3>
 					<div class="" >
 						{%for user in data%}
-						<div class="clearfix margin-bottom-10"><!-- squared item -->
+						<div class="clearfix margin-bottom-10">
 							<img class="thumbnail pull-left rounded" src="/uc/index/avatar/uid/{{user.uid}}" width="40" height="40" alt="" />
 							<h4 class="size-14 nomargin noborder nopadding bold"><a href="#">{{user.username}}</a></h4>
 							<span class="size-12 text-muted">{{user.question_count}} 个问题, {{user.agree_count}} 次赞同</span>
-						</div><!-- /squared item -->
+						</div>
 						{%endfor%}
 
 					</div>
@@ -661,7 +665,7 @@
 				{%endif%}
 
 				
-			</div>
+			</div> -->
 
 
 		</div>

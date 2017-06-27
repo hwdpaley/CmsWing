@@ -1,9 +1,9 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.gzxinbibo.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: arterli <912697590@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 'use strict'
 /**
@@ -227,6 +227,7 @@ global.topic = function(){
     this.run = async function (context, args, callback) {
         console.log(args);
         let where = {'status':1,'pid':0};
+        //'uid':['IN',[1,461]]
         let data = think.isEmpty(args.data) ? "data" : args.data;
         let limit = think.isEmpty(args.limit) ? "10" : args.limit;
         //获取当前分类的所有子栏目
@@ -243,7 +244,13 @@ global.topic = function(){
                 args.cid=unique(cidarr).sort();
             }
         }
-
+        //admin
+        let uid = think.isEmpty(args.uid) ? false :{'uid':['IN',[1,args.uid]]};
+        if(uid){
+            where = think.extend({},where,uid);
+        }else{
+            where = think.extend({},where,{'uid':1});
+        }
         //subcate.push(cate.id);
         let cid = think.isEmpty(args.cid) ? false :{'category_id':['IN',args.cid]};
         if(cid){

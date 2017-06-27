@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+html {
+    font-size: 625% !important;
+}
+
+html, body, ul, li, a, p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.margin-padding-0 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/*边界配置*/
+
+.margin-top-15 {
+    margin-top: .15rem !important;
+}
+
+.margin-top-20 {
+    margin-top: .2rem;
+}
+
+.margin-top-45 {
+    margin-top: .45rem;
+}
+
+.margin-left-10 {
+    margin-left: .1rem;
+}
+
+.margin-left-15 {
+    margin-left: .15rem;
+}
+
+.margin-left-20 {
+    margin-left: .2rem;
+}
+
+.margin-right-15 {
+    margin-right: .15rem;
+}
+
+.margin-right-20 {
+    margin-right: .2rem;
+}
+
+.margin-bottom-15 {
+    margin-bottom: .15rem;
+}
+
+.margin-bottom-20 {
+    margin-bottom: .2rem;
+}
+
+.margin-10 {
+    margin: .1rem;
+}
+
+.margin-15 {
+    margin: .15rem;
+}
+
+.margin-20 {
+    margin: .2rem;
+}
+
+.margin-left-right-15 {
+    margin: 0 .15rem !important;
+}
+
+/*间距配置*/
+.padding-top-5 {
+    padding-top: .05rem;
+}
+
+.padding-top-15 {
+    padding-top: .15rem;
+}
+
+.padding-top-20 {
+    padding-top: .2rem;
+}
+
+.padding-left-5 {
+    padding-left: .05rem;
+}
+
+.padding-left-15 {
+    padding-left: .15rem;
+}
+
+.padding-left-20 {
+    padding-left: .2rem;
+}
+
+.padding-right-15 {
+    padding-right: .15rem;
+}
+
+.padding-right-20 {
+    padding-right: .2rem;
+}
+
+.padding-bottom-15 {
+    padding-bottom: .15rem;
+}
+
+.padding-bottom-20 {
+    padding-bottom: .2rem;
+}
+
+.padding-10 {
+    padding: .1rem;
+}
+
+.padding-15 {
+    padding: .15rem;
+}
+
+.padding-20 {
+    padding: .2rem;
+}
+
+.padding-left-right-15 {
+    padding-left: .15rem;
+    padding-right: .15rem;
+}
+
+.padding-top-bottom-15 {
+    padding-top: .15rem;
+    padding-bottom: .15rem;
+}
+
+/*字体颜色*/
+.color-gray-1 {
+    color: #333333;
+}
+
+.color-gray-2 {
+    color: #666666;
+}
+
+.color-gray-3 {
+    color: #999999;
+}
+
+.color-white {
+    color: #ffffff;
+}
+
+.color-blue-1 {
+    color: #1F8DDC;
+}
+
+.color-integral-1 {
+    color: #ec4982;
+}
+
+/*背景颜色配置*/
+.bg-color-white {
+    background-color: #eee;
+}
+
+.bg-color-normal {
+    background-color: #eeeeee !important;
+}
+
+.bg-color-collection {
+    background-color: #ec4982 !important;
+}
+
+.bg-color-login {
+    background-color: #ec4982 !important;
+}
+
+/*边框设置*/
+.border-normal {
+    border: .01rem solid #eee;
+    padding: .05rem 0;
+}
+
+.border-right-normal {
+    border-right: .015rem solid #eee;
+}
+
+.border-right-bottom-normal {
+    border-right: .015rem solid #eee;
+    border-bottom: .015rem solid #eee;
+}
+
+.border-bottom-normal {
+    border-bottom: .015rem solid #eee;
+}
+
+/*内容高度配置*/
+.line-height-49 {
+    line-height: .49rem;
+}
+
+/*字体粗细配置*/
+.font-weight-normal {
+    font-weight: normal;
+}
+
+.font-size-12 {
+    font-size: .12rem;
+}

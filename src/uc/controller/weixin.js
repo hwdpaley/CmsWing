@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
@@ -33,7 +33,7 @@ export default class extends Base {
     let openid = await this.session("wx_openid");
     //let openid = null;
     if(is_weixin(this.userAgent()) && think.isEmpty(openid)){
-      this.cookie("cmswing_wx_url",this.http.url);
+      this.cookie("bieber_wx_url",this.http.url);
       var oauthUrl = pingpp.wxPubOauth.createOauthUrlForCode(this.setup.wx_AppID, `http://${this.http.host}/uc/weixin/getopenid?showwxpaytitle=1`);
       //console.log(oauthUrl)
       this.redirect(oauthUrl);
@@ -98,7 +98,7 @@ export default class extends Base {
           'last_login_time': last_login_time,
         };
         await this.session('webuser', wx_userInfo);
-        this.redirect(this.cookie("cmswing_wx_url"));
+        this.redirect(this.cookie("bieber_wx_url"));
       }
     }
 
@@ -114,8 +114,9 @@ export default class extends Base {
     //TODO
     // let titck =await createLimitQRCode(this.api,1);
     // console.log(titck);
-    let qrcod = this.api.showQRCodeURL("gQHz7zoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL3JqX0p2Zm5sMnBtalQwX215eE1NAAIEjMBoVwMEAAAAAA==");
+    let qrcod = this.api.showQRCodeURL("gQF_8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyMXRCbEExc2pmbDAxMDAwMGcwM08AAgTTf1JZAwQAAAAA");
     this.assign("qrurl",qrcod);
+    console.log("qrurl============"+qrcod);
     //think.log(qrcod);
     // this.end(qrcod);
     this.meta_title = `扫码关注`;

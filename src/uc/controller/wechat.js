@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
@@ -18,10 +18,15 @@ export default class extends think.controller.base {
             this.api = new API(this.setup.wx_AppID, this.setup.wx_AppSecret);
         }
         /**
-         * 微信服务器验证
-         * index action
-         * @return {Promise} []
+         * 判断是否登录
+         * @returns {boolean}
          */
+
+    /**
+     * 微信服务器验证
+     * index action
+     * @return {Promise} []
+     */
     indexAction() {
         let echostr = this.get('echostr');
         return this.end(echostr);
@@ -30,7 +35,39 @@ export default class extends think.controller.base {
         this.http.res.reply(message);
     }
 
-    //关键词消息回复
+    //获取分类信息
+    async category(id, field) {
+            id = id || 0;
+            field = field || "";
+            if (think.isEmpty(id)) {
+                //this.fail('没有指定数据分类！');
+                this.http.error = new Error('没有指定数据分类！');
+                return think.statusAction(702, this.http);
+            }
+            let cate = await this.model("category").info(id, field);
+            //console.log(cate);
+            if (cate && 1 == cate.status) {
+
+                switch (cate.display) {
+                    case 0:
+                        //this.fail('该分类禁止显示')
+                        this.http.error = new Error('该分类禁止显示！');
+                        return think.statusAction(702, this.http);
+                        break;
+                        //TODO:更多分类显示状态判断
+                    default:
+
+                        return cate;
+                }
+
+            } else {
+
+                //this.fail("分类不存在或者被禁用！");
+                this.http.error = new Error('分类不存在或者被禁用！');
+                return think.statusAction(702, this.http);
+            }
+        }
+        //关键词消息回复
     async textAction() {
         //console.log(this.http);
         let message = this.post();
@@ -435,9 +472,44 @@ export default class extends think.controller.base {
             }
         });
     }
+    async enrollAction() {
+        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        let openid ='oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ';// await this.session("wx_openid");
+        let data = this.post();
+        console.log(data);
+        // data: {
+        //         "doc": did,
+        //         "name": user_name.val(),
+        //         "phone": user_phone.val(),
+        //         // csrfmiddlewaretoken: $.cookie("csrftoken")
+        //     }
+        if (openid) {
 
-    /**
-     * 
-     */
-
+            let map = {
+                openid: openid,
+                docid:data.docid
+            };
+            let res = await this.model("doc_wxuser").where(map).find();
+            console.log(res);
+            if(res.openid!=undefined){
+                console.log("have---------"+res);
+                return this.success({ status: -1, name: "用户已经报名!" });
+                //已经报名
+            }else{
+                let mmap={
+                    openid: openid,
+                    docid:data.docid,
+                    status:1,
+                    create_time:new Date().valueOf()
+                }
+                console.log(mmap);
+                res=await this.model("doc_wxuser").add(mmap);
+                console.log(res);
+                return this.success({ status: 0, name: "用户报名成功!" });
+            }
+            
+            
+        }
+        return this.success({ status: -1, name: "用户报名失败!" });
+    }
 }

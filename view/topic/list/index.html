@@ -151,7 +151,7 @@ CLASSES:
         <div class="row">
 
             <!-- LEFT -->
-            <div class="col-md-9 col-sm-9">
+            <div class="col-md-12 col-sm-12">
                 <div class="text-left">
                     <ul class="nav nav-pills mix-filter">
 
@@ -255,9 +255,9 @@ CLASSES:
 
             <!-- RIGHT -->
 
-            <div class="col-md-3 col-sm-3">
+            <!-- <div class="col-md-3 col-sm-3">
 
-                <!-- INLINE SEARCH -->
+                
                 <div class="inline-search clearfix margin-bottom-10">
                     <form action="" method="get" class="widget_search">
                         <input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
@@ -266,11 +266,11 @@ CLASSES:
                         </button>
                     </form>
                 </div>
-                <!-- /INLINE SEARCH -->
+                
 
                 <hr />
 
-                <!-- side navigation -->
+                
                 {%column data="cates",cid=category.id,isnum="0"%}
                 {%if cates==null%}
                 <div class="side-nav margin-bottom-20 margin-top-20">
@@ -283,15 +283,15 @@ CLASSES:
                         <li class="list-group-item"><a href="{{val.url}}{{http.config('view.file_ext')}}"><span class="size-11 text-muted pull-right">({{val.doc_num}})</span> {{val.name}}</a></li>
                         {%endfor%}
                     </ul>
-                    <!-- /side navigation -->
+                    
                 </div>
                 {%endif%}
 
 
-                <!-- JUSTIFIED TAB -->
+                
                 <div class="tabs nomargin-top hidden-xs margin-bottom-10">
 
-                    <!-- tabs -->
+                    
                     <ul class="nav nav-tabs nav-bottom-border nav-justified">
                         <li class="active">
                             <a href="#tab_1" data-toggle="tab">
@@ -305,15 +305,15 @@ CLASSES:
                         </li>
                     </ul>
 
-                    <!-- tabs content -->
+                    
                     <div class="tab-content margin-bottom-0 margin-top-10">
 
-                        <!-- POPULAR -->
+                        
                         <div id="tab_1" class="tab-pane active">
-                            <!-- /post -->
+                            
                             {% topic data = "hotlist",limit= "5",cid=category.id,type="hot"%}
                             {%for v in hotlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -325,18 +325,18 @@ CLASSES:
                                     <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
                                     <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
 
                         </div>
-                        <!-- /POPULAR -->
+                        
 
 
-                        <!-- RECENT -->
+                        
                         <div id="tab_2" class="tab-pane">
                             {% topic data = "newlist",limit= "5",cid=category.id%}
                             {%for v in newlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -348,19 +348,19 @@ CLASSES:
                                     <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
                                     <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
-                            <!-- /post -->
+                            
                         </div>
-                        <!-- /RECENT -->
+                        
 
                     </div>
 
                 </div>
-                <!-- JUSTIFIED TAB -->
+                
 
 
-                <!-- TAGS -->
+                
                 <h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
                 <div class="hidden-xs margin-bottom-20">
                     {% keywords data ="kws",type="hot"%}
@@ -377,7 +377,7 @@ CLASSES:
                 <hr />
 
 
-                <!-- SOCIAL ICONS -->
+                
                 <div class="hidden-xs margin-top-30 margin-bottom-60">
                     <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
                         <i class="icon-facebook"></i>
@@ -405,7 +405,7 @@ CLASSES:
                     </a>
                 </div>
 
-            </div>
+            </div> -->
         </div>
 
     </div>

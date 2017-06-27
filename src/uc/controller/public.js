@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
@@ -139,6 +139,7 @@ export default class extends Base {
         this.active = "user/index";
         return this.display(`mobile/${this.http.controller}/${this.http.action}`)
       } else {
+        console.log("uc-public-login");
         return this.display();
       }
     }
@@ -268,5 +269,7 @@ export default class extends Base {
       this.redirect("/index");
     }
   }
+
+  
 
 }

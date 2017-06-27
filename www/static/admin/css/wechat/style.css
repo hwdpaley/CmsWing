@@ -1,0 +1,306 @@
+@charset "utf-8";
+
+body, h3, p, a {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*html {*/
+    /*font-family: "PingFang SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Lantinghei SC", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;*/
+/*}*/
+
+/*购买版的样式*/
+
+#customer_page {
+    max-width: 640px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+.header_banner {
+    width: 100%;
+    height: 331px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.content {
+    padding: 13px 10px 10px 10px;
+}
+
+.header_title {
+    font-size: 20px;
+    font-weight: normal;
+    color: #333;
+    line-height:28px;
+    margin: 0 0 6px 0;
+}
+
+.content p{
+    color: #666;
+    font-size: 14px;
+}
+
+ .sign_number {
+     line-height: 58px;
+    display: inline-block;
+    padding: 0 0 0 10px;
+}
+
+.sign_number span {
+    color: #ec4982;
+    font-size: 18px;
+}
+
+.customer_price {
+    float: right;
+    font-size: 24px;
+    line-height: 58px;
+    padding-right: 10px;
+    color: #ec4982;
+}
+
+.standing{
+    display: inline-block;
+    line-height: 48px;
+    color: #666666;
+}
+
+.space {
+    height: 8px;
+    background-color: #eee;
+}
+
+.address {
+    width: 100%;
+    padding: 0 -10px 0 10px;
+}
+
+.address p {
+    padding: 13px 0 13px 30px;
+    color: #666;
+    background: url(/static/admin/images/address.png) no-repeat 10px center;
+    background-size: 14px 18px;
+}
+
+.line {
+    height: 1px;
+    margin-left: 10px;
+    background-color: #eee;
+}
+
+.time {
+    width: 100%;
+}
+
+.time p {
+    padding: 13px 0 13px 30px;
+    display: inline-block;
+    color: #666;
+    background: url(/static/admin/images/time.png) no-repeat 10px center;
+    background-size: 15px;
+}
+
+.introduction_box {
+    padding: 0 10px 20px 10px;
+}
+
+.introduction_box h3 {
+    margin: 10px 0 14px 0;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.introduction_content img {
+    width: 100%;
+}
+
+.sign_up_fix {
+    width: 100%;
+    display: inline-block;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    border-top: 1px solid #eee;
+}
+
+.fix_back {
+    height: 46px;
+}
+
+.sign_up_box {
+    line-height: 46px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.enter {
+    width: 50%;
+    text-indent: 20%;
+}
+
+.sign_up_box a {
+    color: #666;
+     float: left;
+    background: url(/static/admin/images/door.png) no-repeat 24% center;
+    background-size: 20px;
+}
+
+.standing_icon{
+font-size: 12px; background-color: #ec4982; color: #fff; width: 18px; height: 18px; text-align: center; line-height: 18px; margin:0 3px 0 10px;  display: inline-block;
+}
+
+.sign_up {
+    float: right;
+    height: 46px;
+    border-radius: 0;
+    background-color: #ec4982;
+    border-style: none;
+    color: white;
+    width: 50%;
+    font-size: 18px;
+}
+
+/*活动版的样式*/
+
+.active_space {
+    padding: 20px 14px 0px 14px;
+}
+
+.active_title {
+    margin-bottom: 20px;
+}
+
+.active_title h3 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+}
+
+.active_head {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 200%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    float: left;
+}
+
+.store_name {
+    float: left;
+    line-height: 30px;
+    color: #1c8fe0;
+    margin: 0 14px 0 6px;
+}
+
+.active_title_time {
+    color: #999;
+    line-height: 30px;
+}
+
+.active_background {
+    background-color: #fff9fb;
+}
+
+.active_box_bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.active_line {
+    background-color: #eee;
+    height: 10px;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .header_title {
+        font-size: 20px;
+    }
+
+    .header_banner {
+        height: 214px;
+    }
+
+    .customer_price {
+        font-size: 24px;
+    }
+
+    .sign_number span {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 373px) and (max-width: 375px) {
+    .header_banner {
+        height: 194px;
+    }
+
+    .customer_price {
+        font-size: 24px;
+    }
+
+    .sign_number span {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 373px) {
+    .header_banner {
+        height: 155px;
+    }
+
+    .header_title {
+        font-size: 14px;
+    }
+
+    .content p{
+    font-size: 12px;
+}
+    .sign_number {
+        font-size: 12px;
+    }
+    .standing{
+        font-size: 12px;
+    }
+    .address p {
+        font-size: 12px;
+    }
+
+    .time p {
+        font-size: 12px;
+    }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

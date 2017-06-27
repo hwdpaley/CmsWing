@@ -57,7 +57,7 @@
 									<section id="slider">
 
 										<div class="camera_wrap" id="camera_wrap_1" data-height="63%">
-											{% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1"%}
+											{% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%}
 											{% for v in slider%}
 											<div data-thumb="{{v.cover_id|get_pic('m=1,w=60,h=40')}}" data-src="http:{{v.cover_id|get_pic('')}}">
 												<a href="{{v.name|get_url(v.id)}}" target="_blank" class="camera_caption fadeFromBottom size-18">
@@ -130,7 +130,7 @@
 
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="taball">
-									{% topic data = "list",limit= "10",cid=category.id,issub=1%}
+									{% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid%}
 									{% for val in list %}
 									{% set categoryname = val.category_id|get_cate %}
 									<!-- POST ITEM -->
@@ -188,7 +188,7 @@
 								</div>
 								{%for v in cates%}
 								<div class="tab-pane fade  " id="tab{{v.id}}">
-										{% topic data = "list",limit= "10",cid=v.id%}
+										{% topic data = "list",limit= "10",cid=v.id,uid=userid%}
 										{% for val in list %}
 									{% set categoryname = val.category_id|get_cate %}
 										<!-- POST ITEM -->
@@ -310,7 +310,7 @@
 									<!-- POPULAR -->
 									<div id="tab_1" class="tab-pane active">
 										<!--topic tags test-->
-										{% topic data = "hotlist",limit= "5",cid=category.id,type="hot"%}
+										{% topic data = "hotlist",limit= "5",cid=category.id,type="hot",uid=userid%}
 										<!--返回数据赋值给变量data,遍历data-->
 										{%for v in hotlist%}
 										<div class="row tab-post"><!-- post -->
@@ -335,7 +335,7 @@
 									<!-- RECENT -->
 									<div id="tab_2" class="tab-pane">
 
-										{% topic data = "newlist",limit= "5",cid=category.id%}
+										{% topic data = "newlist",limit= "5",cid=category.id,uid=userid%}
 										{%for v in newlist%}
 										<div class="row tab-post"><!-- post -->
 											{%if v.cover_id%}

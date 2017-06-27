@@ -1,5 +1,5 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
@@ -35,7 +35,10 @@ export default class extends Base {
     let roleid=8;//游客
     //访问控制
     if(this.is_login){
+      this.assign('userid', this.is_login);
       roleid = await this.model("member").where({id:this.is_login}).getField('groupid', true);
+    }else{
+      this.assign('userid', 1);
     }
     let priv = await this.model("category_priv").priv(cate.id,roleid,'visit');
     if(!priv){
@@ -87,6 +90,11 @@ export default class extends Base {
       'status': 1,
       'category_id': ['IN', subcate]
     };
+    // if(this.is_login){
+    //   map.uid=['IN',1,this.is_login];
+    // }else{
+    //   map.uid=['IN',1];
+    // }
     //排序
     let o = {};
     o.level = 'DESC';
@@ -330,6 +338,7 @@ export default class extends Base {
       return this.display(`mobile/${this.http.controller}/${temp}`)
     }else{
       //console.log(temp);
+      console.log("list-------------"+temp);
       return this.display(temp);
     }
 

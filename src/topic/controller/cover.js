@@ -1,9 +1,11 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: Tony <912697590@qq.com>
+// +----------------------------------------------------------------------
+
 'use strict';
 import moment from "moment"
 moment.locale('zh-cn');
@@ -27,13 +29,17 @@ export default class extends Base {
     //console.log(cate);
     let roleid=8;//游客
     //访问控制
+    console.log("uid============="+this.is_login);
     if(this.is_login){
+      this.assign('userid', this.is_login);
       roleid = await this.model("member").where({id:this.is_login}).getField('groupid', true);
+    }else{
+      this.assign('userid', 1);
     }
     let priv = await this.model("category_priv").priv(cate.id,roleid,'visit');
     if(!priv){
       this.http.error = new Error('您所在的用户组,禁止访问本栏目！');
-      return think.statusAction(702, this.http);
+      return think.statusAction(700, this.http);
     }
     this.meta_title = cate.meta_title ? cate.meta_title : cate.title; //标题
     this.keywords = cate.keywords ? cate.keywords : ''; //seo关键词
@@ -43,8 +49,10 @@ export default class extends Base {
     //获取面包屑信息
     let breadcrumb = await this.model('category').get_parent_category(cate.id,true);
     this.assign('breadcrumb', breadcrumb);
+    console.log("cover breadcrumb==========="+JSON.stringify(breadcrumb));
     /* 模板赋值并渲染模板 */
     this.assign('category', cate);
+    // console.log("cover category--------"+JSON.stringify(cate));
     let temp = cate.template_index ? `${cate.template_index}` : `${this.http.action}`;
 
     //判断浏览客户端
@@ -52,6 +60,8 @@ export default class extends Base {
       temp = cate.template_m_index ? `${cate.template_m_index}` : `${this.http.action}`
       return this.display(`mobile/${this.http.controller}/${temp}`)
     }else{
+      console.log("cover index==========="+temp);
+      console.log("cover category==========="+JSON.stringify(cate));
       return this.display(temp);
     }
   }

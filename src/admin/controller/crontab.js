@@ -1,9 +1,9 @@
 // +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.cmswing.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: Arterli <arterli@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 'use strict';
 
@@ -47,6 +47,7 @@ export default class extends think.controller.base {
     }
 
     //think.log(new Date(),"订单作废任务执行时间")
+    console.log('----------cloaAction-------');
     this.end();
   }
 }

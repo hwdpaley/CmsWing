@@ -1,0 +1,484 @@
+@charset "utf-8";
+
+body {
+    height: 100%;
+}
+
+/*店铺装修*/
+.shop_decorate-desc {
+    line-height: .36rem;
+}
+
+.mark-red {
+    color: red;
+    font-size: larger;
+    padding-top: .08rem;
+}
+
+/*订单管理*/
+#tkb-order-manager li {
+    min-width: 8rem;
+}
+
+#tkb-order-manager .tkb-order {
+    background-color: #fff;
+    padding: .15rem;
+    position: relative;
+    min-width: 8rem;
+}
+
+#tkb-order-manager .tkb-order-img {
+    display: inline-block;
+}
+
+#tkb-order-manager .tkb-order-info {
+    display: inline-block;
+    padding-left: .1rem;
+}
+
+#tkb-order-manager .tkb-order-info h4 {
+    position: absolute;
+    top: .15rem;
+}
+
+#tkb-order-manager .tkb-order-info .order-time {
+    position: absolute;
+    top: .45rem;
+    color: #999;
+}
+
+#tkb-order-manager .tkb-order-info .order-enroll-num {
+    position: absolute;
+    bottom: .45rem;
+    color: #999;
+}
+
+#tkb-order-manager .tkb-order-info .order-max-num {
+    position: absolute;
+    bottom: .15rem;
+    color: #999;
+}
+
+/*产品管理*/
+.product-manager-list {
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin: .2rem 0 .1rem 0;
+}
+
+.product-manager-list ul, .product-manager-list li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.product-manager-list li {
+    padding: .08rem;
+    border: .01rem solid #eeeeee;
+    background-color: white;
+    width: 33%;
+    display: inline-block;
+}
+
+.product-manager-list li:hover {
+    border: .01rem solid #999999;
+}
+
+.product-manager-list a {
+    color: #333333;
+    width: 100%;
+    position: relative;
+}
+
+.product-manager-list .product-img {
+    margin: -.03rem -.03rem 0 -.03rem;
+}
+
+.product-manager-list img {
+    width: 100%;
+    height: 2rem;
+}
+
+.product-content {
+    margin-top: .1rem;
+}
+
+.product-content h4, .product-content p {
+    padding-bottom: .1rem;
+}
+
+.product-content p {
+    color: #999999;
+}
+
+/*按钮*/
+.product-manager-btngroup {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.product-manager-btngroup .btn-left {
+    position: relative;
+    float: left;
+    width: 25%;
+    left: 0;
+}
+
+.product-manager-btngroup .btn-middle-left {
+    position: relative;
+    float: left;
+    width: 25%;
+    left: 0;
+}
+
+.product-manager-btngroup .btn-middle-right {
+    position: relative;
+    float: left;
+    width: 25%;
+    left: 0;
+}
+
+.product-manager-btngroup .btn-right {
+    position: relative;
+    float: right;
+    width: 25%;
+    right: 0;
+}
+
+.btn-nocomplete {
+    color: #fff;
+    background-color: #B7B7B7;
+}
+
+.btn-slot {
+    color: #fff;
+    background-color: #1C8FE2;
+}
+
+.btn-remove {
+    color: #fff;
+    background-color: #FEA422;
+}
+
+.btn-edit {
+    color: #fff;
+    background-color: #1C8FE2;
+}
+
+.btn-delegate {
+    color: #fff;
+    background-color: #6889A3;
+}
+
+/*设置项目\产品*/
+.product-setting-type ul {
+    min-width: 8rem;
+}
+
+.product-setting-type li {
+    width: 3.8rem;
+    margin-right: .1rem;
+    background-color: whitesmoke;
+    float: left;
+    position: relative;
+    vertical-align: middle;
+    height: 1.2rem;
+    padding: .15rem;
+}
+
+.product_type_active {
+    border: .01rem solid #34a4f4;
+}
+
+.product-setting-type li:active,
+.product-setting-type li:link {
+    border: .01rem solid #34a4f4;
+}
+
+.product-setting-type li img {
+    width: 1rem;
+    height: .9rem;
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+}
+
+.product-setting-type li div {
+    width: 2.4rem;
+    padding-left: .1rem;
+    display: inline-block;
+    float: right;
+}
+
+/*活动日期*/
+.setting-start-time {
+    float: left;
+    width: 40%;
+    height: 80px;
+}
+
+.setting-middle-empty {
+    float: left;
+    width: 20%;
+    height: 80px;
+
+    position: relative;
+}
+
+.setting-end-time {
+    float: left;
+    width: 40%;
+
+}
+
+.product-setting-btngroup {
+    position: fixed;
+    left: .4rem;
+    bottom: .1rem;
+    width: 1rem;
+    line-height: .3rem;
+    background: #FC6;
+    border: 1px solid #F90;
+}
+
+#product-setting-footer {
+    margin: .5rem auto;
+    padding-bottom: .5rem;
+    text-align: center;
+}
+
+#product-setting-footer button {
+    padding: .1rem 1rem;
+}
+
+#product-setting-footer .product-preview {
+    margin-right: 3rem;
+}
+
+.show-class-div {
+    margin-top: 15px;
+}
+
+.show-class-top {
+    padding: 0;
+    margin: 20px 0 15px 6px;
+}
+
+.show-class-size-small {
+    font-size: 0.14rem;
+}
+
+.show-class-size-big {
+    font-size: 0.18rem;
+}
+
+.show-class-no-margin {
+    margin: 0;
+    padding: 0;
+}
+
+/*add-class*/
+.add-class-btn-add {
+    outline: none;
+    box-shadow: none;
+    border-color: transparent;
+    border-radius: 5px;
+    background-color: #0b8de3 !important;
+    color: #FFFFFF !important;
+}
+
+.add-class-font-uline {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.add-class-width {
+    width: 90% !important;
+}
+
+.add-class-no-margin {
+    margin: 0;
+    padding: 0;
+}
+
+.add-class-line {
+    border-bottom: 10px solid #EEEEEE;
+    width: 100%;
+}
+
+.add-class-top-div {
+    margin-top: 15px;
+}
+
+.add-class-middle-div {
+    margin-top: 8px;
+}
+
+.add-class-title {
+    margin: 20px 15px 15px 2.3%;
+}
+
+.add-class-up-line {
+    border-bottom: 1px solid #EEEEEE;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.add-class-down-line {
+    border-bottom: 1px solid #EEEEEE;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/**
+ *  图片库 || 项目模板
+ */
+
+/*复制、下载按钮*/
+.btn_copy, .btn_downloads {
+    background-color: orange;
+    color: #fff;
+}
+
+.btn_copy.focus,
+.btn_downloads.focus,
+.btn_copy:focus,
+.btn_copy:hover,
+.btn_downloads:hover {
+    color: #ffe;
+    text-decoration: none;
+}
+
+
+/*图片库分类*/
+
+.category_box {
+    background-color: #fff;
+    padding: 10px 10px 0 10px;
+}
+
+.category_box .category_title {
+    float: left;
+    width: 60px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.category_box .category_content {
+    float: left;
+    width: 93%; /*写给不支持calc()的浏览器*/
+    width: -moz-calc(100% - 60px);
+    width: -webkit-calc(100% - 60px);
+    width: calc(100% - 60px);
+}
+
+.img_template_tabs li {
+    float: left;
+    margin-left: 2%;
+    width: 9%;
+    text-align: center;
+    border: 1px solid #eee;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.img_template_tabs li a {
+    color: #333;
+}
+
+.img_template_tabs li.active {
+    background-color: orange;
+    border: 1px solid orange;
+}
+
+.img_template_tabs li.active a {
+    color: #fff;
+}
+
+.img_template_tabs li:nth-child(9n + 1) {
+    margin-left: 0;
+}
+
+/*详情内容*/
+.products_template_list,
+.images_template_list {
+    width: 100%;
+    background-color: #eee;
+    padding-top: .1rem;
+}
+
+.products_template_list ul,
+.images_template_list ul {
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 100%;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.products_template_list ul li {
+    width: 23%;
+    background-color: #fff;
+    float: left;
+    margin-left: 2%;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.images_template_list ul li {
+    width: 18%;
+    background-color: #fff;
+    float: left;
+    margin-left: 2%;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.products_template_list ul li:nth-child(4n+1),
+.images_template_list ul li:nth-child(5n + 1) {
+    margin-left: 0;
+}
+
+.products_template_list .img_template,
+.images_template_list .img_template {
+    margin: 10px 10px 0 10px;
+    width: 90%; /*写给不支持calc()的浏览器*/
+    width: -moz-calc(100% - 10px * 2);
+    width: -webkit-calc(100% - 10px * 2);
+    width: calc(100% - 10px * 2);
+}
+
+.products_template_list .title_template,
+.images_template_list .title_template {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+}
+
+.products_template_list .product-manager-btngroup,
+.images_template_list .product-manager-btngroup {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 0 10px;
+    overflow: hidden;
+}

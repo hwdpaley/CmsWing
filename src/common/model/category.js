@@ -111,9 +111,11 @@ export default class extends think.model.base {
      */
     async get_parent_category(id,url){
         let breadcrumb = []
-        while (id!=0)
+        while (id!=0&&id!=undefined)
         {
+            console.log("id========="+id);
             let nav = await this.where({'id':id,'status':1}).field("id,title,pid,allow_publish,name,mold").find();
+            console.log("nav========="+JSON.stringify(nav));
             if(url){
                 if (!think.isEmpty(nav.name)) {
                     nav.url = `/${nav.name}`

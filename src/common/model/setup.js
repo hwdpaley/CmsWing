@@ -1,10 +1,11 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: arterli <912697590@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
+
 'use strict';
 /**
  * model
@@ -30,7 +31,8 @@ export default class extends think.model.base {
         let map = {}
         map.status = 1;
         let list = await this.where(map).order("sort ASC").field(["name","value","type"]).select();
-        let obj = {}
+        let obj = {};
+        // console.log(list);
         list.forEach(v =>{
             if(v.value.search(/\r\n/ig)>-1 && v.type !=2){
                 v.value=v.value.split("\r\n");
@@ -38,6 +40,7 @@ export default class extends think.model.base {
                 v.value.forEach(n =>{
                     n=n.split(":");
                     obj[n[0]]=n[1];
+                    // console.log("获取网站配置"+n[1]);
                 })
 
                 v.value = obj;
@@ -45,7 +48,8 @@ export default class extends think.model.base {
             obj[v.name]=v.value;
 
 
-        })
+        });
+        // console.log("获取网站配置"+obj);
         return obj;
     }
 }

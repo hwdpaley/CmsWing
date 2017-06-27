@@ -1,0 +1,389 @@
+@charset "utf-8";
+body {
+
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    font-size: 625%;
+}
+
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+/*PersonCenter*/
+
+li.un_define {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    display: block;
+}
+
+div .pc-image-below {
+    background-size: cover;
+    height: 140px;
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pc-sub-desc {
+    margin-top: -6px;
+    color: #9b9b9b;
+}
+
+.pc-bottom-integral-number {
+    padding: 0;
+    margin: 0;
+    color: #0ba7ff;
+}
+
+.pc-round-head {
+    margin-top: -40px;
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+
+}
+
+.pc-middle-frame {
+    width: 100%;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+.pc-center-desc {
+    color: #8c8c8c;
+    margin: 0 0 20px 0;
+}
+
+.pc-center-address {
+    text-align: center;
+    border: 1px dotted #A9A9A9;
+    color: #04060A;
+    padding: 2px 4px;
+}
+
+.pc-a-integral {
+    margin-top: -3%;
+    color: #000000;
+    padding: 2px 4px;
+    float: right;
+    position: relative;
+    border: 1px solid #D8D8D8;
+    border-radius: 3px;
+}
+
+.pc-subtitle {
+    color: #333333;
+    margin-top: 8px;
+}
+
+/*Login*/
+.login-register-logo {
+    width: 40%;
+    margin-top: 25px;
+    margin-left: 30%
+}
+
+.login-register-Input {
+
+    margin-left: 10%;
+    width: 80%;
+    height: 20%;
+    font-size: 15px;
+    margin-top: 20px;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    background-color: transparent;
+    border-color: #dddddd;
+    border-radius: 0;
+}
+
+.login-button {
+    border-color: transparent;
+    height: 40px;
+    border-radius: 5px;
+    padding: 3px 6px;
+    background: #0b8de3;
+    color: #FFFFFF;
+    margin-top: 5%;
+    width: 84%;
+    margin-left: 8%;
+}
+
+/*Login2*/
+.register-number-p {
+    margin-top: 20px;
+    margin-left: 10%;
+    width: 80%;
+    font-size: 18px;
+}
+
+.register-send-again-a {
+    text-align: center;
+    color: #FEB026;
+    font-size: 14px;
+}
+
+/*OutLogin*/
+
+.OutLoginButton {
+    margin-top: 12%;
+    display: inline-block;
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    border: 1px solid #AAAAAA;
+    padding: 0.5% 1%;
+    font-size: 0.8em;
+    border-radius: 5px;
+    color: #AAAAAA
+}
+
+.unlogin-round-head {
+    margin-left: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 70px;
+    height: 70px;
+    border-radius: 80px;
+}
+
+.OutLoginTupian {
+    height: 30%;
+    width: 32%;
+    display: inline-block;
+    text-align: center;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.OutLoginYuanXing {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    margin-left: 15px;
+}
+
+.OutLoginTopTitle {
+    font-size: 1.5em;
+    display: inline-block;
+    margin-left: 5%;
+}
+
+.OutLoginA {
+    margin-top: 10%;
+    display: inline-block;
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    border: 1px solid #AAAAAA;
+    padding: 0.5% 1%;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.OutLoginImgAndTitle {
+    width: 32%;
+    display: inline-block;
+    text-align: center;
+    margin: 0 0;
+}
+
+/*my-apply*/
+.apply-round-head {
+    margin-left: 6px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 45px;
+}
+
+.apply-p-name {
+    display: inline-block;
+}
+
+.apply-image {
+    background-size: cover;
+    height: 140px;
+    width: 100%;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.apply-body {
+    height: 100%;
+    background: url(/static/image/me_bg.jpg);
+    background-size: cover;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.apply-div-root {
+    margin: 0;
+    padding: 0;
+    background: #11EEEEEE;
+    height: 100%;
+}
+
+.apply-div-item {
+    width: 95%;
+    background-color: #FFFFFF;
+    margin: 2.5%;
+    border-radius: 8px;
+    padding-bottom: 1px;
+}
+
+.apply-p-title {
+    color: #000000;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.apply-p-data {
+    margin-left: 5px;
+    margin-top: -5px;
+}
+
+/*my-integral*/
+.integral-round-head {
+    float: left;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px;
+    width: 75px;
+    height: 75px;
+    border-radius: 75px;
+}
+
+/*store-index*/
+.store-top-img {
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.store-top-round {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0 10px;
+    filter: alpha(opacity=60);
+    width: 90px;
+    height: 90px;
+    border-radius: 80px;
+}
+
+.store-middle-line {
+    padding-left: 15px;
+    list-style: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background-color: #EEEEEE;
+    width: 100%;
+}
+
+.store-middle-first {
+    border-left: 1px solid #EEEEEE;
+    padding-top: 10px;
+}
+
+.store-middle-second {
+    border-top: 1px solid #EEEEEE;
+    padding-top: 10px;
+    border-left: 1px solid #EEEEEE;
+}
+
+.store-li-none {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.store-middle-signup {
+    width: 40px;
+    height: 40px;
+    /*position: relative;*/
+    float: left;
+    top: 0;
+    left: 0;
+}
+
+.store-item-on {
+    background-color: #F15A57;
+}
+
+/*my-integral*/
+/*li和ul写了全局*/
+.my-integral-top-div {
+    background-color: #FFFFFF;
+    display: inline-block;
+    border-radius: 15px;
+    margin-right: 4%;
+    margin-left: 4%;
+    margin-top: 15px;
+    width: 92%;
+}
+
+.my-integral-middle-div {
+    display: inline-block;
+    margin-top: 25px;
+    float: left;
+}
+
+.my-integral-bottom-p {
+    display: inline-block;
+    float: right;
+    margin-top: 40px;
+    margin-right: 15px;
+}
+
+/*my-collection*/
+.my-collection-middle-div {
+    display: inline-block;
+    margin-top: 36px;
+    float: left;
+}
+.my-collection-bottom-p {
+    display: inline-block;
+    float: right;
+    margin-top: 36px;
+    margin-right: 15px;
+}
+
+
+/*公共资源*/
+
+.p-number-color {
+    color: #0ba7ff;
+}

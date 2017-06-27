@@ -1,9 +1,9 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.gzxinbibo.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: arterli <912697590@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 'use strict'
  /* global massend 群发图文消息 */
@@ -112,10 +112,12 @@ global.getUser=(api,openid)=>{
  */
 global.createLimitQRCode=(api,sceneId)=>{
     let deferred = think.defer();
+    let self=this;
     api.createLimitQRCode(sceneId, function (err, result) {
         if(!think.isEmpty(result)){
             deferred.resolve(result);
-            //self.end(result);
+            console.log('result'+JSON.stringify(result) );
+            self.end(result);
         }else{
             console.error('err'+err);
             //deferred.reject(err);

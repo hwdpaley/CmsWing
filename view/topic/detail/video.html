@@ -51,11 +51,11 @@ CLASSES:
 <!-- -->
 <section class="container padding-top-15 padding-bottom-15">
     <!-- OWL SLIDER -->
-<div class="video_bg">
-   <div id="video-box" style="width: 860px; height: 484px">
+<div class="video_bg11">
+   <div id="video-box" style="width: 1100px; height: 484px">
 
    </div>
-    <div class="listbox" id="player_sidebar">
+    <!-- <div class="listbox" id="player_sidebar">
 
         <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#home" data-toggle="tab">选集</a></li>
@@ -111,7 +111,7 @@ CLASSES:
             </div>
             </div>
 
-    </div>
+    </div> -->
 </div>
     <!-- /OWL SLIDER -->
 
@@ -225,7 +225,7 @@ CLASSES:
                             <li><span style="width: 60px"><i class="fa fa-user"></i>作者:</span> {{info.uid|get_nickname}}</li>
                             <li><span style="width: 60px"><i class="fa fa-calendar"></i>时间:</span> {{ info.update_time|dateformat('Y-m-d H:i') }}</li>
                             <li><span style="width: 60px"><i class="fa fa-lightbulb-o"></i>分类:</span> {%set nn = 1%} {%for val in breadcrumb %}{%if nn != 1%} /{%endif%} <a href="{{val.url}}">{{val.title}}</a>{%set nn = nn+1%}{% endfor %}</li>
-                            <li><span style="width: 60px"><i class="fa fa-link"></i>来源:</span> <a href="#">www.cmswing.com</a></li>
+                            <li><span style="width: 60px"><i class="fa fa-link"></i>来源:</span> <a href="#">www.gzxinbibo.com</a></li>
                         </ul>
 
                     </div>
@@ -326,7 +326,7 @@ CLASSES:
 
 
                 <!-- TAGS -->
-                <h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
+                <!-- <h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
                 <div class="hidden-xs margin-bottom-20">
                     {% keywords data ="kws",type="hot"%}
                     {%for key in kws%}
@@ -335,7 +335,7 @@ CLASSES:
                         <span class="num">{{key.videonum}}</span>
                     </a>
                     {%endfor%}
-                </div>
+                </div> -->
 
 
 
@@ -343,7 +343,7 @@ CLASSES:
 
 
                 <!-- SOCIAL ICONS -->
-                <div class="hidden-xs margin-top-20 margin-bottom-20">
+                <!-- <div class="hidden-xs margin-top-20 margin-bottom-20">
                     <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
                         <i class="icon-facebook"></i>
                         <i class="icon-facebook"></i>
@@ -368,7 +368,7 @@ CLASSES:
                         <i class="icon-rss"></i>
                         <i class="icon-rss"></i>
                     </a>
-                </div>
+                </div> -->
 
             </div>
 

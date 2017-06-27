@@ -227,7 +227,7 @@
                 }
 
                 if (element.link) {
-                    currentElement.html('<a href="' + element.link + '"' + (element.linkTarget ? ' target="' + element.linkTarget + '"' : '') + '>' + currentElement.html() + '</a>');
+                    currentElement.html('<a download href="' + element.link + '"' + (element.linkTarget ? ' target="' + element.linkTarget + '"' : '') + '>' + currentElement.html() + '</a>');
                 }
 
                 pgwSlideshow.plugin.find('.ps-current > ul').append(currentElement);

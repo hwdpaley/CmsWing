@@ -1,9 +1,11 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: Tony <912697590@qq.com>
+// +----------------------------------------------------------------------
+
 'use strict';
 
 import Base from './base.js';
@@ -18,6 +20,7 @@ export default class extends Base {
     //} //if(!(id && think.isString(id))){
     //    this.fail('文档ID错误！');
     //}
+    console.log("id="+id);
     /* 获取详细信息*/
     let document = this.model('document');
     let info = await document.detail(id);
@@ -32,12 +35,21 @@ export default class extends Base {
     if(this.is_login){
       roleid = await this.model("member").where({id:this.is_login}).getField('groupid', true);
     }
+    // if(roleid==8){
+    //   this.http.error = new Error('您尚未登录，请先登录！');
+    //   return think.statusAction(700, this.http);
+    // }
     let priv = await this.model("category_priv").priv(info.category_id,roleid,'visit');
     if(!priv){
       this.http.error = new Error('您所在的用户组,禁止访问本栏目！');
-      return think.statusAction(702, this.http);
+      return think.statusAction(700, this.http);
+      // return this.redirect('/uc/public/login');
     }
-
+    //用户自己只可以看到自己发布的拓课信息，看不到其他用户的发布信息
+    // console.log("info-------------"+JSON.stringify(info));
+    // console.log("user-------------"+JSON.stringify(this.user));
+    // this.http.error = new Error('您所在的用户组,禁止访问本栏目！');
+    // return think.statusAction(702, this.http);
 
     //不同的设备,压缩不同的图片尺寸
     let str = info.content;
@@ -51,9 +63,10 @@ export default class extends Base {
 
         img = image_view(str,847,0);
       }
-      info.content=img
+      info.content=img;
+      // console.log("img----------"+img);
     }
-    //console.log(info);
+    
     //分类信息
     let cate = await this.category(info.category_id);
     cate = think.extend({}, cate);
@@ -76,7 +89,7 @@ export default class extends Base {
     //获取面包屑信息
     let breadcrumb = await this.model('category').get_parent_category(cate.id,true);
     this.assign('breadcrumb', breadcrumb);
-
+console.log("breadcrumb==========="+JSON.stringify(breadcrumb));
     // 上一篇
     let previous = await document.where({id:['>',info.id],category_id:info.category_id,'pid':0, 'status': 1}).order('id DESC').find();
     this.assign('previous',previous)
@@ -160,7 +173,7 @@ export default class extends Base {
       } else {
         temp = model;
       }
-      console.log(temp);
+      
       //内容分页
       if(!think.isEmpty(info.content)){
         info.content=info.content.split("_ueditor_page_break_tag_");
@@ -180,6 +193,8 @@ export default class extends Base {
       if(!think.isEmpty(info.content)){
         info.content=info.content.split("_ueditor_page_break_tag_");
       }
+      console.log("detail----------------"+temp);
+      // console.log("detail info----------------"+JSON.stringify(info));
       return this.display(temp);
     }
   }
