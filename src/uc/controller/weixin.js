@@ -317,7 +317,13 @@ export default class extends Base {
                 }
                 console.log(mmap);
                 res=await this.model("doc_wxuser").add(mmap);
-                console.log(res);
+                //报名人数+1
+                let data = await this.model("document").where({id:data.docid}}).select();
+                data.nums+=1;
+                console.log(data);
+                await this.model("document").update(data);
+
+                
                 return this.success({ status: 0, name: "用户报名成功!" });
             }
             
@@ -333,17 +339,17 @@ export default class extends Base {
 
         /* 页码检测*/
         //TODO
-        let roleid = 8; //游客
-        //访问控制
-        let islogin =await this.islogin();;
-        // console.log("login--------"+JSON.stringify(islogin));
-        if (islogin) {
-            roleid = await this.model("member").where({ id: islogin }).getField('groupid', true);
-        }
-        if(roleid==8){
-          this.http.error = new Error('您尚未登录，请先登录！');
-          return think.statusAction(700, this.http);
-        }
+        // let roleid = 8; //游客
+        // //访问控制
+        // let islogin =await this.islogin();;
+        // // console.log("login--------"+JSON.stringify(islogin));
+        // if (islogin) {
+        //     roleid = await this.model("member").where({ id: islogin }).getField('groupid', true);
+        // }
+        // if(roleid==8){
+        //   this.http.error = new Error('您尚未登录，请先登录！');
+        //   return think.statusAction(700, this.http);
+        // }
         // if(info.uid!=1){
         //   if(info.uid!=islogin){
         //     this.http.error = new Error('无查看权限！');
@@ -486,8 +492,10 @@ export default class extends Base {
         }else{
           this.assign("pay_type", 0);
         }
+
         let signPackage=await this.jssdk('http://www.gzxinbibo.com/uc/wechat/token');
         this.assign("signPackage", signPackage);
+
         if (checkMobile(this.userAgent())) {
             //手机模版
             if (!think.isEmpty(info.template) && info.template != 0) {
