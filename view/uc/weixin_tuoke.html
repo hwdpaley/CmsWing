@@ -104,8 +104,12 @@
 {% endblock %} 
 {% block script %}
 <script>
-uParse('#contentcmswing', {
-    rootPath: '/static/admin/js/udeitor/'
-})
+    uParse('#contentcmswing', {
+        rootPath: '/static/admin/js/udeitor/'
+    })
+    // var signPackage = !{JSON.stringify("{{signPackage}}")};
+    // console.log(signPackage);
+    // var signPackage = "{{signPackage}}";
+    console.log("{{signPackage.appId}}");
 </script>
 {% endblock %}

@@ -19,7 +19,7 @@ export default class extends Base {
     //网站配置
     this.setup = await this.model("setup").getset();
     this.api = new API(this.setup.wx_AppID, this.setup.wx_AppSecret);
-    this.jssdk = new JSSDK(this.setup.wx_AppID, this.setup.wx_AppSecret);
+    this.jssdk = JSSDK;//new JSSDK(this.setup.wx_AppID, this.setup.wx_AppSecret);
   }
   /**
    * index action
@@ -318,10 +318,10 @@ export default class extends Base {
                 console.log(mmap);
                 res=await this.model("doc_wxuser").add(mmap);
                 //报名人数+1
-                let data = await this.model("document").where({id:data.docid}}).select();
-                data.nums+=1;
-                console.log(data);
-                await this.model("document").update(data);
+                let doc = await this.model("document").where({id:data.docid}).select();
+                doc.nums+=1;
+                console.log(doc);
+                await this.model("document").where({id:data.docid}).update(doc);
 
                 
                 return this.success({ status: 0, name: "用户报名成功!" });
@@ -336,7 +336,7 @@ export default class extends Base {
         let document = this.model('document');
         let info = await document.detail(id);
         this.assign("docid", id);
-
+        let islogin =await this.islogin();
         /* 页码检测*/
         //TODO
         // let roleid = 8; //游客
@@ -492,8 +492,9 @@ export default class extends Base {
         }else{
           this.assign("pay_type", 0);
         }
-
-        let signPackage=await this.jssdk('http://www.gzxinbibo.com/uc/wechat/token');
+        // let jssdk = new JSSDK(this.setup.wx_AppID, this.setup.wx_AppSecret);
+        let signPackage=await this.jssdk.getSignPackage('http://www.gzxinbibo.com/uc/wechat/tuoke');
+        console.log(JSON.stringify(signPackage));
         this.assign("signPackage", signPackage);
 
         if (checkMobile(this.userAgent())) {

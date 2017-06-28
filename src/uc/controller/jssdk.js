@@ -35,19 +35,22 @@ JSSDK.prototype = {
             });
         });
     },
-    getSigPackage:function(url){
+    async getSignPackage(url){
         const instance=this;
-        instance.getJsApiTicket(function(err,JsApiTicket){
-            if(err){
-                debug('getJsApiTicket.err',err);
-                return {};
-            }
-            const timestamp=Math.round(Date.now()/1000);
+        const JsApiTicket=this.getJsApiTicket();
+        // instance.getJsApiTicket(function(err,JsApiTicket){
+        //     if(err){
+        //         debug('getJsApiTicket.err',err);
+        //         return {};
+        //     }
+            
+        // });
+        const timestamp=Math.round(Date.now()/1000);
             const noncestr=instance.createNonceStr();
             const rawString='jsapi_ticket='+JsApiTicket+'&noncestr='+noncestr+'&timestamp='+timestamp+'&url='+url;
             const hash=crypto.createHash('sha1');
             const signature=hash.update(rawString).digest('hex');
-            sign={
+            const sign={
                 timestamp,
                 url,
                 signature,
@@ -56,12 +59,11 @@ JSSDK.prototype = {
                 nonceStr:noncestr
 
             };
-            console.log(JSON.stringify(sign));
+            // console.log(JSON.stringify(sign));
             return (sign);
-        });
         
     },
-    getJsApiTicket: function (done) {
+    async getJsApiTicket() {
         const cacheFile = '.jsapiticket.json';
         const intance = this;
         const data = intance.readCacheFile(cacheFile);
@@ -69,17 +71,12 @@ JSSDK.prototype = {
 
         if (typeof data.expireTime === 'undefined' || data.expireTime < time) {
             debug('getJsApiTicket: from server');
-            intance.getAccessToken(function (error, accessToken) {
-                if (error) {
-                    debug('getJsApiTicket.token.error:', error);
-                    return done(error, null);
-                }
-
-                const url = `https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=${accessToken}`;
+            const accessToken=this.getAccessToken();
+            const url = `https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=${accessToken}`;
                 request.get(url, function (err, res, body) {
                     if (err) {
                         debug('getJsApiTicket.request.error:', err, url);
-                        return done(err, null);
+                        return (err);
                     }
 
                     debug('getJsApiTicket.request.body:', body);
@@ -92,20 +89,19 @@ JSSDK.prototype = {
                             jsApiTicket: data.ticket,
                         });
 
-                        done(null, data.ticket);
+                        return(data.ticket);
                     } catch (e) {
                         debug('getJsApiTicket.parse.error:', e, url);
-                        done(e, null);
+                        return(e);
                     }
                 });
-            });
         } else {
             debug('getJsApiTicket: from cache');
-            done(null, data.jsApiTicket);
+            return(data.jsApiTicket);
         }
     },
 
-    getAccessToken: function (done) {
+    async getAccessToken() {
         const cacheFile = '.accesstoken.json';
         const intance = this;
         const data = intance.readCacheFile(cacheFile);
@@ -117,7 +113,7 @@ JSSDK.prototype = {
             request.get(url, function (err, res, body) {
                 if (err) {
                     debug('getAccessToken.request.error:', err, url);
-                    return done(err, null);
+                    return (err);
                 }
 
                 debug('getAccessToken.request.body:', body);
@@ -130,19 +126,19 @@ JSSDK.prototype = {
                         accessToken: data.access_token,
                     });
 
-                    done(null, data.access_token);
+                    return(data.access_token);
                 } catch (e) {
                     debug('getAccessToken.parse.error:', e, url);
-                    done(e, null);
+                    return(e);
                 }
             });
         } else {
             debug('getAccessToken: from cache');
-            done(null, data.accessToken);
+            return(data.accessToken);
         }
     },
 
-    createNonceStr: function () {
+    async createNonceStr() {
         const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         const length = chars.length;
         let str = '';
@@ -153,7 +149,7 @@ JSSDK.prototype = {
     },
 
     // 从文件里面读取缓存
-    readCacheFile: function (filename) {
+    async readCacheFile(filename) {
         try {
             return JSON.parse(fs.readFileSync(filename));
         } catch (e) {
@@ -164,7 +160,7 @@ JSSDK.prototype = {
     },
 
     // 往文件里面写缓存
-    writeCacheFile: function (filename, data) {
+    async writeCacheFile(filename, data) {
         return fs.writeFileSync(filename, JSON.stringify(data));
     },
 };
