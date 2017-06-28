@@ -21,7 +21,13 @@ export default class extends think.controller.base {
          * 判断是否登录
          * @returns {boolean}
          */
+    async islogin() {
+    //前台判断是否登录
+    let user = await this.session('webuser');
+    let res = think.isEmpty(user) ? false : user.uid;
+    return res;
 
+    }
     /**
      * 微信服务器验证
      * index action
@@ -472,44 +478,6 @@ export default class extends think.controller.base {
             }
         });
     }
-    async enrollAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
-        let openid ='oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ';// await this.session("wx_openid");
-        let data = this.post();
-        console.log(data);
-        // data: {
-        //         "doc": did,
-        //         "name": user_name.val(),
-        //         "phone": user_phone.val(),
-        //         // csrfmiddlewaretoken: $.cookie("csrftoken")
-        //     }
-        if (openid) {
-
-            let map = {
-                openid: openid,
-                docid:data.docid
-            };
-            let res = await this.model("doc_wxuser").where(map).find();
-            console.log(res);
-            if(res.openid!=undefined){
-                console.log("have---------"+res);
-                return this.success({ status: -1, name: "用户已经报名!" });
-                //已经报名
-            }else{
-                let mmap={
-                    openid: openid,
-                    docid:data.docid,
-                    status:1,
-                    create_time:new Date().valueOf()
-                }
-                console.log(mmap);
-                res=await this.model("doc_wxuser").add(mmap);
-                console.log(res);
-                return this.success({ status: 0, name: "用户报名成功!" });
-            }
-            
-            
-        }
-        return this.success({ status: -1, name: "用户报名失败!" });
-    }
+    
+    
 }

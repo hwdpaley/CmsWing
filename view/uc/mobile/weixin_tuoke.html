@@ -1,11 +1,24 @@
-{% extends "./inc/wechat_base.html" %} {% block content %}
-<script src="/static/admin/js/udeitor/ueditor.parse.min.js"></script>
-<style>
+{% extends "./inc/tuoke_appbase.html" %}
+{%block style%}
 
-.active > .text {
-    display: block !important;
-}
+<style>
+    .mui-table h4 ,.mui-media-body h4{
+        line-height: 21px;
+        font-weight: 400;
+    }
+    .active > .text {
+      display: block !important;
+    }
 </style>
+{%endblock%}
+{% block content %}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">{{controller.meta_title}}</h1>
+</header>
+
+
+
 <div id="customer_page">
     <div class="header_banner" style="background-image: url({{info.fmurl}});"></div>
     <div class="content">
@@ -107,4 +120,7 @@ uParse('#contentcmswing', {
     rootPath: '/static/admin/js/udeitor/'
 })
 </script>
-{% endblock %}
+
+{% endblock%}
+
+

@@ -63,7 +63,7 @@ function enroll_modal_button(did) {
 		}
 		//报名参加
         $.ajax({
-            url: "/uc/wechat/enroll",
+            url: "/uc/weixin/enroll",
             method: "post",
             data: {
                 "docid": did,

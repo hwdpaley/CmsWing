@@ -466,12 +466,12 @@
     <script type="text/javascript" src="/static/admin/js/wechat/jquery.qrcode.min.js"></script>
     <script type="text/javascript">
         function ShowProduct(id) {
-            $('#wx_iframepage').attr('src', '/uc/tuoke/tuoke?id=' + id);
+            $('#wx_iframepage').attr('src', '/uc/weixin/tuoke?id=' + id);
             $('#wx_look_modal').modal('show');
         }
         function WxListCode(id) {
             $("#wx_qr_modal_code").html("");
-            $("#wx_qr_modal_code").qrcode({width: 120, height: 120, text: 'http://www.gzxinbibo.com/wechat/product/' + id});
+            $("#wx_qr_modal_code").qrcode({width: 120, height: 120, text: 'http://www.gzxinbibo.com/uc/weixin/tuoke/?id=' + id});
             $('#wx_qr_modal').modal('show');
         }
     </script>
