@@ -13,11 +13,13 @@ import pingpp from 'pingpp';
 import http from 'http';
 import fs from 'fs';
 import API from 'wechat-api';
+import JSSDK from './jssdk.js';
 export default class extends Base {
   async __before() {
     //网站配置
     this.setup = await this.model("setup").getset();
     this.api = new API(this.setup.wx_AppID, this.setup.wx_AppSecret);
+    this.jssdk = new JSSDK(this.setup.wx_AppID, this.setup.wx_AppSecret);
   }
   /**
    * index action
@@ -285,7 +287,7 @@ export default class extends Base {
     return deferred.promise;
   }
   async enrollAction() {
-        let openid ='oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ';// await this.session("wx_openid");
+        let openid = await this.session("wx_openid");
         let data = this.post();
         console.log(data);
         // data: {
@@ -461,6 +463,31 @@ export default class extends Base {
 
             }
         }
+        let pic = await get_cover(info.fmurl);
+        console.log("tuoke.  pic---------" + JSON.stringify(pic));
+        info.fmurl = '//' + this.setup.QINIU_DOMAIN_NAME + '/' + pic.path;
+        pic = await get_cover(info.twourl);
+        info.twourl = '//' + this.setup.QINIU_DOMAIN_NAME + '/' + pic.path;
+        // console.log("tuokeAction---------" + JSON.stringify(info));
+        this.assign("info", info);
+        let openid = await this.session("wx_openid");
+        if(openid==undefined){
+          let oid = await this.model("wx_user").where({uid:islogin}).getField("openid");
+          openid=oid[0];
+        }
+        let map = {
+                openid: openid,
+                docid:id
+        };
+        let res = await this.model("doc_wxuser").where(map).find();
+        //是否已经报名
+        if(res.openid!=undefined){
+          this.assign("pay_type", 1);
+        }else{
+          this.assign("pay_type", 0);
+        }
+        let signPackage=await this.jssdk('http://www.gzxinbibo.com/uc/wechat/token');
+        this.assign("signPackage", signPackage);
         if (checkMobile(this.userAgent())) {
             //手机模版
             if (!think.isEmpty(info.template) && info.template != 0) {
@@ -475,6 +502,7 @@ export default class extends Base {
             if (!think.isEmpty(info.content)) {
                 info.content = info.content.split("_ueditor_page_break_tag_");
             }
+            console.log("tuokeAction========"+`${this.http.controller}/${temp}`);
             return this.display(`mobile/${this.http.controller}/${temp}`)
         } else {
             if (!think.isEmpty(info.template) && info.template != 0) {
@@ -491,34 +519,16 @@ export default class extends Base {
                 info.content = info.content.split("_ueditor_page_break_tag_");
             }
         }
-        let pic = await get_cover(info.fmurl);
-        console.log("tuoke.  pic---------" + JSON.stringify(pic));
-        info.fmurl = '//' + this.setup.QINIU_DOMAIN_NAME + '/' + pic.path;
-        pic = await get_cover(info.twourl);
-        info.twourl = '//' + this.setup.QINIU_DOMAIN_NAME + '/' + pic.path;
-        // console.log("tuokeAction---------" + JSON.stringify(info));
-        this.assign("info", info);
-        let openid ='oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ';// await this.session("wx_openid");
-
-        let map = {
-                openid: openid,
-                docid:id
-        };
-        let res = await this.model("doc_wxuser").where(map).find();
-        //是否已经报名
-        if(res.openid!=undefined){
-          this.assign("pay_type", 1);
-        }else{
-          this.assign("pay_type", 0);
-        }
+        
         
         console.log("tuokeAction========"+`${this.http.controller}/${this.http.action}`);
-        if (checkMobile(this.userAgent())) {
-            //手机模版 /mobile/wechat/tuoke
-            return this.display(`mobile/${this.http.controller}/${this.http.action}`)
-        } else {
-            return this.display();
-        }
+        return this.display();
+        // if (checkMobile(this.userAgent())) {
+        //     //手机模版 /mobile/wechat/tuoke
+        //     return this.display(`mobile/${this.http.controller}/${this.http.action}`)
+        // } else {
+        //     return this.display();
+        // }
 
     }
 }

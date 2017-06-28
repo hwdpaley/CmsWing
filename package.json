@@ -8,26 +8,27 @@
     "watch-compile": "node -e \"console.log('<npm run watch-compile> no longer need, use <npm start> command direct.');console.log();\"",
     "watch": "npm run watch-compile"
   },
-
   "dependencies": {
-    "thinkjs": "2.2.x",
     "babel-runtime": "6.x.x",
-    "source-map-support": "0.4.0",
+    "crypto": "0.0.3",
     "geetest": "latest",
+    "jimp": "latest",
+    "lodash": "4.x.x",
+    "moment": "latest",
     "node-crontab": "latest",
     "nunjucks": "^2.2.0",
     "pingpp": "latest",
+    "qiniu": "latest",
+    "request": "^2.81.0",
+    "segment": "latest",
+    "source-map-support": "0.4.0",
+    "superagent": "latest",
     "tar.gz": "^1.0.2",
     "think-pagination": "latest",
     "think-wechat": "latest",
-    "lodash":"4.x.x",
-    "wechat-api":"latest",
-    "jimp":"latest",
-    "qiniu":"latest",
+    "thinkjs": "2.2.x",
     "urllib": ">=0.5.2",
-    "moment": "latest",
-    "superagent": "latest",
-    "segment":"latest"
+    "wechat-api": "latest"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
