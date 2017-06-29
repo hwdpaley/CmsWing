@@ -11,7 +11,7 @@
     <div class="header_banner" style="background-image: url({{info.fmurl}});"></div>
     <div class="content">
         <h3 class="header_title">{{info.title}}</h3>
-        <p class="simplify_introduction">{{info.description}}</p>
+        <p class="simplify_introduction">{{desc}}</p>
         <p>
     </div>
     <div class="space"></div>
@@ -110,6 +110,8 @@
     // var signPackage = !{JSON.stringify("{{signPackage}}")};
     // console.log(signPackage);
     // var signPackage = "{{signPackage}}";
-    console.log("{{signPackage.appId}}");
+    console.log('{{signPackage.nonceStr}}');
+    console.log('{{signPackage.signature}}');
+    console.log('{{signPackage.timestamp}}');
 </script>
 {% endblock %}

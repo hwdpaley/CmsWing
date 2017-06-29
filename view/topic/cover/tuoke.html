@@ -1,17 +1,11 @@
-{% extends "../inc/picture_base.html" %}
-{% block style %}
-    
-    <link rel="stylesheet" href="/static/admin/css/wechat/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/admin/css/wechat/weui.min.css">
-    <link rel="stylesheet" href="/static/admin/css/wechat/jquery-weui.css">
-
-    <link rel="stylesheet" href="/static/admin/css/wechat/all.css">
-    <link rel="stylesheet" href="/static/admin/css/wechat/web_base.css">
-    
-    <link rel="stylesheet" href="/static/admin/css/wechat/manager.css">
-{% endblock %}
-{% block content %}
-     <!--
+{% extends "../inc/picture_base.html" %} {% block style %}
+<link rel="stylesheet" href="/static/admin/css/wechat/bootstrap.min.css">
+<link rel="stylesheet" href="/static/admin/css/wechat/weui.min.css">
+<link rel="stylesheet" href="/static/admin/css/wechat/jquery-weui.css">
+<link rel="stylesheet" href="/static/admin/css/wechat/all.css">
+<link rel="stylesheet" href="/static/admin/css/wechat/web_base.css">
+<link rel="stylesheet" href="/static/admin/css/wechat/manager.css"> {% endblock %} {% block content %}
+<!--
 				PAGE HEADER
 
 				CLASSES:
@@ -29,206 +23,195 @@
 					.shadow-after-3 	= shadow 3 header bottom
 			-->
 <section class="page-header page-header-xs">
-				<div class="container">
-{#
-					<h1>{{category.title}}</h1>
-#}
-					<!-- breadcrumbs -->
-					<ol class="breadcrumb breadcrumb-inverse">
-                        <li><a href="/">首页 </a></li>
-                        {%for val in breadcrumb %}
-                        {% if val.id == category.id %}
-						<li class="active">{{val.title}}</li>
-                        {% else %}
-                        <li><a href="{{val.url}}">{{val.title}}</a></li>
+    <div class="container">
+        {#
+        <h1>{{category.title}}</h1> #}
+        <!-- breadcrumbs -->
+        <ol class="breadcrumb breadcrumb-inverse">
+            <li><a href="/">首页 </a></li>
+            {%for val in breadcrumb %} {% if val.id == category.id %}
+            <li class="active">{{val.title}}</li>
+            {% else %}
+            <li><a href="{{val.url}}">{{val.title}}</a></li>
+            {% endif %} {% endfor %}
+        </ol>
+        <!-- /breadcrumbs -->
+    </div>
+</section>
+<!-- /PAGE HEADER -->
+<!-- -->
+<section>
+    <div class="container">
+        <div class="row">
+            <!-- LEFT -->
+            <div class="col-md-12 col-sm-12">
+                <!--
+        controlls-over		= navigation buttons over the image
+        buttons-autohide 	= navigation buttons visible on mouse hover only
 
-                        {% endif %}
-                        {% endfor %}
-					</ol><!-- /breadcrumbs -->
-
-				</div>
-			</section>
-			<!-- /PAGE HEADER -->
-            <!-- -->
-			<section>
-				<div class="container">
-
-					<div class="row">
-
-						<!-- LEFT -->
-
-						<div class="col-md-12 col-sm-12">
-							<!--
-                                                        controlls-over		= navigation buttons over the image
-                                                        buttons-autohide 	= navigation buttons visible on mouse hover only
-
-                                                        data-plugin-options:
-                                                            "singleItem": true
-                                                            "autoPlay": true (or ms. eg: 4000)
-                                                            "navigation": true
-                                                            "pagination": true
-                                                            "transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
+        data-plugin-options:
+            "singleItem": true
+            "autoPlay": true (or ms. eg: 4000)
+            "navigation": true
+            "pagination": true
+            "transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
                                                     -->
-							<div class="owl-carousel buttons-autohide controlls-over" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
-								{% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%}
-								{% for v in slider%}
-								<a href="{{v.name|get_url(v.id)}}">
-									<img class="img-responsive" src="{{v.cover_id|get_pic('m=1,w=848,h=300')}}" alt="{{v.title}}">
-								</a>
-								{%endfor%}
-							</div>
-
-							<ul class="nav nav-tabs nav-button-tabs">
-								<!-- side navigation -->
-								{%column data="cates",cid=category.id%}
-								<li class="active"><a href="#taball" data-toggle="tab">全部</a></li>
-								{%for val in cates%}
-								<li ><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
-								{%endfor%}
-
-							</ul>
-
-							<div class="tab-content">
-								<div class="tab-pane fade in active" id="taball">
-									{% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid %}
-									{% for val in list %}
-									{% set categoryname = val.category_id|get_cate %}
-									<!-- POST ITEM -->
-									<div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-
-										<!-- IMAGE -->
-										{% if val.cover_id>0 %}
-										
-										<figure class="blog-item-small-image margin-bottom-0">
-											<a onclick="ShowProduct('{{val.id}}');"  title="{{val.title}}">
-												<img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
-											</a>
-											<button onclick="ShowProduct('{{val.id}}');" class="btn btn-success btn-left" style="
+                <div class="owl-carousel buttons-autohide controlls-over" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
+                    {% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%} {% for v in slider%}
+                    <a href="{{v.name|get_url(v.id)}}">
+                        <img class="img-responsive" src="{{v.cover_id|get_pic('m=1,w=848,h=300')}}" alt="{{v.title}}">
+                    </a>
+                    {%endfor%}
+                </div>
+                <div class="row">
+                	<div class="col-md-9 col-sm-9">
+                    <ul class="nav nav-tabs nav-button-tabs">
+                        <!-- side navigation -->
+                        {%column data="cates",cid=category.id%}
+                        <li class="active"><a href="#taball" data-toggle="tab">全部</a></li>
+                        {%for val in cates%}
+                        <li><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <!--投稿按钮-->
+                    <div class="btn-group btn-group-sm pull-right">
+                        <a {%if model|length> 1 %} data-toggle="dropdown" {% endif %} class="btn btn-primary btn-sm document_add
+                    dropdown-toggle {% if allow == 0 %}disabled{% endif %}" {%if model|length
+                    == 1 %} href="/uc/publish/add/model_id/{{modellist[0].id}}/pid/0/cate_id/{{cate_id}}/group_id/{{group_id}}/sortid/{{sortid}}"{%endif%}
+                    >
+                    <span class="fa fa-pencil-square-o"></span> 投稿 {%if model|length > 1 %}<span class="caret"></span>{% endif %}</a> {%if model|length > 1 %}
+                        <ul class="dropdown-menu">
+                            {% for val in modellist%}
+                            <li> <a href="/uc/publish/add/model_id/{{val.id}}/pid/0/cate_id/{{cate_id}}/group_id/{{group_id}}/sortid/{{sortid}}" class="text-info">添加{{val.title}}</a></li>
+                            {% endfor %}
+                            <li class="divider"></li>
+                            <li><a href="#">添加内容</a></li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="taball">
+                        {% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
+                        <!-- POST ITEM -->
+                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
+                            <!-- IMAGE -->
+                            {% if val.cover_id>0 %}
+                            <figure class="blog-item-small-image margin-bottom-0">
+                                <a onclick="ShowProduct('{{val.id}}');" title="{{val.title}}">
+                                    <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
+                                </a>
+                                <button onclick="ShowProduct('{{val.id}}');" class="btn btn-success btn-left" style="
     margin-top: 15px;
 ">预&nbsp;&nbsp;览</button>
-											<button onclick="WxListCode('{{val.id}}');" class="btn btn-success btn-right" style="
+                                <button onclick="WxListCode('{{val.id}}');" class="btn btn-success btn-right" style="
     margin-top: 15px;margin-left:30% 
 ">二维码</button>
-										</figure>
-										
-										{% endif %}
-										<div class="blog-item-small-content">
-											<h2><a onclick="WxListCode('{{val.id}}');"  title="{{val.title}}" title="{{val.title}}">{{val.title}}</a></h2>
-
-											<ul class="blog-post-info list-inline padding-bottom-10">
-												<li>
-													<a href="#">
-														<i class="fa fa-clock-o"></i>
-														<span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-comment-o"></i>
-														<span class="font-lato">{{val.view}} </span>
-													</a>
-												</li>
-												<li>
-													<i class="fa fa-folder-open-o"></i>
-
-													<a class="category" href="{{categoryname.url}}">
-														<span class="font-lato">{{categoryname.name}}</span>
-													</a>
-													{#
-													<a class="category" href="#">
-														<span class="font-lato">Photography</span>
-													</a>
-													#}
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-user"></i>
-														<span class="font-lato">{{val.uid|get_nickname}}</span>
-													</a>
-												</li>
-											</ul>
-
-											<p>{{val.description|truncate(90, true, "...")}}</p>
-										</div>
-
-									</div>
-									<!-- /POST ITEM -->
-									{%endfor%}
-
-								</div>
-								{%for v in cates%}
-								<div class="tab-pane fade  " id="tab{{v.id}}">
-										{% topic data = "list",limit= "10",cid=v.id,uid=userid%}
-										{% for val in list %}
-									{% set categoryname = val.category_id|get_cate %}
-										<!-- POST ITEM -->
-										<div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-
-											<!-- IMAGE -->
-											{% if val.cover_id>0 %}
-											<figure class="blog-item-small-image margin-bottom-0">
-												<a href="{{val.name|get_url(val.id)}}">
-												<img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
-												</a>
-											</figure>
-											{% endif %}
-											<div class="blog-item-small-content">
-												<h2><a href="{{val.name|get_url(val.id)}}">{{val.title}}</a></h2>
-
-												<ul class="blog-post-info list-inline padding-bottom-10">
-													<li>
-														<a href="#">
-															<i class="fa fa-clock-o"></i>
-															<span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<i class="fa fa-comment-o"></i>
-															<span class="font-lato">{{val.view}}</span>
-														</a>
-													</li>
-													<li>
-														<i class="fa fa-folder-open-o"></i>
-
-														<a class="category" href="{{categoryname.url}}">
-															<span class="font-lato">{{categoryname.name}}</span>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<i class="fa fa-user"></i>
-															<span class="font-lato">{{val.uid|get_nickname}}</span>
-														</a>
-													</li>
-												</ul>
-
-									<p>{{val.description|truncate(90, true, "...")}}</p>
-								</div>
-
-							</div>
-							<!-- /POST ITEM -->
-							{%endfor%}
-							<!-- PAGINATION -->
-							<div class="text-center">
-								<a href="{{v.url}}" class="btn btn-reveal btn-default">
-									<i class="fa fa-plus"></i>
-									<span>查看全部内容</span>
-								</a>
-							</div>
-							<!-- /PAGINATION -->
-								</div>
-								{%endfor%}
-
-							</div>
-
-						</div>
-						<!-- RIGHT -->
-
-						<div class="col-md-3 col-sm-3">
-
-							
-							<!-- <div class="inline-search clearfix margin-bottom-30">
+                            </figure>
+                            {% endif %}
+                            <div class="blog-item-small-content">
+                                <h2><a onclick="WxListCode('{{val.id}}');"  title="{{val.title}}" title="{{val.title}}">{{val.title}}</a></h2>
+                                <ul class="blog-post-info list-inline padding-bottom-10">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-comment-o"></i>
+                                            <span class="font-lato">{{val.view}} </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-folder-open-o"></i>
+                                        <a class="category" href="{{categoryname.url}}">
+                                            <span class="font-lato">{{categoryname.name}}</span>
+                                        </a>
+                                        {#
+                                        <a class="category" href="#">
+                                            <span class="font-lato">Photography</span>
+                                        </a>
+                                        #}
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>
+                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <p>{{val.description|truncate(90, true, "...")}}</p>
+                            </div>
+                        </div>
+                        <!-- /POST ITEM -->
+                        {%endfor%}
+                    </div>
+                    {%for v in cates%}
+                    <div class="tab-pane fade  " id="tab{{v.id}}">
+                        {% topic data = "list",limit= "10",cid=v.id,uid=userid%} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
+                        <!-- POST ITEM -->
+                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
+                            <!-- IMAGE -->
+                            {% if val.cover_id>0 %}
+                            <figure class="blog-item-small-image margin-bottom-0">
+                                <a href="{{val.name|get_url(val.id)}}">
+                                    <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
+                                </a>
+                            </figure>
+                            {% endif %}
+                            <div class="blog-item-small-content">
+                                <h2><a href="{{val.name|get_url(val.id)}}">{{val.title}}</a></h2>
+                                <ul class="blog-post-info list-inline padding-bottom-10">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-comment-o"></i>
+                                            <span class="font-lato">{{val.view}}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-folder-open-o"></i>
+                                        <a class="category" href="{{categoryname.url}}">
+                                            <span class="font-lato">{{categoryname.name}}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>
+                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <p>{{val.description|truncate(90, true, "...")}}</p>
+                            </div>
+                        </div>
+                        <!-- /POST ITEM -->
+                        {%endfor%}
+                        <!-- PAGINATION -->
+                        <div class="text-center">
+                            <a href="{{v.url}}" class="btn btn-reveal btn-default">
+                                <i class="fa fa-plus"></i>
+                                <span>查看全部内容</span>
+                            </a>
+                        </div>
+                        <!-- /PAGINATION -->
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+            <!-- RIGHT -->
+            <div class="col-md-3 col-sm-3">
+                <!-- <div class="inline-search clearfix margin-bottom-30">
 								<form action="" method="get" class="widget_search">
 									<input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
 									<button type="submit">
@@ -330,10 +313,7 @@
 								</div>
 
 							</div> -->
-							
-
-
-							<!-- TAGS 
+                <!-- TAGS 
 							<h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
 							<div class="hidden-xs margin-bottom-20">
 								{% keywords data ="kws",type="hot"%}
@@ -345,7 +325,7 @@
 								{%endfor%}
 							</div>
 							-->
-                            <!-- {#
+                <!-- {#
 							
 							<h3 class="hidden-xs size-16 margin-bottom-10">TWITTER FEED</h3>
 							<ul class="hidden-xs widget-twitter margin-bottom-60" data-php="php/twitter/tweet.php" data-username="stepofweb" data-limit="3">
@@ -368,9 +348,7 @@
 #}
 
 							<hr /> -->
-
-
-							<!-- SOCIAL ICONS 
+                <!-- SOCIAL ICONS 
 							<div class="hidden-xs margin-top-30 margin-bottom-60">
 								<a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
 									<i class="icon-facebook"></i>
@@ -398,81 +376,73 @@
 								</a>
 							</div>
 							-->
-						</div>
-					</div>
-
-
-				</div>
-				<!--查看的弹出框-->
+            </div>
+        </div>
+    </div>
+    <!--查看的弹出框-->
     <div class="modal fade bs-example-modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myLargeModalLabel" id="wx_look_modal">
         <div class="modal-dialog ">
             <div class="modal-content">
-
                 <!-- 模块框头部 -->
                 <div class="modal-header text-center">
                     <h4 class="modal-title" id="myModalLabel">预览</h4>
                 </div>
-
                 <!-- 模态框内容 -->
                 <div class="modal-body">
                     <div class="">
                         <iframe src="" id="wx_iframepage" name="iframepage" frameborder="0" scrolling="auto" width="100%" height="700px"></iframe>
-
                     </div>
                 </div>
-
                 <!-- 模态框脚注 -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="wx_modal_close">关闭</button>
                 </div>
-
             </div>
         </div>
-
     </div>
     <!--二维码-->
-<div class="modal fade" id="wx_qr_modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">请扫码下面的二维码</h4>
-            </div>
-            <div class="modal-body bg-success text-center" >
-                <div style="
+    <div class="modal fade" id="wx_qr_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">请扫码下面的二维码</h4>
+                </div>
+                <div class="modal-body bg-success text-center">
+                    <div style="
     width: 120px;
     margin-left: 40%;" id="wx_qr_modal_code"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
-            </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
-			</section>
-			<!-- / -->
-{% endblock %}
-{% block script %}
-    
-    <script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/static/admin/js/wechat/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/admin/js/wechat/jquery-weui.min.js"></script>
+</section>
+<!-- / -->
+{% endblock %} {% block script %}
+<script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/admin/js/wechat/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/wechat/jquery-weui.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/wechat/product_manage.js"></script>
+<script type="text/javascript" src="/static/admin/js/wechat/jquery.qrcode.min.js"></script>
+<script type="text/javascript">
+function ShowProduct(id) {
+    $('#wx_iframepage').attr('src', '/uc/weixin/tuoke?id=' + id);
+    $('#wx_look_modal').modal('show');
+}
 
-
-    <script type="text/javascript" src="/static/admin/js/wechat/product_manage.js"></script>
-    
-    <script type="text/javascript" src="/static/admin/js/wechat/jquery.qrcode.min.js"></script>
-    <script type="text/javascript">
-        function ShowProduct(id) {
-            $('#wx_iframepage').attr('src', '/uc/weixin/tuoke?id=' + id);
-            $('#wx_look_modal').modal('show');
-        }
-        function WxListCode(id) {
-            $("#wx_qr_modal_code").html("");
-            $("#wx_qr_modal_code").qrcode({width: 120, height: 120, text: 'http://www.gzxinbibo.com/uc/weixin/tuoke/?id=' + id});
-            $('#wx_qr_modal').modal('show');
-        }
-    </script>
+function WxListCode(id) {
+    $("#wx_qr_modal_code").html("");
+    $("#wx_qr_modal_code").qrcode({
+        width: 120,
+        height: 120,
+        text: 'http://www.gzxinbibo.com/uc/weixin/tuoke/?id=' + id
+    });
+    $('#wx_qr_modal').modal('show');
+}
+</script>
 {% endblock %}

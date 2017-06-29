@@ -11,8 +11,8 @@ import Base from './base.js';
 import {type} from 'os';
 /**
  * 后台首页控制器
- * @author 阿特 <arterli@qq.com>
- * http://www.cmswing.com
+ * @author Tony <912697590@qq.com>
+ * http://www.gzxinbibo.com
  */
 export default class extends Base {
   init(http){
@@ -33,7 +33,7 @@ export default class extends Base {
     let mysqlv=await this.model('mysql').query("select version()");
     let node = process.versions;
       this.assign({
-          'version':think.CMSWING_VERSION,
+          'version':think.BIEBER_VERSION,
           'OS':type(),
           'nodejs_v':node.node,
           'thinkjs':think.version,
@@ -41,6 +41,7 @@ export default class extends Base {
       })
     //用户统计
       let user_count = await this.model("member").count('id');
+      let wxuser_count = await this.model("wx_user").count('id');
       //行为
       let action_count = await this.model("action").count("id");
       //栏目
@@ -52,6 +53,7 @@ export default class extends Base {
       //分类信息
       let type_count = await this.model("type").count();
     this.assign({
+      wxuser_count:wxuser_count,
       user_count:user_count,
         action_count:action_count,
         cate_count:cate_count,

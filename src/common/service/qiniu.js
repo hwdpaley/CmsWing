@@ -115,7 +115,7 @@ export default class extends think.service.base {
                     deferred.resolve(err);
                 }
             });
-return deferred.promise;
+          return deferred.promise;
         }
         return await stat();
     }

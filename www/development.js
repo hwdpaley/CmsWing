@@ -7,7 +7,7 @@ var instance = new thinkjs({
   RUNTIME_PATH:rootPath + path.sep +'runtime',
   ROOT_PATH: rootPath,
   RESOURCE_PATH: __dirname,
-  CMSWING_VERSION:'1.0.0',
+  BIEBER_VERSION:'2.0.0',
   _:lodash,
   env: 'development'
 });

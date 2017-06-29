@@ -1,9 +1,9 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.gzxinbibo.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: arterli <912697590@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 /**
  * this file will be loaded before server started
@@ -730,6 +730,15 @@ global.get_cover = async (cover_id, field) => {
     }
     let picture = await think.model('picture', think.config("db")).where({ 'status': 1 }).find(cover_id);
     return think.isEmpty(field) ? picture : picture[field];
+}
+global.get_cover2 = async (cover_id,qiniu) => {
+
+    if (think.isEmpty(cover_id)) {
+        return false;
+    }
+    let picture = await think.model('picture', think.config("db")).where({ 'status': 1 }).find(cover_id);
+    let path='http://' + qiniu + '/' +picture.path;
+    return path;
 }
 /**
  *

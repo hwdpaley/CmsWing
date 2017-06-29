@@ -15,6 +15,7 @@ export default class extends Base {
   async indexAction() {
       console.log(GetDateStr(5)+" "+"00:00:00");
       console.log(new Date(GetDateStr(0)+" "+"23:59:59").getTime());
+      console.log("this.http.url------------"+this.http.url);
       //跨域
     let method = this.http.method.toLowerCase();
     if(method === "options"){

@@ -4,21 +4,22 @@ $(document).ready(function () {
     // console.log(path);
     // var id =333;// path.match("[0-9]+")[0];
 
-	 var img_list = $(".introduction_content img");
-	 for(var i=0; i < img_list.length;i++){ //循环为每个img设置
-	 	img_list[i].removeAttribute("width");
-	 	//img_list[i].attr("width", "100%");
-	 	img_list[i].removeAttribute("height");
-	 	img_list[i].removeAttribute("style");
-	 }
+	 // var img_list = $(".introduction_content img");
+	 // for(var i=0; i < img_list.length;i++){ //循环为每个img设置
+	 // 	img_list[i].removeAttribute("width");
+	 // 	//img_list[i].attr("width", "100%");
+	 // 	img_list[i].removeAttribute("height");
+	 // 	img_list[i].removeAttribute("style");
+	 // }
 
 	var pay_type1 = $("#pay_type");
 	if (pay_type1.val() == "1")
 	{
 		$("#enroll_button").val("已报名");
-	}else if(pay_type1.val() == "2"){
-		$("#enroll_button").val("已付费参加");
 	}
+	// else if(pay_type1.val() == "2"){
+	// 	$("#enroll_button").val("已付费参加");
+	// }
 	
 	// 未支付按钮的点击相应事件
 	$("#enroll_button").click(function() {
@@ -73,13 +74,10 @@ function enroll_modal_button(did) {
             },
             success: function (data) {
                 console.log(JSON.stringify(data));
-				if(data.data.status != 0)
+                alert(data.data.name);
+				
+				if(data.data.status == 0)
 				{
-					alert(data.data.name);
-				}
-				else
-				{
-					alert(data.data.name);
 					$("#modal_body").addClass("hidden");
 					if ($('#price').val() == '0')
 					{
@@ -92,7 +90,15 @@ function enroll_modal_button(did) {
 
 					$("#pay_type").val('1');
 					$("#enroll_button").val("已报名");
+				}else if(data.data.status == -2){
+					//先关注
+					window.location.href='/uc/weixin/follow';
+				}else if(data.data.status == -1){
+					$("#enroll_modal").modal('hide');
+					// $("#modal_body").addClass("hidden");
+					// $("#modal-header").addClass("hidden");
 				}
+
 			},
             error: function(XMLHttpRequest, textStatus, errorThrown) {
 				alert(XMLHttpRequest.status);

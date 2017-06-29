@@ -230,7 +230,10 @@ export default class extends Base {
    */
   async addAction() {
     await this.weblogin();
-    let cate_id = this.get("cate_id") || 0;
+    let cate_id = this.get("cate_id") || 134;
+    if(think.isEmpty(cate_id)){
+      console.log("null.    ----------");
+    }
     //权限控制
     let priv = await this.priv(cate_id);
     if(priv){
@@ -240,6 +243,7 @@ export default class extends Base {
     let model_id = this.get("model_id") || 0;
     let group_id = this.get("group_id") || '';
     let sortid = this.get('sortid')||0;
+    console.log("cate_id,model_id,group_id,sortid====="+cate_id+","+model_id+","+group_id+","+sortid);
     think.isEmpty(cate_id) && this.fail("参数不能为空");
     think.isEmpty(model_id) && this.fail("该分类未绑定模型");
     // 获取分组定义
@@ -317,6 +321,7 @@ export default class extends Base {
     this.assign('model', model);
     this.meta_title = '新增' + model.title;
     this.active = "admin/article/index";
+    console.log('add------------');
     return this.display();
   }
 

@@ -108,11 +108,12 @@ export default class extends Base {
     async routeAction() {
         // this.end( this.get('category'));
         let cate = await this.category(this.get('category').split("-")[0]);
+        console.log("route-------"+JSON.stringify(cate));
         let type = cate.allow_publish;
         if (cate.mold == 2) {
             type = 'sp';
         }
-
+        console.log("type-------"+type);
         switch (type) {
             case 0:
                 if (cate.mold == 1) {

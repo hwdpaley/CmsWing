@@ -1,14 +1,14 @@
 // +----------------------------------------------------------------------
-// | Bieber [ 美道网站内容管理框架 ]
+// | Bieber [ 美媒网站内容管理框架 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.gzxinbibo.com All rights reserved.
+// | Copyright (c) 2017 http://www.gzxinbibo.com All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: arterli <912697590@qq.com>
+// | Author: Tony <912697590@qq.com>
 // +----------------------------------------------------------------------
 /**
  * Created by arter on 2016/1/14.
  */
 export default {
-    cookie_name: "cmswing_locale", //存放语言的 cookie 名称
+    cookie_name: "bieber_locale", //存放语言的 cookie 名称
     default: "zh-CN" //默认语言
 };
