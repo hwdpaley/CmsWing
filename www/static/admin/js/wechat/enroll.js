@@ -4,13 +4,13 @@ $(document).ready(function () {
     // console.log(path);
     // var id =333;// path.match("[0-9]+")[0];
 
-	 // var img_list = $(".introduction_content img");
-	 // for(var i=0; i < img_list.length;i++){ //循环为每个img设置
-	 // 	img_list[i].removeAttribute("width");
-	 // 	//img_list[i].attr("width", "100%");
-	 // 	img_list[i].removeAttribute("height");
-	 // 	img_list[i].removeAttribute("style");
-	 // }
+	 var img_list = $(".introduction_content img");
+	 for(var i=0; i < img_list.length;i++){ //循环为每个img设置
+	 	img_list[i].removeAttribute("width");
+	 	//img_list[i].attr("width", "100%");
+	 	img_list[i].removeAttribute("height");
+	 	img_list[i].removeAttribute("style");
+	 }
 
 	var pay_type1 = $("#pay_type");
 	if (pay_type1.val() == "1")

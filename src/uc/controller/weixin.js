@@ -35,6 +35,7 @@ export default class extends Base {
             let openid = await this.session("wx_openid");
             //let openid = null;
             if (is_weixin(this.userAgent()) && think.isEmpty(openid)) {
+                // 先把url暂存起来
                 this.cookie("bieber_wx_url", this.http.url);
                 var oauthUrl = pingpp.wxPubOauth.createOauthUrlForCode(this.setup.wx_AppID, `http://${this.http.host}/uc/weixin/getopenid?showwxpaytitle=1`);
                 console.log("oauthAction-----------" + oauthUrl)
@@ -298,14 +299,8 @@ export default class extends Base {
         if (is_weixin(this.userAgent())) {
             let data = this.post();
             console.log(data);
-            let openid = await this.session("wx_openid");
-            //先判断是否已关注，未关注，则跳到关注页面
-            let res = await this.model("z").where({ openid: openid }).find();
-            if (think.isEmpty(res)) {
-
-                //先进行关注
-                return this.success({ status: -2, name: "请先关注公众号!" });
-            }
+            let openid = await this.session(wx_openid);
+            
             //已是微信用户，
 
             let map = {
@@ -361,8 +356,8 @@ export default class extends Base {
             }
             console.log(mmap);
             await this.model("doc_wxuser").add(mmap);
-            await this.model("wx_user").where({openid:openid[0]}).update({phone:data.phone});
-            
+            await this.model("wx_user").where({ openid: openid[0] }).update({ phone: data.phone });
+
             let document = this.model('document');
             let info = await document.detail(data.docid);
             info.addnums++;
@@ -376,55 +371,33 @@ export default class extends Base {
     }
 
     async tuokeAction() {
-
         let uurl = "http://www.gzxinbibo.com" + this.http.url;
         console.log("url-------------" + uurl);
-        let aa = function(jssdk, url) {
-            let deferred = think.defer();
-            jssdk.getSignPackage(url, (err, signPackage) => {
-                if (!think.isEmpty(signPackage)) {
-                    deferred.resolve(signPackage);
-                } else {
-                    console.error(err);
-                }
-            });
-            return deferred.promise;
+        if (is_weixin(this.userAgent())) {
+            await this.oauthAction();
+            let aa = function(jssdk, url) {
+                let deferred = think.defer();
+                jssdk.getSignPackage(url, (err, signPackage) => {
+                    if (!think.isEmpty(signPackage)) {
+                        deferred.resolve(signPackage);
+                    } else {
+                        console.error(err);
+                    }
+                });
+                return deferred.promise;
+            }
+            let signPackage = await aa(this.jssdk, uurl);
+            console.log(signPackage);
+            this.assign("signPackage", signPackage);
         }
-        let signPackage = await aa(this.jssdk, uurl);
-        console.log(signPackage);
-        this.assign("signPackage", signPackage);
 
-
-        let id = this.get("id").split("||");
+        let id = this.get("id");
+        console.log("id=========="+id);
         let document = this.model('document');
         let info = await document.detail(id);
         this.assign("docid", id);
         let islogin = await this.islogin();
-        /* 页码检测*/
-        //TODO
-        // let roleid = 8; //游客
-        // //访问控制
-        // let islogin =await this.islogin();;
-        // // console.log("login--------"+JSON.stringify(islogin));
-        // if (islogin) {
-        //     roleid = await this.model("member").where({ id: islogin }).getField('groupid', true);
-        // }
-        // if(roleid==8){
-        //   this.http.error = new Error('您尚未登录，请先登录！');
-        //   return think.statusAction(700, this.http);
-        // }
-        // if(info.uid!=1){
-        //   if(info.uid!=islogin){
-        //     this.http.error = new Error('无查看权限！');
-        //     return think.statusAction(700, this.http);
-        //   }
-        // }
-        // // console.log("info.category_id----------" + info.category_id + "," + info.uid + "," + islogin);
-        // let priv = await this.model("category_priv").priv(info.category_id, roleid, 'visit');
-        // if(!priv){
-        //   this.http.error = new Error('您所在的用户组,禁止访问本栏目！');
-        //   return think.statusAction(700, this.http);
-        // }
+        
         let str = info.content;
         if (!think.isEmpty(str)) {
             let img;
@@ -458,7 +431,7 @@ export default class extends Base {
         // if (!think.isEmpty(info.link_id) && info.link_id != 0) {
         //     return this.redirect(info.link_id);
         // }
-        //获取面包屑信息
+        // 获取面包屑信息
         // let breadcrumb = await this.model('category').get_parent_category(cate.id, true);
         // this.assign('breadcrumb', breadcrumb);
 
@@ -469,16 +442,16 @@ export default class extends Base {
         // let next = await document.where({ id: ['<', info.id], category_id: info.category_id, 'pid': 0, 'status': 1 }).order('id DESC').find();
         // this.assign('next', next)
 
-        // //获取模板
+        //获取模板
         // let temp;
         // let model = await this.model('model').get_model(info.model_id, 'name');
 
-        //详情模版 TODO
-        //手机版模版
+        // 详情模版 TODO
+        // 手机版模版
 
         // this.assign('category', cate);
-        //console.log(info);
-        //目录/文章/段落
+        // console.log(info);
+        // 目录/文章/段落
         // let pid;
         // let pinfo;
         // if (info.pid != 0) {
@@ -497,11 +470,11 @@ export default class extends Base {
         //     pinfo = info;
         //     pid = info.id;
         // }
-        //获取最后更新时间
+        // // 获取最后更新时间
         // let lastinfo = await document.where({ topid: pid }).order("update_time DESC").find();
         // //console.log(lasttime);
         // this.assign("lastinfo", lastinfo);
-        //console.log(pid);
+        // console.log(pid);
         // let plist = await document.where({ pid: pid }).order("level DESC").select();
         // this.assign("pinfo", pinfo);
         // this.assign("plist", plist);
@@ -511,15 +484,15 @@ export default class extends Base {
         //     //console.log(lastlevel);
         //     this.assign("lastlevel", plist[0]);
         // }
-        //console.log(plist);
-        //文档无限级目录
+        // console.log(plist);
+        // // 文档无限级目录
         // let ptree_ = await document.where({ topid: pid }).field('id,title,pid,name,level as sort').select();
         // let ptree = get_children(ptree_, pid, 1);
         // //console.log(ptree);
         // this.assign('topid', pid);
         // this.assign("ptree", ptree);
 
-        //如果是目录并且模板为空,模块为视频时，目录id，显示最后更新的主题
+        // // 如果是目录并且模板为空,模块为视频时，目录id，显示最后更新的主题
         // if (info.type == 1 && (think.isEmpty(info.template) || info.template == 0) && info.model_id == 6) {
         //     if (plist[0]) {
         //         console.log(111111);
@@ -544,6 +517,7 @@ export default class extends Base {
         if (checkMobile(this.userAgent())) {
             //手机用户
             openid = await this.session("wx_openid");
+            
             let map = {
                 openid: openid,
                 docid: id
@@ -594,46 +568,6 @@ export default class extends Base {
         } else {
             //未报名
             this.assign("pay_type", 0);
-        }
-        // 如果没关注过，则先关注
-
-        // if(openid==undefined){//?
-
-        // }
-        // if(openid!=undefined){
-
-
-        //   let map = {
-        //           openid: openid,
-        //           docid:id
-        //   };
-        //   let res = await this.model("doc_wxuser").where(map).find();
-        //   //是否已经报名
-        //   if(res.openid!=undefined){
-        //     this.assign("pay_type", 1);
-        //   }else{
-        //     this.assign("pay_type", 0);
-        //   }
-        // }else{
-        //   this.assign("pay_type", 0);
-        // }
-
-        if (checkMobile(this.userAgent())) {
-            //手机模版
-            if (!think.isEmpty(info.template) && info.template != 0) {
-                temp = info.template; //todo 已设置详情模板
-            } else if (!think.isEmpty(cate.template_m_detail)) {
-                temp = cate.template_m_detail; //分类已经设置模板
-            } else {
-                temp = model;
-            }
-
-            //内容分页
-            if (!think.isEmpty(info.content)) {
-                info.content = info.content.split("_ueditor_page_break_tag_");
-            }
-            console.log("tuokeAction========" + `${this.http.controller}/${temp}`);
-            return this.display(`mobile/${this.http.controller}/${temp}`);
         }
         // if (!think.isEmpty(info.template) && info.template != 0) {
         //     temp = info.template; //已设置详情模板

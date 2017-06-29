@@ -230,7 +230,7 @@ export default class extends Base {
    */
   async addAction() {
     await this.weblogin();
-    let cate_id = this.get("cate_id") || 134;
+    let cate_id = this.get("cate_id") || 0;
     if(think.isEmpty(cate_id)){
       console.log("null.    ----------");
     }
