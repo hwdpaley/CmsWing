@@ -1,0 +1,701 @@
+@charset "utf-8";
+
+/*
+ *  首页
+ */
+/* 各模块分区 - 区头*/
+img.section-one-header {
+    vertical-align: middle;
+    width: auto;
+    height: 25px;
+}
+
+.header-title h2 {
+    float: left;
+    line-height: 60px;
+    font-weight: 400;
+    font-size: 18px;
+    color: #333;
+    padding-left: 28px;
+    background-size: 20px;
+}
+
+.header-title a.home_more {
+    float: right;
+    line-height: 60px;
+    color: #999;
+    font-size: 14px;
+    padding-right: 15px;
+    background: url(/static/web2.0/images/more.png) no-repeat 91px 22px;
+}
+
+<!-- /*学妹视频*/
+-->
+.icon_video {
+    background: url(/static/web2.0/images/icon_video.png) no-repeat 0 20px;
+}
+
+<!-- /*学妹音频*/
+-->
+.icon_audio {
+    background: url(/static/web2.0/images/icon_audio.png) no-repeat 0 20px;
+}
+
+<!-- /*学妹顾问*/
+-->
+.icon_data {
+    background: url(/static/web2.0/images/icon_data.png) no-repeat 0 20px;
+}
+
+<!-- /*学妹拓客*/
+-->
+.icon_tool {
+    background: url(/static/web2.0/images/icon_tool.png) no-repeat 0 20px;
+}
+
+<!-- /*学妹社区*/
+-->
+.icon_community {
+    background: url(/static/web2.0/images/community.png) no-repeat 0 20px;
+}
+
+/*
+********************  今日更新
+*/
+.common-list {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.common-list > li {
+    margin-bottom: 15px;
+}
+
+.common-list .list-image {
+    width: 100%;
+}
+
+.common-list .list-info {
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 8px;
+}
+
+.common-list .type-mark {
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    opacity: 0.7;
+    color: white;
+    font-size: 12px;
+    line-height: 28px;
+}
+
+/*
+ * 分区内容列表信息
+ */
+.top_nav_center {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#top_nav .type_list ul {
+    margin: 20px 0 0 0;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+#top_nav .type_list ul li {
+    display: inline-block;
+    margin: 0 20px 0 10px;
+}
+
+#top_nav .type_list ul li button {
+    color: #666666;
+    list-style: none;
+    border: 0;
+    background-color: #f4f4f4;
+}
+
+.line {
+    padding-left: 20px;
+    color: #ccc;
+}
+
+#top_nav ul li button:hover,
+#top_nav ul li.active button {
+    color: #1c8fe0;
+}
+
+#top_nav .type_list ul li {
+    color: #666;
+    font-size: 18px;
+    padding-bottom: 15px;
+}
+
+/*
+ * 二级小分类信息
+ */
+.type_list .second-type {
+    border-right: 1px solid #eee;
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.type_list ol.second-type li {
+    display: inline-block;
+    margin: 0 20px 0 10px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.type_list ol.second-type li button {
+    border: 0;
+    list-style: none;
+    background-color: #fff;
+}
+
+.type_list ol.second-type li:hover button,
+.type_list ol.second-type li.active button {
+    color: #1c8fe0;
+}
+
+/*
+ *  所有列表的框架样式
+ */
+ul.content-list {
+    margin-left: -15px;
+}
+
+.content-list li {
+    position: relative;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.content-list > li.col-xs-6,
+.content-list > li.col-sm-6,
+.content-list > li.col-md-3,
+.content-list > li.col-lg-3 {
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+.content-list > li.col-xs-12,
+.content-list > li.col-sm-12,
+.content-list > li.col-md-12,
+.content-list > li.col-lg-12 {
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+/*列表中的图片框*/
+.content-list .list-image-box {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.list-image-box img {
+    width: 100%;
+}
+
+/*列表中的文字说明*/
+.content-list .list-info-box {
+    width: 100%;
+    position: relative;
+    font-size: 16px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 8px;
+}
+
+.list-info-box .info-title {
+    font-weight: 400;
+    padding-top: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333;
+    font-size: 1em;
+}
+
+.list-info-box .info-desc-box {
+    color: #999;
+    font-size: 0.8125em;
+    padding-bottom: 8px;
+}
+
+.info-desc-box .info-price {
+    color: #FFA422;
+    font-size: 1.23em;
+}
+
+/*
+ * VIP - 经营者认证 * 标识
+ * @class   vip \ confirm
+ * @desc    内容的权限说明, 分 vip权限 与 经营者认证权限
+ */
+.vip {
+    width: 45px;
+    height: 46px;
+    background: url(/static/admin/img/icon_vip.png) no-repeat;
+    background-size: 45px 46px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.confirm {
+    width: 45px;
+    height: 46px;
+    background: url(/static/web2.0/images/icon_confirm.png) no-repeat;
+    background-size: 45px 46px;
+    position: absolute;
+    top: 0;
+}
+
+.vip_triangle {
+    background: url(/static/web2.0/images/vip_triangle.png) no-repeat;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.confirm_triangle {
+    background: url(/static/web2.0/images/confirm_triangle.png) no-repeat;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.vip_triangle span, .confirm_triangle span {
+    color: white;
+    font-size: 14px;
+    transform: rotate(45deg);
+    display: block;
+    margin: 6px 0 0 20px;
+}
+
+/*
+ * 学妹资料 - 列表
+ */
+.content-list .col-xs-12,
+.content-list .col-sm-6,
+.content-list .col-md-6,
+.content-list .col-lg-6 {
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+.data-content-list li {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.data-content-list li:last-child {
+    margin-bottom: 20px;
+}
+
+.data-content-list li .data-box {
+    background: url(/static/web2.0/images/data_icon.png) no-repeat 15px center;
+    padding: 35px 15px 35px 75px;
+    min-height: 96px;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 0.5px solid #eee;
+    border-top: 0.8px solid #eee;
+}
+
+.data-box .data-title {
+    font-weight: 400;
+    max-width: 100%;
+    padding-top: 8px;
+}
+
+.data-box .data-playNum {
+    color: #999;
+    font-size: 14px;
+}
+
+.data-box .data-down-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 30px;
+    color: #ffa500;
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+    height: 66px;
+    line-height: 66px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.data-box .data-down-btn:hover {
+    font-size: 21px;
+}
+
+/*
+ * 微课 - 列表
+ */
+#weike-list {
+
+}
+
+#weike-list .col-xs-12,
+#weike-list .col-sm-6,
+#weike-list .col-md-4 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#weike-list li {
+    border: 1px solid #eee;
+    background-color: #fbfbfb;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+#weike-list li:first-child {
+    margin-top: 15px;
+}
+
+/*微课列表 - 视频信息部分*/
+#weike-list .weike-list-info-box .weike-title {
+    margin-top: 5px;
+    font-weight: 500;
+    color: #333;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+#weike-list .weike-list-info-box .weike-desc {
+    color: #666;
+    font-size: 14px;
+}
+
+#weike-list .weike-list-info-box .weike-saleNum {
+    color: #999;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/****
+ *  拓客列表
+ */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    background-color: #1C8FE0;
+    color: #fff;
+}
+
+.nav-tabs > li > a {
+    text-align: center;
+}
+
+.list-image-box .tuoke-img {
+    height: 240px;
+    width: 100%;
+}
+
+/*
+ * 320px -- 375px
+ */
+@media (min-width: 319px) and (max-width: 375px) {
+
+    .list-info-box .info-title {
+        font-size: 15px;
+    }
+
+    .list-info-box .info-desc-box {
+        font-size: 11px;
+    }
+
+    .btn-group button {
+        font-size: 10px;
+        padding-left: 7px;
+        text-align: center;
+    }
+
+    .list-image-box .tuoke-img {
+        height: 130px;
+        width: 100%;
+    }
+}
+
+/*
+ * ********** 最大宽度为 767px **********
+ */
+@media (max-width: 768px) {
+
+    /*
+     * 首页
+     */
+    #home-data-list {
+        margin: 0 15px !important;
+    }
+
+    /* 分类标签
+    */
+    #top_nav .type_list ul {
+        padding-left: 0 !important;
+    }
+
+    #top_nav .type_list ul li {
+        display: inline-block;
+        margin: 0 10px 0 10px !important;
+    }
+
+    #weike-list .weike-list-info-box {
+        position: relative;
+        padding: 0 5px;
+        font-size: 16px;
+    }
+
+    /*微课列表 - 价格及购买部分*/
+    #weike-list .weike-list-buy-box {
+        position: relative;
+        padding: 0 5px;
+        margin-bottom: 10px;
+    }
+
+    #weike-list .weike-list-buy-box .weike-price {
+        position: relative;
+        color: #ffa500;
+        float: left;
+        font-size: 18px;
+        padding-top: 5px;
+    }
+
+    #weike-list .weike-list-buy-box .weike-buy-btn {
+        position: relative;
+        float: right;
+        background-color: #ffa500;
+        color: white;
+        border: none;
+        padding: 7px 20px 7px 20px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .list-image-box .tuoke-img {
+        height: 180px;
+        width: 100%;
+    }
+}
+
+/*
+ * *******   屏幕最小宽度为 768px
+ */
+@media (min-width: 767px) {
+
+    /*微课列表 - 视频信息部分*/
+    #weike-list .weike-list-info-box {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 15px;
+    }
+
+    /*微课列表 - 价格及购买部分*/
+    #weike-list .weike-list-buy-box {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    #weike-list .weike-list-buy-box .weike-price {
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        color: #ffa500;
+
+        margin-left: 15px;
+    }
+
+    #weike-list .weike-list-buy-box .weike-buy-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        margin-right: 15px;
+
+        background-color: #ffa500;
+        color: white;
+        border: none;
+        padding: 7px 20px 7px 20px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .list-image-box .tuoke-img {
+        height: 240px;
+        width: 100%;
+    }
+}
+
+/*
+ * 拓客模板 ** 模板列表
+ */
+ul.md_list > li {
+    border: 1px solid #eee;
+    width: 100%;
+    float: left;
+    margin-bottom: 15px;
+    position: relative;
+    height: 120px;
+}
+
+ul.md_list > li > .col-lg-6,
+ul.md_list > li > .col-md-6,
+ul.md_list > li > .col-sm-6,
+ul.md_list > li > .col-xs-6 {
+    padding: 0;
+}
+
+ul.md_list > li > .md_img_box {
+    height: 118px;
+    overflow: hidden;
+    background: #c0a16b;
+}
+
+.md_img_box img {
+    height: 100%;
+    min-width: 100%;
+}
+
+.md_list .md_info_box {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    overflow: hidden;
+    height: 100% !important;
+}
+
+.md_info_box .md_info_title {
+    font-size: 16px;
+    width: 100%;
+    color: #333;
+}
+
+.md_info_box .md_info_desc {
+    font-size: 14px;
+    width: 100%;
+    color: #999;
+}
+
+.md_info_box .md_info_btn_group {
+    position: absolute;
+    bottom: 5px;
+}
+
+.md_info_btn_group .preview_btn {
+    background-color: #688AA3;
+    color: #eee;
+    font-size: 10px;
+}
+
+.md_info_btn_group .add_btn {
+    background-color: #1C8FE0;
+    color: #eee;
+    font-size: 10px;
+}
+
+/* 小屏幕（ 480px <= 屏幕宽度 < 768px ） */
+@media (min-width: 479px) and (max-width: 767px) {
+    ul.md_list > li {
+        height: 140px;
+        width: 100%;
+    }
+
+    ul.md_list > li > .md_img_box {
+        height: 138px;
+    }
+
+    .md_info_btn_group .preview_btn,
+    .md_info_btn_group .add_btn {
+        font-size: 12px;
+    }
+}
+
+/* 小屏幕（平板，大于等于 768px） */
+@media (min-width: 767px) {
+    ul.md_list > li {
+        height: 140px;
+        width: 49%;
+    }
+
+    ul.md_list > li:nth-child(even) {
+        margin-left: 2%;
+    }
+
+    ul.md_list > li > .md_img_box {
+        height: 138px;
+    }
+
+    .md_info_btn_group .preview_btn,
+    .md_info_btn_group .add_btn {
+        font-size: 12px;
+    }
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: 991px) {
+    ul.md_list > li {
+        height: 160px;
+        width: 49%;
+    }
+
+    ul.md_list > li:nth-child(even) {
+        margin-left: 2%;
+    }
+
+    ul.md_list > li > .md_img_box {
+        height: 158px;
+    }
+
+    .md_info_btn_group .preview_btn,
+    .md_info_btn_group .add_btn {
+        font-size: 14px;
+    }
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: 1200px) {
+    ul.md_list > li {
+        height: 200px;
+        width: 49%;
+    }
+
+    ul.md_list > li > .md_img_box {
+        height: 198px;
+    }
+
+    .md_info_btn_group .preview_btn,
+    .md_info_btn_group .add_btn {
+        font-size: 16px;
+    }
+}
+

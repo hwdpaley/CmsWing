@@ -1,59 +1,52 @@
-{% extends "../inc/music_base.html" %}
-{% block content %}
-     <!--
-				PAGE HEADER
+music{% extends "../../topic/inc/music_base.html" %} {% block style %}
+<link href="/static/assets/css/layout-question.css" rel="stylesheet" type="text/css" /> 
+{% endblock %} {% block content %} {%set cate = category.id|get_cate()%}
+<!--
+PAGE HEADER
 
-				CLASSES:
-					.page-header-xs	= 20px margins
-					.page-header-md	= 50px margins
-					.page-header-lg	= 80px margins
-					.page-header-xlg= 130px margins
-					.dark			= dark page header
+CLASSES:
+.page-header-xs = 20px margins
+.page-header-md = 50px margins
+.page-header-lg = 80px margins
+.page-header-xlg= 130px margins
+.dark           = dark page header
 
-					.shadow-before-1 	= shadow 1 header top
-					.shadow-after-1 	= shadow 1 header bottom
-					.shadow-before-2 	= shadow 2 header top
-					.shadow-after-2 	= shadow 2 header bottom
-					.shadow-before-3 	= shadow 3 header top
-					.shadow-after-3 	= shadow 3 header bottom
-			-->
+.shadow-before-1    = shadow 1 header top
+.shadow-after-1     = shadow 1 header bottom
+.shadow-before-2    = shadow 2 header top
+.shadow-after-2     = shadow 2 header bottom
+.shadow-before-3    = shadow 3 header top
+.shadow-after-3     = shadow 3 header bottom
+-->
 <section class="page-header dark page-header-xs parallax parallax-2" >
     <div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
     <div class="container">
 
-        <h1>{{category.title}}</h1>
+                    <h1>微课</h1>
 
-        <!-- breadcrumbs -->
-        <ol class="breadcrumb f-14">
-            <li><a href="/">首页 </a></li>
-            {%for val in breadcrumb %}
-            {% if val.id == category.id %}
-            <li class="active">{{val.title}}</li>
-            {% else %}
-            <li><a href="{{val.url}}">{{val.title}}</a></li>
+                    <!-- breadcrumbs -->
+                    <ul class="breadcrumb breadcrumb-inverse">
+                        <li><a href="/">首页 </a>
+                        </li>
+                        <li >微课
+                        </li>
+                    </ul><!-- /breadcrumbs -->
 
-            {% endif %}
-            {% endfor %}
-        </ol><!-- /breadcrumbs -->
-
-    </div>
+                </div>
 </section>
-			<!-- /PAGE HEADER -->
-            <!-- -->
+<!-- -->
 <section>
     <div class="container">
         <div class="row-fluid">
             <ul class="margin-t20" id="weike-list">
-            	{% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid%}
-                {% for val in list %}
                 <li>
-                    <a href="{{val.name|get_url(val.id)}}" target="_blank"><img src="{{val.cover_id|get_pic('m=1,w=300,h=200')}}" class="weike-list-img col-xs-12 col-sm-6 col-md-4">
+                    <a href="/w/337.html"><img src="https://ohtagtxxx.qnssl.com/yxzgdz.jpg" class="weike-list-img col-xs-12 col-sm-6 col-md-4">
                         <div class="clear"></div>
                         <div class="col-xs-12 col-sm-6 col-md-8 weike-list-info-box">
-                            <label class="weike-title">{{val.title|block(16)}}</label>
-                            <p class="weike-desc">{{val.description|block(50)}}
+                            <label class="weike-title">优秀主管打造</label>
+                            <p class="weike-desc">1、主管的思想转换体系 2、主管的辅销体系 3、主管的情感体系 4、主管的行政体系 5、主管的自律体系
                             </p>
-                            <p class="weike-saleNum">{{val.view}}人购买</p>
+                            <p class="weike-saleNum">2445人购买</p>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-8 weike-list-buy-box">
                             <p class="weike-price">￥68&nbsp;/&nbsp;90天</p>
@@ -62,8 +55,7 @@
                         <div class="clearfix"></div>
                     </a>
                 </li>
-                {%endfor%}
-                <!-- <li>
+                <li>
                     <a href="/site/videos/43265667"><img src="https://ohtagtxxx.qnssl.com/zpmj_1.jpg" class="weike-list-img col-xs-12 col-sm-6 col-md-4">
                         <div class="clear"></div>
                         <div class="col-xs-12 col-sm-6 col-md-8 weike-list-info-box">
@@ -168,27 +160,20 @@
                         </div>
                         <div class="clearfix"></div>
                     </a>
-                </li> -->
+                </li>
             </ul>
             <div class="clearfix"></div>
-            <!-- <div class="width100 text-center margin-t25">
+            <div class="width100 text-center margin-t25">
                 <ul id="pagination" class="compact-theme simple-pagination">
                     <li class="disabled"><span class="current prev">前一页</span></li>
                     <li class="active"><span class="current">1</span></li>
                     <li><a href="#page-2" class="page-link">2</a></li>
                     <li><a href="#page-2" class="page-link next">后一页</a></li>
                 </ul>
-            </div> -->
-            <!-- PAGINATION -->
-                <div class="text-left">
-                    <!-- Pagination Default -->
-                    {{pagination | safe}}
-                    <!-- /Pagination Default -->
-                </div>
-                <!-- /PAGINATION -->
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>
 </section>
-			<!-- / -->
+<!-- / -->
 {% endblock %}

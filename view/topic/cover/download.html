@@ -49,17 +49,17 @@
             <div class="col-md-3 col-sm-3">
 
                 <!-- INLINE SEARCH -->
-                <div class="inline-search clearfix margin-bottom-30">
+                <!-- <div class="inline-search clearfix margin-bottom-30">
                     <form action="" method="get" class="widget_search">
                         <input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
                         <button type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
-                </div>
+                </div> -->
                 <!-- /INLINE SEARCH -->
 
-                <hr/>
+                <!-- <hr/> -->
 
                 <!-- side navigation -->
                 {%column data="cate",cid=category.id,isnum="1"%}
@@ -81,9 +81,9 @@
 
 
                 <!-- JUSTIFIED TAB -->
-                <div class="tabs nomargin-top hidden-xs margin-bottom-20">
+                <!-- <div class="tabs nomargin-top hidden-xs margin-bottom-20">
 
-                    <!-- tabs -->
+                    
                     <ul class="nav nav-tabs nav-bottom-border nav-justified">
                         <li class="active">
                             <a href="#tab_1" data-toggle="tab">
@@ -97,16 +97,16 @@
                         </li>
                     </ul>
 
-                    <!-- tabs content -->
+                    
                     <div class="tab-content margin-bottom-0 margin-top-10">
 
-                        <!-- POPULAR -->
+                        
                         <div id="tab_1" class="tab-pane active">
-                            <!--topic tags test-->
+                            
                             {% topic data = "hotlist",limit= "5",cid=category.id,type="hot"%}
-                            <!--返回数据赋值给变量data,遍历data-->
+                            
                             {%for v in hotlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -122,19 +122,19 @@
                                         <span>立即下载</span>
                                     </a></small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
 
                         </div>
-                        <!-- /POPULAR -->
+                        
 
 
-                        <!-- RECENT -->
+                        
                         <div id="tab_2" class="tab-pane">
 
                             {% topic data = "newlist",limit= "5",cid=category.id%}
                             {%for v in newlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -150,16 +150,16 @@
                                         <span>立即下载</span>
                                     </a></small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
-                            <!-- /post -->
+                            
                         </div>
-                        <!-- /RECENT -->
+                        
 
                     </div>
 
-                </div>
-                <!-- JUSTIFIED TAB -->
+                </div> -->
+                
 
 {#
                 <!-- TAGS -->
@@ -259,7 +259,7 @@
             <!--中间-->
             <div class=" col-md-9 col-sm-9">
                 <div class="row">
-                    <div class="col-md-9 col-sm-9">
+                    <div class="col-md-12 col-sm-12">
 
                         <!-- REVOLUTION SLIDER -->
                         <div class="slider fullwidthbanner-container roundedcorners margin-bottom-30">
@@ -369,8 +369,8 @@
                                 <div class="tp-bannertimer"><!-- progress bar --></div>
                             </div>
                         </div>
-                        <div class="box-light clearfix margin-bottom-20">
-                            <!-- POPULAR POSTS -->
+                        <!-- <div class="box-light clearfix margin-bottom-20">
+                            
 
                             <div class="box-inner">
                                 <h3>
@@ -384,7 +384,7 @@
                                     {% topic data = "hotdown",limit=
                                     "20",cid=category.id,issub="1",ispic="1",isstu="2",type="hot"%}
                                     {%for val in hotdown%}
-                                    <div class="margin-bottom-10 col-sm-6"><!-- post item -->
+                                    <div class="margin-bottom-10 col-sm-6">
                                         <img class="thumbnail pull-left" src="{{val.cover_id|get_pic('m=1,w=60,h=60')}}"
                                              width="60" height="60" alt=""/>
                                         <h4 class="size-13 nomargin noborder nopadding" style="height: 40px"><a
@@ -394,7 +394,7 @@
 									<i class="fa fa-download"></i>
 									<span>立即下载</span>
 								</a></span>
-                                    </div><!-- /post item -->
+                                    </div>
                                     {%endfor%}
 
 
@@ -402,16 +402,15 @@
 
 
                             </div>
-                            <!-- /POPULAR POSTS -->
-                        </div>
+                            
+                        </div> -->
 
 
                     </div>
-                    <!--中间-->
-                    <!--右边-->
-                    <div class="col-md-3 col-sm-3 hiddex-xs">
+                    
+                    <!-- <div class="col-md-3 col-sm-3 hiddex-xs">
 
-                        <!-- FEATURED VIDEO -->
+                        
                         <h3 class="size-16 margin-bottom-10">精选推荐</h3>
                         <div class=" margin-bottom-6">
                            <a href="#"><img class="img-responsive" src="//odhs9iog7.qnssl.com/2016022317481056cc2ada3247a.jpg" style="height: 100px"></a>
@@ -420,14 +419,14 @@
                             <a href="#"><img class="img-responsive" src="//odhs9iog7.qnssl.com/20150325144205551258bd5416c.jpg" style="height: 100px"></a>
                         </div>
 
-                        <!-- TWIITER WIDGET -->
+                        
                         <h3 class="size-16 margin-bottom-10">软件推荐</h3>
                         <div class=" margin-bottom-20" style="padding-left: -10px">
-                            <!--topic tags test-->
+                            
                             {% topic data = "hotlist",limit= "5",cid=category.id,type="hot",position='1'%}
-                            <!--返回数据赋值给变量data,遍历data-->
+                            
                             {%for v in hotlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3 padding-0">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -443,17 +442,17 @@
                                         <span>立即下载</span>
                                     </a></small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
                         </div>
 
-                    </div>
+                    </div> -->
                     <!--右边-->
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <a class="btn btn-danger btn-xs pull-right">Header Button</a>
-                                <h2 class="panel-title">常用软件</h2>
+                                <h2 class="panel-title">常用文档及软件</h2>
                             </div>
                             <div class="panel-body padding-top-0 padding-bottom-0">
                                 <div class="boxTab row" style="margin-right: -16px">

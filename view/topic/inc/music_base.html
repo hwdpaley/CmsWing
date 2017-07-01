@@ -43,9 +43,13 @@
 
 	<!-- PAGE LEVEL SCRIPTS -->
 	<link href="/static/assets/css/header-1.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="/static/assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" /> -->
+	<link href="/static/assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+	<link href="/static/admin/css/music/base.css" rel="stylesheet" type="text/css" />
 
-
+	<link href="/static/admin/css/music/simplePagination.css" rel="stylesheet" type="text/css"  />
+	
+	<link href="/static/admin/css/music/model.css" rel="stylesheet" type="text/css"  />
+	<!-- <link href="/static/admin/css/music/layout-question.css" rel="stylesheet" type="text/css" /> -->
 	{% block style %}{% endblock %}
 	{%if controller.setup.WEB_TONGJI%}
 	<!--统计代码-->
@@ -142,9 +146,7 @@
 			<!-- SIDE NAV -->
 			<ul class="list-group">
 
-                 {% channel data='channel', num='4'%} 
-                 {% for val in channel%}
-                 		
+                 {% channel data='channel', num='4'%} {% for val in channel%}
 						<li class="list-group-item {% if val.children %}list-toggle{% endif %} {% if http.url == val.url %}active{% endif %} ">
 
 							<a {% if val.children%}data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-{{val.id}}" class="collapsed"{% else %} href="{{val.url}}" {% endif %}>
@@ -233,18 +235,28 @@
 	<script type="text/javascript" src="/static/assets/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js"></script>
 	<script type="text/javascript" src="/static/assets/js/view/demo.revolution_slider.js"></script>
 	<script src="/static/admin/js/banner/jssor.slider-24.1.5.min.js" type="text/javascript"></script>
+	<script src="/static/admin/js/moment.min.js" type="text/javascript"></script>
+	<script src="/static/admin/js/tools.js" type="text/javascript"></script>
+	<script src="/static/admin/js/jquery.simpleplayer.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var plugin_path = '/static/assets/plugins/';
 		$(function () {
 			if($("#topMain.nav-pills>li.active>a")){
 				var w = $("#topMain.nav-pills>li.active>a").width();
 				$("#topMain.nav-pills>li.active>.aline").width(w);
-				console.log("aline");
 			}
-
 		})
 	</script>
+	
 	{% block script %}{% endblock %}
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $(".player").player();
+            // $(".more").click(function () {
+            //     window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.example.xuemeiplayer";
+            // })
+        });
+    </script>
     <!--[if lte IE 9]>
     <script src="/static/assets/plugins/jquery-fly/requestAnimationFrame.js"></script>
 <![endif]-->

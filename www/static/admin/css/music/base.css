@@ -1,0 +1,854 @@
+@charset "utf-8";
+/*
+ * 将具有默认margin和padding的标记置零
+ * @overlay *
+ * @desc	所有标记的margin、padding都在使用时具体定义
+ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * 修正IE5.x和IE6的斜体溢出bug
+ * @bugfix
+ * @css-for IE 5.x/Win, IE6
+ */
+* html body {
+    overflow: visible;
+}
+
+* html iframe, * html frame {
+    overflow: auto;
+}
+
+* html frameset {
+    overflow: hidden;
+}
+
+/* @group 常用标签 */
+/*
+* 基本标签默认样式取消
+* @overlay HTML标签
+* @desc 取消基本标签默认样式,防止不同浏览器显示效果不同
+* @Prop text-align:center; 解决不同浏览器剧中问题
+*/
+body {
+    color: #000;
+    background: #fff;
+    text-align: center;
+    font-size: 16px;
+}
+
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, tr, label {
+    margin: 0;
+    padding: 0;
+}
+
+input, select {
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+/*
+* 设置内容左对齐
+* @overlay div
+* @desc 恢复因BODY设置剧中产生的继承
+*/
+body div {
+    text-align: left;
+}
+
+div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+* 标签属性
+* @overlay textarea,input
+* @desc 强制输入时内容超出时换行
+*/
+textarea, input {
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 0;
+}
+
+/*
+* 清除ul列表标记的样式
+* @overlay li
+* @desc	ul列表更多的用在不需要列表前置符号的样式里
+*/
+li {
+    list-style-type: none;
+}
+
+/*
+* 定义图片边框
+* @overlay img
+* @desc	当图片作为链接内容被填充时，会有默认边框出现，重定义掉
+*/
+img {
+    border: 0 none;
+}
+
+/*
+* 定义默认的链接样式
+* @overlay a
+* @desc	仅仅是作为默认样式提供，可以在各自的实例中覆盖掉
+*/
+a:link, a:visited {
+    color: #000;
+    text-decoration: none;
+}
+
+/*a:hover {*/
+/*color: #F60;*/
+/*text-decoration: underline;*/
+/*}*/
+
+/* 去掉链接的虚线框 */
+a, a:link, a:visited, a:hover {
+    outline: none !important;
+}
+
+/* @group 通用属性定义 */
+/* 鼠标样式 */
+.pointer {
+    cursor: pointer;
+}
+
+/* 取消边框 */
+.NoBorder {
+    border: 0 none;
+}
+
+/*
+* 字母和单词换行设置
+* @class Break 强制内容换行
+* @class Nobreak 强制内容不换行
+*/
+.Break {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.Nobreak {
+    word-break: keep-all;
+    word-wrap: normal;
+}
+
+/* 定义文本下划线 */
+.UnLine {
+    text-decoration: underline;
+}
+
+.DisunLine {
+    text-decoration: none;
+}
+
+/* 通用容器 */
+.wrapper {
+    clear: both;
+    overflow: hidden;
+}
+
+/*
+ * 文本超出显示省略号
+ */
+.text-hidden {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* @group 隐藏元素 */
+
+/*
+* 隐藏元素
+* @class o-hidden
+* @desc 当元素内容内容超出元素height 或 width 时，隐藏之
+*/
+.o-hidden {
+    overflow: hidden;
+}
+
+/*
+* 隐藏元素
+* @class invisible
+* @desc	visibility可以隐藏元素，但是还是会在布局中占位
+*/
+.invisible {
+    visibility: hidden;
+}
+
+/*
+* 从页面布局上隐藏元素
+* @class hidden
+* @desc	从布局上隐藏元素
+*/
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+/* @end */
+
+/*
+ * 清理元素
+ * @class clear
+ * @desc	清理浮动元素,当浮动换行时后面元素不希望浮动，添加此属性，防止IE BUG
+ */
+.clear {
+    clear: both;
+    height: 0;
+    width: 100%;
+    font-size: 1px;
+    line-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.lineH40 {
+    line-height: 40px;
+    height: 40px;
+}
+
+.lineH60 {
+    line-height: 60px;
+    height: 60px;
+}
+
+/*
+* 外边距
+* @desc     两个 div 之间的边界距离
+*/
+.margin10 {
+    margin: 10px !important;
+}
+
+.margin15 {
+    margin: 15px !important;
+}
+
+.margin20 {
+    margin: 20px !important;
+}
+
+.margin25 {
+    margin: 25px !important;
+}
+
+/*
+*   "上⬆️"
+*/
+.margin-t10 {
+    margin-top: 10px !important;
+}
+
+.margin-t15 {
+    margin-top: 15px !important;
+}
+
+.margin-t20 {
+    margin-top: 20px !important;
+}
+
+.margin-t25 {
+    margin-top: 25px !important;
+}
+
+.margin-t30 {
+    margin-top: 30px !important;
+}
+
+.margin-t40 {
+    margin-top: 40px !important;
+}
+
+/*
+*   "左⬅️"
+*/
+.margin-l10 {
+    margin-left: 10px !important;
+}
+
+.margin-l15 {
+    margin-left: 15px !important;
+}
+
+.margin-l20 {
+    margin-left: 20px !important;
+}
+
+.margin-l25 {
+    margin-left: 25px !important;
+}
+
+.margin-l30 {
+    margin-left: 30px !important;
+}
+
+.margin-l40 {
+    margin-left: 40px !important;
+}
+
+/*
+*   "右️→"
+*/
+.margin-r10 {
+    margin-right: 10px !important;
+}
+
+.margin-r15 {
+    margin-right: 15px !important;
+}
+
+.margin-r20 {
+    margin-right: 20px !important;
+}
+
+.margin-r25 {
+    margin-right: 25px !important;
+}
+
+.margin-r30 {
+    margin-right: 30px !important;
+}
+
+.margin-r40 {
+    margin-right: 40px !important;
+}
+
+/*
+*   "下⬇️"
+*/
+.margin-b5 {
+    margin-bottom: 5px !important;
+}
+
+.margin-b10 {
+    margin-bottom: 10px !important;
+}
+
+.margin-b15 {
+    margin-bottom: 15px !important;
+}
+
+.margin-b20 {
+    margin-bottom: 20px !important;
+}
+
+.margin-b25 {
+    margin-bottom: 25px !important;
+}
+
+.margin-b30 {
+    margin-bottom: 30px !important;
+}
+
+.margin-b40 {
+    margin-bottom: 40px !important;
+}
+
+/*
+* 内间距 padding
+* @desc div 内部的内容 距div的边界的间距
+*/
+.padding8 {
+    padding: 8px !important;
+}
+
+.padding10 {
+    padding: 10px !important;
+}
+
+.padding15 {
+    padding: 15px !important;
+}
+
+.padding20 {
+    padding: 20px !important;
+}
+
+.padding25 {
+    padding: 25px !important;
+}
+
+/*左⬅️*/
+.padding-l10 {
+    padding-left: 10px !important;
+}
+
+.padding-l15 {
+    padding-left: 15px !important;
+}
+
+.padding-l20 {
+    padding-left: 20px !important;
+}
+
+.padding-l25 {
+    padding-left: 25px !important;
+}
+
+/*上⬆️*/
+.padding-t10 {
+    padding-top: 10px !important;
+}
+
+.padding-t15 {
+    padding-top: 15px !important;
+}
+
+.padding-t20 {
+    padding-top: 20px !important;
+}
+
+.padding-t25 {
+    padding-top: 25px !important;
+}
+
+/*右➡️*/
+.padding-r10 {
+    padding-right: 10px !important;
+}
+
+.padding-r15 {
+    padding-right: 15px !important;
+}
+
+.padding-r20 {
+    padding-right: 20px !important;
+}
+
+.padding-r25 {
+    padding-right: 25px !important;
+}
+
+/*下⬇️*/
+.padding-b10 {
+    padding-bottom: 10px !important;
+}
+
+.padding-b15 {
+    padding-bottom: 15px !important;
+}
+
+.padding-b20 {
+    padding-bottom: 20px !important;
+}
+
+.padding-b25 {
+    padding-bottom: 25px !important;
+}
+
+/*
+* 背景颜色 background-color
+* @desc 背景颜色配置信息
+*/
+.bg-cBlue {
+    background-color: #1C8FE0 !important;
+}
+
+.bg-cWhite {
+    background-color: white !important;
+}
+
+.bg-cNormal {
+    background-color: #eee !important;
+}
+
+/*
+* 字体大小
+* class     font*
+* @desc     字体大小的字号配置信息
+*/
+.font10 {
+    font-size: 10px !important;
+}
+
+.font12 {
+    font-size: 12px !important;
+}
+
+.font14 {
+    font-size: 14px !important;
+}
+
+.font15 {
+    font-size: 15px !important;
+}
+
+.font16 {
+    font-size: 16px !important;
+}
+
+.font18 {
+    font-size: 18px !important;
+}
+
+.font20 {
+    font-size: 20px !important;
+}
+
+.font22 {
+    font-size: 22px !important;
+}
+
+.font24 {
+    font-size: 24px !important;
+}
+
+/*
+* 字体颜色
+* class     c*
+* @desc     c1,c2,c3表示三种常用的字体颜色配置
+*/
+.c1 {
+    color: #333 !important;
+}
+
+.c2 {
+    color: #666 !important;
+}
+
+.c3 {
+    color: #999 !important;
+}
+
+.cPrice {
+    color: #FFA422 !important;
+}
+
+.cBlue {
+    color: #1C8FE0 !important;
+}
+
+.cWhite {
+    color: #fff !important;
+}
+
+.cNavBootomBar {
+    color: #BBBBBB !important;
+}
+
+.cRed {
+    color: #D43F3A !important;
+}
+
+.red {
+    color: #e13c1e !important;
+}
+
+/*
+ * 宽度设置
+ * class     c*
+ * @desc     c1,c2,c3表示三种常用的字体颜色配置
+ */
+.width100-relative {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.title-text-hidden {
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    color: #333;
+}
+
+/**
+******  导航栏相关  ******/
+#container {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -130px;
+}
+
+.push, .navbar-static-bottom {
+    height: 130px;
+    clear: both;
+}
+
+.navbar {
+    border: 0 !important;
+}
+
+.navbar-default {
+    background-color: #fff !important;
+}
+
+.navbar {
+    margin-bottom: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.navbar-static-bottom {
+    color: #999 !important;
+    z-index: 1000;
+    border-width: 0 0 1px;
+    background-color: #373B3E;
+    height: 150px;
+    overflow: hidden;
+}
+
+.navbar-static-bottom .cNavBootomBar {
+    color: #999 !important;
+}
+
+.navbar-brand {
+    height: 93px;
+}
+
+.login-logo {
+    background: url(/static/admin/img/head.png) no-repeat 0 30px;
+    background-size: 20px;
+    color: #FFA500;
+    vertical-align: middle;
+    height: 50px;
+    display: block;
+    padding: 0 0 0 30px;
+    margin-left: 15px;
+    line-height: 83px;
+}
+
+.login-logo a {
+    color: #FFA500;
+}
+
+.navbar-normal .nav li {
+    margin-right: 40px;
+}
+
+.navbar-normal .nav li a.nav_base_a {
+    padding: 20px 0;
+}
+
+.navbar-static-bottom .footer_logo {
+    margin-top: 30px;
+}
+
+/*
+ * 用户登录后 - 用户头像显示
+ */
+a.user-image-btn {
+    outline: none;
+    background-color: #fff !important;
+    color: #999;
+    text-decoration: none;
+}
+
+.user-image-btn .user-image {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 1000px;
+    -moz-border-radius: 1000px;
+    border-radius: 1000px;
+}
+
+.visible-xs-block .dropdown a.user-image-btn {
+    background-color: #FAFAFA !important;
+}
+
+#pagination {
+    margin-top: 40px;
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: 1199px) {
+
+    /**********************
+    ****    导航栏相
+    */
+    .navbar-normal,
+    .navbar-normal .navbar-nav li a.nav_base_a {
+        color: #fff !important;
+        background-color: #1C8FE0;
+        font-size: 18px;
+    }
+
+    .navbar-normal .navbar-nav li a.nav_base_a:hover,
+    .navbar-normal .navbar-nav .active a.nav_base_a,
+    .navbar-normal .navbar-nav .active a.nav_base_a:focus,
+    .navbar-normal .navbar-nav .active a.nav_base_a:hover {
+
+        color: #fff;
+        background: url(/static/admin/img/active.png) no-repeat top center #1C8FE0;
+    }
+
+    .navbar-normal .navbar-nav .active a.nav_base_a {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .search_group {
+        line-height: 60px;
+    }
+
+    .search_input {
+        margin-top: 13px;
+    }
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: 991px) and (max-width: 1199px) {
+
+    /**********************
+    ****    导航栏相关
+    */
+    .navbar-normal,
+    .navbar-normal .navbar-nav li a.nav_base_a {
+        color: #fff !important;
+        background-color: #1C8FE0;
+        font-size: 18px;
+    }
+
+    .navbar-normal .navbar-nav li a.nav_base_a:hover,
+    .navbar-normal .navbar-nav .active a.nav_base_a,
+    .navbar-normal .navbar-nav .active a.nav_base_a:focus,
+    .navbar-normal .navbar-nav .active a.nav_base_a:hover {
+
+        color: #fff;
+        background: url(/static/admin/img/active.png) no-repeat top center #1C8FE0;
+    }
+
+    .navbar-normal .navbar-nav .active a.nav_base_a {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .search_group {
+        line-height: 60px;
+    }
+
+    .search_input {
+        margin-top: 13px;
+    }
+
+}
+
+/* 小屏幕（平板，大于等于 768px） */
+@media (min-width: 767px) and (max-width: 991px) {
+
+    /**********************
+    ****    导航栏相关
+    */
+    .navbar-normal .nav li a.nav_base_a {
+        padding: 15px 0;
+    }
+
+    .navbar-normal,
+    .navbar-normal .navbar-nav li a.nav_base_a {
+        color: #fff !important;
+        background-color: #1C8FE0;
+        font-size: 16px;
+    }
+
+    .navbar-normal .navbar-nav li a.nav_base_a:hover,
+    .navbar-normal .navbar-nav .active a.nav_base_a,
+    .navbar-normal .navbar-nav .active a.nav_base_a:focus,
+    .navbar-normal .navbar-nav .active a.nav_base_a:hover {
+
+        color: #fff;
+        background: url(/static/admin/img/active.png) no-repeat top center #1C8FE0;
+    }
+
+    .navbar-normal .navbar-nav .active a.nav_base_a {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .search_group {
+        line-height: 50px;
+    }
+
+    .search_input {
+        margin-top: 8px;
+    }
+}
+
+/* 超小屏幕（手机，小于 768px）例如 6s, 6s plus等 */
+@media (min-width: 479px ) and (max-width: 768px) {
+
+    .navbar-brand {
+        height: 50px;
+        padding-top: 10px;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+    }
+
+    .navbar-normal .nav li a.nav_base_a {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .login-logo {
+        background: url(/static/admin/img/head.png) no-repeat 0 15px;
+        background-size: 20px;
+        color: #FFA500;
+        vertical-align: middle;
+        width: 150px;
+        height: 50px;
+        display: block;
+        padding: 0 0 0 30px;
+        margin-left: 15px;
+        line-height: 50px;
+    }
+
+    .search_group {
+        margin: 10px 0;
+    }
+}
+
+/* 超小屏幕（手机，小于 480px）例如 iPhone4s */
+@media (min-width: 319px ) and (max-width: 480px) {
+    .navbar-brand {
+        height: 50px;
+        padding-top: 10px;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+    }
+
+    .navbar-normal .nav li a.nav_base_a {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .login-logo {
+        background: url(/static/admin/img/head.png) no-repeat 0 15px;
+        background-size: 20px;
+        color: #FFA500;
+        vertical-align: middle;
+        width: 150px;
+        height: 50px;
+        display: block;
+        padding: 0 0 0 30px;
+        margin-left: 15px;
+        line-height: 50px;
+    }
+
+    .search_group {
+        margin: 10px 0;
+    }
+}
+base.css

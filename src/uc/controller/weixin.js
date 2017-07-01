@@ -299,7 +299,7 @@ export default class extends Base {
         if (is_weixin(this.userAgent())) {
             let data = this.post();
             console.log(data);
-            let openid = await this.session(wx_openid);
+            let openid = await this.session("wx_openid");
             
             //已是微信用户，
 
@@ -307,7 +307,7 @@ export default class extends Base {
                 openid: openid,
                 docid: data.docid
             };
-            res = await this.model("doc_wxuser").where(map).find();
+            let res = await this.model("doc_wxuser").where(map).find();
             console.log(res);
             if (!think.isEmpty(res)) {
                 console.log("have---------" + res);
@@ -443,67 +443,67 @@ export default class extends Base {
         // this.assign('next', next)
 
         //获取模板
-        // let temp;
-        // let model = await this.model('model').get_model(info.model_id, 'name');
+        let temp;
+        let model = await this.model('model').get_model(info.model_id, 'name');
 
         // 详情模版 TODO
         // 手机版模版
 
-        // this.assign('category', cate);
-        // console.log(info);
+        this.assign('category', cate);
+        console.log(info);
         // 目录/文章/段落
-        // let pid;
-        // let pinfo;
-        // if (info.pid != 0) {
-        //     let i = info.id;
-        //     //
-        //     while (i != 0) {
-        //         let nav = await document.where({ id: i }).find();
-        //         if (nav.pid == 0) {
-        //             pinfo = nav;
-        //             pid = nav.id;
-        //         }
-        //         i = nav.pid;
-        //     }
+        let pid;
+        let pinfo;
+        if (info.pid != 0) {
+            let i = info.id;
+            //
+            while (i != 0) {
+                let nav = await document.where({ id: i }).find();
+                if (nav.pid == 0) {
+                    pinfo = nav;
+                    pid = nav.id;
+                }
+                i = nav.pid;
+            }
 
-        // } else {
-        //     pinfo = info;
-        //     pid = info.id;
-        // }
-        // // 获取最后更新时间
-        // let lastinfo = await document.where({ topid: pid }).order("update_time DESC").find();
-        // //console.log(lasttime);
-        // this.assign("lastinfo", lastinfo);
-        // console.log(pid);
-        // let plist = await document.where({ pid: pid }).order("level DESC").select();
-        // this.assign("pinfo", pinfo);
-        // this.assign("plist", plist);
-        // //console.log(plist);
-        // if (plist[0]) {
-        //     //let lastlevel = plist[0].level;
-        //     //console.log(lastlevel);
-        //     this.assign("lastlevel", plist[0]);
-        // }
-        // console.log(plist);
-        // // 文档无限级目录
-        // let ptree_ = await document.where({ topid: pid }).field('id,title,pid,name,level as sort').select();
-        // let ptree = get_children(ptree_, pid, 1);
-        // //console.log(ptree);
-        // this.assign('topid', pid);
-        // this.assign("ptree", ptree);
+        } else {
+            pinfo = info;
+            pid = info.id;
+        }
+        // 获取最后更新时间
+        let lastinfo = await document.where({ topid: pid }).order("update_time DESC").find();
+        //console.log(lasttime);
+        this.assign("lastinfo", lastinfo);
+        console.log(pid);
+        let plist = await document.where({ pid: pid }).order("level DESC").select();
+        this.assign("pinfo", pinfo);
+        this.assign("plist", plist);
+        //console.log(plist);
+        if (plist[0]) {
+            //let lastlevel = plist[0].level;
+            //console.log(lastlevel);
+            this.assign("lastlevel", plist[0]);
+        }
+        console.log(plist);
+        // 文档无限级目录
+        let ptree_ = await document.where({ topid: pid }).field('id,title,pid,name,level as sort').select();
+        let ptree = get_children(ptree_, pid, 1);
+        //console.log(ptree);
+        this.assign('topid', pid);
+        this.assign("ptree", ptree);
 
-        // // 如果是目录并且模板为空,模块为视频时，目录id，显示最后更新的主题
-        // if (info.type == 1 && (think.isEmpty(info.template) || info.template == 0) && info.model_id == 6) {
-        //     if (plist[0]) {
-        //         console.log(111111);
-        //         let model_id = plist[0].model_id;
-        //         let p_id = plist[0].id;
-        //         let table = await this.model("model").get_table_name(model_id);
-        //         let p_info = await this.model(table).find(p_id);
-        //         info = think.extend(info, p_info);
+        // 如果是目录并且模板为空,模块为视频时，目录id，显示最后更新的主题
+        if (info.type == 1 && (think.isEmpty(info.template) || info.template == 0) && info.model_id == 6) {
+            if (plist[0]) {
+                console.log(111111);
+                let model_id = plist[0].model_id;
+                let p_id = plist[0].id;
+                let table = await this.model("model").get_table_name(model_id);
+                let p_info = await this.model(table).find(p_id);
+                info = think.extend(info, p_info);
 
-        //     }
-        // }
+            }
+        }
         info.fmurl = await get_cover2(info.fmurl, this.setup.QINIU_DOMAIN_NAME);
         // console.log("tuoke.  pic---------" + JSON.stringify(pic));
         // info.fmurl = 'http://' + this.setup.QINIU_DOMAIN_NAME + '/' + pic.path;

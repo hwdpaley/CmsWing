@@ -107,6 +107,7 @@ export default class extends Base {
          */
     async routeAction() {
         // this.end( this.get('category'));
+        console.log("url----------"+this.http.url+","+this.get('category').split("-")[0]);
         let cate = await this.category(this.get('category').split("-")[0]);
         console.log("route-------"+JSON.stringify(cate));
         let type = cate.allow_publish;

@@ -1,41 +1,38 @@
-{% extends "../inc/picture_base.html" %}
+{% extends "../inc/picture_base.html" %} 
 {% block content %}
 <!--
-           PAGE HEADER
+                PAGE HEADER
 
-           CLASSES:
-               .page-header-xs	= 20px margins
-               .page-header-md	= 50px margins
-               .page-header-lg	= 80px margins
-               .page-header-xlg= 130px margins
-               .dark			= dark page header
+                CLASSES:
+                    .page-header-xs = 20px margins
+                    .page-header-md = 50px margins
+                    .page-header-lg = 80px margins
+                    .page-header-xlg= 130px margins
+                    .dark           = dark page header
 
-               .shadow-before-1 	= shadow 1 header top
-               .shadow-after-1 	= shadow 1 header bottom
-               .shadow-before-2 	= shadow 2 header top
-               .shadow-after-2 	= shadow 2 header bottom
-               .shadow-before-3 	= shadow 3 header top
-               .shadow-after-3 	= shadow 3 header bottom
-       -->
-<section class="page-header dark page-header-xs parallax parallax-2" >
-    <div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
+                    .shadow-before-1    = shadow 1 header top
+                    .shadow-after-1     = shadow 1 header bottom
+                    .shadow-before-2    = shadow 2 header top
+                    .shadow-after-2     = shadow 2 header bottom
+                    .shadow-before-3    = shadow 3 header top
+                    .shadow-after-3     = shadow 3 header bottom
+            -->
+<section class="page-header dark page-header-xs parallax parallax-2">
+    <div class="overlay dark-2">
+        <!-- dark overlay [1 to 9 opacity] -->
+    </div>
     <div class="container">
-
         <h1>{{category.title}}</h1>
-
         <!-- breadcrumbs -->
         <ol class="breadcrumb f-14">
             <li><a href="/">首页 </a></li>
-            {%for val in breadcrumb %}
-            {% if val.id == category.id %}
+            {%for val in breadcrumb %} {% if val.id == category.id %}
             <li class="active">{{val.title}}</li>
             {% else %}
             <li><a href="{{val.url}}">{{val.title}}</a></li>
-
-            {% endif %}
-            {% endfor %}
-        </ol><!-- /breadcrumbs -->
-
+            {% endif %} {% endfor %}
+        </ol>
+        <!-- /breadcrumbs -->
     </div>
 </section>
 <!-- /PAGE HEADER -->
@@ -170,16 +167,16 @@
 
                                 <div class="item-box">
                                     <figure>
-										<span class="item-hover">
-											<span class="overlay dark-5"></span>
-											<span class="inner">
+                                        <span class="item-hover">
+                                            <span class="overlay dark-5"></span>
+                                            <span class="inner">
 <!-- details -->
-												<a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
-													<span class="fa fa-play-circle fa-3x"></span>
-												</a>
+                                                <a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
+                                                    <span class="fa fa-play-circle fa-3x"></span>
+                                                </a>
 
-											</span>
-										</span>
+                                            </span>
+                                        </span>
 
                                         <!-- overlay title -->
                                         <div class="item-box-overlay-title">
@@ -217,16 +214,16 @@
 
                                     <div class="item-box">
                                         <figure>
-										<span class="item-hover">
-											<span class="overlay dark-5"></span>
-											<span class="inner">
+                                        <span class="item-hover">
+                                            <span class="overlay dark-5"></span>
+                                            <span class="inner">
                                                 <!-- details -->
-												<a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
-													<span class="fa fa-play-circle fa-3x"></span>
-												</a>
+                                                <a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
+                                                    <span class="fa fa-play-circle fa-3x"></span>
+                                                </a>
 
-											</span>
-										</span>
+                                            </span>
+                                        </span>
 
                                             <!-- overlay title -->
                                             <div class="item-box-overlay-title">

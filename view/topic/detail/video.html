@@ -1,4 +1,4 @@
-{% extends "../inc/base.html" %}
+{% extends "../inc/picture_base.html" %}
 {% block style %}
 
 <script src="/static/admin/js/udeitor/ueditor.parse.min.js"></script>
@@ -55,63 +55,7 @@ CLASSES:
    <div id="video-box" style="width: 1100px; height: 484px">
 
    </div>
-    <!-- <div class="listbox" id="player_sidebar">
 
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#home" data-toggle="tab">选集</a></li>
-            <li><a href="#profile" data-toggle="tab">会员</a></li>
-        </ul>
-
-        <div class="tab-content slim-scroll" data-height="440px" data-size="10px">
-            <div class="tab-pane fade in active " id="home">
-                <div class="subscribe">
-                    <span class="m_img"><a href="#" target="_blank" charset="hz-4009164-1000705"><img src="{{pinfo.cover_id|get_pic('m=1,w=50,h=50')}}" alt="{{pinfo.title}}"></a></span>
-                    <span class="m_title" id="subnamelistarea"><a href="#" data-from="hz-4009165-1000705" charset="hz-4009165-1000705" target="_blank">{{pinfo.title}}</a><a href="#" target="_blank" title="道长等级：12"><i class="lvl12"></i></a></span>
-		    <span class="m_action" id="officiallistfollow">
-				<div class="sub_action " id="user_follow_info_official"><div class="btn btn-info btn-sm" id="subscribe_official" subname="" subimg="" data-stat-role="ck"><span class="form_btn_text">订&nbsp;&nbsp;阅</span></div></div>
-		    	<div class="sub_state" style="display: block;"><span class="num" id="user_fans_num_official">186.2万</span><b class="arrow"><em class="arrow_bg">◆</em><em class="arrow_co">◆</em></b></div>
-		    </span>
-                </div>
-                <div class="tvinfo ">
-
-                    <a class="iku_share" id="iku_share" style="display:none"><i></i>放到桌面</a>
-                    <p class="tvintro">
-                        更新至<em>{{lastlevel.level}}</em>集  <em></em>
-                        <a href="javascript:" class="showinfo_btn" id="dropdown">
-                            节目信息	<span class="caret"></span>
-                        </a>
-                    </p>
-                    <p class="tvintro_panel" id="tvintro_panel" style="display: none;">
-                        {{pinfo.description}}...<a target="_blank" href="#">详情</a>
-                    </p>
-                </div>
-
-                <div class="showlists">
-             {%for val in plist%}
-                    <div class="item item-close" >
-                        <div class="inner1">
-                            <div class="program" title="{{val.title}}" >
-                                <a href="{{val.name|get_url(val.id)}}" class="A {%if info.id == val.id%}current{%endif%}" >
-                                    <div class="serial"><label>{{val.level}}</label><span class="playing fa fa-youtube-play"></span></div>
-                                    <div class="headline">{{val.title}}</div>
-                                    <div class="time"><label>更新:</label><span>{{val.create_time|dateformat('Y-m-d')}}</span> </div>
-                                    <div class="statplay"><i class="fa fa-play-circle-o" title="播放"></i> {{val.view}}</div>
-                                </a>
-                            </div>
-                            <div class="" ></div>
-                            <div class="handle" ><a href="javascript:;" class="A"><i class="fa fa-map-signs"></i></a></div>
-                        </div>
-                    </div>
-{%endfor%}
-
-                </div>
-            </div>
-            <div class="tab-pane fade" id="profile">
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
-            </div>
-            </div>
-
-    </div> -->
 </div>
     <!-- /OWL SLIDER -->
 
@@ -205,17 +149,17 @@ CLASSES:
             <div class="col-md-3 col-sm-3">
 
                 <!-- INLINE SEARCH -->
-                <div class="inline-search clearfix margin-bottom-30">
+                <!-- <div class="inline-search clearfix margin-bottom-30">
                     <form action="" method="get" class="widget_search">
                         <input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
                         <button type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
-                </div>
+                </div> -->
                 <!-- /INLINE SEARCH -->
 
-                <hr />
+                <!-- <hr /> -->
                 <div class="panel panel-default">
                     <div class="panel-body">
 
@@ -255,9 +199,9 @@ CLASSES:
                 {%endif%}
 
                 <!-- JUSTIFIED TAB -->
-                <div class="tabs nomargin-top hidden-xs margin-bottom-10">
+                <!-- <div class="tabs nomargin-top hidden-xs margin-bottom-10">
 
-                    <!-- tabs -->
+                    
                     <ul class="nav nav-tabs nav-bottom-border nav-justified">
                         <li class="active">
                             <a href="#tab_1" data-toggle="tab">
@@ -271,15 +215,15 @@ CLASSES:
                         </li>
                     </ul>
 
-                    <!-- tabs content -->
+                    
                     <div class="tab-content margin-bottom-0 margin-top-10">
 
-                        <!-- POPULAR -->
+                        
                         <div id="tab_1" class="tab-pane active">
-                            <!-- /post -->
+                            
                             {% topic data = "hotlist",limit= "5",cid=category.id,type="hot"%}
                             {%for v in hotlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -291,18 +235,18 @@ CLASSES:
                                     <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
                                     <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
 
                         </div>
-                        <!-- /POPULAR -->
+                        
 
 
-                        <!-- RECENT -->
+                        
                         <div id="tab_2" class="tab-pane">
                             {% topic data = "newlist",limit= "5",cid=category.id%}
                             {%for v in newlist%}
-                            <div class="row tab-post"><!-- post -->
+                            <div class="row tab-post">
                                 {%if v.cover_id%}
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <a href="{{v.name|get_url(v.id)}}">
@@ -314,14 +258,14 @@ CLASSES:
                                     <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
                                     <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
                                 </div>
-                            </div><!-- /post -->
+                            </div>
                             {%endfor%}
-                            <!-- /post -->
+                            
                         </div>
-                        <!-- /RECENT -->
+                        
 
                     </div>
-                </div>
+                </div> -->
                 <!-- JUSTIFIED TAB -->
 
 
@@ -339,7 +283,7 @@ CLASSES:
 
 
 
-                <hr />
+                
 
 
                 <!-- SOCIAL ICONS -->

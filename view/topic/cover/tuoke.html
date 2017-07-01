@@ -22,20 +22,25 @@
 					.shadow-before-3 	= shadow 3 header top
 					.shadow-after-3 	= shadow 3 header bottom
 			-->
-<section class="page-header page-header-xs">
+<section class="page-header dark page-header-xs parallax parallax-2" >
+    <div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
     <div class="container">
-        {#
-        <h1>{{category.title}}</h1> #}
+
+        <h1>{{category.title}}</h1>
+
         <!-- breadcrumbs -->
-        <ol class="breadcrumb breadcrumb-inverse">
+        <ol class="breadcrumb f-14">
             <li><a href="/">首页 </a></li>
-            {%for val in breadcrumb %} {% if val.id == category.id %}
+            {%for val in breadcrumb %}
+            {% if val.id == category.id %}
             <li class="active">{{val.title}}</li>
             {% else %}
             <li><a href="{{val.url}}">{{val.title}}</a></li>
-            {% endif %} {% endfor %}
-        </ol>
-        <!-- /breadcrumbs -->
+
+            {% endif %}
+            {% endfor %}
+        </ol><!-- /breadcrumbs -->
+
     </div>
 </section>
 <!-- /PAGE HEADER -->

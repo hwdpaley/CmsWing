@@ -1,0 +1,68 @@
+music{% extends "../../topic/inc/music_base.html" %}
+{% block style %}
+<link href="/static/assets/css/layout-question.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+{%set cate = category.id|get_cate()%}
+<!--
+PAGE HEADER
+
+CLASSES:
+.page-header-xs	= 20px margins
+.page-header-md	= 50px margins
+.page-header-lg	= 80px margins
+.page-header-xlg= 130px margins
+.dark			= dark page header
+
+.shadow-before-1 	= shadow 1 header top
+.shadow-after-1 	= shadow 1 header bottom
+.shadow-before-2 	= shadow 2 header top
+.shadow-after-2 	= shadow 2 header bottom
+.shadow-before-3 	= shadow 3 header top
+.shadow-after-3 	= shadow 3 header bottom
+-->
+<section class="page-header page-header-xs" >
+    <div class="container">
+
+        <!-- <h1>热门话题</h1> -->
+
+        <!-- breadcrumbs -->
+        <!-- <ol class="breadcrumb">
+            <li><a href="/">首页</a></li>
+            <li class="active">音频</li>
+
+        </ol> -->
+        <!-- /breadcrumbs -->
+        <!-- page tabs -->
+
+        <!-- <ul class="page-header-tabs list-inline">
+            <li class="{%if http.get('key')==''%}active{%endif%}"><a href="/topic">全部</a></li>
+            <li class="{%if http.get('key')=='week'%}active{%endif%}"><a href="/topic/week">7天</a></li>
+            <li class="{%if http.get('key')=='month'%}active{%endif%}"><a href="/topic/month">30天</a></li>
+        </ul>
+ -->
+        <!-- /page tabs -->
+    </div>
+</section>
+
+<!-- -->
+<section >
+    <div class="container">
+        <div class="row-fluid">
+
+            <!--  列表部分 -->
+            <ul class="content-list margin-t15" id="audio-list"><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/music/audio/81261280"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/dingjixiaoshou3.0tixi.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:W_m5zwp8DyShQppR2AfYqFTXbnA=" class="width100"></div><div class="list-info-box"><label class="info-title">顶级销售3.0体系</label><p class="info-desc-box"><span>259人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/78585014"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/20170421161357_625.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:gEyshjWpZ85QoWfk9H1Mb4P5QbM=" class="width100"></div><div class="list-info-box"><label class="info-title">美容院怎样做充值活动？</label><p class="info-desc-box"><span>919人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/78460269"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/20170417141211_709.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:9NHmWLMt_DEtaXJuKCS_uEMuE0I=" class="width100"></div><div class="list-info-box"><label class="info-title">美容院如何100%品质成交新顾客</label><p class="info-desc-box"><span>1443人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/18508766"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/hhaqqqqq.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:P1dclrmLrvGvbiH4GaFax5-Nosw=" class="width100"><div class="vip"></div></div><div class="list-info-box"><label class="info-title">美容院人事战略发展体系</label><p class="info-desc-box"><span>1695人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/79720524"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/5ZGY5bel6Jaq6LWE6K6+6K6h5L2gLeWBmueahOWvueS6huWQl++8nw==_20161013092757_132.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:X-6ntaWXGZyejZC86BX3QvWUi_s=" class="width100"><div class="vip"></div></div><div class="list-info-box"><label class="info-title">员工的薪资设计你做对了吗？</label><p class="info-desc-box"><span>1239人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/54128458"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/cmp5dGxtbmRndnp2ZG4=_20161017120202_281.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:c2wWJ1W1wk6OcHdLqXzZDXw1ZtI=" class="width100"><div class="vip"></div></div><div class="list-info-box"><label class="info-title">怎么防止员工出去开店给我带来的损失呢？</label><p class="info-desc-box"><span>912人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/34890871"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/5ZWG5Lia5qih5byP6auY5Lia57up6K6+6K6h5L2T57O7_20160913150304_801.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:CvThXSuFY6mZFBuNGdD8fHfgguk=" class="width100"><div class="vip"></div></div><div class="list-info-box"><label class="info-title">商业模式——高业绩设计体系</label><p class="info-desc-box"><span>673人看过</span></p></div></a></li><li class="col-xs-6 col-sm-6 col-md-3 col-lg-3"><a href="/site/audios/82717832"><div class="list-image-box"><img src="https://oht7k3rna.qnssl.com/20170411160735_846.jpg?e=1498791900&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:IUhjdsaCyQT2-Iry2j7uQXhX6_8=" class="width100"></div><div class="list-info-box"><label class="info-title">新店如何快速拓客？</label><p class="info-desc-box"><span>621人看过</span></p></div></a></li></ul>
+
+            <!--  分页控件部分 -->
+            <div class="width100 text-center">
+                <div class="clearfix"></div>
+                <ul id="pagination" class="compact-theme simple-pagination"><li class="disabled"><span class="current prev">前一页</span></li><li class="active"><span class="current">1</span></li><li class="disabled"><span class="ellipse">…</span></li><li><a href="#page-19" class="page-link">19</a></li><li><a href="#page-20" class="page-link">20</a></li><li><a href="#page-2" class="page-link next">后一页</a></li></ul>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+<!-- / -->
+{% endblock %}
+

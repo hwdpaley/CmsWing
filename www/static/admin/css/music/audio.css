@@ -1,0 +1,251 @@
+@charset "utf-8";
+
+body, h3, p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.audio_bg {
+    background: url(/static/admin/img/voice_bg.png);
+    background-size: cover;
+    overflow: hidden;
+}
+
+body, div, h3, p {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.audio-header {
+    margin-top: 5%;
+    width: 100%;
+    border-bottom: 1px solid #343F56;
+}
+
+.audio-header h3 {
+    margin: 10px 0 8px 0;
+    font-size: 24px;
+    color: white;
+    font-weight: normal;
+}
+
+.audio-header p {
+    width: 125px;
+    margin:15px auto;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 4px 2px;
+}
+
+.share_center {
+    width: 100%;
+    margin: 6px auto 0 auto;
+    text-align: center;
+}
+
+.share_head {
+    width: 200px;
+    height: 200px;
+    border-radius: 1000px;
+    overflow: hidden;
+    background: no-repeat center center;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+.autoRotate {
+    -webkit-animation: myani 10s linear infinite 0s none;
+    -moz-animation: myani 10s linear infinite 0s none;
+    -ms-animation: myani 10s linear infinite 0s none;
+    transition: all 1s ease 0s;
+}
+
+@-webkit-keyframes myani {
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes myani {
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes myani {
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes myani {
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.border {
+    border: 10px solid rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    border-radius: 1000px;
+}
+
+.share_audio {
+    width: 100%;
+    margin: 6px auto 0 auto;
+    text-align: center;
+}
+
+.audio-footer {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.audio-footer h3 {
+    font-weight: normal;
+    font-size: 26px;
+    color: #3ca6f1;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.audio-footer p {
+    font-weight: normal;
+    letter-spacing: 4px;
+    color: white;
+    margin: 20px 0 20px 0;
+}
+
+.more {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    width: 260px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: #3ca6f1 url(/static/admin/img/voice.png) no-repeat 50px center;
+    background-size: 20px 26px;
+    text-indent: 50px;
+    outline: none;
+}
+
+@media (min-width: 376px) and (max-width: 767px) {
+    /*.audio-header {*/
+        /*height: 230px;*/
+    /*}*/
+
+    .audio-header h3 {
+        margin: 0 0 10px 0;
+        font-size: 22px;
+    }
+
+    .audio-header p {
+        font-size: 18px;
+    }
+
+    .audio-footer h3 {
+        font-size: 30px;
+        letter-spacing: 1px;
+    }
+
+    .audio-footer p {
+        font-size: 19px;
+        letter-spacing: 3px;
+    }
+
+    .more {
+        margin: 0 auto;
+        text-align: center;
+        font-size: 18px;
+        color: white;
+        width: 300px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        background: #3ca6f1 url(/static/admin/img/voice.png) no-repeat 80px center;
+        background-size: 15px 19px;
+        text-indent: 40px;
+        outline: none;
+    }
+}
+
+@media (min-width: 370px) and (max-width: 376px) {
+    .share_head {
+        width: 180px;
+        height: 180px;
+    }
+
+    .audio-header h3 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+    }
+
+    .audio-header p {
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 370px) {
+    .share_head {
+        width: 150px;
+        height: 150px;
+    }
+
+    .audio-header h3 {
+        margin: 0 0 6px 0;
+        font-size: 16px;
+    }
+
+    .audio-header p {
+        font-size: 14px;
+    }
+
+    .audio_player {
+        width: 240px;
+    }
+
+    .audio-footer h3 {
+        font-size: 18px;
+        letter-spacing: 1px;
+        margin: 0 0 4px 0;
+    }
+
+    .audio-footer p {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .more {
+        margin: 0 auto;
+        text-align: center;
+        font-size: 14px;
+        color: white;
+        width: 200px;
+        height: 30px;
+        border-radius: 4px;
+        border: none;
+        background: #3ca6f1 none;
+        text-indent: 0;
+        outline: none;
+    }
+}

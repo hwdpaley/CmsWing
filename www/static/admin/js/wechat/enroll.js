@@ -74,7 +74,10 @@ function enroll_modal_button(did) {
             },
             success: function (data) {
                 console.log(JSON.stringify(data));
-                alert(data.data.name);
+                if(data.data.name){
+                	alert(data.data.name);
+                }
+                
 				
 				if(data.data.status == 0)
 				{
@@ -90,9 +93,6 @@ function enroll_modal_button(did) {
 
 					$("#pay_type").val('1');
 					$("#enroll_button").val("已报名");
-				}else if(data.data.status == -2){
-					//先关注
-					window.location.href='/uc/weixin/follow';
 				}else if(data.data.status == -1){
 					$("#enroll_modal").modal('hide');
 					// $("#modal_body").addClass("hidden");

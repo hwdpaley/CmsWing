@@ -1,0 +1,72 @@
+music{% extends "../../topic/inc/music_base.html" %} {% block style %}
+<link href="/static/assets/css/layout-question.css" rel="stylesheet" type="text/css" />
+<link href="/static/admin/css/music/audio.css" rel="stylesheet" type="text/css" /> <link href="/static/admin/css/music/simpleplayer.css" rel="stylesheet" type="text/css" /> 
+
+
+{% endblock %} {% block content %} {%set cate = category.id|get_cate()%}
+<!--
+PAGE HEADER
+
+CLASSES:
+.page-header-xs = 20px margins
+.page-header-md = 50px margins
+.page-header-lg = 80px margins
+.page-header-xlg= 130px margins
+.dark           = dark page header
+
+.shadow-before-1    = shadow 1 header top
+.shadow-after-1     = shadow 1 header bottom
+.shadow-before-2    = shadow 2 header top
+.shadow-after-2     = shadow 2 header bottom
+.shadow-before-3    = shadow 3 header top
+.shadow-after-3     = shadow 3 header bottom
+-->
+<section class="page-header page-header-xs">
+    <div class="container">
+        <!-- <h1>热门话题</h1> -->
+        <!-- breadcrumbs -->
+        <!-- <ol class="breadcrumb">
+            <li><a href="/">首页</a></li>
+            <li class="active">音频</li>
+
+        </ol> -->
+        <!-- /breadcrumbs -->
+        <!-- page tabs -->
+        <!-- <ul class="page-header-tabs list-inline">
+            <li class="{%if http.get('key')==''%}active{%endif%}"><a href="/topic">全部</a></li>
+            <li class="{%if http.get('key')=='week'%}active{%endif%}"><a href="/topic/week">7天</a></li>
+            <li class="{%if http.get('key')=='month'%}active{%endif%}"><a href="/topic/month">30天</a></li>
+        </ul>
+ -->
+        <!-- /page tabs -->
+    </div>
+</section>
+<!-- -->
+<section class="audio_bg">
+    <div class="container">
+        <div id="">
+            <div class="audio-header">
+                <h3 class="margin-t10">顶级销售3.0体系</h3>
+                <h3 style="font-size: 20px;" class="margin-t10">王刚老师</h3>
+            </div>
+            <div class="share_center">
+                <div class="border margin-t15">
+                    <div class="share_head" style="background-image:url('https://oht7k3rna.qnssl.com/SU1HXzc4NTVf_20160913150352_643.jpg?e=1498794550&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:sgTSvFRLC2DU0gbQQFxIrS14E9Y=');"></div>
+                </div>
+            </div>
+            <div class="margin-t15">
+                <div class="share_audio">
+                    
+                    <audio class="player" src="https://oht7k3rna.qnssl.com/dingjixiaoshou3.0tixi.mp3?e=1498794550&amp;token=odvE3lss1WVjnznWAIAxOtI3MB9-WgkuLoWSO657:1W3bzNTaAS2KzfGMDrQhgR5oAQ4=">
+                    </audio>
+                </div>
+            </div>
+            <div class="audio-footer">
+                <p class="font20">美媒教育—随时随地也能学习</p>
+                <!-- <button class="more">收听更多语音</button> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

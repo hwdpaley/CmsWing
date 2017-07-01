@@ -18,7 +18,7 @@ CLASSES:
 .shadow-before-3 	= shadow 3 header top
 .shadow-after-3 	= shadow 3 header bottom
 -->
-<section class="page-header page-header-xs" >
+<section class="page-header dark page-header-xs" >
     <div class="container">
 
         <h1>{{category.title}}</h1>
@@ -163,7 +163,7 @@ CLASSES:
                     </ul>
                     {%if category.id|priv(controller.user.roleid,'add',0,false)%}
                     <!--投稿按钮-->
-                    <div class="btn-group btn-group-sm pull-right">
+                    <!-- <div class="btn-group btn-group-sm pull-right">
                         <a {%if model|length> 1 %} data-toggle="dropdown" {% endif %} class="btn btn-primary btn-sm document_add
                             dropdown-toggle {% if allow == 0 %}disabled{% endif %}" {%if model|length
                             == 1 %} href="/uc/publish/add/model_id/{{modellist[0].id}}/pid/0/cate_id/{{cate.id}}/group_id/{{group_id}}/sortid/{{sortid}}"{%endif%}
@@ -176,11 +176,10 @@ CLASSES:
                                     class="text-info">添加{{val.title}}</a></li>
                             {% endfor %}
 
-                            <!--<li class="divider"></li>-->
-                            <!--<li><a href="#">添加内容</a></li>-->
+                            
                         </ul>
                         {% endif %}
-                    </div>
+                    </div> -->
                     <!--//投稿按钮-->
                     {%endif%}
                     <div class="btn-group btn-group-sm pull-right">
@@ -244,7 +243,7 @@ CLASSES:
 
 
                 <!-- PAGINATION -->
-                <div class="text-left">
+                <div class="text-right">
                     <!-- Pagination Default -->
                     {{pagination | safe}}
                     <!-- /Pagination Default -->

@@ -305,7 +305,7 @@ export default class extends Base {
     this.assign('count',data.count);
     //console.log(cate)
     let temp = cate.template_lists ? `${cate.template_lists}` : "";
-    //console.log(cate);
+    // console.log(cate);
     //console.log(111)
     if(checkMobile(this.userAgent())){
       if(this.isAjax("get")){

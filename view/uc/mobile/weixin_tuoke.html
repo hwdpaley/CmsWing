@@ -77,7 +77,7 @@
 <div class="fix_back"></div>
 <div class="sign_up_fix">
     <div class="sign_up_box">
-        <a class="enter">进入店铺</a>
+        <!-- <a class="enter">进入店铺</a> -->
         <input type="button" class="sign_up" id="enroll_button" value="立即报名">
     </div>
 </div>
@@ -144,6 +144,7 @@ console.log('{{signPackage.url}}');
                 title: '{{info.title}}', // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: '{{info.fmurl}}', // 分享图标
+                desc:'{{desc}}',
                 success: function () { 
                     console.log('share success');
                     // 用户确认分享后执行的回调函数
@@ -156,7 +157,7 @@ console.log('{{signPackage.url}}');
                 title: '{{info.title}}', // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: '{{info.fmurl}}', // 分享图标
-                // desc:'{{desc}}',
+                desc:'{{desc}}',
                 success: function () { 
                     console.log('share success');
                     // 用户确认分享后执行的回调函数

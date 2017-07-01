@@ -89,7 +89,7 @@ export default class extends Base {
     //获取面包屑信息
     let breadcrumb = await this.model('category').get_parent_category(cate.id,true);
     this.assign('breadcrumb', breadcrumb);
-console.log("breadcrumb==========="+JSON.stringify(breadcrumb));
+    console.log("breadcrumb==========="+JSON.stringify(breadcrumb));
     // 上一篇
     let previous = await document.where({id:['>',info.id],category_id:info.category_id,'pid':0, 'status': 1}).order('id DESC').find();
     this.assign('previous',previous)
@@ -100,7 +100,7 @@ console.log("breadcrumb==========="+JSON.stringify(breadcrumb));
     //获取模板
     let temp;
     let model = await this.model('model').get_model(info.model_id, 'name');
-
+    console.log("info.model_id-------------------"+info.model_id);
     //详情模版 TODO
     //手机版模版
 
@@ -187,7 +187,9 @@ console.log("breadcrumb==========="+JSON.stringify(breadcrumb));
       } else {
         temp = model;
       }
-       // console.log(temp);
+      // console.log("info----------------"+JSON.stringify(info));
+      // console.log("cate----------------"+JSON.stringify(cate));
+      console.log("temp-------------------"+temp+","+model);
         //console.log(info);
       //内容分页
       if(!think.isEmpty(info.content)){
