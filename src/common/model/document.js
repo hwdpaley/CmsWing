@@ -82,6 +82,7 @@ export default class extends think.model.base {
         }
         //添加或者新增基础内容
         if(think.isEmpty(data.id)){//新增数据
+
             if(think.isEmpty(data.create_time)){
                 data.create_time = time;
             }else{
@@ -90,7 +91,7 @@ export default class extends think.model.base {
             data.update_time=new Date().getTime();
             data.status= await this.getStatus(data.id,data.category_id);
             var id = await this.add(data);//添加基础数据
-            //console.log(id);
+            console.log("new document-----------------  "+id);
             //let id = 100;
             if(!id){
                 this.error = '新增基础内容出错！';

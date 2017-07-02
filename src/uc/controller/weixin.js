@@ -287,6 +287,102 @@ export default class extends Base {
             });
             return deferred.promise;
         }
+        async tuokecopyAction() {
+
+        // data: {
+        //         "docid": did,
+        //         "name": user_name.val(),
+        //         "phone": user_phone.val(),
+        //         // csrfmiddlewaretoken: $.cookie("csrftoken")
+        //     }
+        if (is_weixin(this.userAgent())) {
+            let data = this.post();
+            console.log(data);
+            let openid = await this.session("wx_openid");
+            
+            //已是微信用户，
+
+            let map = {
+                openid: openid,
+                docid: data.docid
+            };
+            let res = await this.model("doc_wxuser").where(map).find();
+            console.log(res);
+            if (!think.isEmpty(res)) {
+                console.log("have---------" + res);
+                return this.success({ status: 0, name: "用户已经报名!" });
+                //已经报名
+            } else {
+
+                let mmap = {
+                    openid: openid,
+                    docid: data.docid,
+                    status: 1,
+                    create_time: new Date().valueOf()
+                }
+                console.log(mmap);
+                res = await this.model("doc_wxuser").add(mmap);
+                //报名人数+1
+                let document = this.model('document');
+                let info = await document.detail(data.docid);
+                info.addnums++;
+                console.log("info.nums" + info.addnums);
+                //报名人数+1
+                let doc = await document.updates(info);
+
+                return this.success({ status: 0, name: "用户报名成功!" });
+            }
+        } else {
+            //PC端
+            let data = this.post();
+            console.log(data);
+            let islogin = await this.islogin();
+            if (!islogin) {
+                //未登录，提示登录
+                return this.success({ status: -1, name: "请先登录，谢谢参与" });
+            }
+            console.log("islogn----------" + islogin);
+            let document = this.model('document');
+            let info = await document.detail(data.docId);
+            // console.log("tuoke info------"+JSON.stringify(info));
+            if(info.uid==islogin){
+                return this.success({ status: 0, name: "您已经拥有该拓客模板!" });
+            }
+            info.uid=islogin;
+            info.id=null;
+            info.create_time=null;
+            info.position=0;
+            let mytuokeid=await this.model('category').where({name:'mytuoke'}).find();
+            console.log("mytuokeid.id==================="+mytuokeid.id);
+            info.category_id=mytuokeid.id;//我的拓客模板
+            // console.log("tuoke info------"+JSON.stringify(info));
+            let res = await document.updates(info);
+            // // let openid = await this.model("wx_user").where({ uid: islogin }).getField('openid');
+            // // console.log("openid----------" + openid);
+            // // if (think.isEmpty(openid)) {
+            // //     return this.success({ status: -1, name: "请先关注微信公众号，谢谢参与" });
+            // // }
+            // let mmap = {
+            //     openid: openid[0],
+            //     docid: data.docid,
+            //     status: 1,
+            //     create_time: new Date().valueOf()
+            // }
+            // console.log(mmap);
+            // await this.model("doc_wxuser").add(mmap);
+            // await this.model("wx_user").where({ openid: openid[0] }).update({ phone: data.phone });
+
+            // let document = this.model('document');
+            // let info = await document.detail(data.docid);
+            // info.addnums++;
+            // console.log("info.nums" + info.addnums);
+            // //报名人数+1
+            // let doc = await document.updates(info);
+            // console.log("info.nums doc -----"+doc);
+            return this.success({ status: 0, name: "拓客模板拷贝成功!" });
+        }
+        return this.success({ status: -1, name: "用户报名失败!" });
+    }
         //报名
     async enrollAction() {
 
@@ -546,6 +642,10 @@ export default class extends Base {
             }
             console.log("tuokeAction 手机========" + `${this.http.controller}/${temp}`);
             return this.display(`mobile/${this.http.controller}/${temp}`);
+        }
+        if (!islogin) {
+                //未登录，提示登录
+                return this.success({ status: -1, name: "请先登录，谢谢参与" });
         }
         // PC用户
         let oid = await this.model("wx_user").where({ uid: islogin }).find();

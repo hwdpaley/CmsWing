@@ -39,7 +39,7 @@ export default class extends Base {
       this.assign('userid', this.is_login);
       roleid = await this.model("member").where({id:this.is_login}).getField('groupid', true);
     }else{
-      this.assign('userid', 1);
+      this.assign('userid', 0);
     }
     let priv = await this.model("category_priv").priv(cate.id,roleid,'visit');
     if(!priv){

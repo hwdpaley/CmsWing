@@ -26,37 +26,37 @@ img.section-one-header {
     color: #999;
     font-size: 14px;
     padding-right: 15px;
-    background: url(/static/web2.0/images/more.png) no-repeat 91px 22px;
+    background: url(/static/admin/img/more.png) no-repeat 91px 22px;
 }
 
 <!-- /*学妹视频*/
 -->
 .icon_video {
-    background: url(/static/web2.0/images/icon_video.png) no-repeat 0 20px;
+    background: url(/static/admin/img/icon_video.png) no-repeat 0 20px;
 }
 
 <!-- /*学妹音频*/
 -->
 .icon_audio {
-    background: url(/static/web2.0/images/icon_audio.png) no-repeat 0 20px;
+    background: url(/static/admin/img/icon_audio.png) no-repeat 0 20px;
 }
 
 <!-- /*学妹顾问*/
 -->
 .icon_data {
-    background: url(/static/web2.0/images/icon_data.png) no-repeat 0 20px;
+    background: url(/static/admin/img/icon_data.png) no-repeat 0 20px;
 }
 
 <!-- /*学妹拓客*/
 -->
 .icon_tool {
-    background: url(/static/web2.0/images/icon_tool.png) no-repeat 0 20px;
+    background: url(/static/admin/img/icon_tool.png) no-repeat 0 20px;
 }
 
 <!-- /*学妹社区*/
 -->
 .icon_community {
-    background: url(/static/web2.0/images/community.png) no-repeat 0 20px;
+    background: url(/static/admin/img/community.png) no-repeat 0 20px;
 }
 
 /*
@@ -259,14 +259,14 @@ ul.content-list {
 .confirm {
     width: 45px;
     height: 46px;
-    background: url(/static/web2.0/images/icon_confirm.png) no-repeat;
+    background: url(/static/admin/img/icon_confirm.png) no-repeat;
     background-size: 45px 46px;
     position: absolute;
     top: 0;
 }
 
 .vip_triangle {
-    background: url(/static/web2.0/images/vip_triangle.png) no-repeat;
+    background: url(/static/admin/img/vip_triangle.png) no-repeat;
     width: 50px;
     height: 50px;
     position: absolute;
@@ -275,7 +275,7 @@ ul.content-list {
 }
 
 .confirm_triangle {
-    background: url(/static/web2.0/images/confirm_triangle.png) no-repeat;
+    background: url(/static/admin/img/confirm_triangle.png) no-repeat;
     width: 50px;
     height: 50px;
     position: absolute;
@@ -312,7 +312,7 @@ ul.content-list {
 }
 
 .data-content-list li .data-box {
-    background: url(/static/web2.0/images/data_icon.png) no-repeat 15px center;
+    background: url(/static/admin/img/data_icon.png) no-repeat 15px center;
     padding: 35px 15px 35px 75px;
     min-height: 96px;
     border-left: 1px solid #eee;

@@ -113,6 +113,7 @@ global.column= function(){
         let cid = !think.isEmpty(args.cid) ?args.cid:false;
         let tree = !think.isEmpty(args.tree) ?args.tree:false;
         let isapp = !think.isEmpty(args.isapp) ?args.isapp:false;
+        let limit = !think.isEmpty(args.limit) ? "10" : args.limit;
         let isindex = !think.isEmpty(args.isindex) ?args.isindex:false;
 
         let column = await think.model('category', think.config("db")).get_all_category();
@@ -150,6 +151,7 @@ global.column= function(){
             }
         }
         context.ctx[data] = arr;
+        console.log(arr);
         return callback(null,'');
     };
 
@@ -315,7 +317,7 @@ global.topic = function(){
             }
             topic = topicarr;
         }
-        //console.log(topic)
+        // console.log(topic)
         context.ctx[data] = topic;
         return callback(null, '');
     }

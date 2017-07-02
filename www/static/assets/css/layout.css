@@ -6459,11 +6459,11 @@ h1.blog-post-title {
 	/** Blog Small Image
 	 ****************** **/
 	.blog-post-item .blog-item-small-image {
-		width:200px;
+		width:250px;
 		float:left;
 	}
 	.blog-post-item .blog-item-small-image + .blog-item-small-content {
-		padding-left:220px;
+		padding-left:280px;
 	}
 		.blog-post-item.blog-post-item-inverse .blog-item-small-image {
 			width:200px;

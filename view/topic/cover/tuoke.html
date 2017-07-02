@@ -4,43 +4,42 @@
 <link rel="stylesheet" href="/static/admin/css/wechat/jquery-weui.css">
 <link rel="stylesheet" href="/static/admin/css/wechat/all.css">
 <link rel="stylesheet" href="/static/admin/css/wechat/web_base.css">
-<link rel="stylesheet" href="/static/admin/css/wechat/manager.css"> {% endblock %} {% block content %}
+<link rel="stylesheet" href="/static/admin/css/wechat/manager.css">
+<link href="/static/admin/css/music/base.css" rel="stylesheet" type="text/css" />
+<link href="/static/admin/css/music/model.css" rel="stylesheet" type="text/css" /> {% endblock %} {% block content %}
 <!--
-				PAGE HEADER
+                PAGE HEADER
 
-				CLASSES:
-					.page-header-xs	= 20px margins
-					.page-header-md	= 50px margins
-					.page-header-lg	= 80px margins
-					.page-header-xlg= 130px margins
-					.dark			= dark page header
+                CLASSES:
+                    .page-header-xs = 20px margins
+                    .page-header-md = 50px margins
+                    .page-header-lg = 80px margins
+                    .page-header-xlg= 130px margins
+                    .dark           = dark page header
 
-					.shadow-before-1 	= shadow 1 header top
-					.shadow-after-1 	= shadow 1 header bottom
-					.shadow-before-2 	= shadow 2 header top
-					.shadow-after-2 	= shadow 2 header bottom
-					.shadow-before-3 	= shadow 3 header top
-					.shadow-after-3 	= shadow 3 header bottom
-			-->
-<section class="page-header dark page-header-xs parallax parallax-2" >
-    <div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
+                    .shadow-before-1    = shadow 1 header top
+                    .shadow-after-1     = shadow 1 header bottom
+                    .shadow-before-2    = shadow 2 header top
+                    .shadow-after-2     = shadow 2 header bottom
+                    .shadow-before-3    = shadow 3 header top
+                    .shadow-after-3     = shadow 3 header bottom
+            -->
+<section class="page-header dark page-header-xs parallax parallax-2">
+    <div class="overlay dark-2">
+        <!-- dark overlay [1 to 9 opacity] -->
+    </div>
     <div class="container">
-
         <h1>{{category.title}}</h1>
-
         <!-- breadcrumbs -->
         <ol class="breadcrumb f-14">
             <li><a href="/">首页 </a></li>
-            {%for val in breadcrumb %}
-            {% if val.id == category.id %}
+            {%for val in breadcrumb %} {% if val.id == category.id %}
             <li class="active">{{val.title}}</li>
             {% else %}
             <li><a href="{{val.url}}">{{val.title}}</a></li>
-
-            {% endif %}
-            {% endfor %}
-        </ol><!-- /breadcrumbs -->
-
+            {% endif %} {% endfor %}
+        </ol>
+        <!-- /breadcrumbs -->
     </div>
 </section>
 <!-- /PAGE HEADER -->
@@ -51,8 +50,8 @@
             <!-- LEFT -->
             <div class="col-md-12 col-sm-12">
                 <!--
-        controlls-over		= navigation buttons over the image
-        buttons-autohide 	= navigation buttons visible on mouse hover only
+        controlls-over      = navigation buttons over the image
+        buttons-autohide    = navigation buttons visible on mouse hover only
 
         data-plugin-options:
             "singleItem": true
@@ -69,139 +68,137 @@
                     {%endfor%}
                 </div>
                 <div class="row">
-                	<div class="col-md-9 col-sm-9">
-                    <ul class="nav nav-tabs nav-button-tabs">
-                        <!-- side navigation -->
-                        {%column data="cates",cid=category.id%}
-                        <li class="active"><a href="#taball" data-toggle="tab">全部</a></li>
-                        {%for val in cates%}
-                        <li><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
-                        {%endfor%}
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-3">
-                    <!--投稿按钮-->
-                    <div class="btn-group btn-group-sm pull-right">
-                        <a {%if model|length> 1 %} data-toggle="dropdown" {% endif %} class="btn btn-primary btn-sm document_add
+                    <div class="col-md-9 col-sm-9">
+                        <ul class="nav nav-tabs nav-button-tabs">
+                            <!-- side navigation -->
+                            {%column data="cates",cid=category.id%}
+                            <li class="active"><a href="#taball" data-toggle="tab">模板列表</a></li>
+                            {%for val in cates%}
+                            <li><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <!--投稿按钮-->
+                        <div class="btn-group btn-group-sm pull-right">
+                            <a {%if model|length> 1 %} data-toggle="dropdown" {% endif %} class="btn btn-primary btn-sm document_add
                     dropdown-toggle {% if allow == 0 %}disabled{% endif %}" {%if model|length
                     == 1 %} href="/uc/publish/add/model_id/{{modellist[0].id}}/pid/0/cate_id/{{cate_id}}/group_id/{{group_id}}/sortid/{{sortid}}"{%endif%}
                     >
-                    <span class="fa fa-pencil-square-o"></span> 投稿 {%if model|length > 1 %}<span class="caret"></span>{% endif %}</a> {%if model|length > 1 %}
-                        <ul class="dropdown-menu">
-                            {% for val in modellist%}
-                            <li> <a href="/uc/publish/add/model_id/{{val.id}}/pid/0/cate_id/{{cate_id}}/group_id/{{group_id}}/sortid/{{sortid}}" class="text-info">添加{{val.title}}</a></li>
-                            {% endfor %}
-                            <li class="divider"></li>
-                            <li><a href="#">添加内容</a></li>
-                        </ul>
-                        {% endif %}
+                    <span class="fa fa-pencil-square-o"></span> 制作项目 {%if model|length > 1 %}<span class="caret"></span>{% endif %}</a> {%if model|length > 1 %}
+                            <ul class="dropdown-menu">
+                                {% for val in modellist%}
+                                <li> <a href="/uc/publish/add/model_id/{{val.id}}/pid/0/cate_id/{{cate_id}}/group_id/{{group_id}}/sortid/{{sortid}}" class="text-info">添加{{val.title}}</a></li>
+                                {% endfor %}
+                                <li class="divider"></li>
+                                <li><a href="#">添加内容</a></li>
+                            </ul>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-                </div>
                 <div class="tab-content">
+                    <!-- <ul class="common-list">
+                            {% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid %} {% for v in list %} {% set categoryname = val.category_id|get_cate %}
+                            <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                <a href="{{v.name|get_url(v.id)}}">
+                                    <div class="width100-relative">
+                                        <img src="{{v.cover_id|get_pic('')}}" class="width100">
+                                        <div class="vip">
+                                        </div>
+                                    </div>
+                                    <div class="width100-relative list-info">
+                                        <label class="title-text-hidden">{{v.title}}</label>
+                                        <p><span class="c3 font14">{{v.view}}人看过</span></p>
+                                    </div>
+                                </a>
+                            </li>
+                            {%endfor%}
+                            
+                        </ul> -->
                     <div class="tab-pane fade in active" id="taball">
-                        {% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
+                        <ul class="common-list">
+                        {% topic data = "list",limit= "10",cid=category.id,issub=1 %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
                         <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <!-- IMAGE -->
+                        <!-- <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix"> -->
+                        <!-- IMAGE -->
+                        
                             {% if val.cover_id>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
+                            <!-- <figure class="blog-item-small-image margin-bottom-0"> -->
+                            <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                 <a onclick="ShowProduct('{{val.id}}');" title="{{val.title}}">
                                     <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
                                 </a>
+                                {% if userid>0 %}
                                 <button onclick="ShowProduct('{{val.id}}');" class="btn btn-success btn-left" style="
     margin-top: 15px;
 ">预&nbsp;&nbsp;览</button>
-                                <button onclick="WxListCode('{{val.id}}');" class="btn btn-success btn-right" style="
-    margin-top: 15px;margin-left:30% 
+                                <button onclick="tuokeCopy('{{val.id}}');" class="btn btn-success btn-left" style="
+                                    margin-top: 15px;margin-left:25px;
+                                ">拷&nbsp;&nbsp;贝</button>
+                                <!-- <a href='/uc/publish/edit/id/{{val.id}}'><button class="btn btn-success btn-left" style="
+                                    margin-top: 15px;margin-left:25px;
+                                ">编&nbsp;&nbsp;辑</button></a> -->
+                                <button onclick="WxListCode
+('{{val.id}}');" class="btn btn-success btn-right" style="
+    margin-top: 15px;margin-left:23px; 
 ">二维码</button>
-                            </figure>
+                                {% endif %}
+                                <!-- </figure> -->
+                            </li>
                             {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a onclick="WxListCode('{{val.id}}');"  title="{{val.title}}" title="{{val.title}}">{{val.title}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}} </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                        {#
-                                        <a class="category" href="#">
-                                            <span class="font-lato">Photography</span>
-                                        </a>
-                                        #}
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>{{val.description|truncate(90, true, "...")}}</p>
-                            </div>
-                        </div>
+                            
+                            {%endfor%}
+                        </ul>
+                        <!-- </div> -->
                         <!-- /POST ITEM -->
-                        {%endfor%}
+                        
                     </div>
                     {%for v in cates%}
                     <div class="tab-pane fade  " id="tab{{v.id}}">
+                        <ul class="common-list">
                         {% topic data = "list",limit= "10",cid=v.id,uid=userid%} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
                         <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
+                        <!-- {% if val.cover_id>0 %} -->
+                        <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                             <!-- IMAGE -->
-                            {% if val.cover_id>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
+                            
+                            <!-- <figure class="blog-item-small-image margin-bottom-0"> -->
                                 <a href="{{val.name|get_url(val.id)}}">
                                     <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
                                 </a>
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}">{{val.title}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>{{val.description|truncate(90, true, "...")}}</p>
-                            </div>
-                        </div>
+                            <!-- </figure> -->
+                            {% if userid>0 %}
+                            <button onclick="ShowProduct('{{val.id}}');" class="btn btn-success btn-left" style="
+    margin-top: 15px;margin-bottom: 15px;
+">预&nbsp;&nbsp;览</button>
+                            {%if userid==val.uid%}
+                            <a href='/uc/publish/edit/id/{{val.id}}'>
+                                <button class="btn btn-success btn-right" style="
+    margin-top: 15px;margin-left:25px;margin-bottom: 15px; 
+">编&nbsp;&nbsp;辑</button>
+                            </a>
+                            {%else%}
+                            <button onclick="tuokeCopy('{{val.id}}');" class="btn btn-success btn-right" style="
+    margin-top: 15px;margin-left:25px;margin-bottom: 15px; 
+">拷&nbsp;&nbsp;贝</button>
+                            {%endif%}
+                            <button onclick="WxListCode
+('{{val.id}}');" class="btn btn-success btn-right" style="
+    margin-top: 15px;margin-left:23px; margin-bottom: 15px;
+">二维码</button>
+                            {% endif %} <!-- userid>0 -->
+                        
+                               
+
+                            <!-- {% endif %} --><!-- cover_id>0 -->
+                             </li>
+                             {%endfor%}
+                            </ul>
+                            
+                        
                         <!-- /POST ITEM -->
-                        {%endfor%}
+                        
                         <!-- PAGINATION -->
                         <div class="text-center">
                             <a href="{{v.url}}" class="btn btn-reveal btn-default">
@@ -217,170 +214,170 @@
             <!-- RIGHT -->
             <div class="col-md-3 col-sm-3">
                 <!-- <div class="inline-search clearfix margin-bottom-30">
-								<form action="" method="get" class="widget_search">
-									<input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
-									<button type="submit">
-										<i class="fa fa-search"></i>
-									</button>
-								</form>
-							</div>
-							
+                                <form action="" method="get" class="widget_search">
+                                    <input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
+                                    <button type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            
 
-							<hr />
+                            <hr />
 
-							
-							{%column data="cate",cid=category.id,isnum="1"%}
-							{%if cate%}
-							<div class="side-nav margin-bottom-20 margin-top-20">
-								<div class="side-nav-head">
-									<button class="fa fa-bars"></button>
-									<h4>{{category.title}} 子分类</h4>
-								</div>
-								<ul class="list-group list-group-bordered list-group-noicon uppercase">
-									{%for val in cate%}
-									<li class="list-group-item"><a href="{{val.url}}"><span class="size-11 text-muted pull-right">({{val.doc_num}})</span> {{val.name}}</a></li>
-									{%endfor%}
-								</ul>
-								
-							</div>
-							{%endif%}
-
-
-
-							
-							<div class="tabs nomargin-top hidden-xs margin-bottom-10">
-
-								
-								<ul class="nav nav-tabs nav-bottom-border nav-justified">
-									<li class="active">
-										<a href="#tab_1" data-toggle="tab">
-											最热
-										</a>
-									</li>
-									<li>
-										<a href="#tab_2" data-toggle="tab">
-											最新
-										</a>
-									</li>
-								</ul>
-
-								
-								<div class="tab-content margin-bottom-0 margin-top-10">
-
-									
-									<div id="tab_1" class="tab-pane active">
-										topic tags test
-										{% topic data = "hotlist",limit= "5",cid=category.id,type="hot",uid=userid%}
-										
-										{%for v in hotlist%}
-										<div class="row tab-post">
-											{%if v.cover_id%}
-											<div class="col-md-3 col-sm-3 col-xs-3">
-												<a href="{{v.name|get_url(v.id)}}">
-													<img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
-												</a>
-											</div>
-											{%endif%}
-											<div class="col-md-9 col-sm-9 col-xs-9">
-												<a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
-												<small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
-											</div>
-										</div>
-										{%endfor%}
-
-									</div>
-									
+                            
+                            {%column data="cate",cid=category.id,isnum="1"%}
+                            {%if cate%}
+                            <div class="side-nav margin-bottom-20 margin-top-20">
+                                <div class="side-nav-head">
+                                    <button class="fa fa-bars"></button>
+                                    <h4>{{category.title}} 子分类</h4>
+                                </div>
+                                <ul class="list-group list-group-bordered list-group-noicon uppercase">
+                                    {%for val in cate%}
+                                    <li class="list-group-item"><a href="{{val.url}}"><span class="size-11 text-muted pull-right">({{val.doc_num}})</span> {{val.name}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                                
+                            </div>
+                            {%endif%}
 
 
-									
-									<div id="tab_2" class="tab-pane">
 
-										{% topic data = "newlist",limit= "5",cid=category.id,uid=userid%}
-										{%for v in newlist%}
-										<div class="row tab-post">
-											{%if v.cover_id%}
-											<div class="col-md-3 col-sm-3 col-xs-3">
-												<a href="{{v.name|get_url(v.id)}}">
-													<img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
-												</a>
-											</div>
-											{%endif%}
-											<div class="col-md-9 col-sm-9 col-xs-9">
-												<a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
-												<small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
-											</div>
-										</div>
-										{%endfor%}
-										
-									</div>
-									
+                            
+                            <div class="tabs nomargin-top hidden-xs margin-bottom-10">
 
-								</div>
+                                
+                                <ul class="nav nav-tabs nav-bottom-border nav-justified">
+                                    <li class="active">
+                                        <a href="#tab_1" data-toggle="tab">
+                                            最热
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_2" data-toggle="tab">
+                                            最新
+                                        </a>
+                                    </li>
+                                </ul>
 
-							</div> -->
+                                
+                                <div class="tab-content margin-bottom-0 margin-top-10">
+
+                                    
+                                    <div id="tab_1" class="tab-pane active">
+                                        topic tags test
+                                        {% topic data = "hotlist",limit= "5",cid=category.id,type="hot",uid=userid%}
+                                        
+                                        {%for v in hotlist%}
+                                        <div class="row tab-post">
+                                            {%if v.cover_id%}
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <a href="{{v.name|get_url(v.id)}}">
+                                                    <img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
+                                                </a>
+                                            </div>
+                                            {%endif%}
+                                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                                <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
+                                                <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
+                                            </div>
+                                        </div>
+                                        {%endfor%}
+
+                                    </div>
+                                    
+
+
+                                    
+                                    <div id="tab_2" class="tab-pane">
+
+                                        {% topic data = "newlist",limit= "5",cid=category.id,uid=userid%}
+                                        {%for v in newlist%}
+                                        <div class="row tab-post">
+                                            {%if v.cover_id%}
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <a href="{{v.name|get_url(v.id)}}">
+                                                    <img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
+                                                </a>
+                                            </div>
+                                            {%endif%}
+                                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                                <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
+                                                <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
+                                            </div>
+                                        </div>
+                                        {%endfor%}
+                                        
+                                    </div>
+                                    
+
+                                </div>
+
+                            </div> -->
                 <!-- TAGS 
-							<h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
-							<div class="hidden-xs margin-bottom-20">
-								{% keywords data ="kws",type="hot"%}
-								{%for key in kws%}
-								<a class="tag" href="{{key.url}}">
-									<span class="txt">{{key.keyname}}</span>
-									<span class="num">{{key.videonum}}</span>
-								</a>
-								{%endfor%}
-							</div>
-							-->
+                            <h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
+                            <div class="hidden-xs margin-bottom-20">
+                                {% keywords data ="kws",type="hot"%}
+                                {%for key in kws%}
+                                <a class="tag" href="{{key.url}}">
+                                    <span class="txt">{{key.keyname}}</span>
+                                    <span class="num">{{key.videonum}}</span>
+                                </a>
+                                {%endfor%}
+                            </div>
+                            -->
                 <!-- {#
-							
-							<h3 class="hidden-xs size-16 margin-bottom-10">TWITTER FEED</h3>
-							<ul class="hidden-xs widget-twitter margin-bottom-60" data-php="php/twitter/tweet.php" data-username="stepofweb" data-limit="3">
-								<li></li>
-							</ul>
+                            
+                            <h3 class="hidden-xs size-16 margin-bottom-10">TWITTER FEED</h3>
+                            <ul class="hidden-xs widget-twitter margin-bottom-60" data-php="php/twitter/tweet.php" data-username="stepofweb" data-limit="3">
+                                <li></li>
+                            </ul>
 
-							
-							<h3 class="hidden-xs size-16 margin-bottom-10">FEATURED VIDEO</h3>
-							<div class="hidden-xs embed-responsive embed-responsive-16by9 margin-bottom-60">
-								<iframe class="embed-responsive-item" src="http://player.youku.com/embed/XMTQ0ODQ2Nzg4OA==" width="800" height="450"></iframe>
-							</div>
+                            
+                            <h3 class="hidden-xs size-16 margin-bottom-10">FEATURED VIDEO</h3>
+                            <div class="hidden-xs embed-responsive embed-responsive-16by9 margin-bottom-60">
+                                <iframe class="embed-responsive-item" src="http://player.youku.com/embed/XMTQ0ODQ2Nzg4OA==" width="800" height="450"></iframe>
+                            </div>
 
-							
-							<h3 class="hidden-xs size-16 margin-bottom-10">FLICKR PHOTO</h3>
-							<div class="hidden-xs widget-flickr clearfix lightbox margin-bottom-60" data-id="37304598@N02" data-limit="16" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'></div>
+                            
+                            <h3 class="hidden-xs size-16 margin-bottom-10">FLICKR PHOTO</h3>
+                            <div class="hidden-xs widget-flickr clearfix lightbox margin-bottom-60" data-id="37304598@N02" data-limit="16" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'></div>
 
 
-							
-							<iframe class="hidden-xs" src="http://player.youku.com/embed/XOTA3NzI0NDI4" style="border:none; overflow:hidden; width:263px; height:258px;"></iframe>
+                            
+                            <iframe class="hidden-xs" src="http://player.youku.com/embed/XOTA3NzI0NDI4" style="border:none; overflow:hidden; width:263px; height:258px;"></iframe>
 #}
 
-							<hr /> -->
+                            <hr /> -->
                 <!-- SOCIAL ICONS 
-							<div class="hidden-xs margin-top-30 margin-bottom-60">
-								<a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-									<i class="icon-facebook"></i>
-									<i class="icon-facebook"></i>
-								</a>
+                            <div class="hidden-xs margin-top-30 margin-bottom-60">
+                                <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
 
-								<a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-									<i class="icon-twitter"></i>
-									<i class="icon-twitter"></i>
-								</a>
+                                <a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
 
-								<a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-									<i class="icon-gplus"></i>
-									<i class="icon-gplus"></i>
-								</a>
+                                <a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
+                                    <i class="icon-gplus"></i>
+                                    <i class="icon-gplus"></i>
+                                </a>
 
-								<a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
-									<i class="icon-linkedin"></i>
-									<i class="icon-linkedin"></i>
-								</a>
+                                <a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                                    <i class="icon-linkedin"></i>
+                                    <i class="icon-linkedin"></i>
+                                </a>
 
-								<a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
-									<i class="icon-rss"></i>
-									<i class="icon-rss"></i>
-								</a>
-							</div>
-							-->
+                                <a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
+                                    <i class="icon-rss"></i>
+                                    <i class="icon-rss"></i>
+                                </a>
+                            </div>
+                            -->
             </div>
         </div>
     </div>
@@ -434,11 +431,43 @@
 <script type="text/javascript" src="/static/admin/js/wechat/jquery-weui.min.js"></script>
 <script type="text/javascript" src="/static/admin/js/wechat/product_manage.js"></script>
 <script type="text/javascript" src="/static/admin/js/wechat/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/wechat/enroll.js"></script>
 <script type="text/javascript">
 function ShowProduct(id) {
+     if ({{userid}} == 0) {
+        alert('请先登录，谢谢');
+        return;
+    }
     $('#wx_iframepage').attr('src', '/uc/weixin/tuoke?id=' + id);
     $('#wx_look_modal').modal('show');
 }
+
+function tuokeCopy(id) {
+    console.log("did=" + id);
+    //模板拷贝
+    $.ajax({
+        url: "/uc/weixin/tuokecopy",
+        method: "post",
+        data: {
+            "docId": id,
+            // "name": user_name.val(),
+            // "phone": user_phone.val(),
+            // csrfmiddlewaretoken: $.cookie("csrftoken")
+        },
+        success: function(data) {
+            console.log(JSON.stringify(data));
+            if (data.data.name) {
+                alert(data.data.name);
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
+        }
+    });
+}
+
 
 function WxListCode(id) {
     $("#wx_qr_modal_code").html("");
