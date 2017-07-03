@@ -33,8 +33,9 @@ export default class extends Base {
             //判断是否是微信浏览器
             //微信公众账号内自动登陆
             let openid = await this.session("wx_openid");
-            //let openid = null;
-            if (is_weixin(this.userAgent()) && think.isEmpty(openid)) {
+            //openid =null;// await this.session("wx_openid",null);
+			console.log("oauthAction--------"+openid);
+            if (is_weixin(this.userAgent()) && (think.isEmpty(openid)||typeof openid == 'undefined')) {
                 // 先把url暂存起来
                 this.cookie("bieber_wx_url", this.http.url);
                 var oauthUrl = pingpp.wxPubOauth.createOauthUrlForCode(this.setup.wx_AppID, `http://${this.http.host}/uc/weixin/getopenid?showwxpaytitle=1`);
@@ -63,31 +64,32 @@ export default class extends Base {
         let openid = await getopenid();
         //9think.log(think.isEmpty(openid));
         let userinfo = await getUser(this.api, openid);
-        //console.log(userinfo);
+        console.log("userinfo-------------"+JSON.stringify(userinfo));
         //如果没有关注先跳到关注页面
-        if (userinfo.subscribe == 0) {
-            console.log(1111111111111)
-            this.redirect('/uc/weixin/follow');
-            return false;
-        };
-        userinfo.subscribe_time = userinfo.subscribe_time * 1000;
-
+        //if (userinfo.subscribe == 0) {
+        //    console.log(1111111111111)
+        //    this.redirect('/uc/weixin/follow');
+        //    return false;
+        //};
+        //userinfo.subscribe_time = userinfo.subscribe_time * 1000;
+		userinfo.subscribe_time = new Date().getTime();
         let wx_user = await this.model("wx_user").where({ openid: openid }).find();
 
         //存储Openid
         await this.session('wx_openid', openid);
         if (think.isEmpty(wx_user)) {
             await this.model("wx_user").add(userinfo);
-            this.redirect("/uc/weixin/signin");
+            //this.redirect("/uc/weixin/signin");
         } else {
             await this.model("wx_user").where({ openid: openid }).update(userinfo);
 
             //检查微信号是否跟网站会员绑定
-            if (think.isEmpty(wx_user.uid)) {
+            //if (think.isEmpty(wx_user.uid)) {
                 //没绑定跳转绑定页面
-                this.redirect("/uc/weixin/signin");
+            //    this.redirect("/uc/weixin/signin");
 
-            } else {
+            //} else 
+				{
                 //更新微信头像
                 let filePath = think.RESOURCE_PATH + '/upload/avatar/' + wx_user.uid;
                 think.mkdir(filePath)
@@ -546,7 +548,7 @@ export default class extends Base {
         // 手机版模版
 
         this.assign('category', cate);
-        console.log(info);
+       // console.log(info);
         // 目录/文章/段落
         let pid;
         let pinfo;
@@ -607,7 +609,7 @@ export default class extends Base {
         // info.twourl = '//' + this.setup.QINIU_DOMAIN_NAME + '/' + pic.path;
         // console.log("tuokeAction---------" + JSON.stringify(info));
         this.assign("info", info);
-        console.log("description-------------" + info.description);
+        //console.log("description-------------" + info.description);
         this.assign("desc", info.description);
         let openid;
         if (checkMobile(this.userAgent())) {
@@ -618,14 +620,19 @@ export default class extends Base {
                 openid: openid,
                 docid: id
             };
-            let res = await this.model("doc_wxuser").where(map).find();
-            console.log(res);
-            //是否已经报名
-            if (res.openid != undefined) {
-                this.assign("pay_type", 1);
-            } else {
-                //未报名
+			
+            if (typeof openid == 'undefined') {
                 this.assign("pay_type", 0);
+            } else {
+                let res = await this.model("doc_wxuser").where(map).find();
+                console.log(res);
+                //是否已经报名
+                if (res.openid != undefined) {
+                    this.assign("pay_type", 1);
+                } else {
+                    //未报名
+                    this.assign("pay_type", 0);
+                }
             }
             //手机模版
             if (!think.isEmpty(info.template) && info.template != 0) {

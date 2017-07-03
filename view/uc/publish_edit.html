@@ -324,11 +324,11 @@ table tr td{
                                                         </div>
                                                         {% elif field.type == "date" %}
                                                         <div class="col-md-3">
-                                                            <input type="text" name="{{field.name}}" class="form-control date" value="{{data[field.name]|dateformat('Y-m-d')}}" placeholder="请选择日期" />
+                                                            <input type="text" name="date|||{{field.name}}" class="form-control date" value="{{data[field.name]|dateformat('Y-m-d')}}" placeholder="请选择日期" />
                                                         </div>
                                                         {% elif field.type == "datetime" %}
                                                         <div class="col-md-3">
-                                                            <input type="text" name="{{field.name}}" class="form-control time" value="{{data[field.name]|dateformat('Y-m-d H:i')}}" placeholder="请选择时间" />
+                                                            <input type="text" name="date|||{{field.name}}" class="form-control time" value="{{data[field.name]|dateformat('Y-m-d H:i')}}" placeholder="请选择时间" />
                                                         </div>
                  {% elif field.type == "freight" %}
                 <div class="col-md-5">

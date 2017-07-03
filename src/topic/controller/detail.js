@@ -178,7 +178,9 @@ export default class extends Base {
       if(!think.isEmpty(info.content)){
         info.content=info.content.split("_ueditor_page_break_tag_");
       }
-      return this.display(`mobile/${this.http.controller}/${temp}`)
+      // console.log(`mobile/${this.http.controller}/${temp}`);
+      return this.display(`mobile/${this.http.controller}/${temp}`);
+      
     }else{
       if (!think.isEmpty(info.template) && info.template !=0) {
         temp = info.template; //已设置详情模板

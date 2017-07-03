@@ -454,18 +454,19 @@ export default class extends Base {
             //检查本栏目编辑是否需要审核
             let roleid = await this.model("member").where({ id: this.is_login }).getField('groupid', true);
             let addexa = await this.model("category_priv").priv(data.category_id, roleid, 'editexa');
-            if (addexa) {
-                let addp = await this.model("approval").adds(data.model_id, this.user.uid, data.title, data);
-                if (addp) {
-                    return this.success({ name: "编辑成功, 请等待管理员审核...", url: '/uc/publish/index/cate_id/' + data.category_id });
-                } else {
-                    return this.fail("操作失败！");
-                }
-            }
+            // if (addexa) {
+            //     let addp = await this.model("approval").adds(data.model_id, this.user.uid, data.title, data);
+            //     if (addp) {
+            //         return this.success({ name: "编辑成功, 请等待管理员审核...", url: '/uc/publish/index/cate_id/' + data.category_id });
+            //     } else {
+            //         return this.fail("操作失败！");
+            //     }
+            // }
         }
         //console.log(data);
         //return false;
         let res = await this.model('document').updates(data);
+        console.log("edit data====="+JSON.stringify(data));
         // let res ={ data:
         // { name: '',
         //     title: '1111',
@@ -496,9 +497,9 @@ export default class extends Base {
             //行为记录
             if (!res.data.id) {
                 //await this.model("action").log("add_document", "document", res.id, this.user.uid, this.ip(), this.http.url);//添加行为日志
-                return this.success({ name: "添加成功", url: "/uc/publish/index/cate_id/" + res.data.category_id });
+                return this.success({ name: "添加成功", url: "/mytuoke/" + res.data.category_id });
             } else {
-                return this.success({ name: "更新成功", url: "/uc/publish/index/cate_id/" + res.data.category_id });
+                return this.success({ name: "更新成功", url: "/mytuoke" });
             }
 
         } else {

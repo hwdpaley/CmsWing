@@ -671,9 +671,9 @@ export default class extends Base {
      */
     async updateAction() {
         let data = this.post();
-       // console.log(data);
+        // console.log("updateAction----------------"+JSON.stringify(data) );
         let res = await this.model('document').updates(data);
-
+        // console.log("updateAction---------------- ok" );
         if (res) {
             //行为记录
             if (!res.data.id) {
@@ -687,7 +687,7 @@ export default class extends Base {
             this.fail("操作失败！");
         }
 
-
+        
     }
     /**
      * 设置一条或者多条数据的状态

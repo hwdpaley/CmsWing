@@ -437,7 +437,7 @@
                         
                         
                         <ul class="common-list">
-                        	{% topic data ="hotlist",limit="10",cid=85,type="hot",uid=userid%} 
+                        	{% topic data ="hotlist",limit="4",cid=85,type="hot",uid=userid%} 
 							{% for v in hotlist %} 
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                 <a href="{{v.name|get_url(v.id)}}">
@@ -462,7 +462,7 @@
                             <a href="/music" class="home_more">更多美媒音频</a>
                         </div>
                         <ul class="common-list">
-                        	{% topic data ="hotlist",limit="10",cid=138,type="hot",issub=1,uid=userid%} 
+                        	{% topic data ="hotlist",limit="4",cid=138,type="hot",issub=1,uid=userid%} 
 							{% for v in hotlist %} 
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                 <a href="{{v.name|get_url(v.id)}}">

@@ -36,6 +36,6 @@ think.middleware('parse_wechat', wechatMiddleware({
     wechat: {
         token: think.config("setup.wx_Token"),
         appid: think.config("setup.wx_AppID"),
-        encodingAESKey: ''
+        encodingAESKey: 'dPcV8ASnbOiBNSi0hdZyEvf27459CY84AdTZcbqoR58'
     }
 }));

@@ -75,9 +75,10 @@ export default class extends think.controller.base {
         }
         //关键词消息回复
     async textAction() {
-        //console.log(this.http);
+        console.log(this.http);
         let message = this.post();
-        // console.log(message);
+         console.log("message-------------------"+message);
+		 
         let key = message.Content.trim();
         let kmodel = this.model('wx_keywords');
         let isKey = await kmodel.field('rule_id').where({ keyword_name: key }).find();
@@ -122,6 +123,10 @@ export default class extends think.controller.base {
         switch (message.Event) {
 
             case "subscribe": //首次关注
+				console.log("首次关注------"+message.FromUserName);
+				let userinfo = await getUser(this.api, message.FromUserName);
+				console.log("userinfo-----------"+JSON.stringify(userinfo) );
+				await this.model("wx_user").add(userinfo);
                 let datas = await this.model("wx_replylist").where({ reply_type: 1 }).order("create_time DESC").select();
                 let data = datas[0];
                 let content;
@@ -134,9 +139,14 @@ export default class extends think.controller.base {
                         break;
                 }
                 this.reply(content);
+				//this.redirect(this.cookie("bieber_wx_url"));
                 break;
             case "unsubscribe": //取消关注
-                //todo
+                console.log("取消关注-------------");
+				let wx_user = await this.model("wx_user").where({ openid: message.FromUserName }).delete();
+
+				 console.log("message------"+message.FromUserName);
+				 await this.session('wx_openid',null);
                 break;
             case "CLICK": //click事件坚挺
                 let res = await this.model("wx_material").find(message.EventKey);
