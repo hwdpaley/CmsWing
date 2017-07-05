@@ -216,7 +216,8 @@
         btn.text("提取中...");
         var url = "/admin/file/savenetpic";
         var params = {
-          "picurl": picurl
+          "picurl": picurl,
+          "__CSRF__":"{{csrf}}"
         };
         $.post(url, params, function(data) {
           btn.text("提取");

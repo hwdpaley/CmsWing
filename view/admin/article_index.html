@@ -286,12 +286,14 @@
         async: {
             enable: true,
             url: "/admin/article/getmenu",
+            otherParam: ["__CSRF__","{{csrf}}"]
         },
         view: {
             showLine: true,
             selectedMulti: false,
         },
         callback: {
+
             onAsyncSuccess: zTreeOnAsyncSuccess
 
         }
@@ -299,6 +301,7 @@
 
     function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
        // console.log(treeNode)
+       console.log('zTreeOnAsyncSuccess=====,'+JSON.stringify(event));
         var treeObj = $.fn.zTree.getZTreeObj(treeId);
         treeObj.expandAll(true);
         var id= $("#"+treeId).attr("data-cate");

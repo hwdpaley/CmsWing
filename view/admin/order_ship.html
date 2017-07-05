@@ -209,7 +209,7 @@
             var pid = $("#province1 option:selected").val();
             $.ajax({
                 url: "/cart/getarea",
-                data: {"pid":pid},
+                data: {"pid":pid,"__CSRF_":"{{csrf}}"},
                 success: function(msg){
                     var province_arr = ['<option value="">--- 市 ---</option>']
                     $.each(msg,function name(k,v) {
@@ -225,7 +225,7 @@
             var pid = $("#city1 option:selected").val();
             $.ajax({
                 url: "/cart/getarea",
-                data: {"pid":pid},
+                data: {"pid":pid,"__CSRF_":"{{csrf}}"},
                 success: function(msg){
                     var province_arr = ['<option value="">--- 县/区 ---</option>']
                     $.each(msg,function name(k,v) {

@@ -420,7 +420,100 @@ export default class extends Base {
             this.assign('model', model);
             this.display();
         }
-   
+   //编辑文档
+    async zxmyshopAction() {
+            await this.weblogin();
+            let id = this.get('id') || "";
+            console.log("id==========," + id);
+            let sortid = this.get('sortid') || 0;
+            if (think.isEmpty(id)) {
+                this.fail("参数不能为空");
+            }
+            //获取详细数据；
+            let document = this.model("document")
+            let data = await document.details(id);
+            //安全验证
+            if (data.uid != this.user.uid) {
+                this.http.error = new Error('只能编辑自己的稿件哦(*^_^*)!');
+                return think.statusAction(702, this.http);
+            }
+            //let model =  this.model("model").getmodel(2);
+            if (data.pid != 0) {
+                //获取上级文档
+                let article = document.field("id,title,type").find(data.pid);
+                this.assign('article', article);
+            }
+            let model = await this.model("model").get_document_model(data.model_id);
+
+            // 获取分组定义
+            let groups = await this.model("category").get_category(data.category_id, 'groups');
+            if (groups) {
+                groups = parse_config_attr(groups);
+            }
+            this.assign('groups', groups);
+            // 获取分类信息
+            let sort = await this.model("category").get_category(data.category_id, 'documentsorts');
+            if (sort) {
+                sort = JSON.parse(sort);
+                if (sortid != 0) {
+                    data.sort_id = sortid;
+                } else if (data.sort_id == 0) {
+                    data.sort_id = sort.defaultshow;
+                }
+                let typevar = await this.model("typevar").where({ sortid: data.sort_id }).select();
+                for (let val of typevar) {
+
+                    val.option = await this.model("typeoption").where({ optionid: val.optionid }).find();
+                    if (val.option.type == 'select') {
+                        if (!think.isEmpty(val.option.rules)) {
+                            val.option.rules = JSON.parse(val.option.rules);
+                            val.option.rules.choices = parse_config_attr(val.option.rules.choices);
+                            val.option.value = await this.model("typeoptionvar").where({ sortid: data.sort_id, tid: data.id, fid: data.category_id, optionid: val.option.optionid }).getField("value", true) || "";
+                        }
+
+                    } else if (val.option.type == "radio" || val.option.type == "checkbox") {
+                        if (!think.isEmpty(val.option.rules)) {
+                            val.option.rules = JSON.parse(val.option.rules);
+                            val.option.rules.choices = parse_config_attr(val.option.rules.choices);
+                            val.option.value = await this.model("typeoptionvar").where({ sortid: data.sort_id, tid: data.id, fid: data.category_id, optionid: val.option.optionid }).getField("value", true) || "";
+                        }
+                    } else {
+                        if (!think.isEmpty(val.option.rules)) {
+                            val.option.rules = JSON.parse(val.option.rules);
+                            val.option.value = await this.model("typeoptionvar").where({ sortid: data.sort_id, tid: data.id, fid: data.category_id, optionid: val.option.optionid }).getField("value", true) || "";
+                        }
+                    }
+                }
+                // console.log(typevar);
+                this.assign("typevar", typevar);
+            }
+            //console.log(sort);
+            this.assign("sort", sort);
+            //获取表单字段排序
+            let fields = await this.model("attribute").get_model_attribute(model.id, true);
+            this.assign('fields', fields);
+            //获取当前分类文档的类型
+            let type_list = await this.model("category").get_type_bycate(data.category_id)
+                //获取suk tags
+            let tags = await this.model('tags').where({ model_id: data.model_id }).select();
+            this.assign('tags', tags);
+            //获取面包屑信息
+            let nav = await this.model('category').get_parent_category(data.category_id);
+            //console.log(model);
+            this.assign('breadcrumb', nav);
+            //console.log(model);
+            this.assign('type_list', type_list);
+            this.meta_title = '编辑' + model.title;
+            this.active = "admin/article/index";
+            this.assign({
+                "navxs": true,
+            });
+            //console.log(data);
+            this.assign('data', data);
+            this.assign('model_id', data.model_id);
+            this.assign('model', model);
+            this.display();
+        }
         /**
          * 更新或者添加数据
          */
@@ -440,20 +533,22 @@ export default class extends Base {
             //检查本栏目发布是否需要审核
             let roleid = await this.model("member").where({ id: this.is_login }).getField('groupid', true);
             let addexa = await this.model("category_priv").priv(data.category_id, roleid, 'addexa');
-            if (addexa) {
-                let addp = await this.model("approval").adds(data.model_id, this.user.uid, data.title, data);
-                if (addp) {
-                    return this.success({ name: "发布成功, 请等待管理员审核...", url: '/uc/publish/index/cate_id/' + data.category_id });
-                } else {
-                    return this.fail("操作失败！");
-                }
-            }
+            // if (addexa) {
+            //     let addp = await this.model("approval").adds(data.model_id, this.user.uid, data.title, data);
+            //     if (addp) {
+            //         return this.success({ name: "发布成功, 请等待管理员审核...", url: '/uc/publish/index/cate_id/' + data.category_id });
+            //     } else {
+            //         return this.fail("操作失败！");
+            //     }
+            // }
         } else { //修改
             data.uid = this.user.uid;
             data.ip = this.ip();
             //检查本栏目编辑是否需要审核
+            console.log();
             let roleid = await this.model("member").where({ id: this.is_login }).getField('groupid', true);
             let addexa = await this.model("category_priv").priv(data.category_id, roleid, 'editexa');
+            console.log("addexa-------------"+addexa+","+data.category_id);
             // if (addexa) {
             //     let addp = await this.model("approval").adds(data.model_id, this.user.uid, data.title, data);
             //     if (addp) {

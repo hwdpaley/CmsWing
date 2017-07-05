@@ -18,6 +18,7 @@
                                 <section class="panel panel-default">
                                     <div class="panel-body">
                                         <form id="ajaxForm" method="post" class="form-horizontal" action="/admin/mpbase/editseting" data-validate="parsley">
+                                            <input type="hidden" name="__CSRF__" value="{{csrf}}">
                                             <input type="hidden" id="id" name="id" value="{{info.id}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">用户</label>

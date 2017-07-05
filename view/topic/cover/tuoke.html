@@ -446,6 +446,7 @@ function tuokeCopy(id) {
     console.log("did=" + id);
     //模板拷贝
     $.ajax({
+        headers: {'x-__CSRF__': $.cookie('__CSRF__')},
         url: "/uc/weixin/tuokecopy",
         method: "post",
         data: {

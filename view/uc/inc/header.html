@@ -1,5 +1,5 @@
 <div id="header" class=" clearfix header-md ">
-	<!--
+    <!--
 				AVAILABLE HEADER CLASSES
 
 				Default nav height: 96px
@@ -25,62 +25,53 @@
 
 				Example Usage:  class="clearfix sticky header-sm transparent noborder"
 			-->
-	<!-- TOP NAV -->
-	
-	<header id="topNav">
-		<div class="container">
-
-			<!-- Mobile Menu Button -->
-			<button class="btn btn-mobile" id="sidepanel_btn" >
-				<i class="fa fa-bars"></i>
-			</button>
-
-			<!-- BUTTONS -->
-			<ul class="pull-right nav nav-pills nav-second-main">
-
-				{% if controller.is_login %}
-				<li class="text-welcome "><strong>{{controller.user.username}}</strong></li>
-				<li>
-				<a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
-					<i class="fa fa-user hidden-xs"></i> 会员中心</a>
-				<ul class="dropdown-menu pull-right">
-					<li><a tabindex="-1" href="/uc"><i class="fa fa-bank"></i>我的中心</a></li>
-					<li class="divider"></li>
-					{#
-					<li><a tabindex="-1" href="/uc/order"><i class="fa fa fa-reorder"></i> 我的订单</a></li>
-					<li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> 我的关注</a></li>
-					<li><a tabindex="-1" href="/uc/account"><i class="fa fa-cny"></i> 账号金额</a></li>
-					<li><a tabindex="-1" href="#"><i class="fa fa-money"></i> 优惠券</a></li>
-					#}
-					<li><a tabindex="-1" href="/uc/seting"><i class="fa fa-gear"></i> 个人设置</a></li>
-					<li class="divider"></li>
-					<li><a tabindex="-1" href="/uc/public/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
-				</ul>
-			</li>
-			{% else %}
-			<li><a href="/uc/public/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> 登录</a></li>
-			<li><a href="/uc/public/register"><i class="fa fa-thumbs-o-up"></i> 注册</a></li>
-			{% endif %}
-
-			</ul>
-			<!-- /BUTTONS -->
-
-
-			<!-- Logo -->
-			<a class=" pull-left" href="/" >
-				<img src="/static/assets/images/meimei.png" alt="" />
-			</a>
-
-			<!--
+    <!-- TOP NAV -->
+    <header id="topNav">
+        <div class="container">
+            <!-- Mobile Menu Button -->
+            <button class="btn btn-mobile" id="sidepanel_btn">
+                <i class="fa fa-bars"></i>
+            </button>
+            <!-- BUTTONS -->
+            <ul class="pull-right nav nav-pills nav-second-main">
+                {% if controller.is_login %}
+                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
+                    <li class="text-welcome "><strong>{{userInfo.real_name}}</strong></li>
+                    <li></a>
+                        <!-- <i class="fa fa-user hidden-xs"></i> -->
+                <ul class="dropdown-menu pull-right">
+                    <li><a tabindex="-1" href="/uc"><i class="fa fa-bank"></i>我的中心</a></li>
+                    <li class="divider"></li>
+                    {#
+                    <li><a tabindex="-1" href="/uc/order"><i class="fa fa fa-reorder"></i> 我的订单</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> 我的关注</a></li>
+                    <li><a tabindex="-1" href="/uc/account"><i class="fa fa-cny"></i> 账号金额</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-money"></i> 优惠券</a></li>
+                    #}
+                    <li><a tabindex="-1" href="/uc/seting"><i class="fa fa-gear"></i> 个人设置</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="/uc/public/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+                </ul>
+                </li>
+                {% else %}
+                <li><a href="/uc/public/login?__CSRF__={{csrf}}" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> 登录</a></li>
+                <li><a href="/uc/public/register"><i class="fa fa-thumbs-o-up"></i> 注册</a></li>
+                {% endif %}
+            </ul>
+            <!-- /BUTTONS -->
+            <!-- Logo -->
+            <a class=" pull-left" href="/">
+                <img src="/static/assets/images/meimei.png" alt="" />
+            </a>
+            <!--
 							Top Nav
 
 							AVAILABLE CLASSES:
 							submenu-dark = dark sub menu
 						-->
-			<div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
-				<nav class="nav-main">
-
-					<!--
+            <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+                <nav class="nav-main">
+                    <!--
 									NOTE
 
 									For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
@@ -90,41 +81,30 @@
 										<a href="#">HOME</a>
 									</li>
 								-->
-					<ul id="topMain" class="nav nav-pills nav-main">
-						{% channel data='channel'%}
-						{% for val in channel%}
-						{%if val.status > 0%}
-						<li class="{% if val.children %}dropdown{% endif %} {% if category.id|in_Array(val.on) %}active{% endif %}">
-
-							<a {% if val.children%}class="dropdown-toggle" {% endif %} href="{{val.url}}" {%if val.target ==1%} target="_blank"{%endif%}>{{val.title}}</a> {% if val.children%}
-							<ul class="dropdown-menu">
-								{% for _val in val.children%}
-								{%if _val.status > 0%}
-								<li class="{% if _val.children%}dropdown{% endif %} {% if category.id|in_Array(_val.on) %}active{% endif %}">
-									<a {% if _val.children%}class="dropdown-toggle" {% endif %} href="{{_val.url}}" {%if _val.target ==1%} target="_blank"{%endif%}>{{_val.title}}</a> {% if _val.children%}
-									<ul class="dropdown-menu">
-										{% for __val in _val.children%}
-										{%if __val.status > 0%}
-										<li class="{% if category.id|in_Array(__val.on) %}active{% endif %}"><a href="{{__val.url}}" {%if __val.target ==1%} target="_blank"{%endif%}>{{__val.title}}</a></li>
-										{% endif%}
-										{% endfor %}
-									</ul>
-									{% endif %}
-								</li>
-								{% endif%}
-								{% endfor %}
-							</ul>
-							{% endif %}
-						</li>
-						{%endif%}
-						{% endfor%}
-
-					</ul>
-				</nav>
-			</div>
-
-		</div>
-	</header>
-	<!-- /Top Nav -->
-
+                    <ul id="topMain" class="nav nav-pills nav-main">
+                        {% channel data='channel'%} {% for val in channel%} {%if val.status > 0%}
+                        <li class="{% if val.children %}dropdown{% endif %} {% if category.id|in_Array(val.on) %}active{% endif %}">
+                            <a {% if val.children%}class="dropdown-toggle" {% endif %} href="{{val.url}}" {%if val.target==1%} target="_blank" {%endif%}>{{val.title}}</a> {% if val.children%}
+                            <ul class="dropdown-menu">
+                                {% for _val in val.children%} {%if _val.status > 0%}
+                                <li class="{% if _val.children%}dropdown{% endif %} {% if category.id|in_Array(_val.on) %}active{% endif %}">
+                                    <a {% if _val.children%}class="dropdown-toggle" {% endif %} href="{{_val.url}}" {%if _val.target==1%} target="_blank" {%endif%}>{{_val.title}}</a> {% if _val.children%}
+                                    <ul class="dropdown-menu">
+                                        {% for __val in _val.children%} {%if __val.status > 0%}
+                                        <li class="{% if category.id|in_Array(__val.on) %}active{% endif %}"><a href="{{__val.url}}" {%if __val.target==1%} target="_blank" {%endif%}>{{__val.title}}</a></li>
+                                        {% endif%} {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </li>
+                                {% endif%} {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        {%endif%} {% endfor%}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- /Top Nav -->
 </div>

@@ -37,6 +37,7 @@
 <script type="text/javascript">
     $(function(){
     $.ajax({
+        headers: {'x-__CSRF__': $.cookie('__CSRF__')},
         url:"/admin/ecom/farearea",
         type:"post",
         success: function(data){

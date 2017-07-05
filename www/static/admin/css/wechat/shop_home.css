@@ -1,0 +1,347 @@
+@charset "utf-8";
+
+/*tabbar - 相关设置*/
+.tabbar_item_collecion {
+    text-align: center;
+    color: white;
+    background-color: #ec4982;
+    line-height: .49rem;
+}
+
+.weui_tabbar_item .tabbar-collecion-icon {
+    width: .24rem;
+    height: .24rem;
+}
+
+/*
+******  店家商铺  ******
+*/
+#header {
+    width: 100%;
+    height: .66rem;
+    position: relative;
+    background-color: #eee;
+}
+
+.tkb-logo {
+    float: left;
+    margin-left: .15rem;
+    padding: .1rem 0;
+    max-width: 50%; /*写给不支持calc()的浏览器*/
+    max-width: -moz-calc(60% - .15rem);
+    max-width: -webkit-calc(60% - .15rem);
+    max-width: calc(60% - .15rem);
+    height: 100%;
+    overflow: hidden;
+}
+
+.tkb-logo img {
+    height: 100%;
+    max-width: 100%;
+}
+
+.tkb-person-center {
+    float: right;
+    right: 0;
+    top: 0;
+    width: 1.2rem;
+    height: 100%;
+    position: absolute;
+}
+
+.tkb-person-center a {
+    margin-right: .15rem;
+    height: .3rem;
+    top: 50%;
+    margin-top: -.15rem;
+    position: absolute;
+    border: #428BCA solid .01rem;
+    -webkit-border-radius: .1rem;
+    -moz-border-radius: .1rem;
+    border-radius: .1rem;
+    padding: .05rem .1rem;
+    font-size: .14rem;
+}
+
+/* 正文内容*/
+
+.home-store-bg-image {
+    width: 100%;
+    max-height: 2.4rem;
+}
+
+.user-logo-image {
+    -webkit-border-radius: 100rem;
+    -moz-border-radius: 100rem;
+    border-radius: 100rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: -.6rem;
+    left: 50%;
+    position: relative;
+    margin-left: -.6rem;
+}
+
+.store-address {
+    padding: .08rem .15rem;
+    max-height: 60%;
+    margin: .1rem .15rem;
+    text-align: center;
+    border: .02rem dashed #eee;
+}
+
+/*项目推荐*/
+.enroll-status {
+    width: .66rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tkb-mobile-product li {
+    margin: 0 .15rem .15rem .15rem;
+    width: 90%; /*写给不支持calc()的浏览器*/
+    width: -moz-calc(100% - .3rem);
+    width: -webkit-calc(100% - .3rem);
+    width: calc(100% - .3rem);
+    position: relative;
+}
+
+.tkb-mobile-product-image {
+    width: 100%;
+    max-height: 1.8rem;
+    -webkit-border-radius: .05rem;
+    -moz-border-radius: .05rem;
+    border-radius: .05rem;
+    overflow: hidden;
+}
+
+.product-recomand-title {
+    color: #333333;
+    font-weight: normal;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*
+******  积分商城  ******
+*/
+.integral-info-content {
+    height: .6rem;
+    position: relative;
+}
+
+.left-info {
+    float: left;
+    padding-left: .15rem;
+    position: relative;
+    height: .6rem;
+    width: 50%;
+}
+
+.right-btn-group {
+    float: right;
+    padding-right: .15rem;
+    position: relative;
+    height: .6rem;
+    width: 50%;
+}
+
+.right-btn-group .btn-integral-detail {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    height: .24rem;
+    margin-top: -.12rem;
+    margin-right: .15rem;
+}
+
+.right-btn-group .btn-exchange-history {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: .24rem;
+    margin-top: -.12rem;
+}
+
+/*
+******  个人中心  ******
+*/
+.center-header {
+    position: relative;
+    height: 1.1rem;
+    padding: .15rem .15rem;
+    border-bottom: .01rem solid #eee;
+}
+
+.center-header img {
+    height: 100%;
+    -webkit-border-radius: 100rem;
+    -moz-border-radius: 100rem;
+    border-radius: 100rem;
+}
+
+.center-header .out-login-btn {
+    position: absolute;
+    float: right;
+    top: 50%;
+    right: .15rem;
+    height: .24rem;
+    margin-top: -.12rem;
+}
+
+.user-image {
+    -webkit-border-radius: 100rem;
+    -moz-border-radius: 100rem;
+    border-radius: 100rem;
+}
+
+/*登陆界面*/
+.login-input {
+    -webkit-border-radius: .08rem;
+    -moz-border-radius: .08rem;
+    border-radius: .08rem;
+    border: 0;
+    border-bottom: .015rem solid #eee;
+    width: 90%;
+    margin-bottom: .25rem;
+}
+
+.login-btn {
+    background-color: #ec4982 !important;
+    font-size: .16rem;
+    width: 100%;
+}
+
+.custom-group {
+    width: 80%;
+    margin: .2rem auto;
+}
+
+/*我的报名*/
+.enroll-panel-normal {
+    margin: 0 .15rem .15rem .15rem !important;
+    border-radius: .08rem !important;
+    border-width: 0 !important;
+}
+
+.enroll-product-info {
+    margin: .1rem .15rem .15rem .15rem;
+}
+
+.enroll-product-info .enroll-product-title {
+    color: #333;
+    font-weight: normal;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/*我的收藏*/
+.collection-store-list {
+    margin: 0 .15rem .15rem .15rem;
+    -webkit-border-radius: .08rem;
+    -moz-border-radius: .08rem;
+    border-radius: .08rem;
+}
+
+.collection-store-img {
+    width: .8rem;
+    height: .8rem;
+    -webkit-border-radius: 100rem;
+    -moz-border-radius: 100rem;
+    border-radius: 100rem;
+}
+
+/*我的积分*/
+.common-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 1.8rem;
+}
+
+@media (min-width: 320px) and (max-width: 360px) {
+    .common-title {
+        max-width: 1.3rem;
+    }
+}
+
+@media (min-width: 360px) and (max-width: 480px) {
+    .common-title {
+        max-width: 1.8rem;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+    .common-title {
+        max-width: 2.4rem;
+    }
+}
+
+/*=========遮罩，弹框=========================*/
+.bg_col{
+    /*display: none;*/
+    background: black;
+    opacity: .3;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.alert_detail_box{
+    /*display: none;*/
+    position: fixed;
+    z-index: 99;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    background: white;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+.close_img{
+    width: 100%;
+    text-align: center;
+    z-index: 999;
+    position: absolute;
+    bottom: -70px;
+}
+.close_img img{
+    width: 40px;
+    height: 40px;
+}
+.swiper-slide{
+    padding: 0 12px;
+    font-size: 15px;
+}
+.favor-header-bar{border-top-left-radius:5px;-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;border-top-right-radius:5px;background-color: #fff;padding:0 10px;overflow: hidden;height:40px;line-height: 40px;border-bottom: 1px solid #e1e1e1;}
+.favor-header-bar li{display: block;width:50%;text-align: center;float: left;margin-left:-1px;height:40px;line-height: 40px;margin-top:5px;border-right: 1px solid #e1e1e1;position: relative;}
+.favor-header-bar a{font-size:16px;color:#333;display:block;padding-bottom: 5px;width:85%;margin:0 auto;}
+.favor-header-bar li:last-child{border-right:none;}
+.favor-header-bar li.default a{color:#ec4982;border-bottom: 2px solid #ec4982;}
+/*favor-list*/
+.favor-list.swiper-container{margin-top:10px;width:100%;height: 350px}
+.favor-list dl{overflow:hidden;padding:10px;border-bottom: 1px solid #e1e1e1;background-color: #fff;}
+.favor-list a:first-child dl{border-top:1px solid #e1e1e1;}
+.favor-list dt,.favor-list dd{float: left;}
+.favor-list dt{width:30%;position: relative;}
+.favor-list dt span{display: block;width:10px;height:10px;background-color: #fd3d3d;border-radius: 100%;-webkit-border-radius: 100%;-moz-border-radius: 100%;-ms-border-radius: 100%;-o-border-radius: 100%;
+	position: absolute;top:-5px;right: -5px;}
+.favor-list dd{width:61%;margin-left:1rem;line-height:100%;}
+.favor-list dd small{color:#9c9c9c;font-size: 12px;display: block;}
+.favor-list dd p{font-size:14px;color:#666;display: block;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;margin:0;}
+.favor-list dd h2{font-weight: normal;font-size:14px;color:#333;}
+.favor-list a{display: block;width: 100%;}
+
+/*nofavor*/
+.nofavor{width:46.8%;margin:16.5% auto 0 auto;}

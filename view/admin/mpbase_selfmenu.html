@@ -301,7 +301,7 @@
                         var d = i;
                         var meterial_id = d.substr(9);
                         $('#material_id').val(meterial_id);
-                        var data = {"id":meterial_id};
+                        var data = {"id":meterial_id,"__CSRF__":"{{csrf}}"};
                         var div = $("#"+i);
                         var material_id = i.substr(9);
                         var data = {"id":material_id};

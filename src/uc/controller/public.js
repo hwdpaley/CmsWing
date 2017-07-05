@@ -84,7 +84,7 @@ export default class extends Base {
   }
   //   登陆页面
   async loginAction() {
-
+    console.log("is post?============"+this.isAjax("post"));
     if (this.isAjax("post")) {
       //验证码
       if(1==this.setup.GEETEST_IS_LOGIN){

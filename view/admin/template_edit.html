@@ -125,6 +125,7 @@
         //提交表单
         $(".ajax_post_temp").click(function (e) {
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url: "/admin/template/edit",
                 data: {
                     html: testEditor.getValue(),

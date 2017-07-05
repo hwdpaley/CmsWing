@@ -109,6 +109,7 @@
 
             <div class="panel-body">
                 <form action="/uc/publish/update" method="post" enctype="multipart/form-data" class="form-horizontal validate" data-toastr-position="top-full-width" >
+                    <input type="hidden"  value="{{csrf}}" name="__CSRF__">
                     <div class="tab-content">
                         {% for key ,group in model.field_group | parse_config_attr %}
                         {%if loop.index != mm%}
@@ -206,6 +207,7 @@
                                                 var uploader_sortid_{{val.option.identifier}} = WebUploader.create({
                                                     // 选完文件后，是否自动上传。
                                                     auto: true,
+                                                    formData:{"__CSRF__":"{{csrf}}"},
                                                     // swf文件路径
                                                     swf: '/static/admin/js/webuploader/Uploader.swf',
                                                     // 文件接收服务端。
@@ -347,11 +349,11 @@
                                         </div>
                                         {% elif field.type == "date" %}
                                         <div class="col-md-3">
-                                            <input type="text" name="{{field.name}}" class="form-control data {%if field.is_must ==1%}required{%endif%}" placeholder="请选择日期" />
+                                            <input type="text" name="date|||{{field.name}}" class="form-control date {%if field.is_must ==1%}required{%endif%}" placeholder="请选择日期" />
                                         </div>
                                         {% elif field.type == "datetime" %}
                                         <div class="col-md-3">
-                                            <input type="text" name="{{field.name}}" class="form-control time {%if field.is_must ==1%}required{%endif%}" placeholder="请选择时间" />
+                                            <input type="text" name="date|||{{field.name}}" class="form-control time {%if field.is_must ==1%}required{%endif%}" placeholder="请选择时间" />
                                         </div>
                                         {% elif field.type == "freight" %}
                                         <div class="col-md-5">
@@ -624,6 +626,7 @@
                                                         var uploader = WebUploader.create({
                                                             // 选完文件后，是否自动上传。
                                                             auto: true,
+                                                            formData:{"__CSRF__":"{{csrf}}"},
                                                             // swf文件路径
                                                             swf: '/static/admin/js/webuploader/Uploader.swf',
                                                             // 文件接收服务端。
@@ -1310,6 +1313,7 @@
                                                 var uploader_{{field.name}} = WebUploader.create({
                                                     // 选完文件后，是否自动上传。
                                                     auto: true,
+                                                    formData:{"__CSRF__":"{{csrf}}"},
                                                     // swf文件路径
                                                     swf: '/static/admin/js/webuploader/Uploader.swf',
                                                     // 文件接收服务端。
@@ -1448,6 +1452,7 @@
 
                                                         // 不压缩image
                                                         resize: false,
+                                                        formData:{"__CSRF__":"{{csrf}}"},
 
                                                         // swf文件路径
                                                         swf:'/static/admin/js/webuploader/Uploader.swf',

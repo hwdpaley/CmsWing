@@ -110,6 +110,7 @@
                 "ico":ico
             };
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 type: 'POST',
                 url: '/admin/menu/edit',
                 data: jsonData,
@@ -126,6 +127,7 @@
 
         //获取上级菜单
         $.ajax({
+            headers: {'x-__CSRF__': $.cookie('__CSRF__')},
             url: "/admin/menu/getmenu",
             success: function (msg) {
                 /* 展示生成的HTML */

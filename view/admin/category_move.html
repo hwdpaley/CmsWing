@@ -89,6 +89,7 @@
 
         //获取上级菜单
         $.ajax({
+            headers: {'x-__CSRF__': $.cookie('__CSRF__')},
             url: "/admin/category/gettree",
             success: function (msg) {
                 /* 展示生成的HTML */

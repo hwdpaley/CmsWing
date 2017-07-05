@@ -52,6 +52,7 @@
                     <div class="panel-body">
                         {%if info.mold==2%}
                         <form action="{{controller.action}}" class="form-horizontal" method="post"  data-validate="parsley">
+                            <input type="hidden" name="__CSRF__" value="{{csrf}}">
                             <div class="tab-content">
 
                                 <div id="tab1" class="tab-pane fade active in">
@@ -120,6 +121,7 @@
                                                         var uploader_{{field.name}} = WebUploader.create({
                                                             // 选完文件后，是否自动上传。
                                                             auto: true,
+                                                            formData:{"__CSRF__":"{{csrf}}"},
                                                             // swf文件路径
                                                             swf: '/static/admin/js/webuploader/Uploader.swf',
                                                             // 文件接收服务端。
@@ -614,6 +616,7 @@
                                                 var uploader_{{field.name}} = WebUploader.create({
                                                     // 选完文件后，是否自动上传。
                                                     auto: true,
+                                                    formData:{"__CSRF__":"{{csrf}}"},
                                                     // swf文件路径
                                                     swf: '/static/admin/js/webuploader/Uploader.swf',
                                                     // 文件接收服务端。
@@ -1250,6 +1253,7 @@
 
         //获取上级菜单
         $.ajax({
+            headers: {'x-__CSRF__': $.cookie('__CSRF__')},
             url: "/admin/category/gettree",
             success: function (msg) {
                 /* 展示生成的HTML */

@@ -464,15 +464,15 @@ global.get_attribute_type = function(type) {
  * 时间戳格式化 dateformat()
  * @param extra 'Y-m-d H:i:s'
  * @param date  时间戳
- * @return  '2015-12-17 15:39:44'
+ * @return  '2015年12月17日 15:39:44'
  */
 /* global dateformat */
 global.dateformat = function(extra, date) {
     let D = new Date(date);
     let time = {
-        "Y": D.getFullYear(),
-        'm': D.getMonth() + 1,
-        'd': D.getDate(),
+        "Y": D.getFullYear()+'年',
+        'm': D.getMonth() + 1+'月',
+        'd': D.getDate()+'日',
         'H': D.getHours(),
         'i': D.getMinutes(),
         's': D.getSeconds()
@@ -484,7 +484,7 @@ global.dateformat = function(extra, date) {
         _date = extra.replace(k, time[k])
         extra = _date;
     }
-    return _date;
+    return _date.replace('-','').replace('-','');
 }
 /* global array_search */
 global.array_search = function(arr, str) {
@@ -1197,7 +1197,7 @@ global.get_cate=async(cid)=>{
  * @param arr
  */
 global.sort_url = (id,val,arr,http)=>{
-    //console.log(http.get(val))
+    console.log(http.get(val))
     let url;
         url=`${val}_${id}`;
         for(let v of arr){

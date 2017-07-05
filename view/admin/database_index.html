@@ -112,6 +112,7 @@
         })
         function optimize(tables) {
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 "type": "POST",
                 "url": "/admin/database/optimize",
                 "data": {"tables": tables},
@@ -144,6 +145,7 @@
 
             tables = arr.join(",");
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 "type": "POST",
                 "url": "/admin/database/export",
                 "data": {"tables": tables},

@@ -120,6 +120,7 @@
          })
          console.log(dataarr);
          $.ajax({
+            headers: {'x-__CSRF__': $.cookie('__CSRF__')},
              url:"/admin/type/updatetypeoption",
              data:{data:JSON.stringify(dataarr)},
              type:"post",

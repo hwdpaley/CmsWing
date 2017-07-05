@@ -19,6 +19,9 @@ export default class extends Base {
          */
     async indexAction() {
             //auto render template file index_index.html
+            
+
+
             this.meta_title = "首页"; //标题1
             this.keywords = this.setup.WEB_SITE_KEYWORD ? this.setup.WEB_SITE_KEYWORD : ''; //seo关键词
             this.description = this.setup.WEB_SITE_DESCRIPTION ? this.setup.WEB_SITE_DESCRIPTION : ""; //seo描述
@@ -106,15 +109,15 @@ export default class extends Base {
          * 解析路由，判断是频道页面还是列表页面
          */
     async routeAction() {
-        // this.end( this.get('category'));
-        console.log("rout url----------"+this.http.url+","+this.get('category').split("-")[0]);
+        console.log('routeAction--------');
+        console.log("rout url----------" + this.http.url + "," + this.get('category').split("-")[0]);
         let cate = await this.category(this.get('category').split("-")[0]);
-        console.log("route cate_model-------"+cate.mold);
+        console.log("route cate_model-------" + cate.mold);
         let type = cate.allow_publish;
         if (cate.mold == 2) {
             type = 'sp';
         }
-        console.log("type-------"+type);
+        console.log("type-------,cate.mold-----" + type + "," + cate.mold);
         switch (type) {
             case 0:
                 if (cate.mold == 1) {

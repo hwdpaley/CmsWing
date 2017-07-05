@@ -109,6 +109,7 @@
                                                         var uploader_{{field.name}} = WebUploader.create({
                                                             // 选完文件后，是否自动上传。
                                                             auto: true,
+                                                            formData: {"__CSRF__":"{{csrf}}"},
                                                             // swf文件路径
                                                             swf: '/static/admin/js/webuploader/Uploader.swf',
                                                             // 文件接收服务端。

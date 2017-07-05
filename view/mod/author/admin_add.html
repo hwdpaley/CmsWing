@@ -35,7 +35,7 @@
                                 <section class="panel panel-default">
                                     <div class="panel-body">
                                         <form id="ajaxForm" method="post" class="form-horizontal" action="/mod/author/admin/update" data-validate="parsley">
-
+                                            <input type="hidden" value="{{csrf}}" name="__CSRF__">
                                             {%if sort %}
                                             <input type="hidden" name="sort_id" value="{{http.get('sortid')}}">
                                             <div class="form-group">
@@ -194,6 +194,7 @@
                                                                 var uploader_sortid_{{val.option.identifier}} = WebUploader.create({
                                                                     // 选完文件后，是否自动上传。
                                                                     auto: true,
+                                                                    formData:{"__CSRF__":"{{csrf}}"},
                                                                     // swf文件路径
                                                                     swf: '/static/admin/js/webuploader/Uploader.swf',
                                                                     // 文件接收服务端。
@@ -377,6 +378,7 @@
                                                                 var uploader_{{field.name}} = WebUploader.create({
                                                                     // 选完文件后，是否自动上传。
                                                                     auto: true,
+                                                                    formData:{"__CSRF__":"{{csrf}}"},
                                                                     // swf文件路径
                                                                     swf: '/static/admin/js/webuploader/Uploader.swf',
                                                                     // 文件接收服务端。
@@ -558,6 +560,7 @@
         async: {
             enable: true,
             url: "/admin/article/getmenu",
+            otherParam: ["__CSRF__","{{csrf}}"]
         },
         view: {
             showLine: true,

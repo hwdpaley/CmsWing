@@ -189,6 +189,7 @@
             //console.log(datas);
 
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url:"/{{http.module}}/{{http.controller}}/updatetypevar",
                 data:{data:JSON.stringify(datas)},
                 type:"post",

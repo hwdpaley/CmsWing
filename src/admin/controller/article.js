@@ -444,10 +444,12 @@ export default class extends Base {
                 }
             }
         }
+        // console.log("tree----------is_admin,"+JSON.stringify(arr_to_tree(cates, 0)));
 
         //think.log(cate);
         return this.json(arr_to_tree(cates, 0))
         }else {
+            let csrf = await this.session('__CSRF__');
             for (let val of cate) {
                 switch (val.mold){
                     case 1:
@@ -463,6 +465,7 @@ export default class extends Base {
                 val.target = '_self';
                 delete val.icon;
             }
+            // console.log("tree----------,"+JSON.stringify(arr_to_tree(cate, 0)));
             return this.json(arr_to_tree(cate, 0))
         }
     }
@@ -671,7 +674,7 @@ export default class extends Base {
      */
     async updateAction() {
         let data = this.post();
-        // console.log("updateAction----------------"+JSON.stringify(data) );
+        console.log("updateAction----------------"+JSON.stringify(data) );
         let res = await this.model('document').updates(data);
         // console.log("updateAction---------------- ok" );
         if (res) {

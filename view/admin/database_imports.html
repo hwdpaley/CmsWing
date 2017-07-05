@@ -96,6 +96,7 @@
         function tar(dir,self){
             self.html("正在压缩...")
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 "url":"/admin/database/targz",
                 "data":{"dir":dir},
                 "success": function (res) {

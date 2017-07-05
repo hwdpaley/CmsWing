@@ -339,7 +339,7 @@ export default class extends Base {
       return this.display(`mobile/${this.http.controller}/${temp}`)
     }else{
       //console.log(temp);
-      console.log("list-------------"+temp);
+      console.log("list------333323w3-------"+temp);
       return this.display(temp);
     }
 

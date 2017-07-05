@@ -85,6 +85,7 @@
         $(document).on('submit','#login',function(e){
             var data=$(this).serialize()
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 type: "POST",
                 url: "/user/login",
                 data: data,

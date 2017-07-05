@@ -72,6 +72,7 @@
         $(".createindex").click(function () {
             var pagesize = $("#pagesize").val();
             $.ajax({
+                
                 "type":"POST",
                 "url":"/admin/search/createindex",
                 "data":{pagesize:pagesize},

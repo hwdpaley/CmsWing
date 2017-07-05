@@ -39,6 +39,7 @@
                     <div class="panel-body">
                         <form id="ajaxForm" method="post" class="form-horizontal" action="/admin/model/editext"
                               data-validate="parsley">
+                              <input type="hidden" name="__CSRF__" value="{{csrf}}">
                             <div class="tab-content">
 
                                 <div id="tab-1" class="tab-pane fade active in">

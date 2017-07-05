@@ -130,6 +130,7 @@
                 "ico":ico
             };
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 type: 'POST',
                 url: '/admin/menu/add',
                 data: jsonData,

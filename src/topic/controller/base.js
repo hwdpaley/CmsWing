@@ -21,11 +21,16 @@ export default class extends think.controller.base {
             //当前登录状态
             this.is_login = await this.islogin();
 
-            //判断公众账号类型
-            if (this.setup.wx_type == 4) {
-                await this.action("uc/weixin", "oauth");
-            }
-
+            let userInfo = await this.model("member").find(this.is_login);
+            // console.log(userInfo);
+            //console.log(userInfo);
+            this.assign("userInfo", userInfo);
+            //判断公众账号类型?
+            // if (this.setup.wx_type == 4) {
+            //     await this.action("uc/weixin", "oauth");
+            // }
+            // let userinfo=await this.session('userInfo');
+            // console.log("__before----------,"+JSON.stringify(userinfo) );
             //关闭站点
             if (this.setup.WEB_SITE_CLOSE == 0) {
                 let isshow = await this.session('userInfo');
@@ -34,8 +39,10 @@ export default class extends think.controller.base {
                     return think.statusAction(404, this.http);
                 }
             }
-
-
+            let csrf = await this.session('__CSRF__');
+            console.log("__CSRF__-------------," + csrf);
+            await this.cookie('__CSRF__', csrf);
+            this.assign('csrf', csrf);
             //用户信息
             this.user = {};
             this.user.roleid = 8; //游客
@@ -44,6 +51,7 @@ export default class extends think.controller.base {
                 this.user.roleid = await this.model("member").where({ id: this.is_login }).getField('groupid', true);
             }
             this.user = think.extend(this.user, await this.session('webuser'));
+            console.log("__before----------," + JSON.stringify(this.user));
             //获取当前分类信息
             //console.log(action);
             // this.meta_title = cate.meta_title?cate.meta_title:cate.title;
@@ -99,6 +107,7 @@ export default class extends think.controller.base {
     }
     async weblogin() {
         let islogin = await this.islogin();
+        console.log('weblogin--------');
         if (!islogin) {
             //判断浏览客户端
             if (checkMobile(this.userAgent())) {
@@ -121,7 +130,7 @@ export default class extends think.controller.base {
                 this.http.error = new Error('没有指定数据分类！');
                 return think.statusAction(702, this.http);
             }
-            console.log("category-----------"+id+","+field);
+            console.log("category-----------" + id + "," + field);
             let cate = await this.model("category").info(id, field);
             //console.log(cate);
             if (cate && 1 == cate.status) {

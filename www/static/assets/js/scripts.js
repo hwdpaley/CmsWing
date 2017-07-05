@@ -443,9 +443,11 @@ function _ajax_post() {
  * 用户登录
  */
   function _login (){
+  		console.log('_login');
       $(document).on('submit','#login',function(e){
           var data=$(this).serialize()
          $.ajax({ 
+         	headers: {'x-__CSRF__': $.cookie('__CSRF__')},
              type: "POST", 
              url: "/uc/public/login",
              data: data,

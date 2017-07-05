@@ -53,7 +53,7 @@ export default class extends Base {
     //判断是否登陆
     await this.weblogin();
     let data = this.post();
-    // think.log(data);
+    console.log("updateinfoAction-----------,"+data);
     let member = {
       email: data.email,
       mobile: data.mobile,

@@ -72,7 +72,7 @@ jQuery(function() {
 
         // 不压缩image
         resize: false,
-
+        formData:{"__CSRF__":"{{csrf}}"},
         // swf文件路径
         swf: '/static/admin/js/webuploader/Uploader.swf',
 
@@ -166,7 +166,7 @@ jQuery(function() {
 
         // 自动上传。
         auto: true,
-
+        formData:{"__CSRF__":"{{csrf}}"},
         // swf文件路径
         swf: '/static/admin/js/webuploader/Uploader.swf',
 

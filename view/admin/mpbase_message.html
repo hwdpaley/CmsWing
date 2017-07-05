@@ -24,6 +24,7 @@
                         <!--陈金龙 start-->
                         <section class="panel panel-default">
                             <form method="post" action="/admin/mpbase/saveinfo" class="form-horizontal" id="ajaxForm" data-validate="parsley">
+                                <input type="hidden" name="__CSRF__" value="{{csrf}}">
                                 <input type="hidden" id="reply_type" name="reply_type" value="2">
                                 <input id="send_type" name="send_type" type="hidden" value="{{initinfo.type}}Area">
                                 <input id="editor_content" name="editor_content" type="hidden" value="{{initinfo.content}}">

@@ -167,6 +167,7 @@
             var AjaxURL= $('#ajaxForm').attr("action");
             var jsonData = $('#ajaxForm').serialize();
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url: AjaxURL,
                 data: jsonData,
                 type: "post",

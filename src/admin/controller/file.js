@@ -144,7 +144,7 @@ export default class extends think.controller.base {
             console.log('not exist')
         }
     }
-
+    console.log("uploadpicAction--------------"+JSON.stringify(res));
     this.json(res);
   }
   //上传多图

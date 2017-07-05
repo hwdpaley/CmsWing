@@ -1,0 +1,211 @@
+ {% extends "./inc/myshop_base.html" %} {% block content %}
+<script src="/static/admin/js/udeitor/ueditor.parse.min.js"></script>
+<style>
+.active > .text {
+    display: block !important;
+}
+</style>
+<div class="weui_tab">
+    <div class="weui_tab_bd">
+        <div id="tkb-mobile-home" class="weui_tab_bd_item weui_tab_bd_item_active">
+            <div id="header">
+                <div class="tkb-logo">
+                    <img src="/static/webapp/img/logo.png">
+                </div>
+                <div class="tkb-person-center">
+                    <a href="/wechat/center" class="glyphicon glyphicon-user">个人中心</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <img src="{{info.twourl}}" class="home-store-bg-image">
+            <img src="{{info.fmurl}}" class="user-logo-image">
+            <h3 class="text-center" style="font-weight: normal;">{{info.title}}</h3>
+            <div class="text-center">
+                <p class="padding-left-right-15 color-gray-3 text-center">
+                </p>
+                <p>{{info.description}}</p>
+                <p></p>
+                <p class="look_more" style="color: #666666;font-size: 14px">查看更多＞</p>
+            </div>
+            <!-- <ul class="product-category">
+                <h4 class="bg-color-normal padding-15 font-weight-normal font-size-14 color-gray-3">
+                                <strong>项目分类</strong>
+                            </h4>
+                <li>
+                    <a href="/wechat/product/type/50501112">
+                        <span class="color-integral-1">美腿项目</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/wechat/product/type/14096046">
+                        <span class="color-integral-1">S瘦秀出你的小蛮腰</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/wechat/product/type/98186941">
+                        <span class="color-integral-1">背部筋络疏通</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/wechat/product/type/99741985">
+                        <span class="color-integral-1">头部筋络疏通</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/wechat/product/type/14911248">
+                        <span class="color-integral-1">纹绣黑色素因子</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/wechat/product/type/90898379">
+                        <span class="color-integral-1">面部拨筋</span>
+                    </a>
+                </li>
+            </ul> -->
+            <div class="clearfix"></div>
+            <div class="weui_panel">
+                <div class="weui_panel_hd bg-color-normal"><strong>店铺项目</strong></div>
+                <div class="weui_panel_bd tkb-mobile-product">
+                    <ul class="margin-top-15">
+                        <li>
+                            <a href="/wechat/product/669228">
+                                <img src="http://image.xuemei99.com/21083139_20170619150828_552.jpg" class="tkb-mobile-product-image">
+                                <h4 class="product-recomand-title">【上海大事件】青青医疗美容韩国‘‘水光美人’’全城最低价399，震撼来袭！</h4>
+                                <p class="color-gray-3">活动时间:<span class="margin-left-10">2017年6月17日 17:30</span></p>
+                            </a>
+                            <img class="enroll-status" src="/static/webapp/img/state_sign_up.png">
+                        </li>
+                        <li>
+                            <a href="/wechat/product/183645">
+                                <img src="http://image.xuemei99.com/23570764_20170510120834_258.jpg" class="tkb-mobile-product-image">
+                                <h4 class="product-recomand-title">春季做背、能活百岁！东方女人邀请您一起来......！</h4>
+                                <p class="color-gray-3">活动时间:<span class="margin-left-10">2017年5月11日 21:30</span></p>
+                            </a>
+                            <img class="enroll-status" src="/static/webapp/img/state_sign_up.png">
+                        </li>
+                        <li>
+                            <a href="/wechat/product/703310">
+                                <img src="http://image.xuemei99.com/45686479_MjjlhYMzROiKs+eWl+WFu+eUny0=_20160523140833_837.jpg" class="tkb-mobile-product-image">
+                                <h4 class="product-recomand-title">28元3D芳疗养生（案例）</h4>
+                                <p class="color-gray-3">活动时间:<span class="margin-left-10">2016年5月15日 10:00</span></p>
+                            </a>
+                            <img class="enroll-status" src="/static/webapp/img/state_sign_up.png">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui_tabbar">
+    <a href="#tkb-mobile-home" class="weui_tabbar_item weui_bar_item_on">
+        <div class="weui_tabbar_icon">
+            <img src="/static/webapp/img/tabbar_door.png" alt="首页">
+        </div>
+        <p class="weui_tabbar_label">商家店铺</p>
+    </a>
+    <a href="/wechat/points/43267709" class="weui_tabbar_item ">
+        <div class="weui_tabbar_icon">
+            <img src="/static/webapp/img/tabbar_integral_store.png" alt="积分商城">
+        </div>
+        <p class="weui_tabbar_label">积分商城</p>
+    </a>
+    <a class="weui_tabbar_item bg-color-collection  hidden" id="focus_ok" onclick="GoFocus(true, '43267709');">
+        <div class="weui_tabbar_icon">
+            <img src="/static/webapp/img/tabbar_collect.png" class="tabbar-collecion-icon" alt="关注">
+        </div>
+        <p class="weui_tabbar_label color-white">关注</p>
+    </a>
+    <a class="weui_tabbar_item bg-color-collection" id="focus_cancel" onclick="GoFocus(false, '43267709');">
+        <div class="weui_tabbar_icon">
+            <img src="/static/webapp/img/tabbar_collect.png" class="tabbar-collecion-icon" alt="取消关注">
+        </div>
+        <p class="weui_tabbar_label color-white">取消关注</p>
+    </a>
+</div>
+<div class="bg_col" style="display: none;"></div>
+<div class="alert_detail_box" style="display: none;">
+    <div class="favor-header-bar">
+        <ul class="tabs">
+            <li class="default"><a href="javascript:void(0);" id="btn1" hidefocus="true">店铺介绍</a></li>
+            <li class=""><a href="javascript:void(0);" id="btn2" hidefocus="true">店铺地址</a></li>
+            <!-- <li class=""><a href="javascript:void(0);" id="btn3" hidefocus="true">店铺信誉</a></li> -->
+        </ul>
+    </div>
+    <!-- slideTo tab -->
+    <div class="swiper-container favor-list">
+            <div class="swiper-wrapper" >
+                <div class="swiper-slide " >
+                    {{info.description}}
+                </div>
+                <div class="swiper-slide " >
+                    {{info.address}}
+                </div>
+                <!-- <div class="swiper-slide margin19" >
+                    {{info.address}}
+                </div> -->
+            </div>
+    </div>
+    <p class="close_img"><img src="/static/webapp/img/close2x.png"></p>
+</div>
+<div class="modal fade" id="ln_qr_modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="text-center text-primary" id="modal_title">关注美媒公众号</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img class="img-thumbnail" width="100%" src="/static/webapp/img/ln_qr_image.jpg">
+                </div>
+            </div>
+        </div>
+</div>
+    {% endblock %} {% block script %}
+    
+    <script>
+        uParse('#contentcmswing', {
+            rootPath: '/static/admin/js/udeitor/'
+        })
+        // var signPackage = !{JSON.stringify("{{signPackage}}")};
+        // console.log(signPackage);
+        // var signPackage = "{{signPackage}}";
+    // console.log('{{signPackage.nonceStr}}');
+    // console.log('{{signPackage.signature}}');
+    // console.log('{{signPackage.timestamp}}');
+    </script>
+    <script type="text/javascript">
+    $('#shop_code').qrcode({
+        width: 128,
+        height: 128,
+        text: 'http://www.gzxinbibo.com/wechat/shop/43267709'
+    });
+    </script>
+    <script type="text/javascript">
+    var mySwiper = new Swiper('.swiper-container', {
+        autoHeight: true,
+        onSlideChangeStart: function() {
+            $(".tabs .default").removeClass('default');
+            $(".tabs li").eq(mySwiper.activeIndex).addClass('default');
+        }
+    });
+    $(".tabs li").on('click', function(e) {
+        e.preventDefault();
+        $(".tabs .default").removeClass('default');
+        $(this).addClass('default');
+        mySwiper.swipeTo($(this).index());
+    });
+    $(".tabs li").click(function(e) {
+        e.preventDefault();
+    });
+
+    $(".alert_detail_box,.bg_col").css("display", "none");
+    $(".look_more").click(function() {
+        $(".alert_detail_box,.bg_col").css("display", "block")
+    });
+    $(".close_img").click(function() {
+        $(".alert_detail_box,.bg_col").css("display", "none")
+    })
+    </script>
+    {% endblock %}

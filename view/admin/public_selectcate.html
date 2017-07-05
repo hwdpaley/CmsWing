@@ -45,6 +45,7 @@
         async: {
             enable: true,
             url: "/admin/public/getmenu",
+            otherParam: ["__CSRF__","{{csrf}}"]
         },
         callback: {
             onAsyncSuccess: zTreeOnAsyncSuccess,

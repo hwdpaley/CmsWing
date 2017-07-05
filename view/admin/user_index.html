@@ -169,6 +169,7 @@ $(function () {
             closeOnConfirm: false
         }, function () {
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url:"/admin/user/recharge",
                 data:{balance:balance,id:id},
                 type:"POST",

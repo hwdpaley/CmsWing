@@ -88,6 +88,7 @@ table tr td{
                                 <section class="panel panel-default padding-0" style="margin-top: 0px;border-top-width: 0; border-top-left-radius: 0;border-top-right-radius: 0">
                                 <div class="panel-body">
                                     <form action="/uc/publish/update" method="post" enctype="multipart/form-data" class="form-horizontal validate" data-toastr-position="top-full-width" >
+                                        <input type="hidden" name="__CSRF__" value="{{csrf}}">
                                     <div class="tab-content">
 
                                         {% for key ,group in model.field_group | parse_config_attr %}
@@ -187,6 +188,7 @@ table tr td{
                                                                 var uploader_sortid_{{val.option.identifier}} = WebUploader.create({
                                                                     // 选完文件后，是否自动上传。
                                                                     auto: true,
+                                                                    formData:{"__CSRF__":"{{csrf}}"},
                                                                     // swf文件路径
                                                                     swf: '/static/admin/js/webuploader/Uploader.swf',
                                                                     // 文件接收服务端。
@@ -324,11 +326,11 @@ table tr td{
                                                         </div>
                                                         {% elif field.type == "date" %}
                                                         <div class="col-md-3">
-                                                            <input type="text" name="date|||{{field.name}}" class="form-control date" value="{{data[field.name]|dateformat('Y-m-d')}}" placeholder="请选择日期" />
+                                                            <input type="text" name="date|||{{field.name}}" class="form-control date" value="{%if data[field.name]==0%}{%else%}{{data[field.name]|moment('YYYY-MM-DD')}}{%endif%}" placeholder="请选择日期" />
                                                         </div>
                                                         {% elif field.type == "datetime" %}
                                                         <div class="col-md-3">
-                                                            <input type="text" name="date|||{{field.name}}" class="form-control time" value="{{data[field.name]|dateformat('Y-m-d H:i')}}" placeholder="请选择时间" />
+                                                            <input type="text" name="date|||{{field.name}}" class="form-control time" value="{%if data[field.name]==0%}{%else%}{{data[field.name]|moment('YYYY-MM-DD HH:mm')}}{%endif%}" placeholder="请选择时间" />
                                                         </div>
                  {% elif field.type == "freight" %}
                 <div class="col-md-5">
@@ -701,6 +703,7 @@ table tr td{
                 var uploader = WebUploader.create({
                     // 选完文件后，是否自动上传。
                     auto: true,
+                    formData:{"__CSRF__":"{{csrf}}"},
                     // swf文件路径
                     swf: '/static/admin/js/webuploader/Uploader.swf',
                     // 文件接收服务端。
@@ -1155,6 +1158,7 @@ table tr td{
             $("#{{field.name}}_addsuk").click(function(){
 
                 $.ajax({
+                    headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                     url:"/"+module+"/publish/ajaxgettags",
                     data:{type:1,pid:0,model_id:{{data.model_id}} },
                 success:function(res){
@@ -1245,6 +1249,7 @@ table tr td{
                     return false;
                 }
                 $.ajax({
+                    headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                     type:"POST",
                     url:"/uc/publish/ajaxaddtags",
                     data:{name:input,type:1,model_id:{{data.model_id}} },
@@ -1384,7 +1389,7 @@ table tr td{
             extensions: 'gif,jpg,jpeg,bmp,png',
             mimeTypes: 'image/*'
         },
-
+        formData:{"__CSRF__":"{{csrf}}"},
         // swf文件路径
         swf: '/static/js/webuploader/Uploader.swf',
 
@@ -1907,6 +1912,7 @@ table tr td{
     var uploader_{{field.name}} = WebUploader.create({
         // 选完文件后，是否自动上传。
         auto: true,
+        formData:{"__CSRF__":"{{csrf}}"},
         // swf文件路径
         swf: '/static/admin/js/webuploader/Uploader.swf',
         // 文件接收服务端。
@@ -2077,7 +2083,7 @@ table tr td{
 
                     // 不压缩image
                     resize: false,
-
+                    formData:{"__CSRF__":"{{csrf}}"},
                     // swf文件路径
                     swf:'/static/admin/js/webuploader/Uploader.swf',
 

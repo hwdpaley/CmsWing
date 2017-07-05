@@ -131,7 +131,7 @@ CLASSES:
                         <a href="#"><i class="fa fa-rss"></i></a>
                     </div>
                 </div>
-                {% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
+                {% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid,isstu=1 %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
                 <!-- POST ITEM -->
                 <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
                     <!-- IMAGE -->
@@ -172,7 +172,13 @@ CLASSES:
                             <li>
                                 <a href="#">
                                     <i class="fa fa-clock-o"></i>
-                                    <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
+                                    <span class="font-lato">开始时间:{{val.stime|dateformat('Y-m-d H:i')}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-clock-o"></i>
+                                    <span class="font-lato">结束时间:{{val.etime|dateformat('Y-m-d H:i')}}</span>
                                 </a>
                             </li>
                             <li>
@@ -371,14 +377,7 @@ CLASSES:
     </div>
 </section>
 {% block script %}
-<script type="text/javascript" src="/static/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
 
-<script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
-<script type="text/javascript" src="/static/admin/js/wechat/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/admin/js/wechat/jquery-weui.min.js"></script>
-<script type="text/javascript" src="/static/admin/js/wechat/product_manage.js"></script>
-<script type="text/javascript" src="/static/admin/js/wechat/jquery.qrcode.min.js"></script>
-<script type="text/javascript" src="/static/admin/js/wechat/enroll.js"></script>
 <script type="text/javascript">
 function ShowProduct(id) {
 
@@ -403,6 +402,7 @@ function tuokeCopy(id) {
     console.log("did=" + id);
     //模板拷贝
     $.ajax({
+        headers: {'x-__CSRF__': $.cookie('__CSRF__')},
         url: "/uc/weixin/tuokecopy",
         method: "post",
         data: {
@@ -429,6 +429,7 @@ function tuokeDelete(id) {
     console.log("did=" + id);
     //模板拷贝
     $.ajax({
+        headers: {'x-__CSRF__': $.cookie('__CSRF__')},
         url: "/admin/article/setstatus/status/-1/ids/"+id,
         method: "post",
         data: {

@@ -86,6 +86,7 @@
         $('#ajaxForm #btn').on('click', function () {
             var jsonData = $('#ajaxForm').serialize();
             $.ajax({
+              headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 type:"POST",
                 url: "/admin/setup/save",
                 data: jsonData,

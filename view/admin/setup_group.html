@@ -139,6 +139,7 @@
                 },
                 function(){
                     $.ajax({
+                        headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                         url: "/admin/setup/del",
                         data: {
                             "id": id

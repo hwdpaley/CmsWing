@@ -49,6 +49,7 @@
                         <i class="fa fa-ban-circle"></i>请先拖动验证码到相应位置.
                     </div>
                     {%endif%}
+                    <input type="hidden" name="__CSRF__" value="{{csrf}}">
                     <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded" id="validate-submit">
                         <i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
                     <div class="text-center m-t m-b"><a href="#"><small>忘记密码?</small></a></div>
@@ -69,6 +70,7 @@
     </footer>
     <!-- / footer -->
     <script src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
     <!-- Bootstrap -->
     <script src="/static/admin/js/bootstrap.js"></script>
     <!-- App -->
@@ -110,11 +112,12 @@
 
         $.ajax({
             // 获取id，challenge，success（是否启用failback）
+            headers: {'x-__CSRF__': $.cookie('__CSRF__')},
             url: "/admin/public/geetest?t=" + (new Date()).getTime(), // 加随机数防止缓存
             type: "get",
             dataType: "json",
             success: function(data) {
-
+                
                 // 使用initGeetest接口
                 // 参数1：配置参数
                 // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件

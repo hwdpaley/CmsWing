@@ -47,13 +47,15 @@ function enroll_modal_button(did) {
     console.log("did=" + did);
     var user_name = $("#user_name");
     var user_phone = $("#user_phone");
-
+    document.getElementById('enroll_btn').disabled=true;
     if (user_name.val().length == 0 || user_phone.val().length == 0) {
         alert("用户名和手机号不能为空");
+        document.getElementById('enroll_btn').disabled=false;
         return;
     }
     if (user_phone.val().length != 11) {
         alert("请输入正确的手机号");
+        document.getElementById('enroll_btn').disabled=false;
         return;
     }
     //报名参加
@@ -64,11 +66,12 @@ function enroll_modal_button(did) {
             "docid": did,
             "name": user_name.val(),
             "phone": user_phone.val(),
-            // csrfmiddlewaretoken: $.cookie("csrftoken")
+            __CSRF__: $.cookie("__CSRF__")
         },
         success: function(data) {
+            document.getElementById('enroll_btn').disabled=false;
             console.log(JSON.stringify(data));
-            if (data.data.name) {
+            if (data.data.name && data.data.status != 0) {
                 alert(data.data.name);
             }
 
@@ -91,6 +94,7 @@ function enroll_modal_button(did) {
 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
+            document.getElementById('enroll_btn').disabled=false;
             alert(XMLHttpRequest.status);
             alert(XMLHttpRequest.readyState);
             alert(textStatus);

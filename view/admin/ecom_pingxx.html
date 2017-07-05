@@ -238,6 +238,7 @@
                 return false;
             }
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url: "/admin/ecom/addappid",
                 type: "POST",
                 data: {appid: val},
@@ -261,6 +262,7 @@
                 return false;
             }
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url: "/admin/ecom/addlivesecretkey",
                 type: "POST",
                 data: {livesecretkey: val},
@@ -285,6 +287,7 @@
                 return false;
             }
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url: "/admin/ecom/rsa",
                 type: "POST",
                 data: {rsa: val,type:type},

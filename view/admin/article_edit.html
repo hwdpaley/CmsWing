@@ -80,6 +80,7 @@ table tr td{
                                 </header>
                                 <div class="panel-body">
                                     <form id="ajaxForm" action="/admin/article/update" method="post" class="form-horizontal" data-validate="parsley">
+                                     <input type="hidden" name="__CSRF__" value="{{csrf}}"/>   
                                     <div class="tab-content">
 
                                         {% for key ,group in model.field_group | parse_config_attr %}
@@ -1368,6 +1369,7 @@ table tr td{
                     return false;
                 }
                 $.ajax({
+                    headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                     type:"POST",
                     url:"/admin/tags/ajaxaddtags",
                     data:{name:input,type:1,model_id:{{data.model_id}} },
@@ -1507,7 +1509,7 @@ table tr td{
             extensions: 'gif,jpg,jpeg,bmp,png',
             mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp'
         },
-
+        formData:{"__CSRF__":"{{csrf}}"},
         // swf文件路径
         swf: '/static/js/webuploader/Uploader.swf',
 
@@ -2009,7 +2011,7 @@ table tr td{
     {% elif field.type == "picture" %}
     <div class="col-sm-10">
         <input type="hidden" name="{{field.name}}" id="cover_id_{{field.name}}" value="{{data[field.name]}}"/>
-
+        
         <div id="fileList_{{field.name}}" class="uploader-list"></div>
         <div id="filePicker_{{field.name}}">选择图片</div>
 
@@ -2030,6 +2032,7 @@ table tr td{
     var uploader_{{field.name}} = WebUploader.create({
         // 选完文件后，是否自动上传。
         auto: true,
+        formData:{"__CSRF__":"{{csrf}}"},
         // swf文件路径
         swf: '/static/admin/js/webuploader/Uploader.swf',
         // 文件接收服务端。
@@ -2191,7 +2194,7 @@ table tr td{
 
                     // 不压缩image
                     resize: false,
-
+                    formData:{"__CSRF__":"{{csrf}}"},
                     // swf文件路径
                     swf:'/static/admin/js/webuploader/Uploader.swf',
 
@@ -2309,6 +2312,7 @@ table tr td{
                                             <div class="col-sm-4 col-sm-offset-2">
                                                 <button class="btn btn-primary btn-s-md ajax-post" type="submit" target-form="form-horizontal">确定</button>
                                                 <button class="btn btn-default" onclick="javascript:history.back(-1);return false;" type="submit">返回</button>
+                                                
                                                 <input type="hidden" name="id" value="{{data.id}}"/>
                                                 <input type="hidden" name="pid" value="{{data.pid}}"/>
                                                 <input type="hidden" name="topid" value="{{data.topid}}"/>
@@ -2364,7 +2368,7 @@ table tr td{
         async: {
             enable: true,
             url: "/admin/article/getmenu",
-            otherParam: ["action", "add"]
+            otherParam: ["action", "add","__CSRF__","{{csrf}}"]
         },
         view: {
             showLine: true,

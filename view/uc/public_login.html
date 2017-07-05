@@ -102,6 +102,7 @@
                 //     return false;
                 // }
                 $.ajax({
+                    headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                     url: "/uc/public/login", // 进行二次验证
                     type: "post",
                     dataType: "json",
@@ -111,7 +112,8 @@
                         geetest_validate: validate.geetest_validate,
                         geetest_seccode: validate.geetest_seccode,
                         username:$("input[name='username']").val(),
-                        password:$("input[name='password']").val()
+                        password:$("input[name='password']").val(),
+                        __CSRF__:$.cookie('__CSRF__')
                     },
                     success: function (data) {
 
@@ -141,6 +143,7 @@
         $("#captcha").ready(function(){
             setTimeout(function(){
                 $.ajax({
+                    headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                     // 获取id，challenge，success（是否启用failback）
                     url: "/admin/public/geetest?t=" + (new Date()).getTime(), // 加随机数防止缓存
                     type: "get",

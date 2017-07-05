@@ -652,6 +652,7 @@
 
             console.log(data);
             $.ajax({
+                headers: {'x-__CSRF__': $.cookie('__CSRF__')},
                 url:"/admin/type/edittype",
                 data:data,
                 type:"post",
