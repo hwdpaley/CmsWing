@@ -152,6 +152,7 @@ export default class extends Base {
         let ngrids = [];
         //console.log(model);
         let grids = model.list_grid.split("\r\n");
+        console.log("grids----------,,"+JSON.stringify(grids));
         for (let value of grids) {
             //字段:标题:链接
             let val = value.split(":");
@@ -214,7 +215,7 @@ export default class extends Base {
             }
         }
         //console.log(this.setup.DOCUMENT_POSITION)
-        //console.log(groups);
+        console.log("ngrids---------,"+JSON.stringify(ngrids) );
         this.assign('modellist', modellist);
         this.assign('cate_id', cate_id);
         this.assign('model_id', model_id);

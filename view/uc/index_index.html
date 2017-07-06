@@ -47,20 +47,20 @@
           <div class="front1">
             <div class="box1 noradius">
               <div class="box-icon-title text-center">
-                <img src="/uc/index/avatar"  class=" rounded" alt="{{controller.user.username}}" style="width: 65px" />
-                <h2>尊敬的会员 <span class="text-danger">{{controller.user.username}}</span>  ，欢迎您！</h2>
+                <img src="/uc/index/avatar"  class=" rounded" alt="{{controller.user.real_name}}" style="width: 65px" />
+                <h2>尊敬的会员 <span class="text-danger">{{userInfo.real_name}}</span>  ，欢迎您！</h2>
               </div>
               <p>最后一次登录：{{controller.user.last_login_time|dateformat('Y-m-d H:i:s')}}</p>
             </div>
           </div>
 
-          <div class="back hide">
+          <!-- <div class="back hide">
             <div class="box2 noradius">
               <h4>WHO AM I?</h4>
               <hr />
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque.</p>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- /FLIP BOX -->
         <div class="box-light margin-top-20"><!-- .box-light OR .box-dark -->

@@ -592,9 +592,9 @@ export default class extends Base {
             //行为记录
             if (!res.data.id) {
                 //await this.model("action").log("add_document", "document", res.id, this.user.uid, this.ip(), this.http.url);//添加行为日志
-                return this.success({ name: "添加成功", url: "/mytuoke/" + res.data.category_id });
+                return this.success({ name: "添加成功", url: "/tuoke/" + res.data.category_id });
             } else {
-                return this.success({ name: "更新成功", url: "/mytuoke" });
+                return this.success({ name: "更新成功", url: "/tuoke" });
             }
 
         } else {

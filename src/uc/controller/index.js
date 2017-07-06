@@ -33,7 +33,8 @@ export default class extends Base {
         on: ["groupid", "groupid"]
     }).find(this.user.uid);
 
-      this.assign("userInfo", userInfo);
+    this.assign("userInfo", userInfo);
+    // console.log("用户中心"+JSON.stringify(userInfo) );
     //订单交易总金额
     let order = await this.model("order").where({user_id: this.user.uid, pay_status: 1}).getField('order_amount');
     let orderTotal = eval(order.join("+"));

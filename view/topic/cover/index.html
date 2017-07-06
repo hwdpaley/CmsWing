@@ -1,4 +1,4 @@
-{% extends "../inc/base.html" %}
+{% extends "../inc/picture_base.html" %}
 
 {% block content %}
      <!--
@@ -60,19 +60,19 @@
                                                             "pagination": true
                                                             "transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
                                                     -->
-							<div class="owl-carousel buttons-autohide controlls-over" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
+							<!-- <div class="owl-carousel buttons-autohide controlls-over" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
 								{% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1"%}
 								{% for v in slider%}
 								<a href="{{v.name|get_url(v.id)}}">
 									<img class="img-responsive" src="{{v.cover_id|get_pic('m=1,w=848,h=300')}}" alt="{{v.title}}">
 								</a>
 								{%endfor%}
-							</div>
+							</div> -->
 
 							<ul class="nav nav-tabs nav-button-tabs">
-								<!-- side navigation -->
+								
 								{%column data="cates",cid=category.id%}
-								<li class="active"><a href="#taball" data-toggle="tab">全部</a></li>
+								<!-- <li class="active"><a href="#taball" data-toggle="tab">全部</a></li> -->
 								{%for val in cates%}
 								<li ><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
 								{%endfor%}

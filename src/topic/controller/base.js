@@ -21,10 +21,8 @@ export default class extends think.controller.base {
             //当前登录状态
             this.is_login = await this.islogin();
 
-            let userInfo = await this.model("member").find(this.is_login);
+            // let userInfo = await this.model("member").find(this.is_login);
             // console.log(userInfo);
-            //console.log(userInfo);
-            this.assign("userInfo", userInfo);
             //判断公众账号类型?
             // if (this.setup.wx_type == 4) {
             //     await this.action("uc/weixin", "oauth");
@@ -40,7 +38,7 @@ export default class extends think.controller.base {
                 }
             }
             let csrf = await this.session('__CSRF__');
-            console.log("__CSRF__-------------," + csrf);
+            // console.log("__CSRF__-------------," + csrf);
             await this.cookie('__CSRF__', csrf);
             this.assign('csrf', csrf);
             //用户信息
@@ -51,7 +49,8 @@ export default class extends think.controller.base {
                 this.user.roleid = await this.model("member").where({ id: this.is_login }).getField('groupid', true);
             }
             this.user = think.extend(this.user, await this.session('webuser'));
-            console.log("__before----------," + JSON.stringify(this.user));
+            // console.log("__before----------," + JSON.stringify(this.user));
+            this.assign("userInfo", this.user);
             //获取当前分类信息
             //console.log(action);
             // this.meta_title = cate.meta_title?cate.meta_title:cate.title;

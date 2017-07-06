@@ -2001,11 +2001,25 @@ table tr td{
                                                             <script id="Editor_{{field.name}}" name="{{field.name}}" style="width: 100%; height: 500px" type="text/plain">{{data[field['name']]|safe}}</script>
                                                             <!-- 实例化编辑器 -->
                                                             <script type="text/javascript">
-                                                                UE.getEditor('Editor_{{field.name}}', {
+                                                                var ue=UE.getEditor('Editor_{{field.name}}', {
                                                                     theme:"default", //皮肤
                                                                     lang:'zh-cn', //语言
-                                                                    serverUrl: '/admin/ueditor/index'
+                                                                    serverUrl: '/admin/ueditor/index?__CSRF__={{csrf}}',
+                                                                    
                                                                 });
+                                        // UE.ajax.requeset( '/admin/ueditor/index', {
+                                        //     data:{
+                                        //         __CSRF__:"{{csrf}}"
+                                        //     },
+                                        //     onsuccess: function ( xhr ) {
+                                        //         console.log( xhr.responseText );
+                                        //     },
+                                        //     onerror: function ( xhr ) {
+                                        //         alert( 'Ajax请求失败' );
+                                        //     }
+
+
+                                        // });
                                                             </script>
                                                         </div>
     {% elif field.type == "picture" %}

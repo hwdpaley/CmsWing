@@ -40,6 +40,16 @@
             {% endif %} {% endfor %}
         </ol>
         <!-- /breadcrumbs -->
+        <!-- page tabs -->
+        {%column data="column",cid=category.id%} {%if column%}
+        <ul class="page-header-tabs list-inline">
+            <!--<li class="active"><a href="portfolio-masonry-3-columns.html">With Gutter</a></li>-->
+            {%for val in column%}
+            <li {%if val.id==category.id %}class="active" {%endif%}><a href="{{val.url}}{{http.config('view.file_ext')}}">{{val.name}}</a></li>
+            {%endfor%}
+        </ul>
+        {%endif%}
+        <!-- /page tabs -->
     </div>
 </section>
 <!-- /PAGE HEADER -->
@@ -69,14 +79,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-9 col-sm-9">
-                        <ul class="nav nav-tabs nav-button-tabs">
-                            <!-- side navigation -->
-                            {%column data="cates",cid=category.id%}
-                            <li class="active"><a href="#taball" data-toggle="tab">模板列表</a></li>
-                            {%for val in cates%}
+                       <!--  <ul class="nav nav-tabs nav-button-tabs">
+                            
+                            {%column data="cates",cid=category.id%} -->
+                            <!-- <li class="active"><a href="#taball" data-toggle="tab">拓客模板</a></li> -->
+                            <!-- {%for val in cates%}
                             <li><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
                             {%endfor%}
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <!--投稿按钮-->

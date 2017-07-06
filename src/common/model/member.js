@@ -61,6 +61,7 @@ export default class extends think.model.base {
                     'uid': user.id,
                     'username': user.username,
                     'last_login_time': user.last_login_time,
+                    'real_name':user.real_name
                 };
 
                 return userInfo; //登录成功，返回用户信息

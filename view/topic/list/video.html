@@ -1,4 +1,4 @@
-{% extends "../inc/base.html" %}
+{% extends "../inc/picture_nofoot_base.html" %}
 {% block content %}
 <!--
 PAGE HEADER
@@ -17,7 +17,7 @@ CLASSES:
 .shadow-before-3 	= shadow 3 header top
 .shadow-after-3 	= shadow 3 header bottom
 -->
-<section class="page-header page-header-xs">
+<section class="page-header dark page-header-xs">
     <div class="container">
 
         <h1>{{category.title}}</h1>
@@ -151,18 +151,18 @@ CLASSES:
         <div class="row">
 
             <!-- LEFT -->
-            <div class="col-md-9 col-sm-9">
+            <div class="col-md-12 col-sm-12">
                 <div class="text-left">
                     <ul class="nav nav-pills mix-filter">
 
-                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="{{cate.url}}{{http.config('view.file_ext')}}">全部</a></li>
+                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/shipinceshi">全部</a></li>
                         {% groups data="groups",cid=category.id%}
                         {%for v in groups%}
                         <li class="filter {%if group_id==v.id%}active{%endif%}"><a href="{{cate.url}}-{{order}}-{{v.id}}{%if sort%}-{{sortid}}{%endif%}{%if sorturl %}-{%endif%}{{sorturl}}{{http.config('view.file_ext')}}">{{v.name}}</a></li>
                         {%endfor%}
                     </ul>
                     <!--投稿按钮-->
-                    <div class="btn-group btn-group-sm pull-right">
+                    <!-- <div class="btn-group btn-group-sm pull-right">
                         <a {%if model|length> 1 %} data-toggle="dropdown" {% endif %} class="btn btn-primary btn-sm document_add
                             dropdown-toggle {% if allow == 0 %}disabled{% endif %}" {%if model|length
                             == 1 %} href="/uc/publish/add/model_id/{{modellist[0].id}}/pid/0/cate_id/{{cate.id}}/group_id/{{group_id}}/sortid/{{sortid}}"{%endif%}
@@ -175,11 +175,10 @@ CLASSES:
                                     class="text-info">添加{{val.title}}</a></li>
                             {% endfor %}
 
-                            <!--<li class="divider"></li>-->
-                            <!--<li><a href="#">添加内容</a></li>-->
+                            
                         </ul>
                         {% endif %}
-                    </div>
+                    </div> -->
                     <!--//投稿按钮-->
                     <div class="btn-group btn-group-sm pull-right">
                         <a class="btn btn-default height-auto {%if order<2%}active{%endif%}" href="{{cate.url}}-{%if order<2%}{{1-order}}{%else%}0{%endif%}{%if group_id or sort%}-{{group_id}}{%endif%}{%if sort%}-{{sortid}}{%endif%}{%if sorturl %}-{%endif%}{{sorturl}}{{http.config('view.file_ext')}}" >按时间 <span class="glyphicon {%if order ==0%}glyphicon-arrow-down{%elif order==1%}glyphicon-arrow-up{%else%}glyphicon-arrow-down{%endif%}"></span> </a>
@@ -253,157 +252,6 @@ CLASSES:
 
             <!-- RIGHT -->
 
-            <div class="col-md-3 col-sm-3">
-
-                <!-- INLINE SEARCH -->
-                <div class="inline-search clearfix margin-bottom-10">
-                    <form action="" method="get" class="widget_search">
-                        <input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
-                        <button type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form>
-                </div>
-                <!-- /INLINE SEARCH -->
-
-                <hr />
-
-                <!-- side navigation -->
-                {%column data="cates",cid=category.id,isnum="0"%}
-                {%if cates==null%}
-                <div class="side-nav margin-bottom-20 margin-top-20">
-                    <div class="side-nav-head">
-                        <button class="fa fa-bars"></button>
-                        <h4>{{category.title}} 子分类</h4>
-                    </div>
-                    <ul class="list-group list-group-bordered list-group-noicon uppercase">
-                        {%for val in cates%}
-                        <li class="list-group-item"><a href="{{val.url}}"><span class="size-11 text-muted pull-right">({{val.doc_num}})</span> {{val.name}}</a></li>
-                        {%endfor%}
-                    </ul>
-                    <!-- /side navigation -->
-                </div>
-                {%endif%}
-
-
-                <!-- JUSTIFIED TAB -->
-                <div class="tabs nomargin-top hidden-xs margin-bottom-10">
-
-                    <!-- tabs -->
-                    <ul class="nav nav-tabs nav-bottom-border nav-justified">
-                        <li class="active">
-                            <a href="#tab_1" data-toggle="tab">
-                                最热
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#tab_2" data-toggle="tab">
-                                最新
-                            </a>
-                        </li>
-                    </ul>
-
-                    <!-- tabs content -->
-                    <div class="tab-content margin-bottom-0 margin-top-10">
-
-                        <!-- POPULAR -->
-                        <div id="tab_1" class="tab-pane active">
-                            <!-- /post -->
-                            {% topic data = "hotlist",limit= "5",cid=category.id,type="hot"%}
-                            {%for v in hotlist%}
-                            <div class="row tab-post"><!-- post -->
-                                {%if v.cover_id%}
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <a href="{{v.name|get_url(v.id)}}">
-                                        <img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
-                                    </a>
-                                </div>
-                                {%endif%}
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
-                                    <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
-                                </div>
-                            </div><!-- /post -->
-                            {%endfor%}
-
-                        </div>
-                        <!-- /POPULAR -->
-
-
-                        <!-- RECENT -->
-                        <div id="tab_2" class="tab-pane">
-                            {% topic data = "newlist",limit= "5",cid=category.id%}
-                            {%for v in newlist%}
-                            <div class="row tab-post"><!-- post -->
-                                {%if v.cover_id%}
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <a href="{{v.name|get_url(v.id)}}">
-                                        <img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
-                                    </a>
-                                </div>
-                                {%endif%}
-                                <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
-                                    <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
-                                </div>
-                            </div><!-- /post -->
-                            {%endfor%}
-                            <!-- /post -->
-                        </div>
-                        <!-- /RECENT -->
-
-                    </div>
-
-                </div>
-                <!-- JUSTIFIED TAB -->
-
-
-                <!-- TAGS -->
-                <h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
-                <div class="hidden-xs margin-bottom-20">
-                    {% keywords data ="kws",type="hot"%}
-                    {%for key in kws%}
-                    <a class="tag" href="{{key.url}}">
-                        <span class="txt">{{key.keyname}}</span>
-                        <span class="num">{{key.videonum}}</span>
-                    </a>
-                    {%endfor%}
-                </div>
-
-
-
-                <hr />
-
-
-                <!-- SOCIAL ICONS -->
-                <div class="hidden-xs margin-top-30 margin-bottom-60">
-                    <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-facebook"></i>
-                    </a>
-
-                    <a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                    </a>
-
-                    <a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-                        <i class="icon-gplus"></i>
-                        <i class="icon-gplus"></i>
-                    </a>
-
-                    <a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
-                        <i class="icon-linkedin"></i>
-                        <i class="icon-linkedin"></i>
-                    </a>
-
-                    <a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
-                        <i class="icon-rss"></i>
-                        <i class="icon-rss"></i>
-                    </a>
-                </div>
-
-            </div>
         </div>
 
     </div>

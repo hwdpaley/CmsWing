@@ -65,9 +65,9 @@ CLASSES:
                         <td>
                             {%if 0 == nsobj[val.option.identifier] or null == nsobj[val.option.identifier]%}
                             <span class="btn btn-danger btn-xs relative">全部</span> {%else%}
-                            <a href="{{cate.url}}-{{order}}-{{group_id}}-{{sortid}}-{{0|sort_url(val.option.identifier,typevar,nsobj)}}{{http.config('view.file_ext')}}" class="btn btn-clean btn-xs relative">全部</a> {%endif%} {%for v in val.rules %} {%if v.id|sort_act(nsobj[val.option.identifier])%}
+                            <a href="/tuoke" class="btn btn-clean btn-xs relative">全部</a> {%endif%} {%for v in val.rules %} {%if v.id|sort_act(nsobj[val.option.identifier])%}
                             <span class="btn btn-danger btn-xs relative">{{v.name}}{{val.option.unit}}</span> {%else%}
-                            <a href="{{cate.url}}-{{order}}-{{group_id}}-{{sortid}}-{{v.id|sort_url(val.option.identifier,typevar,nsobj)}}{{http.config('view.file_ext')}}" class="btn btn-clean btn-xs relative">{{v.name}}{{val.option.unit}}</a> {%endif%} {%endfor%}
+                            <a href="/tuoke" class="btn btn-clean btn-xs relative">{{v.name}}{{val.option.unit}}</a> {%endif%} {%endfor%}
                             <!--子栏目-->
                             {%for v in val.rules %} {%if v.id|sort_act(nsobj[val.option.identifier])%} {% if v.children%}
                             <div class="subtsm">
@@ -100,7 +100,7 @@ CLASSES:
             <div class="col-md-12 col-sm-12">
                 <div class="text-left">
                     <ul class="nav nav-pills mix-filter">
-                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="{{cate.url}}{{http.config('view.file_ext')}}">全部</a></li>
+                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/tuoke">全部</a></li>
                         {% groups data="groups",cid=category.id%} {%for v in groups%}
                         <li class="filter {%if group_id==v.id%}active{%endif%}"><a href="{{cate.url}}-{{order}}-{{v.id}}{%if sort%}-{{sortid}}{%endif%}{%if sorturl %}-{%endif%}{{sorturl}}{{http.config('view.file_ext')}}">{{v.name}}</a></li>
                         {%endfor%}

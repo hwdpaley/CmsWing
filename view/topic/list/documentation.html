@@ -1,4 +1,4 @@
-{% extends "../inc/base.html" %}
+{% extends "../inc/picture_nofoot_base.html" %}
 {% block content %}
 {%set cate = category.id|get_cate()%}
 <!--
@@ -18,13 +18,13 @@ CLASSES:
 .shadow-before-3 	= shadow 3 header top
 .shadow-after-3 	= shadow 3 header bottom
 -->
-<section class="page-header page-header-xs " >
+<section class="page-header dark page-header-xs">
     <div class="container">
-{#
+
         <h1>{{category.title}}</h1>
-#}
+
         <!-- breadcrumbs -->
-        <ol class="breadcrumb breadcrumb-inverse">
+        <ol class="breadcrumb">
             <li><a href="/">首页</a></li>
             {%for val in breadcrumb %}
             {% if val.id == category.id %}
@@ -36,16 +36,28 @@ CLASSES:
             {% endfor %}
         </ol><!-- /breadcrumbs -->
         <!-- page tabs -->
-        {%column data="column",pid=category.id%}
+        {%if category.pid !=0%}{%column data="column",pid=category.pid%}{%else%}{%column data="column",cid=category.id%}{%endif%}
         {%if column%}
         <ul class="page-header-tabs list-inline">
 
-            <!--<li class="active"><a href="portfolio-masonry-3-columns.html">With Gutter</a></li>-->
+            <!-- <li {%if breadcrumb[0].id == category.id %}class="active"{%endif%}><a href="{{breadcrumb[0].url}}{{http.config('view.file_ext')}}">全部</a></li> -->
             {%for val in column%}
             <li  {%if val.id == category.id %}class="active"{%endif%}><a href="{{val.url}}{{http.config('view.file_ext')}}">{{val.name}}</a></li>
             {%endfor%}
         </ul>
         {%endif%}
+        <!-- /page tabs -->
+
+        <!-- page tabs -->
+        <!-- {%column data="cate",pid=category.pid%}
+        {%if cate%}
+        <ul class="page-header-tabs list-inline">
+
+            {%for val in cate%}
+            <li  {%if val.id == category.id %}class="active"{%endif%}><a href="{{val.url}}{{http.config('view.file_ext')}}">{{val.name}}</a></li>
+            {%endfor%}
+        </ul>
+        {%endif%} -->
         <!-- /page tabs -->
     </div>
 </section>
@@ -155,7 +167,7 @@ CLASSES:
                 <div class="text-left">
                     <ul class="nav nav-pills mix-filter">
 
-                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="{{cate.url}}{{http.config('view.file_ext')}}">全部</a></li>
+                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/wenzhangceshi">全部</a></li>
                         {% groups data="groups",cid=category.id%}
                         {%for v in groups%}
                         <li class="filter {%if group_id==v.id%}active{%endif%}"><a href="{{cate.url}}-{{order}}-{{v.id}}{%if sort%}-{{sortid}}{%endif%}{%if sorturl %}-{%endif%}{{sorturl}}{{http.config('view.file_ext')}}">{{v.name}}</a></li>
@@ -163,7 +175,7 @@ CLASSES:
                     </ul>
                     {%if category.id|priv(controller.user.roleid,'add',0,false)%}
                     <!--投稿按钮-->
-                    <div class="btn-group btn-group-sm pull-right">
+                    <!-- <div class="btn-group btn-group-sm pull-right">
                         <a {%if model|length> 1 %} data-toggle="dropdown" {% endif %} class="btn btn-primary btn-sm document_add
                             dropdown-toggle {% if allow == 0 %}disabled{% endif %}" {%if model|length
                             == 1 %} href="/uc/publish/add/model_id/{{modellist[0].id}}/pid/0/cate_id/{{cate.id}}/group_id/{{group_id}}/sortid/{{sortid}}"{%endif%}
@@ -175,12 +187,9 @@ CLASSES:
                             <li> <a href="/uc/publish/add/model_id/{{val.id}}/pid/0/cate_id/{{cate.id}}/group_id/{{group_id}}/sortid/{{sortid}}"
                                     class="text-info">添加{{val.title}}</a></li>
                             {% endfor %}
-
-                            <!--<li class="divider"></li>-->
-                            <!--<li><a href="#">添加内容</a></li>-->
                         </ul>
                         {% endif %}
-                    </div>
+                    </div> -->
                     <!--//投稿按钮-->
                     {%endif%}
                     <div class="btn-group btn-group-sm pull-right">
@@ -203,16 +212,16 @@ CLASSES:
 
                             <div class="thumbnail">
                                 <!-- product image(s) -->
-                                <a class="shop-item-image" href="{{val.name|get_url(val.id)}}" target="_blank">
-                                    <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=265,h=360')}}" alt="shop first image" />
+                                <a class="shop-item-image" href="{{val.name|get_url(val.id)}}" >
+                                    <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="shop first image" />
                                 </a>
                                 <!-- /product image(s) -->
 
                                 <!-- hover buttons -->
-                                <div class="shop-option-over"><!-- replace data-item-id width the real item ID - used by js/view/demo.shop.js -->
+                                <!-- <div class="shop-option-over">
                                     <a class="btn btn-default add-wishlist" href="#" data-item-id="10" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart nopadding"></i></a>
                                     <a class="btn btn-default add-compare" href="#" data-item-id="10" data-toggle="tooltip" title="Add To Compare"><i class="fa fa-bar-chart-o nopadding" data-toggle="tooltip"></i></a>
-                                </div>
+                                </div> -->
                                 <!-- /hover buttons -->
                             </div>
 
@@ -220,15 +229,15 @@ CLASSES:
                                 <h2>{{val.title}}</h2>
 
                                 <!-- rating -->
-                                <div class="shop-item-rating-line">
-                                    <div class="rating rating-5 size-13"><!-- rating-0 ... rating-5 --></div>
-                                </div>
+                                <!-- <div class="shop-item-rating-line">
+                                    <div class="rating rating-5 size-13"></div>
+                                </div> -->
                                 <!-- /rating -->
 
                                 <!-- price -->
-                                <div class=" size-12">
+                                <!-- <div class=" size-12">
                                     {{val.update_time|dateformat('Y-m-d H:i')}}
-                                </div>
+                                </div> -->
                                 <!-- /price -->
                             </div>
 
@@ -241,7 +250,7 @@ CLASSES:
                 </ul>
 
                 <!-- PAGINATION -->
-                <div class="text-left">
+                <div class="text-right">
                     <!-- Pagination Default -->
                     {{pagination | safe}}
                     <!-- /Pagination Default -->

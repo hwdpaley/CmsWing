@@ -48,46 +48,20 @@
             <!-- LEFT -->
 
             <div class="col-md-12 col-sm-12">
-
+                {% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%}
                 <!-- REVOLUTION SLIDER -->
+                {% if slider.length>0%}
                 <div class="slider fullwidthbanner-container roundedcorners margin-bottom-30">
-                    <!--
-                        Navigation Styles:
-
-                            data-navigationStyle="" theme default navigation
-
-                            data-navigationStyle="preview1"
-                            data-navigationStyle="preview2"
-                            data-navigationStyle="preview3"
-                            data-navigationStyle="preview4"
-
-                        Bottom Shadows
-                            data-shadow="1"
-                            data-shadow="2"
-                            data-shadow="3"
-
-                        Slider Height (do not use on fullscreen mode)
-                            data-height="300"
-                            data-height="350"
-                            data-height="400"
-                            data-height="450"
-                            data-height="500"
-                            data-height="550"
-                            data-height="600"
-                            data-height="650"
-                            data-height="700"
-                            data-height="750"
-                            data-height="800"
-                    -->
+                    
                     <div class="fullwidthbanner" data-height="500" data-shadow="3" data-navigationStyle="">
                         <ul class="hide">
-                            {% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%}
+                            
                             {% for v in slider%}
                             <!-- SLIDE  -->
                             <li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
                                 <img src="/static/assets/images/1x1.png" data-lazyload="{{v.cover_id|get_pic('m=1,w=848,h=500')}}" alt="" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
 
-                                <div class="tp-caption lft start"
+                                <!-- <div class="tp-caption lft start"
                                      data-x="0"
                                      data-y="0"
                                      data-speed="750"
@@ -139,7 +113,7 @@
                                      data-endelementdelay="0.1"
                                      data-endspeed="300" >
                                     {{v.description|insert_flg("<br>",20)|safe}}
-                                </div>
+                                </div> -->
                             </li>
                             {%endfor%}
 
@@ -149,6 +123,7 @@
                         <div class="tp-bannertimer"><!-- progress bar --></div>
                     </div>
                 </div>
+                {%endif%}
                 <!-- /REVOLUTION SLIDER -->
                 <ul class="nav nav-tabs nav-button-tabs">
                     <!-- side navigation -->
@@ -175,7 +150,7 @@
                         <div class="row">
                             {% topic data = "list",limit= "12",cid=category.id,issub=1,uid=userid%}
                             {% for val in list %}
-                            <div class="col-md-4 col-sm-4 mix "><!-- item -->
+                            <div class="col-md-3 col-sm-3 mix "><!-- item -->
 
                                 <div class="item-box">
                                     <figure>
@@ -197,7 +172,7 @@
 										</span>
 
                                         <!-- overlay title -->
-                                        <div class="item-box-overlay-title">
+                                        <!-- <div class="item-box-overlay-title">
                                             <h3 class="size-14">{{val.title|block(16)}}</h3>
                                             <ul class="list-inline categories nomargin">
                                                 <li><a href="#"><i class="fa fa-clock-o"></i>
@@ -209,7 +184,8 @@
                                                     <span class="font-lato">{{val.uid|get_nickname}}</span>
                                                 </a></li>
                                             </ul>
-                                        </div><!-- /overlay title -->
+                                        </div> -->
+                                        <!-- /overlay title -->
 
                                         <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=600,h=399')}}" width="600" height="399" alt="">
                                     </figure>
@@ -290,150 +266,11 @@
     </div>
     <!-- RIGHT -->
 
-    <div class="col-md-3 col-sm-3">
+    
 
-        
-        <!-- <div class="inline-search clearfix margin-bottom-30">
-            <form action="" method="get" class="widget_search">
-                <input type="search" placeholder="Start Searching..." id="s" name="s" class="serch-input">
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-        </div>
-        
+   
 
-        <hr />
-
-        
-        {%column data="cate",cid=category.id,isnum="1"%}
-        {%if cate%}
-        <div class="side-nav margin-bottom-20 margin-top-20">
-            <div class="side-nav-head">
-                <button class="fa fa-bars"></button>
-                <h4>{{category.title}} 子分类</h4>
-            </div>
-            <ul class="list-group list-group-bordered list-group-noicon uppercase">
-                {%for val in cate%}
-                <li class="list-group-item"><a href="{{val.url}}"><span class="size-11 text-muted pull-right">({{val.doc_num}})</span> {{val.name}}</a></li>
-                {%endfor%}
-            </ul>
-            
-        </div>
-        {%endif%}
-        <div class="tabs nomargin-top hidden-xs margin-bottom-10">
-
-            
-            <ul class="nav nav-tabs nav-bottom-border nav-justified">
-                <li class="active">
-                    <a href="#tab_1" data-toggle="tab">
-                        最热
-                    </a>
-                </li>
-                <li>
-                    <a href="#tab_2" data-toggle="tab">
-                        最新
-                    </a>
-                </li>
-            </ul>
-
-            
-            <div class="tab-content margin-bottom-0 margin-top-10">
-
-                
-                <div id="tab_1" class="tab-pane active">
-                    
-                    {% topic data = "hotlist",limit= "5",cid=category.id,type="hot",uid=userid%}
-                    
-                    {%for v in hotlist%}
-                    <div class="row tab-post">
-                        {%if v.cover_id%}
-                        <div class="col-md-3 col-sm-3 col-xs-3">
-                            <a href="{{v.name|get_url(v.id)}}">
-                                <img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
-                            </a>
-                        </div>
-                        {%endif%}
-                        <div class="col-md-9 col-sm-9 col-xs-9">
-                            <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
-                            <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
-                        </div>
-                    </div>
-                    {%endfor%}
-
-                </div>
-                <div id="tab_2" class="tab-pane">
-
-                    {% topic data = "newlist",limit= "5",cid=category.id,uid=userid%}
-                    {%for v in newlist%}
-                    <div class="row tab-post">
-                        {%if v.cover_id%}
-                        <div class="col-md-3 col-sm-3 col-xs-3">
-                            <a href="{{v.name|get_url(v.id)}}">
-                                <img src="{{v.cover_id|get_pic('m=1,w=50,h=50')}}" width="50" alt="" />
-                            </a>
-                        </div>
-                        {%endif%}
-                        <div class="col-md-9 col-sm-9 col-xs-9">
-                            <a href="{{v.name|get_url(v.id)}}" class="tab-post-link">{{v.title}}</a>
-                            <small>{{v.update_time|dateformat('Y-m-d H:i')}}</small>
-                        </div>
-                    </div>
-                    {%endfor%}
-                    
-                </div>
-            </div>
-
-        </div> -->
-        
-
-
-        <!-- TAGS -->
-        <!-- <h3 class="hidden-xs size-16 margin-bottom-10">标签</h3>
-        <div class="hidden-xs margin-bottom-20">
-            {% keywords data ="kws",type="hot"%}
-            {%for key in kws%}
-            <a class="tag" href="{{key.url}}">
-                <span class="txt">{{key.keyname}}</span>
-                <span class="num">{{key.videonum}}</span>
-            </a>
-            {%endfor%}
-        </div> -->
-
-        
-        
-        
-
-
-        <!-- SOCIAL ICONS -->
-        <!-- <div class="hidden-xs margin-top-30 margin-bottom-60">
-            <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-                <i class="icon-facebook"></i>
-                <i class="icon-facebook"></i>
-            </a>
-
-            <a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="icon-twitter"></i>
-                <i class="icon-twitter"></i>
-            </a>
-
-            <a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-                <i class="icon-gplus"></i>
-                <i class="icon-gplus"></i>
-            </a>
-
-            <a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
-                <i class="icon-linkedin"></i>
-                <i class="icon-linkedin"></i>
-            </a>
-
-            <a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
-                <i class="icon-rss"></i>
-                <i class="icon-rss"></i>
-            </a>
-        </div> -->
-
-    </div>
+    
     </div>
 
 
