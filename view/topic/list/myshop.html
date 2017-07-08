@@ -130,7 +130,7 @@ CLASSES:
                     </div>
                 </div>
                 <ul class="shop-item-list row list-inline nomargin">
-                    {% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid,isstu=1 %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
+                    {% topic data = "list",limit= "12",cid=category.id,issub=1,uid=userid,isstu=1 %} {% for val in list %} {% set categoryname = val.category_id|get_cate %}
                     <!-- POST ITEM -->
                     <!-- <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix"> -->
                     <!-- IMAGE -->
@@ -141,10 +141,7 @@ CLASSES:
                                 <a onclick="ShowProduct('{{val.id}}');" title="{{val.title}}">
                                     <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
                                 </a>
-                                {%if val.online==1%}
-                                <div class="vip">
-                                </div>
-                                {%endif%}
+                                
                             </div>
                             <div class="text-center" style="margin-top:5px;">
                                 <h5>{{val.title}}</h5>
@@ -156,11 +153,7 @@ CLASSES:
                                     <button class="btn btn-info ">编辑</button>
                                 </a>
                                 <button onclick="tuokeDelete('{{val.id}}');" class="btn btn-danger ">删除</button>
-                                {%if val.online!=1%}
-                                <button onclick="tuokeupdown('{{val.id}}','11');" class="btn btn-primary ">上架</button>
-                                {%else%}
-                                <button onclick="tuokeupdown('{{val.id}}','10');" class="btn btn-info ">下架</button>
-                                {%endif%}
+                                
                                 <button onclick="WxListCode('{{val.id}}');" class="btn btn-success btn-right">二维码</button>
                                 {%else%}
                                 <button onclick="tuokeCopy('{{val.id}}');" class="btn btn-success btn-right" style="margin-left:5px; 
@@ -359,7 +352,7 @@ function tuokeCopy(id) {
         method: "post",
         data: {
             "docId": id,
-            "cname":"mytuoke"
+            "cname":"myshop"
             // "name": user_name.val(),
             // "phone": user_phone.val(),
             // csrfmiddlewaretoken: $.cookie("csrftoken")

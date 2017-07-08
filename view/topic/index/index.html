@@ -8,403 +8,10 @@
         {% include "../inc/banner.html" %}
         <div class="row">
             <div class="col-md-12">
-                
                 <div class="slider fullwidthbanner-container roundedcorners margin-bottom-0">
-                    
-                </div>
-                
-            </div>
-            
-        </div>
-    </div>
-</section>
-<section style="display: none">
-    <div class="container">
-        <div class="row">
-            <!-- RIGHT -->
-            <div class="col-sm-12">
-                <!-- <ul class="nav nav-tabs nav-justified">
-					<li class="active"><a href="#new" data-toggle="tab">最新</a></li>
-					<li ><a href="#hot" data-toggle="tab">最热</a></li>
-					<li><a href="#wenda" data-toggle="tab">问答</a></li>
-					{#
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a></li>
-							<li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
-						</ul>
-					</li>
-					#}
-				</ul> -->
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="new">
-                        {% topic data = "newlist",limit="10",uid=userid %} {% for val in newlist %} {% set categoryname = val.category_id|get_cate %} {%if val.model_id==4%} {% set pic = val.pics|strToArray%}
-                        <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <!-- IMAGE -->
-                            {% if pic[0]>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
-                                <a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">
-                                    <img class="img-responsive" src="{{pic[0]|get_pic('m=1,w=200,h=120')}}" alt="">
-                                </a>
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">{{val.title|truncate(50, true, "...")}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>
-                                    <div class="shop-item-price" style="font-size: 20px;margin-top: 6px;font-weight: bold; float: left">
-                                        {% if val.price|get_price_format('2') %}<span class="line-through" style="color: #999;font-size: 15px;display: inline-block;padding: 0 10px;font-weight: 400;">¥{{val.price|get_price_format('2')}}</span>{%endif%} ¥{{val.price|get_price_format('1')}}
-                                    </div>
-                                    <div class="shop-item-buttons" style="float: left;margin-left: 15px">
-                                        <a class="btn btn-default" href="{{val.name|get_url(val.id)}}" target="_blank"><i class="fa fa-cart-plus"></i> 立即购买</a>
-                                        <!-- replace data-item-id width the real item ID - used by js/view/demo.shop.js -->
-                                        <a class="btn btn-default add-wishlist" href="#" data-item-id="1" data-toggle="tooltip" title="" data-original-title="Add To Wishlist"><i class="fa fa-heart nopadding"></i></a>
-                                        <a class="btn btn-default add-compare" href="#" data-item-id="1" data-toggle="tooltip" title="" data-original-title="Add To Compare"><i class="fa fa-bar-chart-o nopadding" data-toggle="tooltip"></i></a>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- /POST ITEM -->
-                        {%elif val.model_id === 10 %}
-                        <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <div class="ribbon">
-                                <div class="ribbon-inner">{% if null|getnow
-                                    < val.create_time %}未开幕{%elif (null|getnow> val.create_time) and (null|getnow
-                                        < val.deadline)%}展览中{%elif null|getnow> val.deadline%}已结束{%endif%}</div>
-                            </div>
-                            <!-- IMAGE -->
-                            {% if val.cover_id>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
-                                <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">{{val.title|truncate(50, true, "...")}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="alert alert-mini alert-success ">
-                                    <!-- SUCCESS -->
-                                    <strong></strong> <span style="width: 60px"><i class="fa fa-calendar-check-o"></i> 开始:</span> {{ val.create_time|dateformat('Y-m-d') }} <span style="width: 60px"><i class="fa fa-calendar-times-o"></i> 结束:</span> {{val.deadline|dateformat('Y-m-d')}} <span style="width: 60px"><i class="fa fa-map-marker"></i> 地点:</span> {{val.id|getmodelfield(val.model_id,'addr')}}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /POST ITEM -->
-                        {%else%}
-                        <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <!-- IMAGE -->
-                            {% if val.cover_id>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
-                                <a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">
-                                    <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
-                                </a>
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">{{val.title|truncate(50, true, "...")}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>{{val.description|truncate(90, true, "...")}}</p>
-                            </div>
-                        </div>
-                        <!-- /POST ITEM -->
-                        {%endif%} {%endfor%}
-                    </div>
-                    <div class="tab-pane fade" id="hot">
-                        {% topic data ="hotlist",limit="10",type="hot",uid=userid%} 
-                        {% for val in hotlist %} 
-                        {% set categoryname = val.category_id|get_cate %} 
-                        {%if val.model_id==4%} 
-                        	{% set pic = val.pics|strToArray%}
-                        <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <!-- IMAGE -->
-                            {% if pic[0]>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
-                                <img class="img-responsive" src="{{pic[0]|get_pic('m=1,w=200,h=120')}}" alt="">
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">{{val.title}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>
-                                    <div class="shop-item-price" style="font-size: 20px;margin-top: 6px;font-weight: bold; float: left">
-                                        {% if val.price|get_price_format('2') %}<span class="line-through" style="color: #999;font-size: 15px;display: inline-block;padding: 0 10px;font-weight: 400;">¥{{val.price|get_price_format('2')}}</span>{%endif%} ¥{{val.price|get_price_format('1')}}
-                                    </div>
-                                    <div class="shop-item-buttons" style="float: left;margin-left: 15px">
-                                        <a class="btn btn-default" href="{{val.name|get_url(val.id)}}" target="_blank"><i class="fa fa-cart-plus"></i> 立即购买</a>
-                                        <!-- replace data-item-id width the real item ID - used by js/view/demo.shop.js -->
-                                        <a class="btn btn-default add-wishlist" href="#" data-item-id="1" data-toggle="tooltip" title="" data-original-title="Add To Wishlist"><i class="fa fa-heart nopadding"></i></a>
-                                        <a class="btn btn-default add-compare" href="#" data-item-id="1" data-toggle="tooltip" title="" data-original-title="Add To Compare"><i class="fa fa-bar-chart-o nopadding" data-toggle="tooltip"></i></a>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- /POST ITEM -->
-                        {%elif val.model_id === 10 %}
-                        <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <div class="ribbon">
-                                <div class="ribbon-inner">{% if null|getnow
-                                    < val.create_time %}未开幕{%elif (null|getnow> val.create_time) and (null|getnow
-                                        < val.deadline)%}展览中{%elif null|getnow> val.deadline%}已结束{%endif%}</div>
-                            </div>
-                            <!-- IMAGE -->
-                            {% if val.cover_id>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
-                                <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">{{val.title}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="alert alert-mini alert-success ">
-                                    <!-- SUCCESS -->
-                                    <strong></strong> <span style="width: 60px"><i class="fa fa-calendar-check-o"></i> 开始:</span> {{ val.create_time|dateformat('Y-m-d') }} <span style="width: 60px"><i class="fa fa-calendar-times-o"></i> 结束:</span> {{val.deadline|dateformat('Y-m-d')}} <span style="width: 60px"><i class="fa fa-map-marker"></i> 地点:</span> {{val.id|getmodelfield(val.model_id,'addr')}}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /POST ITEM -->
-                        {%else%}
-                        <!-- POST ITEM -->
-                        <div class="blog-post-item padding-bottom-20 margin-bottom-20 clearfix">
-                            <!-- IMAGE -->
-                            {% if val.cover_id>0 %}
-                            <figure class="blog-item-small-image margin-bottom-0">
-                                <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" alt="">
-                            </figure>
-                            {% endif %}
-                            <div class="blog-item-small-content">
-                                <h2><a href="{{val.name|get_url(val.id)}}" target="_blank" title="{{val.title}}">{{val.title}}</a></h2>
-                                <ul class="blog-post-info list-inline padding-bottom-10">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o"></i>
-                                            <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                            <span class="font-lato">{{val.view}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <a class="category" href="{{categoryname.url}}">
-                                            <span class="font-lato">{{categoryname.name}}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>
-                                            <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>{{val.description|truncate(90, true, "...")}}</p>
-                            </div>
-                        </div>
-                        <!-- /POST ITEM -->
-                        {%endif%} {%endfor%}
-                    </div>
-                    <div class="tab-pane fade" id="wenda">
-                        <div class="timeline">
-                            <div class="timeline-hline">
-                                <!-- horizontal line cache='1000'-->
-                            </div>
-                            {%model data="list",table="question",order="update_time DESC",limit="10"%} {% for val in list %} {% set categoryname = val.category_id|get_cate %} {% set imgs= val.detail|img_text_view(200,120)%}
-                            <!-- POST ITEM -->
-                            <div class="blog-post-item blog-post-item-inverse padding-top-20 padding-bottom-20 margin-bottom-0 clearfix">
-                                <div class="timeline-entry">
-                                    <!-- .rounded = entry -->
-                                    <a href="#"><img src="/uc/index/avatar/uid/{{val.uid}}" style="width: 58px;height: 58px; margin-top: -10px"></a>
-                                    <div class="timeline-vline">
-                                        <!-- vertical line -->
-                                    </div>
-                                </div>
-                                <!-- IMAGE -->
-                                {% if imgs|length==1 %}
-                                <figure class="blog-item-small-image margin-bottom-0">
-                                    <img class="img-responsive" src="{{imgs[0]}}" alt="">
-                                </figure>
-                                {% endif %}
-                                <div class="blog-item-small-content">
-                                    <h2><a href="/mod/question/{{val.id}}{{http.config('view.file_ext')}}" title="{{val.title}}">{{val.title}}</a></h2>
-                                    <ul class="blog-post-info list-inline padding-bottom-10">
-                                        <li>
-                                            <a class="" href="{{categoryname.url}}">
-                                                <span class="label label-light">{{categoryname.name}}</span>
-                                            </a>
-                                        </li>
-                                        <li>{%if val.answer_users>0%}
-                                            <a href="#">
-                                                <span class="font-lato">{{val.answer_users|get_nickname}}</span>
-                                            </a>
-                                            <span class="font-lato"> 回复了问题</span> {%else%}
-                                            <a href="#">
-                                                <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                            </a>
-                                            <span class="font-lato"> 发起了问题</span> {%endif%}
-                                        </li>
-                                        <li>
-                                            <span class="font-lato">
-                                {{val.focus_count}} 人关注
-                                    </span>
-                                        </li>
-                                        <li>
-                                            <span class="font-lato">{{val.answer_count}} 个回复</span>
-                                        </li>
-                                        <li>
-                                            <span class="font-lato">{{val.view}} 次浏览</span>
-                                        </li>
-                                        <li>
-                                            <span class="font-lato"> {{val.update_time|moment}}</span>
-                                        </li>
-                                    </ul>
-                                    {% if imgs|length>1 %}
-                                    <div class="row margin-bottom-10">
-                                        {%set i = 0%} {%for img in imgs%} {%if i
-                                        < 4 %} <div class="col-md-3"><img class="img-responsive" src="{{img}}" alt=""></div>
-                                    {%endif%} {%set i=i+1%} {%endfor%}
-                                </div>
-                                {%endif%}
-                                <p>{{val.detail|delhtmltags|truncate(90, true, "...")|safe}}</p>
-                            </div>
-                        </div>
-                        
-                        {%endfor%}
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <section>
@@ -412,48 +19,54 @@
         <div class="container">
             <div class="row">
                 <ol id="home-data-list">
-                    <!-- <li>
+                    <li>
+                        {% topic data ="hotlist",limit="1",cid=85,type="today",isstu=1,uid=userid%} 
                         <div class="lineH60">
                             <img src="/static/admin/img/icon_recent.png" class="section-one-header"></div>
                         <ul class="common-list" id="recent-content">
+                            {% for v in hotlist %}
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                <a href="/site/videos/30624611">
+                                <a href="{{v|get_url_vip(userInfo)}}">
                                     <div class="width100-relative">
-                                        <img src="https://ohtagtxxx.qnssl.com/12.jpg" class="width100">
+                                        <img src="{{v.cover_id|get_pic('')}}" class="width100">
                                         <div class="type-mark">来自美媒视频</div>
                                     </div>
                                     <div class="width100-relative list-info">
-                                        <label class="title-text-hidden">我的滑板鞋-舞蹈</label>
+                                        <label class="title-text-hidden">{{v.title}}</label>
                                     </div>
                                 </a>
                             </li>
+                            {%endfor%}
                         </ul>
-                    </li> -->
+                    </li>
                     <li style="padding-top: -15px;">
                         <div class="header-title wrapper">
                             <h2 class="icon_video">美媒视频</h2>
                             <a href="/shipinceshi" class="home_more">更多美媒视频</a>
                         </div>
-                        
-                        
                         <ul class="common-list">
-                        	{% topic data ="hotlist",limit="4",cid=85,type="hot",uid=userid%} 
-							{% for v in hotlist %} 
+                            {% topic data ="hotlist",limit="4",cid=85,type="hot",isstu=1,uid=userid%} {% for v in hotlist %}
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                <a href="{{v.name|get_url(v.id)}}">
+                                
+                                <a href="{{v|get_url_vip(userInfo)}}">
                                     <div class="width100-relative">
                                         <img src="{{v.cover_id|get_pic('')}}" class="width100">
+                                        {%if v.vip==1%}
                                         <div class="vip">
                                         </div>
+                                        {%endif%}
                                     </div>
                                     <div class="width100-relative list-info">
                                         <label class="title-text-hidden">{{v.title}}</label>
-                                        <p><span class="c3 font14">{{v.view}}人看过</span></p>
+                                        <p><span class="c3 font14">{{v.view}}人看过
+                                        {%if v.wkprice>0%}
+                                        </span><span class="c3 font14 pull-right">¥{{v.wkprice}}&nbsp;元</span>
+                                        {%endif%}
+                                        </p>
                                     </div>
                                 </a>
                             </li>
                             {%endfor%}
-                            
                         </ul>
                     </li>
                     <li style="padding-top: -15px;">
@@ -462,23 +75,22 @@
                             <a href="/music" class="home_more">更多美媒音频</a>
                         </div>
                         <ul class="common-list">
-                        	{% topic data ="hotlist",limit="4",cid=138,type="hot",issub=1,uid=userid%} 
-							{% for v in hotlist %} 
+                            {% topic data ="hotlist",limit="4",cid=138,type="hot",issub=1,isstu=1,uid=userid%} {% for v in hotlist %}
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                <a href="{{v.name|get_url(v.id)}}">
+                                <a href="{{v|get_url_vip(userInfo)}}">
                                     <div class="width100-relative">
-                                        <img src="{{v.cover_id|get_pic('')}}" class="width100">
+                                        <img src="{{v.cover_id|get_pic('')}}" class="width100"> {%if v.vip==1%}
                                         <div class="vip">
                                         </div>
+                                        {%endif%}
                                     </div>
                                     <div class="width100-relative list-info">
-                                        <label class="title-text-hidden">{{v.title}}</label>
+                                        <label class="title-text-hidden">{{v.title|block(20)}}</label>
                                         <p><span class="c3 font14">{{v.view}}人看过</span></p>
                                     </div>
                                 </a>
                             </li>
                             {%endfor%}
-                            
                         </ul>
                     </li>
                     <li>
@@ -488,7 +100,7 @@
                         </div>
                         <ul class="common-list">
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                <a href="/renwu">
+                                <a href="/symodel">
                                     <div class="width100-relative">
                                         <img src="https://ohtawbude.qnssl.com/syms.jpg" class="width100">
                                     </div>
@@ -518,7 +130,8 @@
                                 </a>
                             </li>
                             <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                <a href="/zhinengyingjian">
+                                <!-- <a href="/zhinengyingjian"> -->
+                                <a href="javascript:_show();">
                                     <div class="width100-relative">
                                         <img src="https://ohtawbude.qnssl.com/qnyx.jpg" class="width100">
                                     </div>
@@ -535,8 +148,8 @@
     </div>
 </section>
 <!--
-controlls-over		= navigation buttons over the image
-buttons-autohide 	= navigation buttons visible on mouse hover only
+controlls-over      = navigation buttons over the image
+buttons-autohide    = navigation buttons visible on mouse hover only
 
 data-plugin-options:
 "singleItem": true
@@ -545,32 +158,32 @@ data-plugin-options:
 "pagination": true
 -->
 <!-- <section class="heading-title " style="padding-top: 10px ;padding-bottom: 10px;background-color: rgba(0,0,0,0.05)">
-	<div class="container">
+    <div class="container">
 
-		
-		<div class="heading-title heading-border heading-color nomargin">
-			<h4 style="background-color: rgba(0,0,0,0);color: #333">友情链接 <span>Friendship link</span></h4>
-			<p class="font-lato size-14"><a href="/ext/link/index/apply">申请友情链接</a> | <a href="/ext/link/index">更多&gt;&gt;</a> </p>
-		</div>
+        
+        <div class="heading-title heading-border heading-color nomargin">
+            <h4 style="background-color: rgba(0,0,0,0);color: #333">友情链接 <span>Friendship link</span></h4>
+            <p class="font-lato size-14"><a href="/ext/link/index/apply">申请友情链接</a> | <a href="/ext/link/index">更多&gt;&gt;</a> </p>
+        </div>
 
-	</div>
+    </div>
 </section> -->
 <!-- <div class="text-center margin-top-20 margin-bottom-10 container link">
-	<div class="owl-carousel nomargin" data-plugin-options='{"items":6, "singleItem": false, "autoPlay": true}'>
-		{% model data ="link",table="ext_link",where='{"passed":1}',limit="24",order="sort ASC"%}
-		{%for l in link%}
-		{%if l.linktype==0%}
-		<div class="linkbox alternate">
-			<a href="{{l.url}}" target="_blank" title="{{l.name}}">{{l.name}}</a>
-		</div>
-		{%else%}
-		<div class="linkbox alternate">
-			<a href="{{l.url}}" target="_blank" title="{{l.name}}">
-				<img class="img-responsive" src="{{l.logo}}" alt="{{l.name}}">
-			</a>
-		</div>
-		{%endif%}
-		{%endfor%}
-	</div>
+    <div class="owl-carousel nomargin" data-plugin-options='{"items":6, "singleItem": false, "autoPlay": true}'>
+        {% model data ="link",table="ext_link",where='{"passed":1}',limit="24",order="sort ASC"%}
+        {%for l in link%}
+        {%if l.linktype==0%}
+        <div class="linkbox alternate">
+            <a href="{{l.url}}" target="_blank" title="{{l.name}}">{{l.name}}</a>
+        </div>
+        {%else%}
+        <div class="linkbox alternate">
+            <a href="{{l.url}}" target="_blank" title="{{l.name}}">
+                <img class="img-responsive" src="{{l.logo}}" alt="{{l.name}}">
+            </a>
+        </div>
+        {%endif%}
+        {%endfor%}
+    </div>
 </div> -->
 {% endblock %} {%block script%} {%endblock%}

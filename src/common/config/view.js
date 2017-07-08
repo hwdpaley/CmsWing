@@ -191,7 +191,9 @@ export default {
                 env.addFilter("dateformat", function (extra, date) {
                     return dateformat(date, extra);
                 })
-
+                env.addFilter("dateformat_", function (extra, date) {
+                    return dateformat(date, extra);
+                })
                 /**
                  * 获取行为类型
                  * @param intger type 类型
@@ -252,6 +254,10 @@ export default {
                 env.addFilter('get_url', (name, id) => {
                     return get_url(name, id)
                 })
+                env.addFilter('get_url_vip', async(doc, userInfo, callback) => {
+                    let data = await get_url_vip(doc, userInfo);
+                    callback(null, data);
+                }, true)
                 /**
                  * 获取文档封面图
                  */
@@ -379,6 +385,11 @@ export default {
                 env.addFilter('get_member_group',async (groupid,callback)=>{
                     let data = await think.model("member_group",think.config("db")).getgroup({groupid:groupid});
                     callback(null,data[0]);
+                },true);
+                env.addFilter('get_member_vip',async (uid,callback)=>{
+                    let data = await think.model("member",think.config("db")).get_vip(uid);
+                    // console.log("get_member_vip-------"+data);
+                    callback(null,data);
                 },true);
                 /**
                  * 提取文本内容中的图片

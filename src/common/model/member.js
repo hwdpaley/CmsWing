@@ -57,11 +57,13 @@ export default class extends think.model.base {
             if (password === user.password) {
                 await this.autoLogin(user, ip);//更新用户登录信息，自动登陆
                 /* 记录登录SESSION和COOKIES */
+                let isVip=await this.get_vip(user.id);
                 let userInfo = {
                     'uid': user.id,
                     'username': user.username,
                     'last_login_time': user.last_login_time,
-                    'real_name':user.real_name
+                    'real_name':user.real_name,
+                    'isVip':isVip
                 };
 
                 return userInfo; //登录成功，返回用户信息
@@ -102,6 +104,18 @@ export default class extends think.model.base {
         let name;
         let info = await this.field("username").find(uid);
         name = info.username;
+        return name;
+
+    }
+    async get_vip(uid) {
+        uid = uid || 0;
+        //TODO 缓存处理后续
+        let name=0;
+        let info = await this.field(["vip","overduedate"]).find(uid);
+        let now=new Date().getTime();
+        if(info.vip==1 && info.overduedate>now){
+            name=1;
+        } ;
         return name;
 
     }

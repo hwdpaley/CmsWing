@@ -23,7 +23,7 @@ CLASSES:
 .shadow-before-3    = shadow 3 header top
 .shadow-after-3     = shadow 3 header bottom
 -->
-<section class="page-header page-header-xs">
+<section class="page-header dark page-header-xs">
     <div class="container">
         <h1>{{category.title}}</h1>
         <!-- breadcrumbs -->
@@ -52,7 +52,7 @@ CLASSES:
     <div class="container">
         <div class="row">
             <!-- LEFT -->
-            <div class="col-md-9 col-sm-9">
+            <div class="col-md-12 col-sm-12">
                 <h1 class="blog-post-title">{{info.title}}</h1>
                 <ul class="blog-post-info list-inline">
                     <li>
@@ -132,8 +132,10 @@ CLASSES:
                     </div>
                     {%endif%}
                 </div>
+                {#
                 <!-- /article content -->
                 <div class="divider"></div>
+
                 <!--打赏-->
                 <div id="cyReward" role="cylabs" data-use="reward" sourceid="{{info.id}}" cid="{{category.id}}" class="text-center"></div>
                 <!--打赏-->
@@ -150,6 +152,7 @@ CLASSES:
         </a> {%endfor%}
                 <!-- /TAGS -->
                 <!-- SHARE POST -->
+                
                 <div class="clearfix margin-top-20">
                     <span class="pull-left margin-top-6 bold hidden-xs margin-right-10">
 分享到:
@@ -186,7 +189,7 @@ CLASSES:
                     };
                     with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
                     </script>
-                    {#
+                    
                     <a href="#" class="social-icon social-icon-sm social-icon-transparent social-facebook pull-right" data-toggle="tooltip" data-placement="top" title="Facebook">
                         <i class="icon-facebook"></i>
                         <i class="icon-facebook"></i>
@@ -211,8 +214,9 @@ CLASSES:
                         <i class="icon-email3"></i>
                         <i class="icon-email3"></i>
                     </a>
-                    #}
+                    
                 </div>
+                #}
                 <!-- /SHARE POST -->
                 <div class="divider">
                     <!-- divider -->
@@ -228,6 +232,7 @@ CLASSES:
                     <!-- divider -->
                 </div>
                 <!-- COMMENTS -->
+                {#
                 <div id="comments" class="comments margin-top-20">
                     <!--打分版，用户可以对当前新闻、游戏或者应用等进行1-5级的评分-->
                     <div id="SOHUCS" sid="{{info.id}}"></div>
@@ -242,6 +247,7 @@ CLASSES:
                     });
                     </script>
                 </div>
+                
                 <!-- /COMMENTS -->
             </div>
             <!-- RIGHT -->
@@ -340,6 +346,7 @@ CLASSES:
                 <hr />
                 <!-- SOCIAL ICONS -->
             </div>
+            #}
         </div>
     </div>
 </section>

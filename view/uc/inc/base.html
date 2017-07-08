@@ -11,7 +11,7 @@
 	<title>{{controller.meta_title}} | {{controller.setup.WEB_SITE_TITLE}}</title>
 	<meta name="keywords" content="{{controller.keywords}}" />
 	<meta name="description" content="{{controller.description}}" />
-	<meta name="Author" content="Arterli [www.cmswing.com]" />
+	<meta name="Author" content="Arterli [www.gzxinbibo.com]" />
 	{%if controller.setup.QQ_VALIDATION%}
 	<!--qq互联网站验证-->
 	{{controller.setup.QQ_VALIDATION|safe}}
@@ -38,7 +38,8 @@
 
 	<!-- PAGE LEVEL SCRIPTS -->
 	<link href="/static/assets/css/header-1.css" rel="stylesheet" type="text/css" />
-	<link href="/static/assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" /> {% block style %}{% endblock %}
+	<link href="/static/admin/css/music/model.css" rel="stylesheet" type="text/css" /> 
+	{% block style %}{% endblock %}
 	{%if controller.setup.WEB_TONGJI%}
 	<!--统计代码-->
 	{{controller.setup.WEB_TONGJI|safe}}
@@ -88,8 +89,9 @@
 		<!-- REVOLUTION SLIDER -->
 		{% block content %}{% endblock %}
 		<!-- FOOTER -->
+		{#
 		{% include "./footer.html" %}
-		
+		#}
 		<!-- /FOOTER -->
 
 	</div>
@@ -149,6 +151,7 @@
 			<!-- /SIDE NAV -->
 
 			<!-- social icons -->
+			{#
 			<div class="text-center margin-bottom-30">
 
 				<a href="#" class="social-icon social-icon-sm social-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
@@ -172,6 +175,7 @@
 				</a>
 
 			</div>
+			#}
 			<!-- /social icons -->
 
 		</div>
@@ -198,7 +202,7 @@
 		var plugin_path = '/static/assets/plugins/';
 	</script>
 	<script type="text/javascript" src="/static/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
-
+<script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
 	<script type="text/javascript" src="/static/assets/js/scripts.js"></script>
 {#
 	<!-- STYLESWITCHER - REMOVE -->

@@ -263,11 +263,12 @@ export default class extends Base {
       //清楚cy_id
       //await this.session("wx_openid",null);
       // cysoIp9AH
-      return this.display()
+      // return this.display()
 
     } else {
       this.redirect("/index");
     }
+    this.redirect("/index");
   }
 
   

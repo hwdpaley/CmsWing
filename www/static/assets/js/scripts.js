@@ -2535,7 +2535,10 @@ function _ajax_post() {
 
 
 
-	
+	function _show(msg){
+        msg=msg||'请购买观看，谢谢';
+        _toastr(msg,"top-center","info",false);
+    }
 /** Toastr
 
 	TYPE:

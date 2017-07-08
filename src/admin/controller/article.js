@@ -36,8 +36,10 @@ export default class extends Base {
             await this.admin_priv("init",cate_id,"您没有权限查看本栏目！")
             // 获取分类信息
             let sort = await this.model("category").get_category(cate_id, 'documentsorts');
+
             if (sort) {
                 sort = JSON.parse(sort);
+                console.log("sort-------------------"+JSON.stringify(sort));
                 if(sortid==0){
                     sortid=sort.defaultshow;
                 }
@@ -101,9 +103,11 @@ export default class extends Base {
                 }
                 //console.log(typevar);
                 this.assign("typevar",typevar);
+                console.log("typevar-------------------"+JSON.stringify(typevar));
             }
             //console.log(sort);
             this.assign("sort",sort);
+            console.log("sort---------,"+JSON.stringify(sort));
             let pid = this.get("pid") || 0;
             // 获取列表绑定的模型
             if (pid == 0) {
@@ -215,7 +219,7 @@ export default class extends Base {
             }
         }
         //console.log(this.setup.DOCUMENT_POSITION)
-        console.log("ngrids---------,"+JSON.stringify(ngrids) );
+        
         this.assign('modellist', modellist);
         this.assign('cate_id', cate_id);
         this.assign('model_id', model_id);
@@ -230,6 +234,18 @@ export default class extends Base {
         this.assign({
             "navxs": true,
         });
+        
+        // console.log("model---------,"+JSON.stringify(model) );
+        // console.log("ngrids---------,"+JSON.stringify(ngrids) );
+        // console.log("cate_id---------,"+JSON.stringify(cate_id) );
+        // console.log("model_id---------,"+JSON.stringify(model_id) );
+        // console.log("sortid---------,"+JSON.stringify(sortid) );
+        // console.log("position---------,"+JSON.stringify(position) );
+        // console.log("groups---------,"+JSON.stringify(groups) );
+        // console.log("model_list---------,"+JSON.stringify(model) );
+
+        // console.log("modellist---------,"+JSON.stringify(modellist) );
+        // console.log("list---------,"+JSON.stringify(list) );
         return this.display();
     }
 
@@ -697,6 +713,7 @@ export default class extends Base {
      * 设置一条或者多条数据的状态
      */
     async setstatusAction() {
+        console.log("param art ---------"+JSON.stringify(this.param()));
         let data = await this.model("document").where({id:["IN",this.param('ids')]}).select();
         switch (Number(this.param('status'))){
             case -1:
@@ -718,7 +735,7 @@ export default class extends Base {
                 }
                 break;
         }
-
+        console.log("post data----"+JSON.stringify(this.post()) );
         await super.setstatusAction(this,'document');
         if(this.param('status')==-1||this.param('status')==0){
             for (let v of data){

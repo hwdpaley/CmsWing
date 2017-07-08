@@ -38,7 +38,7 @@ export default class extends Base {
             if (is_weixin(this.userAgent()) && (think.isEmpty(openid)||typeof openid == 'undefined')) {
                 // 先把url暂存起来
                 this.cookie("bieber_wx_url", this.http.url);
-                var oauthUrl = pingpp.wxPubOauth.createOauthUrlForCode(this.setup.wx_AppID, `http://${this.http.host}/uc/weixin/getopenid?showwxpaytitle=1`);
+                var oauthUrl = pingpp.wxPubOauth.createOauthUrlForCode(this.setup.wx_AppID, `http://${this.http.host}/uc/weixin/getopenid?showwxpaytitle=1`,true);
                 console.log("oauthAction-----------" + oauthUrl)
                 this.redirect(oauthUrl);
             }
@@ -354,7 +354,8 @@ export default class extends Base {
             info.id=null;
             info.create_time=null;
             info.position=0;
-            let mytuokeid=await this.model('category').where({name:'mytuoke'}).find();
+            let cname=data.cname;
+            let mytuokeid=await this.model('category').where({name:cname}).find();
             console.log("mytuokeid.id==================="+mytuokeid.id);
             info.category_id=mytuokeid.id;//我的拓客模板
             // console.log("tuoke info------"+JSON.stringify(info));

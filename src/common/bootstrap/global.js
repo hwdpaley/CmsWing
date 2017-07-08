@@ -486,6 +486,25 @@ global.dateformat = function(extra, date) {
     }
     return _date.replace('-','').replace('-','');
 }
+global.dateformat_ = function(extra, date) {
+    let D = new Date(date);
+    let time = {
+        "Y": D.getFullYear(),
+        'm': D.getMonth() + 1,
+        'd': D.getDate(),
+        'H': D.getHours(),
+        'i': D.getMinutes(),
+        's': D.getSeconds()
+    }
+    let key = extra.split(/\W/);
+    let _date;
+    for (let k of key) {
+        time[k] = time[k] < 10 ? "0" + time[k] : time[k]
+        _date = extra.replace(k, time[k])
+        extra = _date;
+    }
+    return _date;
+}
 /* global array_search */
 global.array_search = function(arr, str) {
     // 如果可以的话，调用原生方法
@@ -608,7 +627,7 @@ global.get_list_field = function(data, grid, controller, module) {
         }
         value = val.join(" ");
     }
-    //console.log(value)
+    console.log("get_list_field------,"+value)
     return value;
 }
 
@@ -666,6 +685,18 @@ global.get_nickname = async (uid) => {
 global.time_format = (time) => {
     return dateformat('Y-m-d H:i:s', time);
 }
+global.time_start = (time) => {
+    let a=dateformat_('Y-m-d',time);
+    let b=new Date(a).getTime();
+    console.log("time_start----------"+a+","+b);
+    return b;
+}
+global.time_end = (time) => {
+    let a=dateformat_('Y-m-d',time);
+    let b=new Date(a).getTime()+24*60*60*1000;
+    console.log("time_end----------"+a+","+b);
+    return b;
+}
 /* global str_replace()
  * str_replace(条件[]，替换内容[],被替换的内容)
  * @param search
@@ -714,6 +745,39 @@ global.get_url = (name, id) => {
     } else {
         return `/p/${id}.html`;
     }
+}
+/**
+ * 获取文档地址,是否VIP文档，检查是否vip用户，返回地址
+ * @param doc 文档info
+ * @param userinfo 用户info
+ * @param id   文档id
+ * @param userid   用户id
+ * @returns {*}
+ */
+global.get_url_vip =async (doc,userinfo) => {
+    
+    // console.log("userinfo----------"+time_start(new Date())+","+time_end(new Date()));
+    // console.log("userinfo----------"+time_end(new Date()));
+    if(userinfo.uid==0){//未登录
+        return `javascript:_show('请登录，谢谢');`;
+    }
+    if(doc.vip!=1){
+        return `/p/${doc.id}.html`;
+    }
+    if(userinfo.isVip!=1){
+        return `javascript:_show();`;
+    }
+    if(doc.wkprice > 0)
+    {
+        // console.log("doc----------"+JSON.stringify(doc.id));
+        //检查用户是否购买了该文档
+        let res = await think.model('doc_user', think.config("db")).where({ 'docid': doc.id,'uid':userinfo.uid }).find();
+        // console.log("res----------"+JSON.stringify(res));
+        if(think.isEmpty(res)){
+            return `javascript:_show();`;
+        }
+    }
+    return `/p/${doc.id}.html`;
 }
 /**
  * 获取文档封面图片

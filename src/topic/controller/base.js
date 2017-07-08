@@ -44,6 +44,7 @@ export default class extends think.controller.base {
             //用户信息
             this.user = {};
             this.user.roleid = 8; //游客
+            this.user.uid=0;
             //访问控制
             if (this.is_login) {
                 this.user.roleid = await this.model("member").where({ id: this.is_login }).getField('groupid', true);
@@ -111,10 +112,11 @@ export default class extends think.controller.base {
             //判断浏览客户端
             if (checkMobile(this.userAgent())) {
                 //手机端直接跳转到登录页面
-                return this.redirect('/uc/public/login')
+                return this.redirect('/uc/public/login');
             } else {
                 //pc端跳转到错误页面
-                return think.statusAction(700, this.http);
+                return this.redirect('/uc/public/login');
+                // return think.statusAction(700, this.http);
             }
 
         }

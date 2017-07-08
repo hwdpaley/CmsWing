@@ -125,6 +125,7 @@ export default class extends think.controller.base {
             where = think.extend({ 'id': ['IN', id] }, where);
         }
         msg = think.extend({ 'success': '操作成功！', 'error': '操作失败！', 'url': '', 'ajax': this.isAjax() }, msg);
+        // model="document_tuoke";
         let res = await this.model(model).where(where).update(data);
         if (res) {
             switch (model) {
@@ -173,15 +174,24 @@ export default class extends think.controller.base {
         let data = { 'status': 1 };
         await this.editRow(model, data, where, msg);
     }
-
-    /**
-     * 还原条目
-     * @param {string} model 模型名称,供D函数使用的参数
-     * @param {array}  where 查询时的where()方法的参数
-     * @param {array}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
-     *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
-     * @author arterli <arterli@qq.com>
-     */
+    async onlineUp(model, where, msg) {
+        where = where || {}, msg = msg || { 'success': '状态恢复成功！', 'error': '状态恢复失败！' };
+        let data = { 'online': 1 };
+        await this.editRow(model, data, where, msg);
+    }
+    async onlineDown(model, where, msg) {
+            where = where || {}, msg = msg || { 'success': '状态恢复成功！', 'error': '状态恢复失败！' };
+            let data = { 'online': 2 };
+            await this.editRow(model, data, where, msg);
+        }
+        /**
+         * 还原条目
+         * @param {string} model 模型名称,供D函数使用的参数
+         * @param {array}  where 查询时的where()方法的参数
+         * @param {array}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
+         *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+         * @author arterli <arterli@qq.com>
+         */
     async restore(model, where, msg) {
         where = where || {}, msg = msg || { 'success': '状态还原成功！', 'error': '状态还原失败！' };
         let data = { 'status': 1 };
@@ -208,11 +218,19 @@ export default class extends think.controller.base {
      * 设置一条或者多条数据的状态
      */
     async setstatusAction(self, model, pk = "id") {
-        if (think.isEmpty(this.param('model'))) {
-            model = model || this.http.controller;
+        if (!think.isEmpty(this.post('model'))) {
+            // console.log("post model---------" + JSON.stringify(this.post('model'));
+            model = this.post('model');
         } else {
-            model = this.param('model');
+            if (think.isEmpty(this.param('model'))) {
+                model = model || this.http.controller;
+            } else {
+                model = this.param('model');
+            }
         }
+
+        
+        console.log("model---------" + model);
         let ids = this.param('ids');
         let status = this.param('status');
         status = parseInt(status);
@@ -235,6 +253,14 @@ export default class extends think.controller.base {
                 break;
             case 1:
                 await this.resume(model, map, { 'success': '启用成功', 'error': '启用失败' });
+                break;
+            case 10: //拓课下架
+                console.log("下架------" + JSON.stringify(map) + "," + JSON.stringify(model));
+                await this.onlineDown(model, map, { 'success': '下架成功', 'error': '启用失败' });
+                break;
+            case 11: //拓课上架
+                console.log("上架------");
+                await this.onlineUp(model, map, { 'success': '上架成功', 'error': '启用失败' });
                 break;
             default:
                 this.fail('参数错误');

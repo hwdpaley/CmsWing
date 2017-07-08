@@ -253,7 +253,16 @@ ul.content-list {
     background-size: 45px 46px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 10;
+}
+.vippp {
+    width: 40px;
+    height: 40px;
+    background: url(/static/admin/img/icon_vip.png) no-repeat;
+    background-size: 40px 40px;
+    position: absolute;
+    top: -9px;
+    left: -5px;
 }
 
 .confirm {

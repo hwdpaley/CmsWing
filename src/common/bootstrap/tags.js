@@ -132,7 +132,7 @@ global.column= function(){
         }else if(cid){
             map.pid=think._.toInteger(cid);
             arr = think._.filter(column, map)
-            console.log(arr);
+            // console.log(arr);
         }else if(tree){
             let trees = arr_to_tree(column,tree);
             //console.log(trees)
@@ -151,7 +151,7 @@ global.column= function(){
             }
         }
         context.ctx[data] = arr;
-        console.log(arr);
+        // console.log(arr);
         return callback(null,'');
     };
 
@@ -227,7 +227,7 @@ global.topic = function(){
         return new nodes.CallExtensionAsync(this, 'run', args);
     };
     this.run = async function (context, args, callback) {
-        console.log(args);
+        // console.log(args);
         let where = {'status':1,'pid':0};
         //'uid':['IN',[1,461]]
         let data = think.isEmpty(args.data) ? "data" : args.data;
@@ -268,6 +268,10 @@ global.topic = function(){
                 type="view DESC"
             }else if(args.type == "level"){
                 type="level DESC"
+            }else if(args.type == "today"){
+                console.log("test ----"+time_start(new Date())+","+time_end(new Date()));
+                where = think.extend(where,{'update_time':['between',`${time_start(new Date())},${time_end(new Date())}`]});
+                // type="update_time"
             }
         }
         //推荐
@@ -283,14 +287,14 @@ global.topic = function(){
             }
         }
 
-        console.log(where);
+        // console.log(where);
         let topic
         if(args.tid &&!think.isEmpty(args.tval)){
-            console.log();
+            
             for(let v in JSON.parse(args.tval)){
                 where["t."+v]=JSON.parse(args.tval)[v]
             }
-            console.log(where);
+            // console.log(where);
             topic = await think.model('document', think.config("db")).join({
                 table: "type_optionvalue"+args.tid,
                 join: "left", // 有 left,right,inner 3 个值

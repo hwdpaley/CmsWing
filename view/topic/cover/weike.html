@@ -44,10 +44,13 @@
     <div class="container">
         <div class="row-fluid">
             <ul class="margin-t20" id="weike-list">
-            	{% topic data = "list",limit= "10",cid=category.id,issub=1,uid=userid%}
+            	{% topic data = "list",limit= "10",cid=category.id,issub=1,isstu=1,uid=userid%}
                 {% for val in list %}
                 <li>
-                    <a href="{{val.name|get_url(val.id)}}" target="_blank"><img src="{{val.cover_id|get_pic('m=1,w=300,h=200')}}" class="weike-list-img col-xs-12 col-sm-6 col-md-4">
+                    <a href="{{val.name|get_url(val.id)}}" ><img src="{{val.cover_id|get_pic('m=1,w=300,h=200')}}" class="weike-list-img col-xs-12 col-sm-6 col-md-4">
+                        {%if val.vip==1%}
+                        <div class="vip"></div>
+                        {%endif%}
                         <div class="clear"></div>
                         <div class="col-xs-12 col-sm-6 col-md-8 weike-list-info-box">
                             <label class="weike-title">{{val.title|block(16)}}</label>
@@ -56,7 +59,7 @@
                             <p class="weike-saleNum">{{val.view}}人购买</p>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-8 weike-list-buy-box">
-                            <p class="weike-price">￥68&nbsp;/&nbsp;90天</p>
+                            <p class="weike-price">¥{{val.wkprice}}&nbsp;</p>
                             <button class="btn weike-buy-btn">立即购买</button>
                         </div>
                         <div class="clearfix"></div>

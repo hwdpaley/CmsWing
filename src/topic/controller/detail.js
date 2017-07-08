@@ -37,7 +37,8 @@ export default class extends Base {
     }
     if(roleid==8){
       this.http.error = new Error('您尚未登录，请先登录！');
-      return think.statusAction(700, this.http);
+      this.redirect("/uc/public/login");
+       // return think.statusAction(700, this.http);
     }
     let priv = await this.model("category_priv").priv(info.category_id,roleid,'visit');
     if(!priv){

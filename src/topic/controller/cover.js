@@ -73,7 +73,7 @@ export default class extends Base {
 
     let get_sub_category = await this.model('category').get_sub_category(cate.id);
     this.assign('cate_id', get_sub_category[0]);
-    console.log("cover get_sub_category==========="+JSON.stringify(get_sub_category));
+    // console.log("cover get_sub_category==========="+JSON.stringify(get_sub_category));
 
     /* 模板赋值并渲染模板 */
     this.assign('category', cate);

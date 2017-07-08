@@ -48,6 +48,10 @@
                                 <div class="box-icon-title text-center">
                                     <img src="/uc/index/avatar" class=" rounded" alt="hwdpaley" style="width: 60px;margin-top: -10px;margin-left: -20px;">
                                 </div>
+                                {%set vip = userInfo.id|get_member_vip%}
+                                {%if(vip==1)%}
+                                    <div class="vippp"></div>
+                                {%endif%}
                             </div>
                             <div class="col-md-8 col-sm-8" style="margin-top: 10px;">
                                 <P>{{userInfo.real_name}}</P>
@@ -72,7 +76,7 @@
                 </ul>
                 {% else %}
                 <ul class="pull-right nav nav-pills nav-second-main">
-                <li><a href="/uc/public/login?__CSRF__={{csrf}}" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> 登录</a></li>
+                <li><a href="/uc/public/login?__CSRF__={{csrf}}" ><i class="fa fa-sign-in"></i> 登录</a></li>
                 <li><a href="/uc/public/register"><i class="fa fa-thumbs-o-up"></i> 注册</a></li>
                 </ul>
                 {% endif %}

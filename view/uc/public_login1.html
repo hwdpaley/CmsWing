@@ -1,71 +1,12 @@
-
-{% extends "./inc/base.html" %} 
-{% block content %}
-<!-- 
-				PAGE HEADER 
-				
-				CLASSES:
-					.page-header-xs	= 20px margins
-					.page-header-md	= 50px margins
-					.page-header-lg	= 80px margins
-					.page-header-xlg= 130px margins
-					.dark			= dark page header
-
-					.shadow-before-1 	= shadow 1 header top
-					.shadow-after-1 	= shadow 1 header bottom
-					.shadow-before-2 	= shadow 2 header top
-					.shadow-after-2 	= shadow 2 header bottom
-					.shadow-before-3 	= shadow 3 header top
-					.shadow-after-3 	= shadow 3 header bottom
-			-->
-<section class="page-header dark page-header-xs">
-    <div class="container">
-
-        <!-- breadcrumbs -->
-        <ol class="breadcrumb breadcrumb-inverse">
-            <li><a href="/index">首页</a></li>
-            <li class="active">登录</li>
-        </ol>
-        <!-- /breadcrumbs -->
-
-    </div>
-</section>
-<!-- /PAGE HEADER -->
-
-
-
-
-<!-- -->
-<section>
-    <div class="container">
-
-        <div class="row">
-
-            <!-- LOGIN -->
-            
-
-			<div class="modal-body wrapper-lg">
-                <div class="col-sm-2">
-                    {#
-                    <h4>还没有账号?</h4>
-                    <p>你可以在<a href="/uc/public/register" class="text-info">这里</a>创建一个帐户 </p>
-                    <!-- <p>或者</p> -->
-                    {%if controller.setup.IS_QQ_LOGIN == 1%}
-                    <a href="/uc/qq/" class="btn btn-block btn-social btn-twitter margin-bottom-10">
-                        <i class="fa fa-qq"></i> 使用QQ账号登录
-                    </a>
-                    {%endif%} {%if controller.setup.IS_WEIXIN_LOGIN == 1%}
-                    <a class="btn btn-block btn-social btn-facebook margin-bottom-10">
-                        <i class="fa fa-weixin"></i> 使用微信账号登录
-                    </a>
-                    {%endif%} {%if controller.setup.IS_SINA_LOGIN == 1%}
-                    <a href="/uc/sina/" class="btn btn-block btn-social btn-google margin-bottom-10">
-                        <i class="fa fa-weibo"></i> 使用新浪微博账号登录
-                    </a>
-                    {%endif%}
-                    #}
-                </div>
-                <div class="col-sm-5 b-r">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+            <h4 id="myModalLabel" class="modal-title">用户登录</h4>
+        </div>
+        <div class="modal-body wrapper-lg">
+            <div class="row">
+                <div class="col-sm-7 b-r">
                     <!--<h3 class="m-t-none m-b">已有账号</h3>
                     <p>Sign in to meet your friends.</p>-->
                     <form role="form" class="sky-form" id="login" method="post">
@@ -87,17 +28,18 @@
                             <p id="wait" class="show">正在加载验证码......</p>
                             <p id="notice" class="hide">请先拖动验证码到相应位置</p>
                         </div>
+  
                         {%endif%}
                         <div id="alert"></div>
                         <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
                                 <label class="checkbox weight-300 margin-top-10">
                                     <input type="checkbox" name="checkbox-inline">
                                     <i></i> 记住我
                                 </label>
                             </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8 text-right" >
-                                <button class="btn btn-primary" style="width: 50%;" id="validate-submit">登录</button>
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                <button class="btn btn-primary" id="validate-submit">登录</button>
                             </div>
                         </div>
                     </form>
@@ -105,7 +47,7 @@
                 <div class="col-sm-5">
                     <h4>还没有账号?</h4>
                     <p>你可以在<a href="/uc/public/register" class="text-info">这里</a>创建一个帐户 </p>
-                    <!-- <p>或者</p> -->
+                    <p>或者</p>
                     {%if controller.setup.IS_QQ_LOGIN == 1%}
                     <a href="/uc/qq/" class="btn btn-block btn-social btn-twitter margin-bottom-10">
                         <i class="fa fa-qq"></i> 使用QQ账号登录
@@ -122,79 +64,10 @@
                 </div>
             </div>
         </div>
-                <!-- ALERT -->
-                <!--
-							<div class="alert alert-mini alert-danger margin-bottom-30">
-								<strong>Oh snap!</strong> Login Incorrect!
-							</div>
-							-->
-                <!-- /ALERT -->
-
-
     </div>
-</section>
-<!-- / -->
-<!-- MODAL -->
-
-
-{% endblock %}
-{% block script %}
-<!-- PAGE LEVEL SCRIPTS -->
-		<script type="text/javascript">
-			{% if controller.setup.USER_ALLOW_SMSREGISTER == 1 %}
-       $("#verifycodesend").click(function () {
-		   var that = this;
-		   var mobile = $("input[name='mobile']").val();
-		   var type = $(this).attr("data-type");
-		   var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-		   if(!myreg.test(mobile))
-		   {
-			   _toastr('请输入有效的手机号码!',"top-right","error",false);
-			   return false;
-		   }
-		   $(that).addClass('disabled').attr('autocomplete','off').prop('disabled',true);
-		   $.ajax({
-			   type:"post",
-			   url:"/uc/public/verifycodesend",
-			   data:{mobile:mobile,type:type,check:1},
-			   success:function (data) {
-				   if(data.err_code==0){
-					   $(".qian").hide();
-					   $(".hou").show();
-					   var wait = document.getElementById('wait')
-					   var interval = setInterval(function(){
-						   var time = --wait.innerHTML;
-						   if(time <= 0) {
-							   $(".qian").show();
-							   $(".hou").hide();
-							   $(that).removeClass('disabled').prop('disabled',false);
-							   $("#wait").text('60');
-							   clearInterval(interval);
-						   };
-					   }, 1000);
-				   }else {
-                    if(1000 == data.errno){
-						$(that).removeClass('disabled').prop('disabled',false);
-						_toastr(data.errmsg,"top-right","error",false);
-					}
-				   }
-			   }
-		   })
-	   })
-			{% endif %}
-			/**
-				Checkbox on "I agree" modal Clicked!
-			**/
-			jQuery("#terms-agree").click(function(){
-				jQuery('#termsModal').modal('toggle');
-
-				// Check Terms and Conditions checkbox if not already checked!
-				if(!jQuery("#checked-agree").checked) {
-					jQuery("input.checked-agree").prop('checked', true);
-				}
-				
-			});
-		</script>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 {%if controller.setup.GEETEST_IS_LOGIN ==1%}
 <!-- 引入封装了failback的接口--initGeetest -->
 {%if http.config("http_")==1%}
@@ -240,8 +113,7 @@ $(function() {
                         location.reload();
                     } else {
                         _toastr(data.data.name, "top-right", "success", false);
-                        // location.reload();
-                        window.location.href="/"
+                        location.reload();
                     }
                     
                 }
@@ -294,4 +166,3 @@ $(function() {
 _login();
 </script>
 {%endif%}
-        {% endblock %}

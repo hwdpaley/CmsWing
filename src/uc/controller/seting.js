@@ -53,13 +53,18 @@ export default class extends Base {
     //判断是否登陆
     await this.weblogin();
     let data = this.post();
-    console.log("updateinfoAction-----------,"+data);
+    // console.log("updateinfoAction-----------,"+JSON.stringify(data));
+    if(!data.birthday){
+      data.birthday=new Date().getTime();
+    }else{
+      data.birthday=new Date(data.birthday).getTime();
+    }
     let member = {
       email: data.email,
       mobile: data.mobile,
       real_name: data.real_name,
       sex: data.sex,
-      birthday: new Date(data.birthday).getTime(),
+      birthday: data.birthday,
       province: data.province,
       city: data.city,
       county: data.county,
