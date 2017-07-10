@@ -86,6 +86,7 @@ export default class extends Base {
     //判断浏览客户端
     if(checkMobile(this.userAgent())){
       temp = cate.template_m_index ? `${cate.template_m_index}` : `${this.http.action}`
+      console.log("cover index===========,"+`mobile/${this.http.controller}/${temp}`);
       return this.display(`mobile/${this.http.controller}/${temp}`)
     }else{
       console.log("cover index==========="+temp);

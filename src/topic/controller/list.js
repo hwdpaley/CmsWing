@@ -69,9 +69,10 @@ export default class extends Base {
     // console.log(subcate);
     subcate.push(cate.id);
     //获取模型列表数据个数
-    // console.log(cate);
+    // console.log("cate-------"+JSON.stringify(cate));
     let num;
     if(cate.list_row>0){
+
       num = cate.list_row;
     } else if(cate.model.split(",").length == 1){
       let pagenum=await this.model('model').get_model(cate.model,"list_row");
@@ -84,7 +85,7 @@ export default class extends Base {
     if(checkMobile(this.userAgent())){
       num=10;
     }
-
+    // console.log("num-------"+JSON.stringify(num));
     //console.log(subcate);
     let map = {
       'pid':0,
@@ -241,7 +242,8 @@ export default class extends Base {
       // console.log(map);
 
     }
-    //console.log(map);
+    console.log("controller--------"+this.http.url);
+    console.log("map--------"+JSON.stringify(map));
     //return false;
     //console.log(sort);
     this.assign("sort",sort);
@@ -267,7 +269,7 @@ export default class extends Base {
     }else {
       data = await this.model('document').where(map).page(this.param('page'),num).order(o).countSelect();
     }
-    //console.log(data);
+    // console.log("list-data------"+JSON.stringify(data));
     // let data = await this.model('document').join({
     //     typeoptionvar: {
     //         join: "left", // 有 left,right,inner 3 个值

@@ -179,7 +179,7 @@ export default class extends Base {
       if(!think.isEmpty(info.content)){
         info.content=info.content.split("_ueditor_page_break_tag_");
       }
-      // console.log(`mobile/${this.http.controller}/${temp}`);
+       console.log("detail-index------------,"+`mobile/${this.http.controller}/${temp}`);
       return this.display(`mobile/${this.http.controller}/${temp}`);
       
     }else{

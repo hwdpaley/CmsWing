@@ -7,15 +7,26 @@
         <!-- Loading Screen -->
         <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('{{qiniu_dm}}/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1140px;height:360px;overflow:hidden;">
+            {% topic data ="picturelist",limit="1",type="picture",cid=142,isstu=1,uid=userid%}
+             
+            {%if(picturelist[0])%}
+            {%set plist=picturelist[0].pictureurls.split(',')%}
+            {% for v in plist %}
             <div>
-                <img data-u="image" src="{{qiniu_dm}}/shouye-1.png" />
+                <img data-u="image" src="{{v|get_pic('')}}" />
+            </div>
+            {%endfor%}
+            {%else%}
+            <div>
+                <img data-u="image" src="{{qiniu_dm}}/shouye2.jpg" />
             </div>
             <div>
-                <img data-u="image" src="{{qiniu_dm}}/shouye-2.png" />
+                <img data-u="image" src="{{qiniu_dm}}/shouye1.jpg" />
             </div>
             <div>
-                <img data-u="image" src="{{qiniu_dm}}/guanggao.png" />
+                <img data-u="image" src="{{qiniu_dm}}/shouye0.jpg" />
             </div>
+            {%endif%}
             <!-- <div>
                 <img data-u="image" src="{{qiniu_dm}}/03.jpg" />
             </div>

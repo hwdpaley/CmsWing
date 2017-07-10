@@ -161,21 +161,21 @@
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
     <!--<span class="mui-icon iconfont icon-cart"><span class="mui-badge">9</span></span>-->
     <h1 class="mui-title">{{info.title}}</h1>
-    <span class="mui-icon iconfont icon-search mui-pull-right"></span>
+    <!-- <span class="mui-icon iconfont icon-search mui-pull-right"></span> -->
 </header>
 <nav class="mui-bar mui-bar-tab">
     <a class="mui-tab-item mui-action-back" >
         <span class="mui-icon iconfont icon-back"></span>
         <span class="mui-tab-label">返回</span>
     </a>
-    <a class="mui-tab-item" href="#SOHUCS">
+    <!-- <a class="mui-tab-item" href="#SOHUCS">
         <span class="mui-icon iconfont icon-comment"><span class="mui-badge" id="changyan_count_unit">0</span></span>
         <span class="mui-tab-label">评论</span>
     </a>
     <a class="mui-tab-item" href="#shoucang">
         <span class="mui-icon iconfont icon-favor"></span>
         <span class="mui-tab-label">收藏</span>
-    </a>
+    </a> -->
     <a class="mui-tab-item" href="#fenxiang">
         <span class="mui-icon iconfont icon-share"></span>
         <span class="mui-tab-label">分享</span>
@@ -200,6 +200,28 @@
 
 </nav>
 <div class="mui-content detail" >
+    
+    <div class="mui-content-padded">
+        {%set picurls = info.pictureurls|strToArray%}
+        {%set i =0%}
+        {%for v in picurls%}
+        <p><img src="{{v|get_pic('m=4,w=1024,h=768')}}" alt="{{info.content[i]|delhtmltags}}" data-preview-src="" data-preview-group="1"></p>
+        {%if info.content[i]%}
+        <p>{{info.content[i]|safe}}</p>
+        {%endif%}
+        {%set i=i+1%}
+        {%endfor%}
+    </div>
+    <!-- <div class="mui-content-padded">
+        <article class="article-content">
+            {%for val in info.content%}
+
+            {{val|safe}}
+
+            {%endfor%}
+        </article>
+    </div> -->
+    <!-- <div id="SOHUCS" sid="{{info.id}}"></div> -->
     <div class="mui-content-padded">
         <div class="article-header">
             <div class="pgc-bar-top mui-clearfix" >
@@ -223,33 +245,11 @@
 
             </div>
 
-            <div class="favor-wrapper">
+            <!-- <div class="favor-wrapper">
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">关注</button>
-            </div>
+            </div> -->
         </div>
     </div>
-    <div class="mui-content-padded">
-        {%set picurls = info.pictureurls|strToArray%}
-        {%set i =0%}
-        {%for v in picurls%}
-        <p><img src="{{v|get_pic('m=4,w=1024,h=768')}}" alt="{{info.content[i]|delhtmltags}}" data-preview-src="" data-preview-group="1"></p>
-        {%if info.content[i]%}
-        <p>{{info.content[i]|safe}}</p>
-        {%endif%}
-        {%set i=i+1%}
-        {%endfor%}
-    </div>
-    <div class="mui-content-padded">
-        <article class="article-content">
-            {%for val in info.content%}
-
-            {{val|safe}}
-
-            {%endfor%}
-        </article>
-    </div>
-    <div id="SOHUCS" sid="{{info.id}}"></div>
-
 </div>
 {% endblock%}
 

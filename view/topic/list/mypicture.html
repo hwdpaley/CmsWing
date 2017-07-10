@@ -5,18 +5,18 @@
 PAGE HEADER
 
 CLASSES:
-.page-header-xs	= 20px margins
-.page-header-md	= 50px margins
-.page-header-lg	= 80px margins
+.page-header-xs = 20px margins
+.page-header-md = 50px margins
+.page-header-lg = 80px margins
 .page-header-xlg= 130px margins
-.dark			= dark page header
+.dark           = dark page header
 
-.shadow-before-1 	= shadow 1 header top
-.shadow-after-1 	= shadow 1 header bottom
-.shadow-before-2 	= shadow 2 header top
-.shadow-after-2 	= shadow 2 header bottom
-.shadow-before-3 	= shadow 3 header top
-.shadow-after-3 	= shadow 3 header bottom
+.shadow-before-1    = shadow 1 header top
+.shadow-after-1     = shadow 1 header bottom
+.shadow-before-2    = shadow 2 header top
+.shadow-after-2     = shadow 2 header bottom
+.shadow-before-3    = shadow 3 header top
+.shadow-after-3     = shadow 3 header bottom
 -->
 <section class="page-header dark page-header-xs">
     <div class="container">
@@ -167,7 +167,7 @@ CLASSES:
                 <div class="text-left">
                     <ul class="nav nav-pills mix-filter">
 
-                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/wenzhangceshi">全部</a></li>
+                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/tupianceshi">全部</a></li>
                         {% groups data="groups",cid=category.id%}
                         {%for v in groups%}
                         <li class="filter {%if group_id==v.id%}active{%endif%}"><a href="{{cate.url}}-{{order}}-{{v.id}}{%if sort%}-{{sortid}}{%endif%}{%if sorturl %}-{%endif%}{{sorturl}}{{http.config('view.file_ext')}}">{{v.name}}</a></li>
@@ -202,11 +202,12 @@ CLASSES:
                     </div>
                 </div>
                 <ul class="shop-item-list row list-inline nomargin">
+                {% topic data = "list",limit= "12",cid=category.id,issub=1,uid=userid,isstu=1 %}    
                 {% for val in list %}
                 {% set categoryname = val.category_id|get_cate %}
                     
                     <!-- ITEM -->
-                    <li class="col-lg-4 col-sm-4">
+                    <li class="col-lg-3 col-sm-3">
 
                         <div class="shop-item">
 
@@ -218,16 +219,17 @@ CLASSES:
                                 <!-- /product image(s) -->
 
                                 <!-- hover buttons -->
+                                {#
                                 <div class="shop-option-over">
                                     <a class="btn btn-default add-wishlist" href="#" data-item-id="10" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart nopadding"></i></a>
                                     <a class="btn btn-default add-compare" href="#" data-item-id="10" data-toggle="tooltip" title="Add To Compare"><i class="fa fa-bar-chart-o nopadding" data-toggle="tooltip"></i></a>
-                                    <!-- <a class="btn btn-default add-compare" href="#" data-item-id="10" data-toggle="tooltip" title="Add To Compare"><i class="fa fa-bar-chart-o nopadding" data-toggle="tooltip"></i></a> -->
                                 </div>
+                                #}
                                 <!-- /hover buttons -->
                             </div>
 
                             <div class="shop-item-summary text-center">
-                                <h2>{{val.title|block(24)}}</h2>
+                                <h2>{{val.title}}</h2>
 
                                 <!-- rating -->
                                 <!-- <div class="shop-item-rating-line">

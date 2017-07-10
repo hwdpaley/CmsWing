@@ -6,14 +6,14 @@
 {%set cate = category.id|get_cate()%}
 {%endif%}
 <div id="slider" class="mui-slider" style="top:44px" >
-    <div id="sliderSegmentedControl" {%if sort|length>0 or column|length>0 or groups|length>0%} style="width: 90%" {%endif%} class="mui-scroll-wrapper mui-scroll-bar mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <div id="sliderSegmentedControl" {%if sort|length>0 or column|length>0 or groups|length>0%} style="width: 100%" {%endif%} class="mui-scroll-wrapper mui-scroll-bar mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
         <div class="mui-scroll">
-            <a class="mui-control-item bar-item {%if order ==100%} mui-active{%endif%}" href="#item1mobile" data-url="/index">
+            <!-- <a class="mui-control-item bar-item {%if order ==100%} mui-active{%endif%}" href="#item1mobile" data-url="/index">
                 推荐
             </a>
             <a class="mui-control-item bar-item {%if order ==2%} mui-active{%endif%}" href="#item2mobile" data-url="/index/2">
                 热点
-            </a>
+            </a> -->
             {% column data="bar",isapp="0"%}
             {%for v in bar%}
             <a class="mui-control-item bar-item {%if breadcrumb[0].id ==v.id%} mui-active{%endif%}" href="#item{{v.id}}"  data-url="{{v.url}}">
@@ -39,10 +39,11 @@
 
     </div>
 
-    {%if sort|length>0 or column|length>0 or groups|length>0%}
+    <!-- {%if sort|length>0 or column|length>0 or groups|length>0%}
     <a href="#more" class="mui-icon iconfont icon-sort mui-pull-right more-icon "></a>
-    {%endif%}
+    {%endif%} -->
 </div>
+{#
 {%if sort|length>0 or column|length>0 or groups|length>0%}
 <div id="more" class="mui-modal">
     <header class="mui-bar mui-bar-nav">
@@ -122,3 +123,4 @@
     </div>
 </div>
 {%endif%}
+#}

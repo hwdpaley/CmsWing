@@ -130,7 +130,7 @@ CLASSES:
                     </div>
                 </div>
                 <ul class="shop-item-list row list-inline nomargin">
-                    
+                    {% topic data = "list",limit= "9",cid=category.id,issub=1,uid=userid,isstu=1 %} 
                     {% for val in list %} 
                     {% set categoryname = val.category_id|get_cate %}
                     <!-- POST ITEM -->
@@ -224,7 +224,7 @@ CLASSES:
                     {%endfor%}
                 </ul>
                 <!-- PAGINATION -->
-                <div class="text-center">
+                <div class="text-right">
                     <!-- Pagination Default -->
                     {{pagination | safe}}
                     <!-- /Pagination Default -->

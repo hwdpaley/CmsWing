@@ -272,6 +272,12 @@ global.topic = function(){
                 console.log("test ----"+time_start(new Date())+","+time_end(new Date()));
                 where = think.extend(where,{'update_time':['between',`${time_start(new Date())},${time_end(new Date())}`]});
                 // type="update_time"
+            }else if(args.type == "picture"){
+                let puid=args.uid;
+                if(puid==0){
+                    puid=1;
+                }
+                where = think.extend({},where,{'uid':puid});
             }
         }
         //推荐
@@ -321,7 +327,7 @@ global.topic = function(){
             }
             topic = topicarr;
         }
-        // console.log(topic)
+         // console.log(topic)
         context.ctx[data] = topic;
         return callback(null, '');
     }

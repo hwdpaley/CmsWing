@@ -34,6 +34,7 @@ export default class extends Base {
             }
             //debugger;
             //判断浏览客户端
+            this.assign("qiniu_dm", `//${this.setup.QINIU_DOMAIN_NAME}`);
             if (checkMobile(this.userAgent())) {
                 //跨域
                 let method = this.http.method.toLowerCase();
@@ -96,11 +97,12 @@ export default class extends Base {
                     }
                     return this.json(data);
                 }
+                console.log("index-index------"+`mobile/${this.http.controller}/${this.http.action}`);
                 return this.display(`mobile/${this.http.controller}/${this.http.action}`)
             } else {
                 //debugger;
                 //console.log(think.datetime(new Date(), "YYYY-MM-DD"));
-                this.assign("qiniu_dm", `//${this.setup.QINIU_DOMAIN_NAME}`);
+                
                 return this.display();
             }
 
