@@ -69,9 +69,10 @@ export default class extends Base {
 
 
                 this.assign('order', order);
+console.log("map-------" + JSON.stringify(map));
                 let data = await this.model('document').where(map).page(this.param('page'), 10).order(o).countSelect();
                 this.assign("list", data);
-                console.log("sy list" + data);
+                //console.log("sy list" + JSON.stringify(data) );
                 if (this.isAjax("get")) {
                     for (let v of data.data) {
                         if (!think.isEmpty(v.pics)) {
@@ -84,16 +85,17 @@ export default class extends Base {
                         if (!think.isEmpty(v.cover_id)) {
                             v.cover_id = await get_pic(v.cover_id, 1, 300, 169);
                         }
-                        if (!think.isEmpty(v.price)) {
-                            if (!think.isEmpty(get_price_format(v.price, 2))) {
-                                v.price2 = get_price_format(v.price, 2);
-                            }
-                            v.price = get_price_format(v.price, 1);
+                        // if (!think.isEmpty(v.price)) {
+                        //     if (!think.isEmpty(get_price_format(v.price, 2))) {
+                        //         v.price2 = get_price_format(v.price, 2);
+                        //     }
+                        //     v.price = get_price_format(v.price, 1);
 
-                        }
-                        v.uid = await get_nickname(v.uid);
+                        // }
+                        v.uid = await get_realname(v.uid);
                         v.url = get_url(v.name, v.id);
-                        v.update_time = moment(v.update_time).fromNow()
+                        v.update_time = moment(v.update_time).fromNow();
+                        //console.log("v list" + JSON.stringify(v) );
                     }
                     return this.json(data);
                 }

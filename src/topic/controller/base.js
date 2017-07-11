@@ -7,26 +7,66 @@
 // +----------------------------------------------------------------------
 
 'use strict';
-
+import API from 'wechat-api';
+import JSSDK from '../../uc/controller/jssdk.js';
 export default class extends think.controller.base {
     init(http) {
         super.init(http);
+        
     }
 
     async __before() {
-
-            //网站配置
             this.setup = await this.model("setup").getset();
-            // console.log(this.setup);
+            this.api = new API(this.setup.wx_AppID, this.setup.wx_AppSecret);
+            this.jssdk = JSSDK;
+            //网站配置
+                        // console.log(this.setup);
             //当前登录状态
             this.is_login = await this.islogin();
 
             // let userInfo = await this.model("member").find(this.is_login);
             // console.log(userInfo);
             //判断公众账号类型?
-            // if (this.setup.wx_type == 4) {
-            //     await this.action("uc/weixin", "oauth");
-            // }
+            // if (is_weixin(this.userAgent())) {
+    //     await this.oauthAction();
+    //     let aa = function(jssdk, url) {
+    //         let deferred = think.defer();
+    //         jssdk.getSignPackage(url, (err, signPackage) => {
+    //             if (!think.isEmpty(signPackage)) {
+    //                 deferred.resolve(signPackage);
+    //             } else {
+    //                 console.error(err);
+    //             }
+    //         });
+    //         return deferred.promise;
+    //     }
+    //     let signPackage = await aa(this.jssdk, uurl);
+    //     console.log(signPackage);
+    //     this.assign("signPackage", signPackage);
+    // }
+
+            if (checkMobile(this.userAgent())) {
+                if (is_weixin(this.userAgent())) {
+                    let uurl = "http://www.gzxinbibo.com" + this.http.url;
+                    await this.action("uc/weixin", "oauth");
+                    let weixin = function(jssdk, url) {
+                        let deferred = think.defer();
+                        jssdk.getSignPackage(url, (err, signPackage) => {
+                            if (!think.isEmpty(signPackage)) {
+                                deferred.resolve(signPackage);
+                            } else {
+                                console.error(err);
+                            }
+                        });
+                        return deferred.promise;
+                    }
+                    let signPackage = await weixin(this.jssdk, uurl);
+                    console.log(signPackage);
+                    this.assign("signPackage", signPackage);
+                }else{
+                    return think.statusAction(700, this.http);
+                }
+            }
             // let userinfo=await this.session('userInfo');
             // console.log("__before----------,"+JSON.stringify(userinfo) );
             //关闭站点

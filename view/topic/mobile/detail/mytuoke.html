@@ -1,0 +1,174 @@
+{% extends "./inc/tuoke_appbase.html" %}
+{%block style%}
+
+<style>
+    .mui-table h4 ,.mui-media-body h4{
+        line-height: 21px;
+        font-weight: 400;
+    }
+    .active > .text {
+      display: block !important;
+    }
+</style>
+{%endblock%}
+{% block content %}
+<!-- <header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">{{controller.meta_title}}</h1>
+</header> -->
+<!-- <img src="{{info.fmurl}}" style="visibility:hidden;height:0;width:0;" /> -->
+
+
+<div id="customer_page">
+    <div class="header_banner" style="background-image: url({{info.fmurl}});"></div>
+    <div class="content">
+        <h3 class="header_title">{{info.title}}</h3>
+        <p class="simplify_introduction">{{desc}}</p>
+        <p>
+    </div>
+    <div class="space"></div>
+    <div>
+        <p class="sign_number">已有<span>
+                
+                    {{info.addnums}}
+                
+            </span>人报名 ·限
+            <span>{{info.nums}}</span>人报名</p>
+        <p class="customer_price">￥ {{info.cpprice}}
+        </p>
+    </div>
+    <div class="line"></div>
+    <div class="address">
+        <i class="fa fa-clock-o"></i>
+        <p>{{info.address}}</p>
+    </div>
+    <div class="line"></div>
+    <div class="time">
+        <i class="fa fa-clock-o"></i>
+        <p>{{info.stime|dateformat('Y-m-d H-i')}} 至 {{info.etime|dateformat('Y-m-d H-i')}}</p>
+    </div>
+    <div class="space"></div>
+    <div class="introduction_box">
+        <h3>详细介绍</h3>
+        <div class="introduction_content">
+        <div id="contentcmswing">
+                    <div class="tab-content">
+                        {%set p = 1%} {%for val in info.content%}
+                        <div class="tab-pane fade {% if p ==1 %} in active{%endif%}" id="page{{p}}">
+                            {{val|safe}}
+                        </div>
+                        {% set p = p+1%} {%endfor%}
+                    </div>
+                    {%if info.content|length >1%}
+                    <!-- Pagination Default -->
+                    <div class="text-center">
+                        <ul class="pagination">
+                            {%set o = 1%} {%for val in info.content%}
+                            <li {%if o==1 %}class="active" {%endif%}><a href="#page{{o}}" data-toggle="tab">{{o}}</a></li>
+                            {% set o = o+1%} {%endfor%}
+                        </ul>
+                    </div>
+                    {%endif%}
+                </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="price" value="{{info.cpprice}}">
+<div class="fix_back"></div>
+<div class="sign_up_fix">
+    <div class="sign_up_box">
+        <!-- <a class="enter">进入店铺</a> -->
+        <input type="button" class="sign_up" id="enroll_button" value="立即报名">
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="enroll_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="text-center text-primary" id="modal_title">轻松两步，完成报名</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12 center-block" id="modal_body">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" id="user_name" placeholder="请输入你的姓名">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" id="user_phone" placeholder="请输入你的手机号">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-warning btn-lg btn-block" onclick="enroll_modal_button('{{docid}}')" id="enroll_btn">立即报名</button>
+                    </div>
+                </div>
+                <div id="qr_code" class="hidden text-center">
+                    <img class="img-thumbnail" width="100%" src="{{info.twourl}}">
+                    <h2>请支付{{info.cpprice}}元</h2>
+                </div>
+                <div id="free_show" class="hidden text-center" style="height: 100px;line-height: 100px;background-color: #eeeeee">
+                    <span style="font-size: 16px;color: #999999;">恭喜您已报名成功，稍后店家将会联系您。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="pay_type" value="{{pay_type}}"> 
+{% endblock %} 
+{% block script %}
+<script>
+uParse('#contentcmswing', {
+    rootPath: '/static/admin/js/udeitor/'
+})
+//alert(location.href.split('#')[0]);
+console.log('{{signPackage.rawString}}');
+console.log('{{signPackage.url}}');
+// var signPackage = !{JSON.stringify(signPackage)};
+// console.log(JSON.stringify(signPackage));
+        wx.config({
+            debug: false,
+            appId: '{{signPackage.appId}}',
+            timestamp: '{{signPackage.timestamp}}',
+            nonceStr: '{{signPackage.nonceStr}}',
+            signature: '{{signPackage.signature}}',
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone'
+            ]
+        });
+        wx.ready(function () {
+            console.log('wx.ready');
+            wx.onMenuShareTimeline({
+                title: '{{info.title}}', // 分享标题
+                link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '{{info.fmurl}}', // 分享图标
+                desc:'{{desc}}',
+                success: function () { 
+                    console.log('share success');
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () { 
+                    console.log('share cancel');
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '{{info.title}}', // 分享标题
+                link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '{{info.fmurl}}', // 分享图标
+                desc:'{{desc}}',
+                success: function () { 
+                    console.log('share success');
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () { 
+                    console.log('share cancel');
+                }
+            });
+        });
+</script>
+
+{% endblock%}
+
+

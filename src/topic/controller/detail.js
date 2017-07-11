@@ -163,7 +163,9 @@ export default class extends Base {
       }
     }
     //console.log(info);
+    info.fmurl = await get_cover2(info.cover_id, this.setup.QINIU_DOMAIN_NAME);
     this.assign('info', info);
+    this.assign("desc", info.description);
     //判断浏览客户端
     if(checkMobile(this.userAgent())){
       //手机模版
@@ -179,8 +181,13 @@ export default class extends Base {
       if(!think.isEmpty(info.content)){
         info.content=info.content.split("_ueditor_page_break_tag_");
       }
-       console.log("detail-index------------,"+`mobile/${this.http.controller}/${temp}`);
-      return this.display(`mobile/${this.http.controller}/${temp}`);
+       console.log("mobile detail-index------------,"+`mobile/${this.http.controller}/${temp}`);
+      if(is_weixin(this.userAgent())&&temp=='mytuoke.html'){
+        this.redirect(`/uc/weixin/tuoke/id/`+id);
+      }else{
+        return this.display(`mobile/${this.http.controller}/${temp}`);
+      }
+      
       
     }else{
       if (!think.isEmpty(info.template) && info.template !=0) {

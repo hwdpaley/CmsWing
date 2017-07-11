@@ -107,6 +107,15 @@ export default class extends think.model.base {
         return name;
 
     }
+    async get_realname(uid) {
+        uid = uid || 0;
+        //TODO 缓存处理后续
+        let name;
+        let info = await this.field("real_name").find(uid);
+        name = info.real_name;
+        return name;
+
+    }
     async get_vip(uid) {
         uid = uid || 0;
         //TODO 缓存处理后续

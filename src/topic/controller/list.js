@@ -92,11 +92,11 @@ export default class extends Base {
       'status': 1,
       'category_id': ['IN', subcate]
     };
-    // if(this.is_login){
-    //   map.uid=['IN',1,this.is_login];
-    // }else{
-    //   map.uid=['IN',1];
-    // }
+    if(this.is_login){
+      map.uid=['IN',[1,this.is_login]];
+    }else{
+      map.uid=['IN',1];
+    }
     //排序
     let o = {};
     o.level = 'DESC';
@@ -322,14 +322,14 @@ export default class extends Base {
           if(!think.isEmpty(v.cover_id)){
             v.cover_id = await get_pic(v.cover_id,1,300,169);
           }
-          if(!think.isEmpty(v.price)){
-            if(!think.isEmpty(get_price_format(v.price,2))){
-              v.price2 = get_price_format(v.price,2);
-            }
-            v.price = get_price_format(v.price,1);
+          // if(!think.isEmpty(v.price)){
+          //   if(!think.isEmpty(get_price_format(v.price,2))){
+          //     v.price2 = get_price_format(v.price,2);
+          //   }
+          //   v.price = get_price_format(v.price,1);
 
-          }
-          v.uid = await get_nickname(v.uid);
+          // }
+          v.uid = await get_realname(v.uid);
           v.url = get_url(v.name,v.id);
           v.update_time = moment(v.update_time).fromNow()
         }
@@ -337,7 +337,8 @@ export default class extends Base {
       }
       //手机端模版
       temp = cate.template_m_lists ? `${cate.template_m_lists}` : `${this.http.action}`;
-      //think.log(temp);
+      console.log("mobile list------333323w3-------"+temp);
+      
       return this.display(`mobile/${this.http.controller}/${temp}`)
     }else{
       //console.log(temp);

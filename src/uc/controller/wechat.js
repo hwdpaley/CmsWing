@@ -126,7 +126,11 @@ export default class extends think.controller.base {
 				console.log("首次关注------"+message.FromUserName);
 				let userinfo = await getUser(this.api, message.FromUserName);
 				console.log("userinfo-----------"+JSON.stringify(userinfo) );
-				await this.model("wx_user").add(userinfo);
+                let resuser=this.model("wx_user").where({openid:userinfo.openid}).find();
+                if(think.isEmpty(resuser.openid)){
+                    await this.model("wx_user").add(userinfo);
+                }
+				
                 let datas = await this.model("wx_replylist").where({ reply_type: 1 }).order("create_time DESC").select();
                 let data = datas[0];
                 let content;

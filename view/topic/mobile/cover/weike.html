@@ -281,10 +281,10 @@
         wx.ready(function() {
             console.log('wx.ready');
             wx.onMenuShareTimeline({
-                title: '美媒视频', // 分享标题
+                title: '美媒微课视频', // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'http://onuzqqdow.bkt.clouddn.com/meimeilogo.jpg', // 分享图标
-                desc: '美媒教育平台，美媒视频',
+                desc: '美媒教育平台，美媒微课视频',
                 success: function() {
                     console.log('share success');
                     // 用户确认分享后执行的回调函数
@@ -294,10 +294,10 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: '美媒视频', // 分享标题
+                title: '美媒微课视频', // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: 'http://onuzqqdow.bkt.clouddn.com/meimeilogo.jpg', // 分享图标
-                desc: '美媒教育平台，美媒视频',
+                desc: '美媒教育平台，美媒微课视频',
                 success: function() {
                     console.log('share success');
                     // 用户确认分享后执行的回调函数

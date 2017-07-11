@@ -680,6 +680,14 @@ global.get_nickname = async (uid) => {
     }).get_nickname(uid)
     return data;
 }
+global.get_realname = async (uid) => {
+    //console.log(uid);
+    let data = await think.model('member', think.config("db")).cache({
+        timeout: 1000,
+        type: "file" //使用文件方式缓存
+    }).get_realname(uid)
+    return data;
+}
 //时间格式
 /* global time_format */
 global.time_format = (time) => {

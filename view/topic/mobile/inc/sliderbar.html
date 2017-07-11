@@ -5,7 +5,7 @@
 {% groups data="groups",cid=category.id%}
 {%set cate = category.id|get_cate()%}
 {%endif%}
-<div id="slider" class="mui-slider" style="top:44px" >
+<div id="slider" class="mui-slider" style="top:0px" >
     <div id="sliderSegmentedControl" {%if sort|length>0 or column|length>0 or groups|length>0%} style="width: 100%" {%endif%} class="mui-scroll-wrapper mui-scroll-bar mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
         <div class="mui-scroll">
             <!-- <a class="mui-control-item bar-item {%if order ==100%} mui-active{%endif%}" href="#item1mobile" data-url="/index">

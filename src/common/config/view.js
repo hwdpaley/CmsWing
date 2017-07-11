@@ -239,6 +239,10 @@ export default {
                     let data = await get_nickname(uid);
                     callback(null, data);
                 }, true)
+                env.addFilter("get_realname", async(uid, callback) => {
+                    let data = await get_realname(uid);
+                    callback(null, data);
+                }, true)
                 /**
                  * 获取关联
                  */

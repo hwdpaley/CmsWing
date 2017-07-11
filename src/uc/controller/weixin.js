@@ -41,6 +41,15 @@ export default class extends Base {
                 var oauthUrl = pingpp.wxPubOauth.createOauthUrlForCode(this.setup.wx_AppID, `http://${this.http.host}/uc/weixin/getopenid?showwxpaytitle=1`,true);
                 console.log("oauthAction-----------" + oauthUrl)
                 this.redirect(oauthUrl);
+            }else{
+                let wx_user = await this.model("wx_user").where({ openid: openid }).find();
+                if (think.isEmpty(wx_user)||think.isEmpty(wx_user.uid)) {
+                    let userinfo = await getUser(this.api, openid);
+                    if (think.isEmpty(wx_user)){
+                        await this.model("wx_user").add(userinfo);
+                    }
+                    this.redirect("/uc/weixin/signin");
+                }
             }
 
         }
@@ -64,7 +73,7 @@ export default class extends Base {
         let openid = await getopenid();
         //9think.log(think.isEmpty(openid));
         let userinfo = await getUser(this.api, openid);
-        console.log("userinfo-------------"+JSON.stringify(userinfo));
+        console.log("微信 userinfo-------------"+JSON.stringify(userinfo));
         //如果没有关注先跳到关注页面
         //if (userinfo.subscribe == 0) {
         //    console.log(1111111111111)
@@ -79,16 +88,16 @@ export default class extends Base {
         await this.session('wx_openid', openid);
         if (think.isEmpty(wx_user)) {
             await this.model("wx_user").add(userinfo);
-            //this.redirect("/uc/weixin/signin");
+            this.redirect("/uc/weixin/signin");
         } else {
             await this.model("wx_user").where({ openid: openid }).update(userinfo);
 
             //检查微信号是否跟网站会员绑定
-            //if (think.isEmpty(wx_user.uid)) {
-                //没绑定跳转绑定页面
-            //    this.redirect("/uc/weixin/signin");
+            if (think.isEmpty(wx_user.uid)) {
+                // 没绑定跳转绑定页面
+               this.redirect("/uc/weixin/signin");
 
-            //} else 
+            } else 
 				{
                 //更新微信头像
                 let filePath = think.RESOURCE_PATH + '/upload/avatar/' + wx_user.uid;
@@ -150,12 +159,13 @@ export default class extends Base {
             await this.session('wx_openid', null);
             let wx_info = await this.model("wx_user").where({ openid: open_id }).find();
             this.assign("wx_info", wx_info);
-            this.meta_title = "账号绑定";
+            this.meta_title = "用户手机";
             this.assign("openid", open_id);
             this.assign("headimgurl", wx_info.headimgurl)
                 //todo
+            console.log("signinAction----"+`mobile/${this.http.controller}/${this.http.action}`);
             if (checkMobile(this.userAgent())) {
-                return this.display(`mobile/${this.http.controller}/${this.http.action}`);
+                return this.display(`mobile/${this.http.controller}/phone`);
             } else {
                 return this.display();
             }
@@ -227,6 +237,87 @@ export default class extends Base {
 
 
         }
+    async organizingphoneAction() {
+            let data = this.post();
+            //验证
+            let res;
+            let reg ;
+            if (think.isEmpty(data.username)) {
+                return this.fail("用户昵称不能为空！");
+            } else {
+                // res = await this.model("member").where({ username: ltrim(data.username) }).find();
+                // if (!think.isEmpty(res)) {
+                //     return this.fail("用户昵称已存在，请重新填写！")
+                // }
+            }
+            if (think.isEmpty(data.mobile)) {
+                return this.fail("手机号码不能为空！")
+            } else {
+                // res = await this.model("wx_user").where({ phone: data.mobile }).find();
+                // if (!think.isEmpty(res)) {
+                //     return this.fail("手机号码已存在，请重新填写！")
+                // }
+            }
+            // if (think.isEmpty(data.email)) {
+            //     return this.fail("电子邮箱不能为空！")
+            // } else {
+            //     res = await this.model("member").where({ email: data.email }).find();
+            //     if (!think.isEmpty(res)) {
+            //         return this.fail("电子邮箱已存在，请重新填写！")
+            //     }
+            // }
+            // if (think.isEmpty(data.password) && think.isEmpty(data.password2)) {
+            //     return this.fail("密码不能为空！")
+            // } else {
+
+            //     if (data.password != data.password2) {
+            //         return this.fail("两次输入的密码不一致，请重新填写！")
+            //     }
+            // }
+            data.real_name=data.username;
+            data.email=data.mobile+"@qq.com";
+            data.password="123456";
+            data.status = 1;
+            data.reg_time = new Date().valueOf();
+            data.reg_ip = _ip2int(this.ip());
+            data.groupid=2;//初级会员
+            data.password = encryptPassword(data.password);
+            res = await this.model("member").where({ mobile: data.mobile }).find();
+            
+            if (!think.isEmpty(res)) {
+                 console.log("res member----"+JSON.stringify(res));
+                 // reg = await this.model("member").where({ mobile: data.mobile }).update(data);
+                 // console.log("reg update----"+JSON.stringify(reg));
+                 reg=res.id;
+            }else{
+                 reg = await this.model("member").add(data);
+                 console.log("reg add----"+JSON.stringify(reg));
+            }
+            
+            // let reg = await this.model("wx_user").where({openid:data.openid}).update(data);
+            if (!think.isEmpty(reg)) {
+                //用户副表
+                await this.model("wx_user").where({ openid: data.openid }).update({ uid: reg,phone:data.mobile });
+                //更新微信头像
+                let filePath = think.RESOURCE_PATH + '/upload/avatar/' + reg;
+                think.mkdir(filePath)
+                await this.spiderImage(data.headimgurl, filePath + '/avatar.png')
+            }
+            console.log(data);
+            await this.model("member").autoLogin({ id: reg }, this.ip()); //更新用户登录信息，自动登陆
+            let wx_userInfo = {
+                'uid': reg,
+                'username': data.username,
+                'last_login_time': data.reg_time,
+            };
+            await this.session('webuser', wx_userInfo);
+            //成功后储存opid,防止无限登陆
+            await this.session('wx_openid', data.openid);
+            this.cookie('wx_openid', null);
+            return this.success({ name: "绑定成功", url: this.cookie("bieber_wx_url") });
+
+
+        }
         /**登录绑定 */
     async logonbindingAction() {
             let data = this.post();
@@ -253,7 +344,7 @@ export default class extends Base {
                 await this.session('wx_openid', data.openid);
                 this.cookie('wx_openid', null);
                 //TODO 用户密钥
-                return this.success({ name: "绑定成功", url: "/uc/index" });
+                return this.success({ name: "绑定成功", url: this.cookie("bieber_wx_url") });
             } else { //登录失败
                 let fail;
                 switch (res) {
