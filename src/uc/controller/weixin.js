@@ -588,7 +588,7 @@ export default class extends Base {
         let info = await document.detail(id);
         this.assign("docid", id);
         let islogin = await this.islogin();
-        
+        this.assign("userid", islogin);
         let str = info.content;
         if (!think.isEmpty(str)) {
             let img;

@@ -561,7 +561,9 @@ export default class extends Base {
         //console.log(data);
         //return false;
         let res = await this.model('document').updates(data);
-        console.log("edit data====="+JSON.stringify(data));
+        // console.log("edit data====="+JSON.stringify(data));
+
+        
         // let res ={ data:
         // { name: '',
         //     title: '1111',

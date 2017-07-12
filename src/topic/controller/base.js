@@ -78,7 +78,7 @@ export default class extends think.controller.base {
                 }
             }
             let csrf = await this.session('__CSRF__');
-            // console.log("__CSRF__-------------," + csrf);
+             // console.log("__CSRF__-------------," + csrf);
             await this.cookie('__CSRF__', csrf);
             this.assign('csrf', csrf);
             //用户信息

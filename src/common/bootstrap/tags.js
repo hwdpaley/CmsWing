@@ -278,6 +278,9 @@ global.topic = function(){
                     puid=1;
                 }
                 where = think.extend({},where,{'uid':puid});
+            }else if(args.type == "online"){
+                
+                where = think.extend({},where,{'online':1});
             }
         }
         //推荐

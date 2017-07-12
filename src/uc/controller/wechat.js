@@ -22,17 +22,17 @@ export default class extends think.controller.base {
          * @returns {boolean}
          */
     async islogin() {
-    //前台判断是否登录
-    let user = await this.session('webuser');
-    let res = think.isEmpty(user) ? false : user.uid;
-    return res;
+            //前台判断是否登录
+            let user = await this.session('webuser');
+            let res = think.isEmpty(user) ? false : user.uid;
+            return res;
 
-    }
-    /**
-     * 微信服务器验证
-     * index action
-     * @return {Promise} []
-     */
+        }
+        /**
+         * 微信服务器验证
+         * index action
+         * @return {Promise} []
+         */
     indexAction() {
         let echostr = this.get('echostr');
         return this.end(echostr);
@@ -77,8 +77,8 @@ export default class extends think.controller.base {
     async textAction() {
         console.log(this.http);
         let message = this.post();
-         console.log("message-------------------"+message);
-		 
+        console.log("message-------------------" + message);
+
         let key = message.Content.trim();
         let kmodel = this.model('wx_keywords');
         let isKey = await kmodel.field('rule_id').where({ keyword_name: key }).find();
@@ -123,14 +123,14 @@ export default class extends think.controller.base {
         switch (message.Event) {
 
             case "subscribe": //首次关注
-				console.log("首次关注------"+message.FromUserName);
-				let userinfo = await getUser(this.api, message.FromUserName);
-				console.log("userinfo-----------"+JSON.stringify(userinfo) );
-                let resuser=this.model("wx_user").where({openid:userinfo.openid}).find();
-                if(think.isEmpty(resuser.openid)){
+                console.log("首次关注------" + message.FromUserName);
+                let userinfo = await getUser(this.api, message.FromUserName);
+                console.log("userinfo-----------" + JSON.stringify(userinfo));
+                let resuser = this.model("wx_user").where({ openid: userinfo.openid }).find();
+                if (think.isEmpty(resuser.openid)) {
                     await this.model("wx_user").add(userinfo);
                 }
-				
+
                 let datas = await this.model("wx_replylist").where({ reply_type: 1 }).order("create_time DESC").select();
                 let data = datas[0];
                 let content;
@@ -143,14 +143,14 @@ export default class extends think.controller.base {
                         break;
                 }
                 this.reply(content);
-				//this.redirect(this.cookie("bieber_wx_url"));
+                //this.redirect(this.cookie("bieber_wx_url"));
                 break;
             case "unsubscribe": //取消关注
                 console.log("取消关注-------------");
-				let wx_user = await this.model("wx_user").where({ openid: message.FromUserName }).delete();
+                let wx_user = await this.model("wx_user").where({ openid: message.FromUserName }).delete();
 
-				 console.log("message------"+message.FromUserName);
-				 await this.session('wx_openid',null);
+                console.log("message------" + message.FromUserName);
+                await this.session('wx_openid', null);
                 break;
             case "CLICK": //click事件坚挺
                 let res = await this.model("wx_material").find(message.EventKey);
@@ -182,9 +182,9 @@ export default class extends think.controller.base {
      */
     groupsAction() {
             //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-            let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+            // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
             let self = this;
-            api.getGroups((err, result) => {
+            this.api.getGroups((err, result) => {
                 if (!think.isEmpty(result)) {
                     //think.log(result['groups'],"test");
                     for (let val of result['groups']) {
@@ -201,9 +201,9 @@ export default class extends think.controller.base {
          * 查询用户在哪个分组
          */
     getwithgroupAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.getWhichGroup('oVe9Ew0zHFp0up1CeNcK2J5RL4xs', (err, result) => {
+        this.api.getWhichGroup('oVe9Ew0zHFp0up1CeNcK2J5RL4xs', (err, result) => {
             if (!think.isEmpty(result)) {
                 think.log(result, "test");
                 self.end(result);
@@ -218,9 +218,9 @@ export default class extends think.controller.base {
      * 创建用户分组
      */
     creategroupAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.createGroup('旅游', (err, result) => {
+        this.api.createGroup('旅游', (err, result) => {
             if (!think.isEmpty(result)) {
                 think.log(result, "test");
                 self.end(result);
@@ -235,12 +235,12 @@ export default class extends think.controller.base {
      * 群发文本消息
      */
     masssendtextAction() {
-            let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+            // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
             //let api = new API('wxe8c1b5ac7db990b6', 'ebcd685e93715b3470444cf6b7e763e6');
             let self = this;
-            api.massSendText('你好，恭喜你中奖了', ['oVe9Ew0zHFp0up1CeNcK2J5RL4xs', 'oVe9Ew1nEItmuu-H5NoeZpK0xLzo'], (err, result) => {
+            this.api.massSendText('你好，恭喜你中奖了', ['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ'], (err, result) => {
                 if (!think.isEmpty(result)) {
-                    think.log(result, "test");
+                    think.log(result, "masssendtext");
                     self.end(result);
                 } else {
                     console.error('err' + err);
@@ -253,12 +253,12 @@ export default class extends think.controller.base {
          */
     masssendnewsAction() {
         //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.massSendNews('kiW60VzuoCNnoIgdpmrQ8mUaCeDHGOTg4z_ug1DtPkI', ['o33lBt0nWQQQD3Yq3pdysE24ambA', 'o33lBt6Zey0M52UM5EWYLZgXDE0E'], (err, result) => {
+        this.api.massSendNews('kiW60VzuoCNnoIgdpmrQ8mUaCeDHGOTg4z_ug1DtPkI', ['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ'], (err, result) => {
             //api.massSendNews('ys1SXTdWnZhTZQB77MODarSaJ36xfoTG15deo5aGM3eRvEiuT034AMaUocc66uq9','0',(err,result)=>{
             if (!think.isEmpty(result)) {
-                think.log(result, "test");
+                think.log(result, "masssendnews");
                 self.end(result);
             } else {
                 console.error('err' + err);
@@ -272,9 +272,9 @@ export default class extends think.controller.base {
      */
     getmaterialsAction() {
         //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.getMaterials('image', 0, 10, (err, result) => {
+        this.api.getMaterials('image', 0, 10, (err, result) => {
             if (!think.isEmpty(result)) {
                 think.log(result, "test");
                 self.end(result);
@@ -290,13 +290,13 @@ export default class extends think.controller.base {
      */
     uploadmaterialAction() {
 
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         //{"media_id":"Snt_yv6I9f5KMAJKz4GNZAjZSXJeIgZVbUgRey2STH8","url":"https://mmbiz.qlogo.cn/mmbiz/yNHpDQhqmZmaEjdMt6hokMa5ic2a8tjEmDp2tHVAxe3orww1bN4YIiayUBThKC9k3PKyr7OxeZ0vIklb2tMaKDXw/0?wx_fmt=jpeg"}
-        api.uploadMaterial('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m0.jpg', 'thumb', (err, result) => {
+        this.api.uploadMaterial('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m0.jpg', 'thumb', (err, result) => {
             //api.uploadThumbMaterial('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m21.jpg',(err,result)=>{
             if (!think.isEmpty(result)) {
-                think.log(result, "test");
+                think.log(result, "uploadmaterial");
                 self.end(result);
             } else {
                 console.error('err' + err);
@@ -309,9 +309,9 @@ export default class extends think.controller.base {
      * 获取永久素材
      */
     getmaterialAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.getMaterial('PW4hZzpj-j3qdr_hpRFsePOXn8w4YkAPcKfrOfnvVDCHcYZsp81YZcjLiUMiKg3s', (err, result) => {
+        this.api.getMaterial('PW4hZzpj-j3qdr_hpRFsePOXn8w4YkAPcKfrOfnvVDCHcYZsp81YZcjLiUMiKg3s', (err, result) => {
             if (!think.isEmpty(result)) {
                 think.log(result, "getmaterial");
                 self.end(result);
@@ -326,9 +326,9 @@ export default class extends think.controller.base {
      * 获取临时素材
      */
     getmediaAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.getMedia('PW4hZzpj-j3qdr_hpRFsePOXn8w4YkAPcKfrOfnvVDCHcYZsp81YZcjLiUMiKg3s', (err, result) => {
+        this.api.getMedia('PW4hZzpj-j3qdr_hpRFsePOXn8w4YkAPcKfrOfnvVDCHcYZsp81YZcjLiUMiKg3s', (err, result) => {
             if (!think.isEmpty(result)) {
                 think.log(result, "getmedia");
                 self.end(result);
@@ -342,9 +342,9 @@ export default class extends think.controller.base {
      * 新增永久图文素材
      */
     uploadNewsMaterialAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.uploadNewsMaterial({
+        this.api.uploadNewsMaterial({
             "articles": [{
                 "thumb_media_id": "_P6PWPwDdEROB-VD0RWrThuI-CfLgi3vm88mOWHvqtyAmU8Jp3UU1sNs2wfAaYf7",
                 "author": "HH",
@@ -356,7 +356,7 @@ export default class extends think.controller.base {
             }]
         }, (err, result) => {
             if (!think.isEmpty(result)) {
-                think.log(result, "test");
+                think.log(result, "uploadNewsMaterial");
                 self.end(result);
             } else {
                 console.error('err' + err);
@@ -369,9 +369,9 @@ export default class extends think.controller.base {
      * 上传多媒体文件（图文）
      */
     uploadnewsAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.uploadNews({
+        this.api.uploadNews({
             "articles": [{
                 "thumb_media_id": "_P6PWPwDdEROB-VD0RWrThuI-CfLgi3vm88mOWHvqtyAmU8Jp3UU1sNs2wfAaYf7",
                 "author": "HH",
@@ -383,7 +383,7 @@ export default class extends think.controller.base {
             }]
         }, (err, result) => {
             if (!think.isEmpty(result)) {
-                think.log(result, "test");
+                think.log(result, "uploadnews");
                 self.end(result);
             } else {
                 console.error('err' + err);
@@ -396,11 +396,11 @@ export default class extends think.controller.base {
      * 上传图文消息内的图片获取URL
      */
     uploadimageAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.uploadImage('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\a3.png', (err, result) => {
+        this.api.uploadImage('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\a3.png', (err, result) => {
             if (!think.isEmpty(result)) {
-                think.log(result, "getmaterial");
+                think.log(result, "uploadimag");
                 self.end(result);
             } else {
                 console.error('err' + err);
@@ -413,11 +413,11 @@ export default class extends think.controller.base {
      * 临时(获取thumb_media_id)
      */
     uploadmediaAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
-        api.uploadMedia('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m0.jpg', 'thumb', (err, result) => {
+        this.api.uploadMedia('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m0.jpg', 'thumb', (err, result) => {
             if (!think.isEmpty(result)) {
-                think.log(result, "getmaterial");
+                think.log(result, "uploadmedia");
                 self.end(result);
             } else {
                 console.error('err' + err);
@@ -430,10 +430,10 @@ export default class extends think.controller.base {
      * 测试
      */
     async testAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         let picpath = await this.model('picture').find(34);
-        api.uploadMedia(think.ROOT_PATH + '/www/' + picpath.path, 'thumb', (err, result) => {
+        this.api.uploadMedia(think.ROOT_PATH + '/www/' + picpath.path, 'thumb', (err, result) => {
             if (!think.isEmpty(result)) {
                 think.log(result, "getmaterial");
                 self.end(result);
@@ -449,9 +449,9 @@ export default class extends think.controller.base {
      */
     async getusersAction() {
             //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-            let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+            // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
             let self = this;
-            api.getFollowers((err, result) => {
+            this.api.getFollowers((err, result) => {
                 if (!think.isEmpty(result)) {
 
                     think.log(result, "getuser");
@@ -464,12 +464,52 @@ export default class extends think.controller.base {
         /**
          * 获取用户基本信息
          */
+
     async getuserinfoAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
-        let self = this;
-        api.getUser({ openid: 'oVe9Ew0zHFp0up1CeNcK2J5RL4xs', lang: 'zh_CN' }, (err, result) => {
+
+        let getuserinfo = function(api, openid) {
+            let deferred = think.defer();
+            api.getUser({ openid: openid, lang: 'zh_CN' }, (err, result) => {
+                if (!think.isEmpty(result)) {
+                    think.log(result, "getuserinfo");
+                    deferred.resolve(result);
+                } else {
+                    Console.error('err' + err)
+                }
+            });
+            return deferred.promise;
+        }
+        let openid = await this.cache('getuserinfo');
+        let result = await getuserinfo(this.api, openid);
+        return result;
+        // think.log(openid, "openid");
+        // // let deferred = think.defer();
+        // // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let self = this;
+        // this.api.getUser({ openid: openid, lang: 'zh_CN' }, (err, result) => {
+        //     if (!think.isEmpty(result)) {
+        //         think.log(result, "getuserinfo");
+        //         // this.session('getuserinfo',result);
+        //         return self.end(result);
+        //         // return result;
+        //         // deferred.resolve(result);
+        //         // return deferred.promise;
+        //     } else {
+        //         Console.error('err' + err)
+        //     }
+        //     // return deferred.promise;
+        // });
+    }
+
+    /**
+     * 批量获取用户基本信息
+     */
+    async getusersinfoAction() {
+        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
+        // let self = this;//tina,tony
+        this.api.batchGetUsers(['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ'], (err, result) => {
             if (!think.isEmpty(result)) {
-                think.log(result, "getuser");
+                think.log(result, "getusersinfo");
                 self.end(result);
             } else {
                 Console.error('err' + err)
@@ -477,21 +517,5 @@ export default class extends think.controller.base {
         });
     }
 
-    /**
-     * 批量获取用户基本信息
-     */
-    async getusersinfoAction() {
-        let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
-        let self = this;
-        api.batchGetUsers(['oVe9Ew0zHFp0up1CeNcK2J5RL4xs', 'oVe9Ewyd7Lw1bKPTtBvCSbB13DtU'], (err, result) => {
-            if (!think.isEmpty(result)) {
-                think.log(result, "getuser");
-                self.end(result);
-            } else {
-                Console.error('err' + err)
-            }
-        });
-    }
-    
-    
+
 }

@@ -52,7 +52,7 @@ export default class extends think.controller.base {
           let qiniu = think.service("qiniu");
           let instance = new qiniu();
           let uppic = await instance.uploadpic(filepath,basename);
-          console.log(uppic);
+          console.log("uppic----------"+JSON.stringify(uppic));
           // { fieldName: 'file',
           //     originalFilename: '2015-07-06_BaiduPlayerNetSetup_100.exe',
           //     path: '/Users/Arterli/Projects/CmsWing/runtime/upload/EPKRrpZvCsSV73J-7kuDiiEY.exe',
@@ -112,6 +112,7 @@ export default class extends think.controller.base {
         let qiniu = think.service("qiniu");
         let instance = new qiniu();
          let uppic = await instance.uploadpic(filepath,basename);
+         console.log("uploadpic----------"+JSON.stringify(uppic));
         if(!think.isEmpty(uppic)){
             let data ={
                 create_time:new Date().getTime(),

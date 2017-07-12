@@ -67,15 +67,17 @@
                 <div class="weui_panel_hd bg-color-normal"><strong>店铺项目</strong></div>
                 <div class="weui_panel_bd tkb-mobile-product">
                     <ul class="margin-top-15">
+                        {% topic data = "list",limit= "10",cid=137,type="picture",issub=2,isstu =1,uid=userid%} {% for val in list %}
                         <li>
                             <a href="/wechat/product/669228">
-                                <img src="http://image.xuemei99.com/21083139_20170619150828_552.jpg" class="tkb-mobile-product-image">
-                                <h4 class="product-recomand-title">【上海大事件】青青医疗美容韩国‘‘水光美人’’全城最低价399，震撼来袭！</h4>
-                                <p class="color-gray-3">活动时间:<span class="margin-left-10">2017年6月17日 17:30</span></p>
+                                <img src="{{val.cover_id|get_pic('m=1,w=200,h=120')}}" class="tkb-mobile-product-image">
+                                <h4 class="product-recomand-title">{{val.title}}</h4>
+                                <p class="color-gray-3">活动时间:<span class="margin-left-10">{{val.stime|dateformat('Y-m-d H:i')}}</span></p>
                             </a>
                             <img class="enroll-status" src="/static/webapp/img/state_sign_up.png">
                         </li>
-                        <li>
+                        {%endfor%}
+                        <!-- <li>
                             <a href="/wechat/product/183645">
                                 <img src="http://image.xuemei99.com/23570764_20170510120834_258.jpg" class="tkb-mobile-product-image">
                                 <h4 class="product-recomand-title">春季做背、能活百岁！东方女人邀请您一起来......！</h4>
@@ -90,7 +92,7 @@
                                 <p class="color-gray-3">活动时间:<span class="margin-left-10">2016年5月15日 10:00</span></p>
                             </a>
                             <img class="enroll-status" src="/static/webapp/img/state_sign_up.png">
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>

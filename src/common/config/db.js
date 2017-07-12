@@ -19,7 +19,7 @@ export default {
       database: 'meidao',
       user: 'root',
       password: 'B163e802a1388B163e802a1388',
-      prefix: 'cmswing_',
+      prefix: 'bb_',
       encoding: 'UTF8MB4_GENERAL_CI'
     },
     mongo: {

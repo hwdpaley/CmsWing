@@ -86,7 +86,9 @@
                             <td>
                                 <a href="/admin/user/edituser/id/{{item.id}}" class="text-info" data-toggle="ajaxModal">编辑</a>
                                 <a href="/admin/user/recharge/ids/{{item.id}}" class="text-info" data-toggle="ajaxModal">充值</a>
+
                                 {%if item.id|in_Array(controller.config('user_administrator'))%}{%else%}
+                                <a href="/admin/user/sendmessage/id/{{item.id}}" class="text-info" data-toggle="ajaxModal">发送消息</a>
                                 <a href="/admin/user/userdel?ids={{item.id}}" class="confirm ajax-get text-info">删除</a>
                                 {%endif%}
                             </td>

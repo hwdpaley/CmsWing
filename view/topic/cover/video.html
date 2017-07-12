@@ -1,54 +1,46 @@
-{% extends "../inc/picture_base.html" %}
-{% block content %}
+{% extends "../inc/picture_base.html" %} {% block content %}
 <!--
            PAGE HEADER
 
            CLASSES:
-               .page-header-xs	= 20px margins
-               .page-header-md	= 50px margins
-               .page-header-lg	= 80px margins
+               .page-header-xs  = 20px margins
+               .page-header-md  = 50px margins
+               .page-header-lg  = 80px margins
                .page-header-xlg= 130px margins
-               .dark			= dark page header
+               .dark            = dark page header
 
-               .shadow-before-1 	= shadow 1 header top
-               .shadow-after-1 	= shadow 1 header bottom
-               .shadow-before-2 	= shadow 2 header top
-               .shadow-after-2 	= shadow 2 header bottom
-               .shadow-before-3 	= shadow 3 header top
-               .shadow-after-3 	= shadow 3 header bottom
+               .shadow-before-1     = shadow 1 header top
+               .shadow-after-1  = shadow 1 header bottom
+               .shadow-before-2     = shadow 2 header top
+               .shadow-after-2  = shadow 2 header bottom
+               .shadow-before-3     = shadow 3 header top
+               .shadow-after-3  = shadow 3 header bottom
        -->
-<section class="page-header dark page-header-xs parallax parallax-2" >
-    <div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
+<section class="page-header dark page-header-xs parallax parallax-2">
+    <div class="overlay dark-2">
+        <!-- dark overlay [1 to 9 opacity] -->
+    </div>
     <div class="container">
-
         <h1>{{category.title}}</h1>
-
         <!-- breadcrumbs -->
         <ol class="breadcrumb f-14">
             <li><a href="/">首页 </a></li>
-            {%for val in breadcrumb %}
-            {% if val.id == category.id %}
+            {%for val in breadcrumb %} {% if val.id == category.id %}
             <li class="active">{{val.title}}</li>
             {% else %}
             <li><a href="{{val.url}}">{{val.title}}</a></li>
-
-            {% endif %}
-            {% endfor %}
-        </ol><!-- /breadcrumbs -->
-
+            {% endif %} {% endfor %}
+        </ol>
+        <!-- /breadcrumbs -->
     </div>
 </section>
 <!-- /PAGE HEADER -->
 <!-- -->
 <section>
     <div class="container">
-
         <div class="row">
-
             <!-- LEFT -->
-
             <div class="col-md-12 col-sm-12">
-
                 <!-- REVOLUTION SLIDER -->
                 <div class="slider fullwidthbanner-container roundedcorners margin-bottom-30">
                     <!--
@@ -81,106 +73,60 @@
                     -->
                     <div class="fullwidthbanner" data-height="500" data-shadow="3" data-navigationStyle="">
                         <ul class="hide">
-                            {% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%}
-                            {% for v in slider%}
+                            {% topic data = "slider",limit= "5",cid=category.id,position='2',issub="1",ispic="1",uid=userid%} {% for v in slider%}
                             <!-- SLIDE  -->
-                            <li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
+                            <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off">
                                 <img src="/static/assets/images/1x1.png" data-lazyload="{{v.cover_id|get_pic('m=1,w=848,h=500')}}" alt="" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
-
-                                <div class="tp-caption lft start"
-                                     data-x="0"
-                                     data-y="0"
-                                     data-speed="750"
-                                     data-start="750"
-                                     data-easing="easeOutExpo"
-                                     data-elementdelay="0.1"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="300">
+                                <div class="tp-caption lft start" data-x="0" data-y="0" data-speed="750" data-start="750" data-easing="easeOutExpo" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
                                     <img src="/static/assets/images/1x1.png" alt="" data-lazyload="/static/assets/images/caption_bg.png">
                                 </div>
-
-                                <div class="tp-caption medium_light_white lfb start"
-                                     data-x="left" data-hoffset="40"
-                                     data-y="96"
-                                     data-speed="300"
-                                     data-start="1200"
-                                     data-easing="easeOutExpo"
-                                     data-splitin="none"
-                                     data-splitout="none"
-                                     data-elementdelay="0.1"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="300">
-                                    {{v.title|insert_flg("<br>",12)|safe}}
+                                <div class="tp-caption medium_light_white lfb start" data-x="left" data-hoffset="40" data-y="96" data-speed="300" data-start="1200" data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+                                    {{v.title|insert_flg("
+                                    <br>",12)|safe}}
                                 </div>
-
-                                <div class="tp-caption block_black lfl start"
-                                     data-x="left" data-hoffset="180"
-                                     data-y="195"
-                                     data-speed="300"
-                                     data-start="1500"
-                                     data-easing="easeOutExpo"
-                                     data-splitin="none"
-                                     data-splitout="none"
-                                     data-elementdelay="0.1"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="300" >
+                                <div class="tp-caption block_black lfl start" data-x="left" data-hoffset="180" data-y="195" data-speed="300" data-start="1500" data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
                                     <a href="{{v.name|get_url(v.id)}}">查看详情</a>
                                 </div>
-
-                                <div class="tp-caption small_light_white lfl start"
-                                     data-x="left" data-hoffset="40"
-                                     data-y="250"
-                                     data-speed="1000"
-                                     data-start="1800"
-                                     data-easing="easeOutExpo"
-                                     data-splitin="none"
-                                     data-splitout="none"
-                                     data-elementdelay="0.1"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="300" >
-                                    {{v.description|insert_flg("<br>",20)|safe}}
+                                <div class="tp-caption small_light_white lfl start" data-x="left" data-hoffset="40" data-y="250" data-speed="1000" data-start="1800" data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+                                    {{v.description|insert_flg("
+                                    <br>",20)|safe}}
                                 </div>
                             </li>
                             {%endfor%}
-
-
                         </ul>
-
-                        <div class="tp-bannertimer"><!-- progress bar --></div>
+                        <div class="tp-bannertimer">
+                            <!-- progress bar -->
+                        </div>
                     </div>
                 </div>
                 <!-- /REVOLUTION SLIDER -->
                 <ul class="nav nav-tabs nav-button-tabs">
                     <!-- side navigation -->
                     <li class="active"><a href="#taball" data-toggle="tab">全部</a></li>
-                    {%column data="cates",cid=category.id%}
-                    {%for val in cates%}
+                    {%column data="cates",cid=category.id%} {%for val in cates%}
                     <li><a href="#tab{{val.id}}" data-toggle="tab">{{val.name}}</a></li>
                     {%endfor%}
                 </ul>
-
                 <div class="tab-content portfolio-gutter portfolio-title-over" id="portfolio">
                     <div class="tab-pane fade in active" id="taball">
-
                         <!-- POST ITEM -->
                         <div class="row">
-                            {% topic data = "list",limit= "12",cid=category.id,issub=1,uid=userid%}
-                            {% for val in list %}
-                            <div class="col-md-4 col-sm-4 mix "><!-- item -->
-
+                            {% topic data = "list",limit= "9",cid=category.id,issub=1,uid=userid%} {% for val in list %}
+                            <div class="col-md-4 col-sm-4 mix ">
+                                <!-- item -->
                                 <div class="item-box">
                                     <figure>
-										<span class="item-hover">
-											<span class="overlay dark-5"></span>
-											<span class="inner">
+                                        <span class="item-hover">
+                                            <span class="overlay dark-5"></span>
+                                        <span class="inner">
 <!-- details -->
-												<a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
-													<span class="fa fa-play-circle fa-3x"></span>
-												</a>
-
-											</span>
-										</span>
-
+                                                <a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
+                                                    <span class="fa fa-play-circle fa-3x"></span>
+                                        </a>
+                                        </span>
+                                        </span>
+                                        
+                                        {#
                                         <!-- overlay title -->
                                         <div class="item-box-overlay-title">
                                             <h3 class="size-14">{{val.title|block(16)}}</h3>
@@ -189,90 +135,97 @@
                                                     <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span></a></li>
                                                 <li><a href="#"><i class="fa fa-eye"></i>
                                                     <span class="font-lato">{{val.view}}</span></a></li>
-                                                <li><a href="#">
-                                                    <i class="fa fa-user"></i>
-                                                    <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                                </a></li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-user"></i>
+                                                        <span class="font-lato">{{val.uid|get_nickname}}</span>
+                                                    </a>
+                                                </li>
                                             </ul>
-                                        </div><!-- /overlay title -->
-
+                                        </div>
+                                        <!-- /overlay title -->
+                                        #}
                                         <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=300,h=200')}}" width="600" height="399" alt="">
+                                        
                                     </figure>
+                                    <div class="text-center" style="margin-top:10px;">
+                                            <h3>{{val.title}}</h3>
+                                    </div>
                                 </div>
-
-                            </div><!-- /item -->
-
+                            </div>
+                            <!-- /item -->
                             <!-- /POST ITEM -->
                             {%endfor%}
                         </div>
-
-
                     </div>
                     {%for v in cates%}
                     <div class="tab-pane fade" id="tab{{v.id}}">
-                            <div class="row">
-                                {% topic data = "list",limit= "12",cid=v.id,uid=userid%}
-                                {% for val in list %}
-                                <div class="col-md-4 col-sm-4 mix "><!-- item -->
-
-                                    <div class="item-box">
-                                        <figure>
-										<span class="item-hover">
-											<span class="overlay dark-5"></span>
-											<span class="inner">
+                        <div class="row">
+                            {% topic data = "list",limit= "12",cid=v.id,uid=userid%} {% for val in list %}
+                            <div class="col-md-4 col-sm-4 mix ">
+                                <!-- item -->
+                                <div class="item-box">
+                                    <figure>
+                                        <span class="item-hover">
+                                            <span class="overlay dark-5"></span>
+                                        <span class="inner">
                                                 <!-- details -->
-												<a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
-													<span class="fa fa-play-circle fa-3x"></span>
-												</a>
-
-											</span>
-										</span>
-
-                                            <!-- overlay title -->
-                                            <div class="item-box-overlay-title">
-                                                <h3 class="size-14">{{val.title|block(16)}}</h3>
-                                                <ul class="list-inline categories nomargin">
-                                                    <li><a href="#"><i class="fa fa-clock-o"></i>
+                                                <a class="ico-rounded" href="{{val.name|get_url(val.id)}}" target="_blank">
+                                                    <span class="fa fa-play-circle fa-3x"></span>
+                                        </a>
+                                        </span>
+                                        </span>
+                                        <!-- overlay title -->
+                                        {#
+                                        <div class="item-box-overlay-title">
+                                            <h3 class="size-14">{{val.title|block(16)}}</h3>
+                                            <ul class="list-inline categories nomargin">
+                                                <li><a href="#"><i class="fa fa-clock-o"></i>
                                                         <span class="font-lato">{{val.update_time|dateformat('Y-m-d H:i')}}</span></a></li>
-                                                    <li><a href="#"><i class="fa fa-eye"></i>
+                                                <li><a href="#"><i class="fa fa-eye"></i>
                                                         <span class="font-lato">{{val.view}}</span></a></li>
-                                                    <li><a href="#">
+                                                <li>
+                                                    <a href="#">
                                                         <i class="fa fa-user"></i>
                                                         <span class="font-lato">{{val.uid|get_nickname}}</span>
-                                                    </a></li>
-                                                </ul>
-                                            </div><!-- /overlay title -->
-
-                                            <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=300,h=200')}}" width="600" height="399" alt="">
-                                        </figure>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        #}
+                                        <!-- /overlay title -->
+                                        <img class="img-responsive" src="{{val.cover_id|get_pic('m=1,w=300,h=200')}}" width="600" height="399" alt="">
+                                    </figure>
+                                    <div class="text-center" style="margin-top:10px;">
+                                            <h3>{{val.title}}</h3>
                                     </div>
-
-                                </div><!-- /item -->
-
-                <!-- /POST ITEM -->
-                {%endfor%}
+                                </div>
+                            </div>
+                            <!-- /item -->
+                            <!-- /POST ITEM -->
+                            {%endfor%}
+                        </div>
+                        <!-- PAGINATION -->
+                        <div class="text-center">
+                    <!-- Pagination Default -->
+                    {{pagination | safe}}
+                    <!-- /Pagination Default -->
+                </div>
+                {#
+                        <div class="text-center">
+                            <a href="{{v.url}}" class="btn btn-reveal btn-default">
+                                <i class="fa fa-plus"></i>
+                                <span>查看全部内容</span>
+                            </a>
+                        </div>
+                    #}
+                        <!-- /PAGINATION -->
+                    </div>
+                    {% set n = n +1%} {%endfor%}
+                </div>
             </div>
-            <!-- PAGINATION -->
-            <div class="text-center">
-                <a href="{{v.url}}" class="btn btn-reveal btn-default">
-                    <i class="fa fa-plus"></i>
-                    <span>查看全部内容</span>
-                </a>
-            </div>
-            <!-- /PAGINATION -->
+            <!-- RIGHT -->
         </div>
-        {% set n = n +1%}
-        {%endfor%}
-
-    </div>
-
-    </div>
-    <!-- RIGHT -->
-
-    
-    </div>
-
-
     </div>
 </section>
 <!-- / -->

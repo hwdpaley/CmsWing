@@ -11,6 +11,7 @@
   "dependencies": {
     "babel-runtime": "6.x.x",
     "crypto": "0.0.3",
+    "debug": "^2.6.8",
     "geetest": "latest",
     "jimp": "latest",
     "lodash": "4.x.x",
@@ -18,7 +19,7 @@
     "node-crontab": "latest",
     "nunjucks": "^2.2.0",
     "pingpp": "latest",
-    "qiniu": "latest",
+    "qiniu": "^6.1.13",
     "request": "^2.81.0",
     "segment": "latest",
     "source-map-support": "0.4.0",
@@ -28,7 +29,8 @@
     "think-wechat": "latest",
     "thinkjs": "2.2.x",
     "urllib": ">=0.5.2",
-    "wechat-api": "latest"
+    "wechat-api": "latest",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
