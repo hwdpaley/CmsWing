@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "cmswing",
+    "name": "bieber",
     "script": "www/production.js",
     "cwd": "/usr/web/cmswing",
     "exec_mode": "cluster",

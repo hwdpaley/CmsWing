@@ -164,8 +164,8 @@ export default class extends Base {
                     return this.fail("用户信息不全！");
                 }
                 await this.cache('getuserinfo',openid);
-                
-                let result=await this.action("uc/wechat", "getuserinfo");
+                let result=await this.action("uc/wechat", "masssendtext");
+                // let result=await this.action("uc/wechat", "getuserinfo");
                 // let controllerInstance = this.controller("uc/wechat");
                 // let result=await controllerInstance.getuserinfoAction(openid);
                 console.log("result----------"+JSON.stringify(result));

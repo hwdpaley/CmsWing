@@ -31,7 +31,7 @@ CLASSES:
         <!-- /breadcrumbs -->
         <!-- page tabs -->
         
-        {%column data="column",pid=category.pid%} {%if column%}
+        {%column data="column",pid=category.id%} {%if column%}
         <ul class="page-header-tabs list-inline">
             <!--<li class="active"><a href="portfolio-masonry-3-columns.html">With Gutter</a></li>-->
             {%for val in column%}
@@ -66,9 +66,9 @@ CLASSES:
                         <td>
                             {%if 0 == nsobj[val.option.identifier] or null == nsobj[val.option.identifier]%}
                             <span class="btn btn-danger btn-xs relative">全部</span> {%else%}
-                            <a href="/tuoke" class="btn btn-clean btn-xs relative">全部</a> {%endif%} {%for v in val.rules %} {%if v.id|sort_act(nsobj[val.option.identifier])%}
+                            <a href="/xfmb" class="btn btn-clean btn-xs relative">全部</a> {%endif%} {%for v in val.rules %} {%if v.id|sort_act(nsobj[val.option.identifier])%}
                             <span class="btn btn-danger btn-xs relative">{{v.name}}{{val.option.unit}}</span> {%else%}
-                            <a href="/tuoke" class="btn btn-clean btn-xs relative">{{v.name}}{{val.option.unit}}</a> {%endif%} {%endfor%}
+                            <a href="/xfmb" class="btn btn-clean btn-xs relative">{{v.name}}{{val.option.unit}}</a> {%endif%} {%endfor%}
                             <!--子栏目-->
                             {%for v in val.rules %} {%if v.id|sort_act(nsobj[val.option.identifier])%} {% if v.children%}
                             <div class="subtsm">
@@ -101,7 +101,7 @@ CLASSES:
             <div class="col-md-12 col-sm-12">
                 <div class="text-left">
                     <ul class="nav nav-pills mix-filter">
-                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/tuoke">全部</a></li>
+                        <li class="filter {%if group_id==0%}active{%endif%}"><a href="/xfmb">全部</a></li>
                         {% groups data="groups",cid=category.id%} {%for v in groups%}
                         <li class="filter {%if group_id==v.id%}active{%endif%}"><a href="{{cate.url}}-{{order}}-{{v.id}}{%if sort%}-{{sortid}}{%endif%}{%if sorturl %}-{%endif%}{{sorturl}}{{http.config('view.file_ext')}}">{{v.name}}</a></li>
                         {%endfor%}
@@ -346,7 +346,7 @@ function ShowProduct(id) {
         alert('请先登录，谢谢！');
         return;
     }
-    $('#wx_iframepage').attr('src', '/uc/weixin/tuoke/id/' + id);
+    $('#wx_iframepage').attr('src', '/uc/weixin/xfmb/id/' + id);
     $('#wx_look_modal').modal('show');
 }
 
@@ -355,7 +355,7 @@ function WxListCode(id) {
     $("#wx_qr_modal_code").qrcode({
         width: 120,
         height: 120,
-        text: 'http://www.gzxinbibo.com/uc/weixin/tuoke/id/' + id
+        text: 'http://www.gzxinbibo.com/uc/weixin/xfmb/id/' + id
     });
     $('#wx_qr_modal').modal('show');
 }

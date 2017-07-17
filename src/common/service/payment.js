@@ -26,7 +26,7 @@ export default class extends think.service.base {
         let amount = Number(order_amount) * 100;
         let setup = await think.cache("setup")
         let pingpp = require('pingpp')(setup.PINGXX_LIVE_SECRET_KEY);
-        pingpp.setPrivateKeyPath(think.RESOURCE_PATH + "/upload/pingpp/cmswing_rsa_private_key.pem");
+        pingpp.setPrivateKeyPath(think.RESOURCE_PATH + "/upload/pingpp/bieber_rsa_private_key.pem");
         switch (channel) {
             case 'alipay_pc_direct':
                 //支付宝网页支付
@@ -107,7 +107,7 @@ export default class extends think.service.base {
     async charge(id) {
         let setup = await think.cache("setup")
         let pingpp = require('pingpp')(setup.PINGXX_LIVE_SECRET_KEY);
-        pingpp.setPrivateKeyPath(think.RESOURCE_PATH + "/upload/pingpp/cmswing_rsa_private_key.pem");
+        pingpp.setPrivateKeyPath(think.RESOURCE_PATH + "/upload/pingpp/bieber_rsa_private_key.pem");
         function retrieve(pingpp, id) {
             let deferred = think.defer();
             pingpp.charges.retrieve(id, function (err, charge) {

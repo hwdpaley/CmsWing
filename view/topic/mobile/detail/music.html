@@ -1,13 +1,11 @@
-{% extends "../inc/base.html" %}
-{% block content %}
-{#
-<header id="header" class="mui-bar mui-bar-transparent">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    
-    <h1 class="mui-title"><img src="/static/webapp/img/logo.png" ></h1>
-    <!-- <span class="mui-icon iconfont icon-search mui-pull-right"></span> -->
-</header>
-#}
+music{% extends "../inc/music_base.html" %} {% block style %}
+<link href="/static/assets/css/layout-question.css" rel="stylesheet" type="text/css" />
+<link href="/static/admin/css/music/audio.css" rel="stylesheet" type="text/css" /> <link href="/static/admin/css/music/simpleplayer.css" rel="stylesheet" type="text/css" /> 
+
+
+{% endblock %} {% block content %} {%set cate = category.id|get_cate()%}
+
+
 <nav class="mui-bar mui-bar-tab">
     <a class="mui-tab-item mui-action-back" >
         <span class="mui-icon iconfont icon-back"></span>
@@ -44,73 +42,56 @@
     </a>
 
 </nav>
+
 <div class="mui-content detail" >
-    <div id="video-box" style="width:100%; height: 250px;margin-top: 100px;">
+   
+        <div class="row audio_bg">
 
+            <!-- LEFT -->
+            
+
+            <div class="col-md-12 col-sm-12 ">
+            <div class="audio-header">
+                <h3 class="margin-t10">{{info.title}}</h3>
+                <h3 style="font-size: 20px;" class="margin-t10">{{info.teacher}}</h3>
+            </div>
+            <div class="share_center">
+                <div class="border margin-t15">
+                    <div class="share_head" style="background-image:url('{{info.cover_id|get_pic("")}}');"></div>
+                </div>
+            </div>
+            <div class="margin-t15">
+                <div class="share_audio">
+                    
+                    
+                    <audio id="audio" class="player">   
+      <source src="{%if info.videourl.length>10%}{{info.videourl}}{%else%}{%if info.video_id != 0%}//{{controller.setup.QINIU_DOMAIN_NAME}}/{{info.video_id|get_file("savename",false)}}{%else%}{{info.videourl}}{%endif%}{%endif%}" type="audio/mpeg">
+      Your browser does not support the audio tag.
+    </audio>
+                </div>
+            </div>
+            <div class="audio-footer">
+                <p class="font20">美媒教育—随时随地也能学习</p>
+                <!-- <button class="more">收听更多语音</button> -->
+            </div>
+        </div>
+        
     </div>
-    <ul id="list" class="mui-table-view mui-table-view-chevron">
-        <li class="mui-table-view-cell ">
-
-                {{pinfo.title}}
-          <span class="mui-badge">更新至 <em class="text-danger">{{lastlevel.level}}</em> 集</span>
-        </li>
-        <li class="mui-table-view-divider">正在播放:{%if info.level== 0%} {{lastlevel.title}} {%else%} {{info.title}}{%endif%}</li>
-        <li class="mui-table-view-cell mui-collapse">
-            <a class="mui-navigate-right" href="#">
-                播放列表
-            </a>
-            <ul class="mui-table-view mui-table-view-chevron">
-                {%for val in plist%}
-                <li class="mui-table-view-cell mui-media mui-media-icon">
-                    <a class="mui-navigate-right"  href="{{val.name|get_url(val.id)}}">
-                        <div class="mui-media-object mui-pull-left"><span class="mui-icon iconfont {%if info.id == val.id%}icon-videofill{%else%}icon-video{%endif%}"></span>
-                        </div>
-                        <div class="mui-media-body">
-                        {{val.title}}
-                        <span class="mui-badge">{{val.level}}</span>
-                        </div>
-                    </a>
-                </li>
-                {%endfor%}
-            </ul>
-        </li>
-    </ul>
-    <!-- <div id="SOHUCS" sid="{{info.id}}"></div> -->
+    
+    <div id="SOHUCS" sid="{{info.id}}"></div>
 
 </div>
-{% endblock%}
-
+{% endblock %}
 {% block script %}
 <script id="changyan_mobile_js" charset="utf-8" type="text/javascript"
         src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id={{controller.setup.CY_APPID}}&conf={{controller.setup.CY_APPKEY}}">
 </script>
 <script type="text/javascript" src="//assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-<script type="text/javascript" src="http://cytron.cdn.videojj.com/latest/cytron.core.js"></script>
+
 <script type="text/javascript">
     mui.init();
-    var ivaInstance = new Iva(
-            'video-box',//父容器id或者父容器DOM对象，给父容器设置宽高640px*480px以上可以获得最佳的浏览体验；
-            {
-                appkey: '{{controller.setup.VIDEOJJ_appkey}}',//必填，请在控制台查看应用标识
-                live: false,//选填，是否是直播流，默认为false
-                video: '{%if info.video_id != 0%}http://{{controller.setup.QINIU_DOMAIN_NAME}}/{{info.video_id|get_file("savename",false)}}{%else%}{{info.videourl}}{%endif%}',//必填，播放地址（http://www.tudou.com/programs/view/tM_vZCQy2uM/）或者资源地址（http://7xi4ig.com2.z0.glb.qiniucdn.com/shapuolang_ts.mp4）
-                title: '{{info.title}}',//选填，视频标题
-                cover: '{{info.cover_id|get_pic("")}}',//选填，视频封面url
-                videoStartPrefixSeconds: 0,//选填，跳过片头，默认为0
-                videoEndPrefixSeconds: 0,//选填，跳过片尾，默认为0
-                /* 以下参数可以在“控制台->项目看板->应用管理->播放器设置”进行全局设置，前端设置可以覆盖全局设置 */
-                skinSelect: 0,//选填，播放器皮肤，可选0、1、2，默认为0，
-                autoplay: true,//选填，是否自动播放，默认为false
-                rightHand: true,//选填，是否开启右键菜单，默认为false
-                autoFormat: false,//选填，是否自动选择最高清晰度，默认为false
-                bubble: true,//选填，是否开启云泡功能，默认为true
-                jumpStep: 10,//选填，左右方向键快退快进的时间
-                tagTrack: false,//选填，云链是否跟踪，默认为false
-                tagShow: false,//选填，云链是否显示，默认为false
-                tagDuration: 5,//选填，云链显示时间，默认为5秒
-                tagFontSize: 16//选填，云链文字大小，默认为16像素
-            }
-    );
+    $(".player").player();
+    
     var btn = document.querySelectorAll(".mui-bar-tab a.mui-tab-item");
     for(var i = 0;i<btn.length;i++){
         btn[i].addEventListener("tap",function () {
@@ -147,11 +128,7 @@
         });
         wx.ready(function () {
             console.log('wx.ready');
-            var ad=document.getElementById("sowa993");
-            //console.log(ad);
-            if(ad){
-                ad.style.display='none';
-            }
+            
             wx.onMenuShareTimeline({
                 title: '{{info.title}}', // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致

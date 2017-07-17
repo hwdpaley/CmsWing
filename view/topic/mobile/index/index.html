@@ -340,7 +340,7 @@ mui.ready(function() {
     }
     mui('#pullrefresh').pullRefresh().scrollTo(0, tops);
     //alert(1)
-    console.log()
+    console.log();
         //            $('header').on('doubleTap',function () {
         //                alert(3)
         //            })
@@ -381,6 +381,11 @@ mui.ready(function() {
     });
     wx.ready(function() {
         console.log('wx.ready');
+        var ad=document.getElementById("sowa993");
+        //console.log(ad);
+        if(ad){
+            ad.style.display='none';
+        }
         wx.onMenuShareTimeline({
             title: '美媒教育平台', // 分享标题
             link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致

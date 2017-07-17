@@ -116,8 +116,8 @@ global.createLimitQRCode=(api,sceneId)=>{
     api.createLimitQRCode(sceneId, function (err, result) {
         if(!think.isEmpty(result)){
             deferred.resolve(result);
-            console.log('result'+JSON.stringify(result) );
-            self.end(result);
+            // console.log('result'+JSON.stringify(result) );
+            // self.end(result);
         }else{
             console.error('err'+err);
             //deferred.reject(err);

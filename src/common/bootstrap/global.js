@@ -627,7 +627,7 @@ global.get_list_field = function(data, grid, controller, module) {
         }
         value = val.join(" ");
     }
-    console.log("get_list_field------,"+value)
+    // console.log("get_list_field------,"+value)
     return value;
 }
 

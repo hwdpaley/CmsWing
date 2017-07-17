@@ -238,7 +238,7 @@ export default class extends think.controller.base {
             // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
             //let api = new API('wxe8c1b5ac7db990b6', 'ebcd685e93715b3470444cf6b7e763e6');
             let self = this;
-            this.api.massSendText('你好，恭喜你中奖了', ['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ'], (err, result) => {
+            this.api.massSendText('你好，恭喜你中奖了,这是测试信息', ['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwA0peWnTbnx3aDytJtCwdeo'], (err, result) => {
                 if (!think.isEmpty(result)) {
                     think.log(result, "masssendtext");
                     self.end(result);

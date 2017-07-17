@@ -165,7 +165,7 @@ export default class extends Base {
             });
             return deferred.promise;
         }
-            let res =await aa(api);
+        let res =await aa(api);
         this.assign('groups', res);//用户分组
         this.assign({"navxs": true});
         return self.display();
@@ -1549,14 +1549,31 @@ export default class extends Base {
 
     async yj2dAction(){
         let api = new API(this.setup.wx_AppID, this.setup.wx_AppSecret);
-        let res =createLimitQRCode(api,100);
+        // let yj2d = function(api, sceneId) {
+        //     let deferred = think.defer();
+        //     api.createLimitQRCode({  sceneId: sceneId }, (err, result) => {
+        //         if (!think.isEmpty(result)) {
+        //             think.log(result, "createLimitQRCode");
+        //             deferred.resolve(result);
+        //         } else {
+        //             Console.error('err' + err)
+        //         }
+        //     });
+        //     return deferred.promise;
+        // }
+        let res =await createLimitQRCode(api,100);
         console.log(JSON.stringify(res));
+        let qrcod = api.showQRCodeURL(res.ticket);
+        
+        this.assign('qrurl',qrcod);
         // let id = this.get("ids");
         // let res = await this.model('member_public').where({'id':id}).delete();
-        if(res){
-            return this.success({name: "二维码生成成功"});
-        }else{
-            return this.fail("二维码生成失败");
-        }
+        return this.display();
+        // if(res){
+        //     return this.display();
+        //     // return this.success({name: "二维码生成成功"});
+        // }else{
+        //     return this.fail("二维码生成失败");
+        // }
     }
 }

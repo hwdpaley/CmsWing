@@ -615,7 +615,16 @@ export default class extends Base {
             this.assign('article', article);
         }
         let model = await this.model("model").get_document_model(data.model_id);
+        console.log("model---------"+JSON.stringify(model));
 
+        if(model.name=='xfmb'){
+            let xfmb =await document.where({title:"吸粉模板图库",category_id:147}).find();
+            console.log("xfmb---------"+JSON.stringify(xfmb));
+            let table =await think.model("model",think.config("db")).get_table_name(xfmb.model_id);
+            let details = await think.model(table,think.config("db")).find(xfmb.id);
+            console.log("details---------"+JSON.stringify(details)); 
+            this.assign('xfmb',details);  
+        }
         // 获取分组定义
         let groups = await this.model("category").get_category(data.category_id, 'groups');
         if (groups) {
@@ -662,6 +671,7 @@ export default class extends Base {
         this.assign("sort",sort);
         //获取表单字段排序
         let fields = await this.model("attribute").get_model_attribute(model.id,true);
+        console.log("fields-----------"+JSON.stringify(fields));
         this.assign('fields', fields);
         //获取当前分类文档的类型
         let type_list = await this.model("category").get_type_bycate(data.category_id)

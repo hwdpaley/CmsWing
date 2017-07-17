@@ -78,7 +78,7 @@ export default class extends Base {
         let path ;
         switch (type){
             case "private":
-                path =  think.RESOURCE_PATH + "/upload/pingpp/cmswing_rsa_private_key.pem";
+                path =  think.RESOURCE_PATH + "/upload/pingpp/bieber_rsa_private_key.pem";
                 break;
             default:
                 path =  think.RESOURCE_PATH + "/upload/pingpp/pingpp_rsa_public_key.pem";

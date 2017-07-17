@@ -9,6 +9,10 @@ function JSSDK(appId, appSecret) {
 }
 
 JSSDK.prototype = {
+    setAppid:function(appId, appSecret){
+        this.appId = appId;
+        this.appSecret = appSecret;
+    },
     getSignPackage: function (url, done) {
         const instance = this;
         console.log("jssdk----url-------------"+url);

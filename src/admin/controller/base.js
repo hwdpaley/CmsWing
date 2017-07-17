@@ -367,18 +367,36 @@ export default class extends think.controller.base {
     async parseDocumentList(list, model_id) {
             model_id = model_id || 1;
             let attrList = await this.model('attribute').get_model_attribute(model_id, false, 'id,name,type,extra');
+            
+            let userList =await this.session("userList");
+            if(think.isEmpty(userList))
+            {
+                userList = await this.model('member').field('id,real_name').select();
+                console.log("userList------"+JSON.stringify(userList) );
+                await this.session("userList",userList);
+            } 
+            // let user=[];
+            // userList.forEach((k) => {
+            //     let kk={};
+            //     kk.id=k.id;
+            //     kk.name=k.real_name;
+            //     user.push(kk);
+                
+            // });
+            // console.log("user-----"+JSON.stringify(user));
             //attrList=attrList[model_id];
             //this.end(attrList);
-            // console.log(attrList);
+            // 
             if (think.isArray(list)) {
                 list.forEach((data, k) => {
                         //console.log(data);
                         for (let key in data) {
-                            //console.log(key)
+                            // console.log(key)
                             if (!think.isEmpty(attrList[key])) {
                                 let extra = attrList[key]['extra'];
                                 let type = attrList[key]['type'];
-                                //console.log(extra);
+                                // if()
+                                // console.log(extra);
                                 if ('select' == type || 'checkbox' == type || 'radio' == type || 'bool' == type) {
                                     // 枚举/多选/单选/布尔型
                                     let options = parse_config_attr(extra);
@@ -392,6 +410,13 @@ export default class extends think.controller.base {
                                     data[key] = dateformat('Y-m-d H:i', data[key]);
                                 } else if ('pics' === type) {
                                     data[key] = `<span class="thumb-sm"><img alt="..." src="${data[key]}" class="img-responsive img-thumbnail"></span>`;
+                                }
+                                if(key=='uid'){
+                                    userList.forEach((k) => {
+                                        if(k.id==data[key]){
+                                            data[key]=k.real_name;
+                                        }
+                                    });
                                 }
                             }
                         }

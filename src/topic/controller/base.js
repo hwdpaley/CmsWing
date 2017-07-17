@@ -47,7 +47,7 @@ export default class extends think.controller.base {
 
             if (checkMobile(this.userAgent())) {
                 if (is_weixin(this.userAgent())) {
-                    let uurl = "http://www.gzxinbibo.com" + this.http.url;
+                    let uurl = this.setup.wx_url + this.http.url;
                     await this.action("uc/weixin", "oauth");
                     let weixin = function(jssdk, url) {
                         let deferred = think.defer();
