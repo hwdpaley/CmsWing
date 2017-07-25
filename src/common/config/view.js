@@ -243,6 +243,10 @@ export default {
                     let data = await get_realname(uid);
                     callback(null, data);
                 }, true)
+                env.addFilter("get_rolename", async(uid, callback) => {
+                    let data = await get_rolename(uid);
+                    callback(null, data);
+                }, true)
                 /**
                  * 获取关联
                  */

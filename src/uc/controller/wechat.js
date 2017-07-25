@@ -142,8 +142,10 @@ export default class extends think.controller.base {
                         content = JSON.parse(data.content);
                         break;
                 }
+                console.log("bieber_wx_url-------------"+this.cookie("bieber_wx_url"));
                 this.reply(content);
-                //this.redirect(this.cookie("bieber_wx_url"));
+                // await action("topic/index","index");
+                // this.redirect(this.setup.wx_url);
                 break;
             case "unsubscribe": //取消关注
                 console.log("取消关注-------------");
@@ -181,8 +183,6 @@ export default class extends think.controller.base {
      * 获取用户分组
      */
     groupsAction() {
-            //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-            // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
             let self = this;
             this.api.getGroups((err, result) => {
                 if (!think.isEmpty(result)) {
@@ -218,7 +218,6 @@ export default class extends think.controller.base {
      * 创建用户分组
      */
     creategroupAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.createGroup('旅游', (err, result) => {
             if (!think.isEmpty(result)) {
@@ -252,8 +251,6 @@ export default class extends think.controller.base {
          * 群发图文消息
          */
     masssendnewsAction() {
-        //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.massSendNews('kiW60VzuoCNnoIgdpmrQ8mUaCeDHGOTg4z_ug1DtPkI', ['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ'], (err, result) => {
             //api.massSendNews('ys1SXTdWnZhTZQB77MODarSaJ36xfoTG15deo5aGM3eRvEiuT034AMaUocc66uq9','0',(err,result)=>{
@@ -271,8 +268,6 @@ export default class extends think.controller.base {
      * 获取永久素材列表
      */
     getmaterialsAction() {
-        //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.getMaterials('image', 0, 10, (err, result) => {
             if (!think.isEmpty(result)) {
@@ -290,7 +285,6 @@ export default class extends think.controller.base {
      */
     uploadmaterialAction() {
 
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         //{"media_id":"Snt_yv6I9f5KMAJKz4GNZAjZSXJeIgZVbUgRey2STH8","url":"https://mmbiz.qlogo.cn/mmbiz/yNHpDQhqmZmaEjdMt6hokMa5ic2a8tjEmDp2tHVAxe3orww1bN4YIiayUBThKC9k3PKyr7OxeZ0vIklb2tMaKDXw/0?wx_fmt=jpeg"}
         this.api.uploadMaterial('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m0.jpg', 'thumb', (err, result) => {
@@ -309,7 +303,6 @@ export default class extends think.controller.base {
      * 获取永久素材
      */
     getmaterialAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.getMaterial('PW4hZzpj-j3qdr_hpRFsePOXn8w4YkAPcKfrOfnvVDCHcYZsp81YZcjLiUMiKg3s', (err, result) => {
             if (!think.isEmpty(result)) {
@@ -326,7 +319,6 @@ export default class extends think.controller.base {
      * 获取临时素材
      */
     getmediaAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.getMedia('PW4hZzpj-j3qdr_hpRFsePOXn8w4YkAPcKfrOfnvVDCHcYZsp81YZcjLiUMiKg3s', (err, result) => {
             if (!think.isEmpty(result)) {
@@ -342,7 +334,6 @@ export default class extends think.controller.base {
      * 新增永久图文素材
      */
     uploadNewsMaterialAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.uploadNewsMaterial({
             "articles": [{
@@ -369,7 +360,6 @@ export default class extends think.controller.base {
      * 上传多媒体文件（图文）
      */
     uploadnewsAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.uploadNews({
             "articles": [{
@@ -396,7 +386,6 @@ export default class extends think.controller.base {
      * 上传图文消息内的图片获取URL
      */
     uploadimageAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.uploadImage('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\a3.png', (err, result) => {
             if (!think.isEmpty(result)) {
@@ -413,7 +402,6 @@ export default class extends think.controller.base {
      * 临时(获取thumb_media_id)
      */
     uploadmediaAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         this.api.uploadMedia('D:\\webStorm\\CmsWing\\www\\static\\admin\\img\\m0.jpg', 'thumb', (err, result) => {
             if (!think.isEmpty(result)) {
@@ -430,7 +418,6 @@ export default class extends think.controller.base {
      * 测试
      */
     async testAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         let self = this;
         let picpath = await this.model('picture').find(34);
         this.api.uploadMedia(think.ROOT_PATH + '/www/' + picpath.path, 'thumb', (err, result) => {
@@ -440,7 +427,6 @@ export default class extends think.controller.base {
             } else {
                 console.error('err' + err);
             }
-
         });
     }
 
@@ -448,8 +434,6 @@ export default class extends think.controller.base {
      * 获取关注者列表
      */
     async getusersAction() {
-            //let api = new API('wxec8fffd0880eefbe', 'a084f19ebb6cc5dddd2988106e739a07');
-            // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
             let self = this;
             this.api.getFollowers((err, result) => {
                 if (!think.isEmpty(result)) {
@@ -505,7 +489,6 @@ export default class extends think.controller.base {
      * 批量获取用户基本信息
      */
     async getusersinfoAction() {
-        // let api = new API('wx31783e0b591a7f4b', 'c4cca2d1622fd3e6f70aa78d2621db3b');
         // let self = this;//tina,tony
         this.api.batchGetUsers(['oXJPVwCuRDHRshz1yz5t-1Fdh9Ig', 'oXJPVwN4JY0Y3fAVDuvl3EWh2_uQ'], (err, result) => {
             if (!think.isEmpty(result)) {

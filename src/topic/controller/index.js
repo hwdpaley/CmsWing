@@ -34,7 +34,7 @@ export default class extends Base {
             }
             //debugger;
             //判断浏览客户端
-            this.assign("qiniu_dm", `//${this.setup.QINIU_DOMAIN_NAME}`);
+            this.assign("qiniu_dm", `https://${this.setup.QINIU_DOMAIN_NAME}`);
             if (checkMobile(this.userAgent())) {
                 //跨域
                 let method = this.http.method.toLowerCase();
@@ -113,8 +113,12 @@ console.log("map-------" + JSON.stringify(map));
          * 解析路由，判断是频道页面还是列表页面
          */
     async routeAction() {
-        console.log('routeAction--------');
-        console.log("rout url----------" + this.http.url + "," + this.get('category').split("-")[0]);
+        console.log('routeAction--------222');
+        if('/.well-known/pki-validation/fileauth.txt'==this.http.url){
+            console.log('routeAction--------well-known---'+this.http.url);
+            await this.action("topic/weike", "pkivalidation");
+        }
+        console.log("rout url----------," + this.http.url + "," + this.get('category').split("-")[0]);
         let cate = await this.category(this.get('category').split("-")[0]);
         console.log("route cate_model-------" + cate.mold);
         let type = cate.allow_publish;

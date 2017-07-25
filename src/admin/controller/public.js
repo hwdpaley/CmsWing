@@ -61,6 +61,7 @@ export default class extends think.controller.base {
                     default:
                         fail = '未知错误'; // 0-接口参数错误（调试阶段使用）
                 }
+
                 this.http.error = new Error(fail);
                 return think.statusAction(702, this.http);
             }
@@ -69,6 +70,7 @@ export default class extends think.controller.base {
             if (is_login) {
                 this.redirect('/admin/index');
             } else {
+                await this.session('userInfo', null); 
                 return this.display();
             }
         }

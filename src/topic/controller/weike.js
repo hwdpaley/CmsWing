@@ -55,7 +55,14 @@ export default class extends Base {
     //auto render template file index_index.html
     return this.display();
   }
-
+  async pkivalidationAction(){
+     
+      this.meta_title = "音乐"; //标题
+      this.keywords =  "音乐"; //seo关键词
+      this.description =  "音乐"; //seo描述
+    //auto render template file index_index.html
+    return this.display();
+  }
  async listAction(){
      let q = this.get("key").split(",");
      console.log(q);

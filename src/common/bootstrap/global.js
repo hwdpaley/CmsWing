@@ -688,6 +688,14 @@ global.get_realname = async (uid) => {
     }).get_realname(uid)
     return data;
 }
+global.get_rolename = async (uid) => {
+    //console.log(uid);
+    let data = await think.model('auth_role', think.config("db")).cache({
+        timeout: 1000,
+        type: "file" //使用文件方式缓存
+    }).get_rolename(uid)
+    return data;
+}
 //时间格式
 /* global time_format */
 global.time_format = (time) => {
@@ -861,7 +869,7 @@ global.get_pic = async(id,m=null,w=null,h=null)=>{
              q = `?imageView2${m}${w}${h}`
         }
         let name = await think.cache("setup");
-        return `//${name.QINIU_DOMAIN_NAME}/${picture.path}${q}`;
+        return `http://${name.QINIU_DOMAIN_NAME}/${picture.path}${q}`;
     }else {
         return picture.path
     }

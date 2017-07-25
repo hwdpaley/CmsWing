@@ -115,7 +115,7 @@ ul.countdown li p {
         <div class="mui-scroll" style="top: 50px; transform: translate3d(0px, 0px, 0px) translateZ(0px);">
             <div id="customer_page">
     
-            <div class="introduction_box">
+            <!-- <div class="introduction_box">
                 
                 <div class="introduction_content">
                     <div id="contentcmswing">
@@ -127,7 +127,7 @@ ul.countdown li p {
                             {% set p = p+1%} {%endfor%}
                         </div>
                         {%if info.content|length >1%}
-                        <!-- Pagination Default -->
+                        
                         <div class="text-center">
                             <ul class="pagination">
                                 {%set o = 1%} {%for val in info.content%}
@@ -139,8 +139,8 @@ ul.countdown li p {
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- <img src="/static/admin/img/heeiurfdw.jpg" style="width: 100%;"> -->
+            </div> -->
+            <img src="/static/admin/img/heeiurfdw.jpg" style="width: 100%;">
             <!-- 倒计时 -->
             <div>
                 <h1 align="center" style="margin-top:60px;">活动剩余时间</h1>
@@ -356,7 +356,7 @@ play_filter.addEventListener('mousemove',function(){
 </script>
 <!-- 倒计时 -->
 
-    <script type="text/javascript" src="js/jquery.downCount.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.downCount.js"></script>
     <script type="text/javascript">
         $('.countdown').downCount({
             date: '8/18/2017 00:00:00',
@@ -371,53 +371,7 @@ mui.init();
 uParse('#contentcmswing', {
     rootPath: '/static/admin/js/udeitor/'
 });
-wx.config({
-    debug: false,
-    appId: '{{signPackage.appId}}',
-    timestamp: '{{signPackage.timestamp}}',
-    nonceStr: '{{signPackage.nonceStr}}',
-    signature: '{{signPackage.signature}}',
-    jsApiList: [
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage',
-        'onMenuShareQQ',
-        'onMenuShareWeibo',
-        'onMenuShareQZone'
-    ]
-});
-wx.ready(function() {
-    console.log('wx.ready');
-    var ad = document.getElementById("sowa993");
-    //console.log(ad);
-    if (ad) {
-        ad.style.display = 'none';
-    }
-    wx.onMenuShareTimeline({
-        title: '{{info.title}}', // 分享标题
-        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: '{{info.fmurl}}', // 分享图标
-        desc: '{{desc}}',
-        success: function() {
-            console.log('share success');
-            // 用户确认分享后执行的回调函数
-        },
-        cancel: function() {
-            console.log('share cancel');
-        }
-    });
-    wx.onMenuShareAppMessage({
-        title: '{{info.title}}', // 分享标题
-        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: '{{info.fmurl}}', // 分享图标
-        desc: '{{desc}}',
-        success: function() {
-            console.log('share success');
-            // 用户确认分享后执行的回调函数
-        },
-        cancel: function() {
-            console.log('share cancel');
-        }
-    });
-});
+
+
 </script>
 {% endblock%}

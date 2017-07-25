@@ -1,161 +1,423 @@
-music{% extends "../inc/music_base.html" %} {% block style %}
-<link href="/static/assets/css/layout-question.css" rel="stylesheet" type="text/css" />
-<link href="/static/admin/css/music/audio.css" rel="stylesheet" type="text/css" /> <link href="/static/admin/css/music/simpleplayer.css" rel="stylesheet" type="text/css" /> 
+{% extends "./inc/music_appbase.html" %} {%block style%}
+<style>
+.mui-bar-tab {
+    height: auto;
+}
+
+p {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+img {
+    margin-top: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+ul,
+li {
+    margin: auto;
+}
+</style>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+body {
+    background: #e89bd6;
+    color: white;
+    /*font: normal 12px 'Open Sans', sans-serif;*/
+    margin-top: 20px;
+}
+
+ul.countdown {
+    list-style: none;
+    margin: 75px 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+ul.countdown li {
+    display: inline-block;
+}
+
+ul.countdown li span {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 40px;
+}
+
+ul.countdown li.seperator {
+    font-size: 40px;
+    line-height: 40px;
+    vertical-align: top;
+}
+
+ul.countdown li p {
+    color: #ffffff;
+    font-size: 14px;
+}
 
 
-{% endblock %} {% block content %} {%set cate = category.id|get_cate()%}
+/*a {
+            color: #76949F;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }*/
 
+.source {
+    width: 405px;
+    margin: 0 auto;
+    background: #4f5861;
+    color: #a7abb1;
+    font-weight: bold;
+    display: block;
+    white-space: pre;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
 
-<nav class="mui-bar mui-bar-tab">
-    <a class="mui-tab-item mui-action-back" >
-        <span class="mui-icon iconfont icon-back"></span>
-        <span class="mui-tab-label">返回</span>
-    </a>
-    <!-- <a class="mui-tab-item" href="#SOHUCS">
-        <span class="mui-icon iconfont icon-comment"><span class="mui-badge" id="changyan_count_unit">0</span></span>
-        <span class="mui-tab-label">评论</span>
-    </a>
-    <a class="mui-tab-item" href="#shoucang">
-        <span class="mui-icon iconfont icon-favor"></span>
-        <span class="mui-tab-label">收藏</span>
-    </a> -->
-    <a class="mui-tab-item" href="#fenxiang">
-        <span class="mui-icon iconfont icon-share"></span>
-        <span class="mui-tab-label">分享</span>
-    </a>
+.btn {
+    background: #f56c4c;
+    margin: 40px auto;
+    padding: 12px;
+    display: block;
+    width: 100px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
 
-    {% if controller.is_login %}
-    <a class="mui-tab-item" href="/uc/index">
-        <span class="mui-icon iconfont icon-my"></span>
-        <span class="mui-tab-label">我的</span>
-    </a>
-    {%else%}
-    <a class="mui-tab-item" href="/uc/public/login">
-        <span class="mui-icon iconfont icon-myfill"></span>
-        <span class="mui-tab-label">登录</span>
-    </a>
-    {%endif%}
-
-    <a class="mui-tab-item" href="#top">
-        <span class="mui-icon iconfont icon-top"></span>
-        <span class="mui-tab-label">顶部</span>
-    </a>
-
-</nav>
-
-<div class="mui-content detail" >
-   
-        <div class="row audio_bg">
-
-            <!-- LEFT -->
-            
-
-            <div class="col-md-12 col-sm-12 ">
-            <div class="audio-header">
-                <h3 class="margin-t10">{{info.title}}</h3>
-                <h3 style="font-size: 20px;" class="margin-t10">{{info.teacher}}</h3>
-            </div>
-            <div class="share_center">
-                <div class="border margin-t15">
-                    <div class="share_head" style="background-image:url('{{info.cover_id|get_pic("")}}');"></div>
+.btn:hover {
+    text-decoration: none;
+    opacity: .7;
+}
+</style>
+{%endblock%} {% block content %}
+<header class="mui-bar mui-bar-nav" style="background-color: darkcyan;line-height: 50px;height: 50px;padding-right: 0px">
+    <div style="color: #FFFFFF;font-size: 14px;" id="dpname">克丽缇娜科技园店
+        <div style="float: right;color: #e6e0e0;font-size: 20px;font-weight: bold;padding-right: 20px" id="tj">2254人关注
+        </div>
+    </div>
+</header>
+<div class="mui-content" style="margin-top:10px;">
+    <div class="mui-scroll-wrapper" data-scroll="1">
+        <div class="mui-scroll" style="top: 50px; transform: translate3d(0px, 0px, 0px) translateZ(0px);">
+            <div id="customer_page">
+    
+            <div class="introduction_box">
+                
+                <div class="introduction_content">
+                    <div id="contentcmswing">
+                        <div class="tab-content">
+                            {%set p = 1%} {%for val in info.content%}
+                            <div class="tab-pane fade {% if p ==1 %} in active{%endif%}" id="page{{p}}">
+                                {{val|safe}}
+                            </div>
+                            {% set p = p+1%} {%endfor%}
+                        </div>
+                        {%if info.content|length >1%}
+                        <!-- Pagination Default -->
+                        <div class="text-center">
+                            <ul class="pagination">
+                                {%set o = 1%} {%for val in info.content%}
+                                <li {%if o==1 %}class="active" {%endif%}><a href="#page{{o}}" data-toggle="tab">{{o}}</a></li>
+                                {% set o = o+1%} {%endfor%}
+                            </ul>
+                        </div>
+                        {%endif%}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="margin-t15">
-                <div class="share_audio">
-                    
-                    
-                    <audio id="audio" class="player">   
-      <source src="{%if info.videourl.length>10%}{{info.videourl}}{%else%}{%if info.video_id != 0%}//{{controller.setup.QINIU_DOMAIN_NAME}}/{{info.video_id|get_file("savename",false)}}{%else%}{{info.videourl}}{%endif%}{%endif%}" type="audio/mpeg">
-      Your browser does not support the audio tag.
-    </audio>
-                </div>
+            <!-- <img src="/static/admin/img/heeiurfdw.jpg" style="width: 100%;"> -->
+            <!-- 倒计时 -->
+            <div>
+                <h1 align="center" style="margin-top:60px;">活动剩余时间</h1>
+                <ul class="countdown">
+                    <li> <span class="days">00</span>
+                        <p class="days_ref">天</p>
+                    </li>
+                    <li class="seperator">.</li>
+                    <li> <span class="hours">00</span>
+                        <p class="hours_ref">时</p>
+                    </li>
+                    <li class="seperator">:</li>
+                    <li> <span class="minutes">00</span>
+                        <p class="minutes_ref">分</p>
+                    </li>
+                    <li class="seperator">:</li>
+                    <li> <span class="seconds">00</span>
+                        <p class="seconds_ref">秒</p>
+                    </li>
+                </ul>
             </div>
-            <div class="audio-footer">
-                <p class="font20">美媒教育—随时随地也能学习</p>
-                <!-- <button class="more">收听更多语音</button> -->
+            <br>
+            <br>
+            <br>
+        </div>
+        <div class="mui-scrollbar mui-scrollbar-vertical">
+            <div class="mui-scrollbar-indicator" style="transition-duration: 0ms; display: block; height: 136px; transform: translate3d(0px, 0px, 0px) translateZ(0px);"></div>
+        </div>
+    </div>
+</div>
+<div class="mui-bar mui-bar-tab" style="font-size: 14px;">
+    <a href="tel:6253285" class="mui-tab-item" style="background-color: darkcyan;color: #FFFFFF;height: 50px;">         
+            <span class="mui-tab-label">地址:{{info.address}}</span>
+        </a>
+</div>
+<div>
+    <div id="list" style="position: relative; top: 200px; left: 30px; background-color: rgb(0, 0, 0); opacity: 0.5; width: 270px; text-align: center; z-index: 10; border-radius: 5px; overflow: hidden; height: 63px;">
+        <ul style="position: absolute; margin: 0px; padding: 0px; top: -0.329877px; color: rgb(255, 255, 255);">
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item; opacity: 0.984292;">189****1236&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">186****1239&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">189****1453&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item; opacity: 0.0157084;">130****1373&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">132****1923&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">138****2573&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">189****4364&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">186****6265&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">138****1233&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">136****5233&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+            <li style="margin: 0px; padding: 0px; height: 21px; display: list-item;">189****1236&nbsp; &nbsp; 获得 &nbsp;&nbsp; 玫瑰花抱枕</li>
+        </ul>
+    </div>
+</div>
+<div style="position: absolute;top: 80%;z-index: 100;">
+    <a href="#" id="enroll_button">
+            <img src="/static/admin/img/56de62c66e283708447c075f6dad5467.jpg" width="100px">
+        </a>
+</div>
+
+<!-- <input type="hidden" id="price" value="{{info.cpprice}}">
+<div class="fix_back"></div>
+<div class="sign_up_fix">
+    <div class="sign_up_box">
+        <a class="enter">进入店铺</a>
+        <input type="button" class="sign_up" id="enroll_button" value="立即报名">
+    </div>
+</div> -->
+<!-- Modal -->
+<div class="modal fade" id="enroll_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="text-center text-primary" id="modal_title">轻松两步，完成报名</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12 center-block" id="modal_body">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" id="user_name" placeholder="请输入你的姓名">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" id="user_phone" placeholder="请输入你的手机号">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-warning btn-lg btn-block" onclick="enroll_modal_button('{{docid}}')" id="enroll_btn">立即报名</button>
+                    </div>
+                </div>
+                <div id="qr_code" class="hidden text-center">
+                    <img class="img-thumbnail" width="100%" src="{{info.twourl}}">
+                    <h2>请支付{{info.cpprice}}元</h2>
+                </div>
+                <div id="free_show" class="hidden text-center" style="height: 100px;line-height: 100px;background-color: #eeeeee">
+                    <span style="font-size: 16px;color: #999999;">恭喜您已报名成功，稍后店家将会联系您。</span>
+                </div>
             </div>
         </div>
-        
     </div>
-    
-    <div id="SOHUCS" sid="{{info.id}}"></div>
-
 </div>
-{% endblock %}
+ 
+{% endblock %} 
 {% block script %}
-<script id="changyan_mobile_js" charset="utf-8" type="text/javascript"
-        src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id={{controller.setup.CY_APPID}}&conf={{controller.setup.CY_APPKEY}}">
-</script>
-<script type="text/javascript" src="//assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-
 <script type="text/javascript">
-    mui.init();
-    $(".player").player();
-    
-    var btn = document.querySelectorAll(".mui-bar-tab a.mui-tab-item");
-    for(var i = 0;i<btn.length;i++){
-        btn[i].addEventListener("tap",function () {
-            var href = this.getAttribute("href");
-            if(href=="#top"){
-                mui.scrollTo(0,500);
-            }else if(href=="#shoucang"){
-                //todo
-                mui.toast("功能开发中。。。")
-                return
-            }else if(href=="#fenxiang"){
-                //todo
-                mui.toast("功能开发中。。。")
-                return
-            }else {
-                mui.openWindow({url: href})
-            }
-
-        })
-    }
-    wx.config({
-            debug: false,
-            appId: '{{signPackage.appId}}',
-            timestamp: '{{signPackage.timestamp}}',
-            nonceStr: '{{signPackage.nonceStr}}',
-            signature: '{{signPackage.signature}}',
-            jsApiList: [
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage',
-                'onMenuShareQQ',
-                'onMenuShareWeibo',
-                'onMenuShareQZone'
-            ]
-        });
-        wx.ready(function () {
-            console.log('wx.ready');
-            
-            wx.onMenuShareTimeline({
-                title: '{{info.title}}', // 分享标题
-                link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: '{{info.fmurl}}', // 分享图标
-                desc:'{{desc}}',
-                success: function () { 
-                    console.log('share success');
-                    // 用户确认分享后执行的回调函数
-                },
-                cancel: function () { 
-                    console.log('share cancel');
-                }
-            });
-            wx.onMenuShareAppMessage({
-                title: '{{info.title}}', // 分享标题
-                link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: '{{info.fmurl}}', // 分享图标
-                desc:'{{desc}}',
-                success: function () { 
-                    console.log('share success');
-                    // 用户确认分享后执行的回调函数
-                },
-                cancel: function () { 
-                    console.log('share cancel');
-                }
-            });
-        });
-
+$(function(){
+    $('#list').vTicker({ 
+        speed: 500,
+        pause: 2000,
+        animation: 'fade',
+        mousePause: false,
+        showItems: 3
+    });
+       
+});
 </script>
-{% endblock %}
+<script>
+    mui('.mui-scroll-wrapper').scroll({
+            deceleration:0.0006
+        });
+</script>
+<!-- 音乐 -->
+<script type="text/javascript">
+    $('.share_img').click(function(){
+        //window.location.href="http://wfwed.7192.com.cn/tk.php?id=694";
+        $('#share_more_outer').fadeIn();
+    });
+
+    function close_shares(){
+        $('#share_more_outer').fadeOut();
+    }
+</script>
+    <div id="music_play_filter" onclick="just_play(1)" style="display: none;"></div>
+    <span id="musicControl">
+    <a id="mc_play" class="on" onclick="play_music();">
+        <audio id="musicfx" loop="loop" autoplay="autoplay">
+            <source src="http://cdn.y.baidu.com/86858ac0230cc395db0eb8fc485ec304.mp3" type="audio/mpeg">
+        </audio>
+    </a>
+    </span>
+<style type="text/css">
+    #musicControl { position:fixed;right:10px;top:60px;display:inline-block;z-index: 100}
+    #musicControl a { display:inline-block;width:30px;height:30px;overflow:hidden;background-image:url('http://wxdata.52116.cn/static/img/mcbg4.png');background-repeat: no-repeat;background-size:30px auto;}
+    #musicControl a audio{width:100%;height:30px;}
+    #musicControl a.stop { background-position:0px bottom;}
+    #musicControl a.on { background-position:0px 0px;-webkit-animation:reverseRotataZ 1.2s linear infinite;}
+    #music_play_filter{width:100%;height:100%;overflow:hidden;position:fixed;top:0;left:0;z-index:99999998;}
+    @-webkit-keyframes reverseRotataZ{
+        0%{-webkit-transform: rotateZ(0deg);}
+        100%{-webkit-transform: rotateZ(-360deg);}
+    }
+</style>
+<script type="text/javascript">
+    function just_play(id){
+        $('#mc_play audio').get(0).play();
+        $('#mc_play').attr('class','on');
+        if (typeof(id)!='undefined'){
+            $('#music_play_filter').hide();
+        }
+    }
+    function play_music(){
+        if ($('#mc_play').hasClass('on')){
+            $('#mc_play audio').get(0).pause();
+            $('#mc_play').attr('class','stop');
+        }else{
+            $('#mc_play audio').get(0).play();
+            $('#mc_play').attr('class','on');
+        }
+        $('#music_play_filter').hide();
+    }
+window.onload=function(){
+    // if (!is_weixn()){
+        just_play();
+    // }
+}
+var play_filter=document.getElementById('music_play_filter');
+play_filter.addEventListener('click', function(){
+    just_play(1);
+});
+play_filter.addEventListener('touchstart', function(){
+    just_play(1);
+});
+play_filter.addEventListener('touchend', function(){
+    just_play(1);
+});
+play_filter.addEventListener('touchmove', function(){
+    just_play(1);
+});
+play_filter.addEventListener('mousedown', function(){
+    just_play(1);
+});
+play_filter.addEventListener('mouseup', function(){
+    just_play(1);
+});
+play_filter.addEventListener('mousemove',function(){
+    just_play(1);
+});
+</script>
+<!-- 应用关注统计 -->
+<script type="text/javascript">
+    var tj=document.getElementById("tj");
+    tj.innerHTML = 2234+"人关注";
+    // $.ajax({
+    //  type:'post',
+    //  url:'fwtj.php',
+    //  data:{'xhtm':45,},
+    //  success:function(r){
+    //      // if(r==''){
+    //      //  $.alert('恭喜您预订成功');
+    //      // }else{
+    //      //  $.alert(r);
+    //      // }
+    //      // setTimeout(function(){window.location.href="/tk/694.html";},1200);
+ //            tj.innerHTML = r+"人关注";
+    //  }
+    // });
+</script>
+<!-- 倒计时 -->
+
+    <script type="text/javascript" src="js/jquery.downCount.js"></script>
+    <script type="text/javascript">
+        $('.countdown').downCount({
+            date: '8/18/2017 00:00:00',
+            offset: +10
+        }, function () {
+            alert('活动结束，谢谢参与!');
+        });
+</script>
+<script>
+mui.init();
+
+uParse('#contentcmswing', {
+    rootPath: '/static/admin/js/udeitor/'
+});
+wx.config({
+    debug: false,
+    appId: '{{signPackage.appId}}',
+    timestamp: '{{signPackage.timestamp}}',
+    nonceStr: '{{signPackage.nonceStr}}',
+    signature: '{{signPackage.signature}}',
+    jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'onMenuShareQZone'
+    ]
+});
+wx.ready(function() {
+    console.log('wx.ready');
+    var ad = document.getElementById("sowa993");
+    //console.log(ad);
+    if (ad) {
+        ad.style.display = 'none';
+    }
+    wx.onMenuShareTimeline({
+        title: '{{info.title}}', // 分享标题
+        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: '{{info.fmurl}}', // 分享图标
+        desc: '{{desc}}',
+        success: function() {
+            console.log('share success');
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function() {
+            console.log('share cancel');
+        }
+    });
+    wx.onMenuShareAppMessage({
+        title: '{{info.title}}', // 分享标题
+        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: '{{info.fmurl}}', // 分享图标
+        desc: '{{desc}}',
+        success: function() {
+            console.log('share success');
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function() {
+            console.log('share cancel');
+        }
+    });
+});
+</script>
+{% endblock%}

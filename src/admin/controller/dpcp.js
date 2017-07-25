@@ -418,7 +418,19 @@ export default class extends Base {
      */
 
     async getmenuAction() {
-        let cate = await this.model("category").get_all_category();
+        let cate;
+        // let cid=parseInt(this.post('cid'));
+        // console.log("cate id---------"+cid);
+        // if (!think.isEmpty(this.post("cid"))) {
+            
+        // }else{
+        //     let cate = await this.model("category").get_all_category();
+        // }
+        cate =await this.model("category").get_all_category({id:145});
+            let cate1 =await this.model("category").get_all_category({pid:145});
+            for(let v of cate1){
+                cate.push(v);
+            }
         // console.log("cate---------"+JSON.stringify(cate));
         if (!this.is_admin) {
             let parr = [];
@@ -432,7 +444,7 @@ export default class extends Base {
                         val.url = `/admin/sp/index/cate_id/${val.id}`;
                         break;
                     default:
-                        val.url = `/admin/article/index/cate_id/${val.id}`;
+                        val.url = `/admin/dpcp/index/cate_id/${val.id}`;
                 }
 
                 val.target = '_self';
@@ -475,7 +487,7 @@ export default class extends Base {
                         val.url = `/admin/sp/index/cate_id/${val.id}`;
                         break;
                     default:
-                        val.url = `/admin/article/index/cate_id/${val.id}`;
+                        val.url = `/admin/dpcp/index/cate_id/${val.id}`;
                 }
 
                 val.target = '_self';
@@ -586,7 +598,7 @@ export default class extends Base {
         this.assign('type_list', type_list);
         this.assign('model', model);
         this.meta_title = '新增' + model.title;
-        this.active = "admin/article/index";
+        this.active = "admin/dpcp/index";
         this.assign({
             "navxs": true,
         });
@@ -616,7 +628,7 @@ export default class extends Base {
         console.log("model---------" + JSON.stringify(model));
 
         if (model.name == 'xfmb') {
-            let xfmb = await document.where({ title: "吸粉模板图库", category_id: 151 }).find();
+            let xfmb = await document.where({ title: "吸粉模板图库", category_id: 147 }).find();
             console.log("xfmb---------" + JSON.stringify(xfmb));
             let table = await think.model("model", think.config("db")).get_table_name(xfmb.model_id);
             let details = await think.model(table, think.config("db")).find(xfmb.id);
@@ -683,7 +695,7 @@ export default class extends Base {
         //console.log(model);
         this.assign('type_list', type_list);
         this.meta_title = '编辑' + model.title;
-        this.active = "admin/article/index";
+        this.active = "admin/dpcp/index";
         this.assign({
             "navxs": true,
         });
@@ -706,9 +718,9 @@ export default class extends Base {
                 //行为记录
                 if (!res.data.id) {
                     await this.model("action").log("add_document", "document", res.id, this.user.uid, this.ip(), this.http.url);
-                    this.success({ name: "添加成功", url: "/admin/article/index/cate_id/" + res.data.category_id });
+                    this.success({ name: "添加成功", url: "/admin/dpcp/index/cate_id/" + res.data.category_id });
                 } else {
-                    this.success({ name: "更新成功", url: "/admin/article/index/cate_id/" + res.data.category_id });
+                    this.success({ name: "更新成功", url: "/admin/dpcp/index/cate_id/" + res.data.category_id });
                 }
 
             } else {

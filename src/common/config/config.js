@@ -11,7 +11,7 @@
  */
 export default {
     //key: value
-    //port:8888
+    port:8361,
     http_: 1, //1:http,2:https
     default_module: "topic", //默认模块
     route_on: true,

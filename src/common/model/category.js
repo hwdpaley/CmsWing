@@ -313,6 +313,32 @@ export default class extends think.model.base {
 
     }
 
+
+    // async get_category_byid(cid){
+    //     //let list ="22";
+
+    //     let list = await think.cache("category_byid", () => {
+    //         return this.get_colunm_id();
+    //     }, {timeout: 365 * 24 * 3600});
+    //     if(think.isEmpty(map)){
+    //         return list;
+    //     }else {
+    //         return think._.filter(list, map);
+    //     }
+
+    // }
+    // async get_colunm_id(){
+    //     let lists= await this.where({status: 1,pid:145}).field('id,title as name,name as title,pid,allow_publish,isapp,mold,description,icon').order('pid,sort').select();
+    //     for(let v of lists) {
+    //         if (!think.isEmpty(v.title)) {
+    //             v.url = `/${v.title}`
+    //         } else {
+    //             v.url = `/${v.id}`
+    //         }
+    //     }
+    //     // console.log(lists);
+    //     return lists;
+    // }
     /**
      *
      */

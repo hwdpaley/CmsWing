@@ -16,7 +16,7 @@ export default [
     [/^topic$/,"topic/keyword/index"],
     // [/^music$/,"topic/music/index"],
     [/^music\/(.*)$/,"topic/music/audio?id:1"],
-    // [/^weike$/,"topic/weike/index"],
+    [/^.well-known$/,"topic/weike/pkivalidation?key=:1"],
     [/^search$/,"topic/search/index"],
     [/^t\/(.*)$/,"topic/keyword/list?key=:1"],
     [/(.*)$/, "topic/index/route?category=:1"],

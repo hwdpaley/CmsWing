@@ -22,7 +22,7 @@ export default class extends think.controller.base {
             return this.redirect('/admin/public/signin');
         }
         let csrf = await this.session('__CSRF__');
-        // console.log("__CSRF__-------------," + csrf);
+        console.log("__CSRF__ admin-------------," + csrf);
         await this.cookie('__CSRF__', csrf);
         this.assign('csrf', csrf);
         //用户信息
@@ -48,16 +48,16 @@ export default class extends think.controller.base {
         //console.log(is_admin);
         let url = `${this.http.module}/${this.http.controller}/${this.http.action}`;
         //console.log(url);
-        if (!this.is_admin) {
-            let Auth = think.adapter("auth", "rbac");
-            let auth = new Auth(this.user.uid);
-            let res = await auth.check(url);
-            if (!res) {
-                //return this.fail('未授权访问!');
-                this.http.error = new Error('未授权访问!');
-                return think.statusAction(702, this.http);
-            }
-        }
+        // if (!this.is_admin) {
+        //     let Auth = think.adapter("auth", "rbac");
+        //     let auth = new Auth(this.user.uid);
+        //     let res = await auth.check(url);
+        //     if (!res) {
+        //         //return this.fail('未授权访问!');
+        //         this.http.error = new Error('未授权访问!');
+        //         return think.statusAction(702, this.http);
+        //     }
+        // }
 
         //console.log(this.user.uid);
         //this.active = this.http.url.slice(1),

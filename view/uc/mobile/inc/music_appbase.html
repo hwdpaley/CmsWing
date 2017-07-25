@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
     <link rel="stylesheet" href="/static/webapp/css/mui.min.css">
-    <link rel="stylesheet" href="/static/webapp/css/app.css">
+    <!-- <link rel="stylesheet" href="/static/webapp/css/app.css">
     <link rel="stylesheet" href="/static/webapp/fonts/iconfont.css">
     <link rel="stylesheet" href="/static/admin/css/wechat/bootstrap.min.css">
     <link rel="stylesheet" href="/static/admin/css/wechat/weui.min.css">
@@ -18,12 +18,12 @@
     <link rel="stylesheet" href="/static/admin/css/wechat/style.css">
     <link rel="stylesheet" href="/static/admin/css/wechat/all.css">
     <link rel="stylesheet" href="/static/admin/css/wechat/web_base.css">
-    <link rel="stylesheet" href="/static/admin/css/wechat/manager.css">
+    <link rel="stylesheet" href="/static/admin/css/wechat/manager.css"> -->
 
     {% block style %}{% endblock %}
 </head>
 
-<body {%block bodyattr%} {%endblock%}>
+<body class="mui-ios mui-ios-9 mui-ios-9-1">
 {% block content %}
 {% endblock%}
 <script type="text/javascript" src="/static/admin/js/wechat/jquery-2.1.4.min.js"></script>
@@ -31,11 +31,12 @@
 <script src="/static/webapp/libs/lodash.min.js"></script>
 <!-- <script src="/static/webapp/libs/zepto.min.js"></script> -->
 
-<script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
-<script type="text/javascript" src="/static/admin/js/wechat/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="/static/admin/js/wechat/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/admin/js/wechat/bootstrap.min.js"></script> -->
 
 <script src="/static/admin/js/udeitor/ueditor.parse.min.js"></script>
 <script src="/static/admin/js/wechat/jquery-weui.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.vticker-min.js"></script>
 <script src="/static/admin/js/wechat/enroll.js"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 {% block script %}{% endblock %}

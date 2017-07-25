@@ -302,6 +302,11 @@
 <script src="/static/webapp/js/mui.view.js "></script>
 <script>
     mui.init();
+    var ad=document.getElementById("sowa993");
+    //console.log(ad);
+    if(ad){
+        ad.style.display='none';
+    }
     //初始化单页view
     var viewApi = mui('#app').view({
         defaultPage: '#setting'
@@ -326,6 +331,7 @@
     var formorganizing = document.getElementById("form-organizing");
     formorganizing.addEventListener('tap',function (event) {
         var data = $(".form-organizing").serialize();
+        console.log('you click a button!');
         var that = this;
            var mobile = $("input[name='mobile']").val();
            var type = $(this).attr("data-type");
